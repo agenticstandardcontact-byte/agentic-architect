@@ -29,4 +29,20 @@ This isn't a collection of "prompts." It's a directory-level configuration syste
 [Get the Framework for £49 →](https://agentic-architect.lemonsqueezy.com/checkout/buy/130acb4c-3851-4223-ba2f-e0754ee4978e)
 
 ---
-*Created by a Senior C# Architect for developers who value their time.*
+
+## 📬 Support & Community
+
+We are dedicated to maintaining the "Persistence Protocol" for Cursor. If you need assistance, please use the appropriate channel below:
+
+### 🛠️ Professional Support
+For licensing inquiries, billing questions, or specific project integration help:
+**Email:** [agenticstandardcontact@gmail.com](mailto:agenticstandardcontact@gmail.com)
+*Target response time: Within 24 business hours.*
+
+### 🐛 Issue Tracking
+Found a bug in a `.mdc` rule or have a feature request for the protocol? 
+**[Open a GitHub Issue](https://github.com/agenticstandardcontact-byte/agentic-architect/issues)**
+*We value community feedback to help refine AI architectural boundaries.*
+
+### 🏛️ Get the Full Kit
+**[Purchase the Framework for £49 →](https://agentic-architect.lemonsqueezy.com/checkout/buy/130acb4c-3851-4223-ba2f-e0754ee4978e)**
