@@ -1,0 +1,29 @@
+name: Daily Marketing Engine
+on:
+  schedule:
+    - cron: '0 9 * * *' # Runs at 9 AM daily
+  workflow_dispatch:   # Lets you trigger it manually from your phone
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Pick a Random Rule and Update
+        run: |
+          # 1. Pick a random rule from your library file
+          # We search for lines starting with 'Rule ' and grab the text
+          SELECTED_RULE=$(grep "^Rule " rules-library.md | shuf -n 1)
+          
+          # 2. Update the README (replacing the line after 'Today's Featured Pattern:')
+          # This is a bit of 'sed' magic to swap the content
+          sed -i "/Today's Featured Pattern:/!b;n;c> **$SELECTED_RULE**" README.md
+          
+      - name: Commit and Push
+        run: |
+          git config --global user.name "Agentic Architect Bot"
+          git config --global user.email "bot@agenticarchitect.com"
+          git add README.md
+          git commit -m "Auto-update: Daily Senior .NET Rule"
+          git push
