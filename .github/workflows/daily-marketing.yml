@@ -1,61 +1,61 @@
-name: README Janitor
+name: Daily Marketing Engine
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * *' # Runs at 9 AM daily
+  workflow_dispatch:   # Manual trigger for testing
 
 jobs:
-  cleanup:
+  update-readme:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
       
-      - name: Restore Original README
+      - name: Update Tip with Python
         run: |
-          cat << 'EOF' > README.md
-          # 🏛️ Agentic Architect: The Persistence Framework for Cursor
-          Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a "chat-bot" into a stateful Architectural Partner.
+          python3 -c "
+          import random
 
-          [Buy Agentic Architect](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
+          # 1. Load rules from your library
+          try:
+              with open('rules/persistence-kit.md', 'r') as f:
+                  rules = [line.strip() for line in f if line.startswith('Rule ')]
+          except FileNotFoundError:
+              print('Error: rules/persistence-kit.md not found')
+              exit(1)
 
-          ## 🧠 The Problem: "The Context Tax"
-          Every Senior Developer using Cursor pays a "Context Tax." You spend the first 15 minutes of every session re-syncing the AI on your DI patterns, project boundaries, and recent refactors. Without a persistence layer, the AI eventually "drifts," suggesting patterns that violate your core architecture.
+          if not rules:
+              print('Error: No rules found in file')
+              exit(1)
 
-          ## 🛡️ The Solution: The Persistence Protocol
-          Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and a Stateful Persistence Protocol designed to lock your architectural decisions into the AI's "long-term memory."
+          selected = random.choice(rules)
 
-          ## 📦 What's Inside the Kit:
-          * **arch-core.mdc**: Enforces SOLID boundaries and prevents "Big Ball of Mud" suggestions.
-          * **dotnet-di.mdc**: A specialized auditor for constructor injections and service lifetimes.
-          * **bug-breaker.mdc**: A circuit-breaker that stops the AI when it enters a hallucination loop.
-          * **persistence.mdc**: The engine that maintains your LEARNING_LOG.md—the "brain" of your project.
+          # 2. Update README surgically
+          with open('README.md', 'r') as f:
+              lines = f.readlines()
 
-          ## 🚀 How it Works
-          1. Purchase the Kit via [Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit).
-          2. Drop the `.cursor/rules/` folder into your project root.
-          3. Initialize your `LEARNING_LOG.md`: Cursor will now automatically track architectural shifts.
+          new_lines = []
+          inside_tag = False
+          for line in lines:
+              if '' in line:
+                  new_lines.append(line)
+                  new_lines.append(f'> **{selected}**\n')
+                  inside_tag = True
+              elif '' in line:
+                  new_lines.append(line)
+                  inside_tag = False
+              elif not inside_tag:
+                  new_lines.append(line)
 
-          ---
-          ## 🛠️ Daily Senior Rule Update
-          > **Loading today's architectural rule...**
-          ---
-
-          ## 🏛️ Built for Senior .NET Environments
-          This isn't a collection of "prompts." It's a directory-level configuration system that optimizes token usage by loading only the rules relevant to your current file.
-
-          [Get the Framework for £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
-
-          ## 📬 Support & Community
-          * **Professional Support**: agenticstandardcontact@gmail.com
-          * **Issue Tracking**: [Open a GitHub Issue](https://github.com/agentic-architect/rules/issues)
-
-          **[Purchase the full kit £19.99]** https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit
-          EOF
-
-      - name: Commit Cleanup
+          with open('README.md', 'w') as f:
+              f.writelines(new_lines)
+          "
+          
+      - name: Commit and Push
         run: |
           git config --global user.name "Agentic Architect Bot"
           git config --global user.email "bot@agenticarchitect.com"
           git add README.md
-          git commit -m "Emergency README Restoration"
+          git commit -m "Auto-update: Daily Senior .NET Rule" || exit 0
           git push
