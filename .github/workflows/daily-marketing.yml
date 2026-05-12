@@ -14,10 +14,11 @@ jobs:
       
       - name: Update Tip
         run: |
-          # 1. Grab a random rule that starts with 'Rule' from your library
-          SELECTED_RULE=$(grep "Rule " rules-library.md | shuf -n 1)
+          # 1. Grab a random rule from the correct folder/file path
+          # We look for lines starting with 'Rule' inside the 'rules' folder
+          SELECTED_RULE=$(grep "Rule " rules/persistence-kit.md | shuf -n 1)
           
-          # 2. Add a clear header and the rule to the end of the README
+          # 2. Append it to the README with a clean separator
           echo -e "\n\n---\n### 🛠️ Daily Senior Rule Update\n> $SELECTED_RULE\n" >> README.md
           
       - name: Commit and Push
