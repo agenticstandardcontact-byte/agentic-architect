@@ -2,7 +2,7 @@
 
 > **Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a "chat-bot" into a stateful Architectural Partner.**
 
-([Buy Agentic Architect]https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
+Buy Agentic Architect (https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
 
 ## 🧠 The Problem: "The Context Tax"
 Every Senior Developer using Cursor pays a "Context Tax." You spend the first 15 minutes of every session re-syncing the AI on your DI patterns, project boundaries, and recent refactors. Without a persistence layer, the AI eventually "drifts," suggesting patterns that violate your core architecture.
