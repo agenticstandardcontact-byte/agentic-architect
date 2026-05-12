@@ -10,26 +10,20 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4 # Keeping v4 is fine for now, it's stable
+      - uses: actions/checkout@v4
       
       - name: Update Tip
         run: |
-          # 1. Grab a random rule from the library
-          SELECTED_RULE=$(grep "^Rule " rules-library.md | shuf -n 1)
+          # 1. Grab a random rule that starts with 'Rule' from your library
+          SELECTED_RULE=$(grep "Rule " rules-library.md | shuf -n 1)
           
-          # 2. Overwrite the file 'daily_tip.txt' with the new rule
-          echo "### Today's Featured Pattern:" > daily_tip.txt
-          echo "> **$SELECTED_RULE**" >> daily_tip.txt
-          
-          # 3. Use a different method to update the README that won't fail
-          # We will just append the tip to the end of the file instead of searching for a line
-          echo -e "\n---\n$(cat daily_tip.txt)" >> README.md
+          # 2. Add a clear header and the rule to the end of the README
+          echo -e "\n\n---\n### 🛠️ Daily Senior Rule Update\n> $SELECTED_RULE\n" >> README.md
           
       - name: Commit and Push
         run: |
           git config --global user.name "Agentic Architect Bot"
           git config --global user.email "bot@agenticarchitect.com"
           git add README.md
-          # The '|| exit 0' prevents the error if there are no changes
-          git commit -m "Auto-update: Daily Senior .NET Rule" || exit 0
+          git commit -m "Auto-update: Daily Tip" || exit 0
           git push
