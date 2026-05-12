@@ -14,13 +14,11 @@ jobs:
       
       - name: Update Tip
         run: |
-          # 1. Grab a random rule from the correct folder/file path
-          # We look for lines starting with 'Rule' inside the 'rules' folder
+          # 1. Grab a random rule
           SELECTED_RULE=$(grep "Rule " rules/persistence-kit.md | shuf -n 1)
           
-          # 2. Append it to the README with a clean separator
-          echo -e "\n\n---\n### 🛠️ Daily Senior Rule Update\n> $SELECTED_RULE\n" >> README.md
-          
+          # 2. Use 'sed' to swap only the text between the hidden tags
+          sed -i "//,//c\\n> $SELECTED_RULE\n" README.md
       - name: Commit and Push
         run: |
           git config --global user.name "Agentic Architect Bot"
