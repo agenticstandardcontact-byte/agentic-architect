@@ -14,11 +14,12 @@ jobs:
       
       - name: Update Tip
         run: |
-          # 1. Grab a random rule from the library file
+          # 1. Grab a random rule
           SELECTED_RULE=$(grep "Rule " rules/persistence-kit.md | shuf -n 1)
           
-          # 2. Replace the content between the hidden placeholder tags
-          sed -i "//,//c\\n> $SELECTED_RULE\n" README.md
+          # 2. Use a "placeholder" file to swap the content safely
+          # This avoids the 'no previous regular expression' error
+          sed -e "//,//c\\n> $SELECTED_RULE\n" README.md > README.tmp && mv README.tmp README.md
           
       - name: Commit and Push
         run: |
