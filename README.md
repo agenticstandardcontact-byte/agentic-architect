@@ -50,3 +50,9 @@ Found a bug in a `.mdc` rule or have a feature request for the protocol?
 ---
 ### Today's Featured Pattern:
 > ****
+
+
+---
+### 🛠️ Daily Senior Rule Update
+> 
+
