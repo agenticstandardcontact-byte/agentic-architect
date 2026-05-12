@@ -46,3 +46,9 @@ Found a bug in a `.mdc` rule or have a feature request for the protocol?
 
 ### 🏛️ Get the Full Kit
 **[Purchase the full kit £19.99] https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit
+
+
+---
+### 🛠️ Daily Senior Rule Update
+> Rule 4: Validator Enforcement
+
