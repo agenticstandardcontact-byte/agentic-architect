@@ -1,43 +1,34 @@
-name: Daily Marketing Engine
+name: README Janitor
 on:
-  schedule:
-    - cron: '0 9 * * *'
-  workflow_dispatch:
+  workflow_dispatch: # This lets you trigger it manually
 
 jobs:
-  update-readme:
+  cleanup:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
       
-      - name: Update Tip with Python
+      - name: Overwrite Broken README
         run: |
-          python3 -c "
-          import random, re
+          echo "# 🚀 Agentic Architect: .NET Persistence Suite" > README.md
+          echo "" >> README.md
+          echo "**Professional .MDC Persistence Rules for Senior .NET Architects.**" >> README.md
+          echo "" >> README.md
+          echo "[👉 Get the Full Suite on Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)" >> README.md
+          echo "" >> README.md
+          echo "---" >> README.md
+          echo "## 🛠️ Daily Senior Rule Update" >> README.md
+          echo "" >> README.md
+          echo "> **Rule 1: The Result Pattern**" >> README.md
+          echo "" >> README.md
+          echo "---" >> README.md
 
-          # 1. Get a random rule
-          with open('rules/persistence-kit.md', 'r') as f:
-              rules = [line.strip() for line in f if line.startswith('Rule ')]
-          selected = random.choice(rules) if rules else 'No rules found'
-
-          # 2. Update README
-          with open('README.md', 'r') as f:
-              content = f.read()
-
-          pattern = r'.*?'
-          replacement = f'\n> **{selected}**\n'
-          new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
-
-          with open('README.md', 'w') as f:
-              f.write(new_content)
-          "
-          
-      - name: Commit and Push
+      - name: Commit Cleanup
         run: |
           git config --global user.name "Agentic Architect Bot"
           git config --global user.email "bot@agenticarchitect.com"
           git add README.md
-          git commit -m "Auto-update: Daily Senior .NET Rule" || exit 0
+          git commit -m "Fixed README overflow"
           git push
