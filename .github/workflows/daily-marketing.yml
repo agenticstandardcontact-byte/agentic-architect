@@ -1,8 +1,8 @@
 name: Daily Marketing Engine
 on:
   schedule:
-    - cron: '0 9 * * *'
-  workflow_dispatch:
+    - cron: '0 9 * * *' # 9 AM Daily
+  workflow_dispatch:   # Lets you trigger it manually
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -11,11 +11,14 @@ jobs:
   update-readme:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6 # Updated to v6
+      - uses: actions/checkout@v6 # Updated to v6 for Node 24 support
       
       - name: Pick a Random Rule and Update
         run: |
+          # Grabs a random rule from your library
           SELECTED_RULE=$(grep "^Rule " rules-library.md | shuf -n 1)
+          
+          # Injects it into the README under the Featured Pattern header
           sed -i "/Today's Featured Pattern:/!b;n;c> **$SELECTED_RULE**" README.md
           
       - name: Commit and Push
