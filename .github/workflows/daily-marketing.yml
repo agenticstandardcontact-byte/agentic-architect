@@ -1,30 +1,35 @@
 name: Daily Marketing Engine
 on:
   schedule:
-    - cron: '0 9 * * *' # 9 AM Daily
-  workflow_dispatch:   # Lets you trigger it manually
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    - cron: '0 9 * * *'
+  workflow_dispatch:
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v6 # Updated to v6 for Node 24 support
+      - uses: actions/checkout@v4 # Keeping v4 is fine for now, it's stable
       
-      - name: Pick a Random Rule and Update
+      - name: Update Tip
         run: |
-          # Grabs a random rule from your library
+          # 1. Grab a random rule from the library
           SELECTED_RULE=$(grep "^Rule " rules-library.md | shuf -n 1)
           
-          # Injects it into the README under the Featured Pattern header
-          sed -i "/Today's Featured Pattern:/!b;n;c> **$SELECTED_RULE**" README.md
+          # 2. Overwrite the file 'daily_tip.txt' with the new rule
+          echo "### Today's Featured Pattern:" > daily_tip.txt
+          echo "> **$SELECTED_RULE**" >> daily_tip.txt
+          
+          # 3. Use a different method to update the README that won't fail
+          # We will just append the tip to the end of the file instead of searching for a line
+          echo -e "\n---\n$(cat daily_tip.txt)" >> README.md
           
       - name: Commit and Push
         run: |
           git config --global user.name "Agentic Architect Bot"
           git config --global user.email "bot@agenticarchitect.com"
           git add README.md
-          git commit -m "Auto-update: Daily Senior .NET Rule"
+          # The '|| exit 0' prevents the error if there are no changes
+          git commit -m "Auto-update: Daily Senior .NET Rule" || exit 0
           git push
