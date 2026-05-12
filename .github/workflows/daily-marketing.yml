@@ -12,14 +12,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Update Tip
+      - name: Update Tip with Python
         run: |
-          # 1. Grab a random rule
-          SELECTED_RULE=$(grep "Rule " rules/persistence-kit.md | shuf -n 1)
-          
-          # 2. Use a "placeholder" file to swap the content safely
-          # This avoids the 'no previous regular expression' error
-          sed -e "//,//c\\n> $SELECTED_RULE\n" README.md > README.tmp && mv README.tmp README.md
+          python3 -c "
+          import random, re
+
+          # 1. Get a random rule
+          with open('rules/persistence-kit.md', 'r') as f:
+              rules = [line.strip() for line in f if line.startswith('Rule ')]
+          selected = random.choice(rules) if rules else 'No rules found'
+
+          # 2. Update README
+          with open('README.md', 'r') as f:
+              content = f.read()
+
+          pattern = r'.*?'
+          replacement = f'\n> **{selected}**\n'
+          new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+
+          with open('README.md', 'w') as f:
+              f.write(new_content)
+          "
           
       - name: Commit and Push
         run: |
