@@ -14,15 +14,16 @@ jobs:
       
       - name: Update Tip
         run: |
-          # 1. Grab a random rule
+          # 1. Grab a random rule from the library file
           SELECTED_RULE=$(grep "Rule " rules/persistence-kit.md | shuf -n 1)
           
-          # 2. Use 'sed' to swap only the text between the hidden tags
+          # 2. Replace the content between the hidden placeholder tags
           sed -i "//,//c\\n> $SELECTED_RULE\n" README.md
+          
       - name: Commit and Push
         run: |
           git config --global user.name "Agentic Architect Bot"
           git config --global user.email "bot@agenticarchitect.com"
           git add README.md
-          git commit -m "Auto-update: Daily Tip" || exit 0
+          git commit -m "Auto-update: Daily Senior .NET Rule" || exit 0
           git push
