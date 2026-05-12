@@ -49,6 +49,10 @@ Found a bug in a `.mdc` rule or have a feature request for the protocol?
 
 
 ---
-### 🛠️ Daily Senior Rule Update
-> Rule 4: Validator Enforcement
+---
+## 🛠️ Daily Senior Rule Update
+*This section is updated daily by our AI Architectural Engine to keep your context fresh.*
 
+> **Rule 4: Validator Enforcement**
+---
+© 2026 Agentic Architect. Built for Cursor & Windsurf.
