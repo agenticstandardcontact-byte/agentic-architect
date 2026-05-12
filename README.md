@@ -45,4 +45,4 @@ Found a bug in a `.mdc` rule or have a feature request for the protocol?
 *We value community feedback to help refine AI architectural boundaries.*
 
 ### 🏛️ Get the Full Kit
-**[Purchase the Framework for £49 →](https://agentic-architect.lemonsqueezy.com/checkout/buy/130acb4c-3851-4223-ba2f-e0754ee4978e)**
+**[Purchase the full kit £19.99] https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit
