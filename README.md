@@ -46,3 +46,7 @@ Found a bug in a `.mdc` rule or have a feature request for the protocol?
 
 ### 🏛️ Get the Full Kit
 **[Purchase the full kit £19.99] https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit
+
+---
+### Today's Featured Pattern:
+> ****
