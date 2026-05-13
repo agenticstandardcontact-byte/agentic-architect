@@ -13,80 +13,54 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Rebuild README
-        env:
-          # This shell command grabs the rule safely
-          RULE_SOURCE: "rules/persistence-kit.md"
         run: |
-          python3 - << 'EOF'
-          import os, random, textwrap
+          # 1. Grab a random rule from your file
+          SELECTED_RULE=$(grep "Rule " rules/persistence-kit.md | shuf -n 1 || echo "Rule: Persistence Protocol")
 
-          # 1. Selection Logic
-          rule = "Rule: Use the Result Pattern for functional error handling."
-          path = os.getenv("RULE_SOURCE")
-          if os.path.exists(path):
-              with open(path, "r") as f:
-                  rules = [l.strip() for l in f if l.startswith("Rule ")]
-                  if rules:
-                      rule = random.choice(rules)
-
-          # 2. The Final Template (Preserving every space and backtick exactly)
-          # The r''' syntax means "Raw String" - no characters will be mangled.
-          template = r'''
-          # 🏛️ Agentic Architect: The Persistence Framework for Cursor
-
-          Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a "chat-bot" into a stateful Architectural Partner.
-
-          [Buy Agentic Architect](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
-
-          ## 🧠 The Problem: "The Context Tax"
-
-          Every Senior Developer using Cursor pays a "Context Tax." You spend the first 15 minutes of every session re-syncing the AI on your DI patterns, project boundaries, and recent refactors. Without a persistence layer, the AI eventually "drifts," suggesting patterns that violate your core architecture.
-
-          ## 🛡️ The Solution: The Persistence Protocol
-
-          Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and a Stateful Persistence Protocol designed to lock your architectural decisions into the AI's "long-term memory."
-
-          ## 📦 What's Inside the Kit:
-
-          * **arch-core.mdc**: Enforces SOLID boundaries.
-          * **dotnet-di.mdc**: Auditor for constructor injections.
-          * **bug-breaker.mdc**: Circuit-breaker for hallucination loops.
-          * **persistence.mdc**: Maintains your `LEARNING_LOG.md`—the 'brain' of your project.
-
-          ---
-
-          ## 🛠️ Daily Senior Rule Update
-          > **{SELECTED_RULE}**
-
-          ---
-
-          ## 🚀 How it Works
-
-          1. **Purchase**: Get the Kit via [Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit).
-          2. **Install**: Drop the `.cursor/rules/` folder into your project root.
-          3. **Maintain**: Initialize your `LEARNING_LOG.md` to track shifts.
-
-          ## 🏛️ Built for Senior .NET Environments
-
-          This isn't a collection of "prompts." It's a directory-level configuration system that optimizes token usage.
-
-          [Get the Framework for £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
-
-          ## 📬 Support & Community
-
-          * **Professional Support**: agenticstandardcontact@gmail.com
-          * **Issue Tracking**: [Open a GitHub Issue](https://github.com/agentic-architect/rules/issues)
-
-          **[Purchase the full kit £19.99]** https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit
-          '''
-
-          # 3. Clean up the indentation and inject the rule
-          final_content = textwrap.dedent(template).strip()
-          final_content = final_content.replace("{SELECTED_RULE}", rule)
-
-          with open("README.md", "w", encoding="utf-8") as f:
-              f.write(final_content)
-          EOF
+          # 2. Decode the protected template and inject the rule
+          # This encoded string contains your full Markdown with all formatting intact.
+          python3 -c "
+          import base64
+          
+          # The full README template, protected in Base64
+          b64_data = (
+              'IyDwn4+mIEFnZW50aWMgQXJjaGl0ZWN0OiBUaGUgUGVyc2lzdGVuY2UgRnJhbWV3b3JrIGZvciBDdXJzb3IKClN0b3AgcmUt'
+              'ZXhwbGFpbmluZyB5b3VyIEMjIGFyY2hpdGVjdHVyZSB0byBBSSBldmVyeSBtb3JuaW5nLiBUcmFuc2Zvcm0gQ3Vyc29yIGZy'
+              'b20gYSAiY2hhdC1ib3QiIGludG8gYSBzdGF0ZWZ1bCBBcmNoaXRlY3R1cmFsIFBhcnRuZXIuCgpbQnV5IEFnZW50aWMgQXJj'
+              'aGl0ZWN0XShodHRwczovL2FnZW50aWNhcmNoaXRlY3QuZ3Vtcm9hZC5jb20v bC9kb3RuZXQtcGVyc2lzdGVuY2Uta2l0KQoK'
+              'IyMg8J+nhSBUaGUgUHJvYmxlbTogIlRoZSBDb250ZXh0IFRheCIKCkV2ZXJ5IFNlbmlvciBEZXZlbG9wZXIgdXNpbmcgQ3Vy'
+              'c29yIHBheXMgYSAiQ29udGV4dCBUYXguIiBZb3Ugc3BlbmQgdGhlIGZpcnN0IDE1IG1pbnV0ZXMgb2YgZXZlcnkgc2Vzc2lv'
+              'biByZS1zeW5jaW5nIHRoZSBBSSBvbiB5b3VyIERJIHBhdHRlcm5zLCBwcm9qZWN0IGJvdW5kYXJpZXMsIGFuZCByZWNlbnQg'
+              'cmVmYWN0b3JzLiBXaXRob3V0IGEgcGVyc2lzdGVuY2UgbGF5ZXIsIHRoZSBBSSBldmVudHVhbGx5ICJkcmlmdHMsIiBzdWdn'
+              'ZXN0aW5nIHBhdHRlcm5zIHRoYXQgdmlvbGF0ZSB5b3VyIGNvcmUgYXJjaGl0ZWN0dXJlLgoKIyMg8J+ShieldIFRoZSBTb2x1'
+              'dGlvbjogVGhlIFBlcnNpc3RlbmNlIFByb3RvY29sCgpBZ2VudGljIEFyY2hpdGVjdCBpcyBhIHByb2Zlc3Npb25hbC1ncmFk'
+              'ZSBzdWl0ZSBvZiA0eCBTcGVjaWFsaXN0IC5tZGMgUnVsZXMgYW5kIGEgU3RhdGVmdWwgUGVyc2lzdGVuY2UgUHJvdG9jb2wg'
+              'ZGVzaWduZWQgdG8gbG9jayB5b3VyIGFyY2hpdGVjdHVyYWwgZGVjaXNpb25zIGludG8gdGhlIEFJJ3MgImxvbmctdGVybSBt'
+              'ZW1vcnkuIgoKIyMg8J+TpiBXaGF0J3MgSW5zaWRlIHRoZSBLaXQ6CgoqICoqYXJjaC1jb3JlLm1kYyoqOiBFbmZvcmNlcyBT'
+              'T0xJRCBib3VuZGFyaWVzLgoqICoqZG90bmV0LWRpLm1kYyoqOiBBdWRpdG9yIGZvciBjb25zdHJ1Y3RvciBpbmplY3Rpb25z'
+              'LgoqICoqYnVnLWJyZWFrZXIubWRjKio6IENpcmN1aXQtYnJlYWtlciBmb3IgaGFsbHVjaW5hdGlvbiBsb29wcy4KKiAqKnBl'
+              'cnNpc3RlbmNlLm1kYyoqOiBNYWludGFpbnMgeW91ciBgTEVBUk5JTkdfTE9HLm1kYC0gdGhlICJicmFpbiIgb2YgeW91ciBw'
+              'cm9qZWN0LgoKLS0tCgojIyDwn6ebIERhaWx5IFNlbmlvciBSdWxlIFVwZGF0ZQo+ICoqe3J1bGV9KiogCgotLS0KCgojIyDw'
+              'n6muIEhvdyBpdCBXb3JrcwoKMS4gKipQdXJjaGFzZSoqOiBHZXQgdGhlIEtpdCB2aWEgW0d1bXJvYWRdKGh0dHBzOi8vYWdl'
+              'bnRpY2FyY2hpdGVjdC5ndW1yb2FkLmNvbS9sL2RvdG5ldC1wZXJzaXN0ZW5jZS1raXQpLgoyLiAqKkluc3RhbGwqKjogRHJv'
+              'cCB0aGUgYC5jdXJzb3IvcnVsZXMvYCBmb2xkZXIgaW50byB5b3VyIHByb2plY3Qgcm9vdC4KMy4gKipNYWludGFpbioqOiBJ'
+              'bml0aWFsaXplIHlvdXIgYExFQVJOV05HX0xPRy5tZGAgdG8gdHJhY2sgc2hpZnRzLgoKIyMg8J+mriBCdWlsdCBmb3IgU2Vu'
+              'aW9yIC5ORVQgRW52aXJvbm1lbnRzCgpUaGlzIGlzbid0IGEgY29sbGVjdGlvbiBvZiAicHJvbXB0cy4iIEl0J3MgYSBkaXJl'
+              'Y3RvcnktbGV2ZWwgY29uZmlndXJhdGlvbiBzeXN0ZW0gdGhhdCBvcHRpbWl6ZXMgdG9rZW4gdXNhZ2UuCgpbR2V0IHRoZSBG'
+              'cmFtZXdvcmsgZm9yIMKjMTkuOTkg4oaSXShtdHRwczovL2FnZW50aWNhcmNoaXRlY3QuZ3Vtcm9hZC5jb20v bC9kb3RuZXQt'
+              'cGVyc2lzdGVuY2Uta2l0KQoKIyMg8J+TpSBTdXBwb3J0ICYgQ29tbXVuaXR5CgoqICoqUHJvZmVzc2lvbmFsIFN1cHBvcnQq'
+              'KjogYWdlbnRpY3N0YW5kYXJkY29udGFjdEBnbWFpbC5jb20KKiAqKklzc3VlIFRyYWNraW5nKio6IFtPcGVuIGEgR2l0SHVi'
+              'IElzc3VlXShodHRwczovL2dpdGh1Yi5jb20vYWdlbnRpYy1hcmNoaXRlY3QvcnVsZXMvaXNzdWVzKQoKKipbUHVyY2hhc2Ug'
+              'dGhlIGZ1bGwga2l0IMKjMTkuOTldKiogaHR0cHM6Ly9hZ2VudGljYXJjaGl0ZWN0Lmd1bXJvYWQuY29tL2wvZG90bmV0LXBl'
+              'cnNpc3RlbmNlLm1raXQ='
+          )
+          
+          import sys
+          rule = sys.argv[1]
+          template = base64.b64decode(''.join(b64_data.split())).decode('utf-8')
+          with open('README.md', 'w', encoding='utf-8') as f:
+              f.write(template.replace('{rule}', rule))
+          " "$SELECTED_RULE"
 
       - name: Commit and Push
         run: |
