@@ -17,12 +17,12 @@ Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and 
 * **arch-core.mdc**: Enforces SOLID boundaries.
 * **dotnet-di.mdc**: Auditor for constructor injections.
 * **bug-breaker.mdc**: Circuit-breaker for hallucination loops.
-* **persistence.mdc**: Maintains your `LEARNING_LOG.md`—the 'brain' of your project.
+* **persistence.mdc**: Maintains your `LEARNING_LOG.md`—the "brain" of your project.
 
 ---
 
 ## 🛠️ Daily Senior Rule Update
-> **Rule 4: Validator Enforcement**
+> ****
 
 ---
 
