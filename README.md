@@ -14,15 +14,15 @@ Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and 
 
 ## 📦 What's Inside the Kit:
 
-* **arch-core.mdc**: Enforces SOLID boundaries.
-* **dotnet-di.mdc**: Auditor for constructor injections.
-* **bug-breaker.mdc**: Circuit-breaker for hallucination loops.
-* **persistence.mdc**: Maintains your `LEARNING_LOG.md`—the "brain" of your project.
+* **arch-core.mdc**: Enforces SOLID boundaries and prevents "Big Ball of Mud" suggestions.
+* **dotnet-di.mdc**: A specialized auditor for constructor injections and service lifetimes.
+* **bug-breaker.mdc**: A circuit-breaker that stops the AI when it enters a hallucination loop.
+* **persistence.mdc**: The engine that maintains your `LEARNING_LOG.md`—the "brain" of your project.
 
 ---
 
 ## 🛠️ Daily Senior Rule Update
-> ****
+> **Rule 1: The Result Pattern**
 
 ---
 
@@ -30,11 +30,11 @@ Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and 
 
 1. **Purchase**: Get the Kit via [Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit).
 2. **Install**: Drop the `.cursor/rules/` folder into your project root.
-3. **Maintain**: Initialize your `LEARNING_LOG.md` to track shifts.
+3. **Maintain**: Initialize your `LEARNING_LOG.md` to track architectural shifts automatically.
 
 ## 🏛️ Built for Senior .NET Environments
 
-This isn't a collection of "prompts." It's a directory-level configuration system that optimizes token usage.
+This isn't a collection of "prompts." It's a directory-level configuration system that optimizes token usage by loading only the rules relevant to your current file.
 
 [Get the Framework for £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
 
