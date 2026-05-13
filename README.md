@@ -25,11 +25,6 @@ Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and 
 2. **Install**: Drop the `.cursor/rules/` folder into your project root.
 3. **Maintain**: Initialize your `LEARNING_LOG.md` to track architectural shifts automatically.
 
----
-## 🛠️ Daily Senior Rule Update
-> **Rule 3: Structured Logging**
----
-
 ## 🏛️ Built for Senior .NET Environments
 
 This isn't a collection of "prompts." It's a directory-level configuration system that optimizes token usage by loading only the rules relevant to your current file.
