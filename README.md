@@ -17,13 +17,13 @@ Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and 
 
 ---
 ## 🛠️ Daily Senior Rule Update
-> **Rule 3: Structured Logging**
+> **Rule 5: Minimal API Groups**
 ---
 
 ## 🚀 How it Works
 1. Purchase the Kit via [Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit).
-2. Drop the .cursor/rules/ folder into your project root.
-3. Initialize your LEARNING_LOG.md: Cursor will now automatically track architectural shifts.
+2. Drop the `.cursor/rules/` folder into your project root.
+3. Initialize your `LEARNING_LOG.md`: Cursor will now automatically track architectural shifts.
 
 [Get the Framework for £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
 
