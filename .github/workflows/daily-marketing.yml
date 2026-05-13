@@ -12,58 +12,86 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Build README via Python Heredoc
+      - name: Rebuild README
+        env:
+          # This shell command grabs the rule safely
+          RULE_SOURCE: "rules/persistence-kit.md"
         run: |
-          python3 << 'EOF'
-          import random, os
+          python3 - << 'EOF'
+          import os, random, textwrap
 
           # 1. Selection Logic
-          rule = "Rule 1: The Result Pattern"
-          if os.path.exists("rules/persistence-kit.md"):
-              with open("rules/persistence-kit.md", "r") as f:
+          rule = "Rule: Use the Result Pattern for functional error handling."
+          path = os.getenv("RULE_SOURCE")
+          if os.path.exists(path):
+              with open(path, "r") as f:
                   rules = [l.strip() for l in f if l.startswith("Rule ")]
-                  if rules: rule = random.choice(rules)
+                  if rules:
+                      rule = random.choice(rules)
 
-          # 2. Structure (Using list for guaranteed spacing)
-          content = [
-              "# 🏛️ Agentic Architect: The Persistence Framework for Cursor",
-              "Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a 'chat-bot' into a stateful Architectural Partner.",
-              "[Buy Agentic Architect](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)",
-              "## 🧠 The Problem: 'The Context Tax'",
-              "Every Senior Developer using Cursor pays a 'Context Tax.' You spend the first 15 minutes of every session re-syncing the AI on your DI patterns, project boundaries, and recent refactors. Without a persistence layer, the AI eventually 'drifts,' suggesting patterns that violate your core architecture.",
-              "## 🛡️ The Solution: The Persistence Protocol",
-              "Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and a Stateful Persistence Protocol designed to lock your architectural decisions into the AI's 'long-term memory.'",
-              "## 📦 What's Inside the Kit:",
-              "* **arch-core.mdc**: Enforces SOLID boundaries.",
-              "* **dotnet-di.mdc**: Auditor for constructor injections.",
-              "* **bug-breaker.mdc**: Circuit-breaker for hallucination loops.",
-              "* **persistence.mdc**: Maintains your `LEARNING_LOG.md`—the 'brain' of your project.",
-              "---",
-              "## 🛠️ Daily Senior Rule Update",
-              f"> **{rule}**",
-              "---",
-              "## 🚀 How it Works",
-              "1. **Purchase**: Get the Kit via [Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit).",
-              "2. **Install**: Drop the `.cursor/rules/` folder into your project root.",
-              "3. **Maintain**: Initialize your `LEARNING_LOG.md` to track shifts.",
-              "## 🏛️ Built for Senior .NET Environments",
-              "This isn't a collection of 'prompts.' It's a directory-level configuration system.",
-              "[Get the Framework for £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)",
-              "## 📬 Support & Community",
-              "* **Support**: agenticstandardcontact@gmail.com",
-              "* **Issues**: [Open a GitHub Issue](https://github.com/agentic-architect/rules/issues)",
-              "**[Purchase the full kit £19.99]** https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit"
-          ]
+          # 2. The Final Template (Preserving every space and backtick exactly)
+          # The r''' syntax means "Raw String" - no characters will be mangled.
+          template = r'''
+          # 🏛️ Agentic Architect: The Persistence Framework for Cursor
 
-          # 3. Write with double newlines for Markdown
-          with open("README.md", "w") as f:
-              f.write("\n\n".join(content))
+          Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a "chat-bot" into a stateful Architectural Partner.
+
+          [Buy Agentic Architect](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
+
+          ## 🧠 The Problem: "The Context Tax"
+
+          Every Senior Developer using Cursor pays a "Context Tax." You spend the first 15 minutes of every session re-syncing the AI on your DI patterns, project boundaries, and recent refactors. Without a persistence layer, the AI eventually "drifts," suggesting patterns that violate your core architecture.
+
+          ## 🛡️ The Solution: The Persistence Protocol
+
+          Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and a Stateful Persistence Protocol designed to lock your architectural decisions into the AI's "long-term memory."
+
+          ## 📦 What's Inside the Kit:
+
+          * **arch-core.mdc**: Enforces SOLID boundaries.
+          * **dotnet-di.mdc**: Auditor for constructor injections.
+          * **bug-breaker.mdc**: Circuit-breaker for hallucination loops.
+          * **persistence.mdc**: Maintains your `LEARNING_LOG.md`—the 'brain' of your project.
+
+          ---
+
+          ## 🛠️ Daily Senior Rule Update
+          > **{SELECTED_RULE}**
+
+          ---
+
+          ## 🚀 How it Works
+
+          1. **Purchase**: Get the Kit via [Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit).
+          2. **Install**: Drop the `.cursor/rules/` folder into your project root.
+          3. **Maintain**: Initialize your `LEARNING_LOG.md` to track shifts.
+
+          ## 🏛️ Built for Senior .NET Environments
+
+          This isn't a collection of "prompts." It's a directory-level configuration system that optimizes token usage.
+
+          [Get the Framework for £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
+
+          ## 📬 Support & Community
+
+          * **Professional Support**: agenticstandardcontact@gmail.com
+          * **Issue Tracking**: [Open a GitHub Issue](https://github.com/agentic-architect/rules/issues)
+
+          **[Purchase the full kit £19.99]** https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit
+          '''
+
+          # 3. Clean up the indentation and inject the rule
+          final_content = textwrap.dedent(template).strip()
+          final_content = final_content.replace("{SELECTED_RULE}", rule)
+
+          with open("README.md", "w", encoding="utf-8") as f:
+              f.write(final_content)
           EOF
-          
+
       - name: Commit and Push
         run: |
           git config --global user.name "Agentic Architect Bot"
           git config --global user.email "bot@agenticarchitect.com"
           git add README.md
-          git commit -m "Auto-update: Daily Rule" || exit 0
+          git commit -m "Auto-update: Daily Senior .NET Rule" || exit 0
           git push
