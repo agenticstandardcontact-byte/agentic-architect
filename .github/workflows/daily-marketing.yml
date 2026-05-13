@@ -12,51 +12,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Rebuild README via Python Template
+      - name: Rebuild README
         run: |
-          python3 -c "
-          import random, textwrap, os
-
-          # 1. Selection Logic
-          rule_file = 'rules/persistence-kit.md'
-          selected = 'Rule 1: The Result Pattern'
-          if os.path.exists(rule_file):
-              with open(rule_file, 'r') as f:
-                  rules = [line.strip() for line in f if line.startswith('Rule ')]
-                  if rules:
-                      selected = random.choice(rules)
-
-          # 2. The Golden Template (Preserves all spacing exactly)
-          content = f'''
+          # 1. Create a template. The 'EOF' ensures no backticks are mangled.
+          cat << 'EOF' > README.template
           # 🏛️ Agentic Architect: The Persistence Framework for Cursor
 
-          Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a \"chat-bot\" into a stateful Architectural Partner.
+          Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a "chat-bot" into a stateful Architectural Partner.
 
           [Buy Agentic Architect](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
 
-          ## 🧠 The Problem: \"The Context Tax\"
+          ## 🧠 The Problem: "The Context Tax"
 
-          Every Senior Developer using Cursor pays a \"Context Tax.\" You spend the first 15 minutes of every session re-syncing the AI on your DI patterns, project boundaries, and recent refactors. Without a persistence layer, the AI eventually \"drifts,\" suggesting patterns that violate your core architecture.
+          Every Senior Developer using Cursor pays a "Context Tax." You spend the first 15 minutes of every session re-syncing the AI on your DI patterns, project boundaries, and recent refactors. Without a persistence layer, the AI eventually "drifts," suggesting patterns that violate your core architecture.
 
           ## 🛡️ The Solution: The Persistence Protocol
 
-          Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and a Stateful Persistence Protocol designed to lock your architectural decisions into the AI's \"long-term memory.\"
+          Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and a Stateful Persistence Protocol designed to lock your architectural decisions into the AI's "long-term memory."
 
           ## 📦 What's Inside the Kit:
 
-          * **arch-core.mdc**: Enforces SOLID boundaries and prevents \"Big Ball of Mud\" suggestions.
+          * **arch-core.mdc**: Enforces SOLID boundaries and prevents "Big Ball of Mud" suggestions.
           * **dotnet-di.mdc**: A specialized auditor for constructor injections and service lifetimes.
           * **bug-breaker.mdc**: A circuit-breaker that stops the AI when it enters a hallucination loop.
-          * **persistence.mdc**: The engine that maintains your LEARNING_LOG.md—the \"brain\" of your project.
-
-          ---
-
-          ## 🛠️ Daily Senior Rule Update
-          *This principle is extracted from our full architectural suite to help maintain a stateful .NET environment.*
-
-          > **{selected}**
-
-          ---
+          * **persistence.mdc**: The engine that maintains your `LEARNING_LOG.md`—the "brain" of your project.
 
           ## 🚀 How it Works
 
@@ -64,9 +43,14 @@ jobs:
           2. **Install**: Drop the `.cursor/rules/` folder into your project root.
           3. **Maintain**: Initialize your `LEARNING_LOG.md` to track architectural shifts automatically.
 
+          ---
+          ## 🛠️ Daily Senior Rule Update
+          > **[[RULE_PLACEHOLDER]]**
+          ---
+
           ## 🏛️ Built for Senior .NET Environments
 
-          This isn't a collection of \"prompts.\" It's a directory-level configuration system that optimizes token usage by loading only the rules relevant to your current file.
+          This isn't a collection of "prompts." It's a directory-level configuration system that optimizes token usage by loading only the rules relevant to your current file.
 
           [Get the Framework for £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
 
@@ -76,11 +60,25 @@ jobs:
           * **Issue Tracking**: [Open a GitHub Issue](https://github.com/agentic-architect/rules/issues)
 
           **[Purchase the full kit £19.99]** https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit
-          '''
+          EOF
 
-          # 3. Write file with explicit dedent to fix formatting
+          # 2. Use Python to safely swap the rule without breaking formatting
+          python3 -c "
+          import random, os
+          
+          # Get the rule
+          rule = 'Rule: Persistence Protocol'
+          if os.path.exists('rules/persistence-kit.md'):
+              with open('rules/persistence-kit.md', 'r') as f:
+                  rules = [l.strip() for l in f if l.startswith('Rule ')]
+                  if rules: rule = random.choice(rules)
+
+          # Perform the swap
+          with open('README.template', 'r') as f:
+              content = f.read()
+          
           with open('README.md', 'w') as f:
-              f.write(textwrap.dedent(content).strip())
+              f.write(content.replace('[[RULE_PLACEHOLDER]]', rule))
           "
           
       - name: Commit and Push
