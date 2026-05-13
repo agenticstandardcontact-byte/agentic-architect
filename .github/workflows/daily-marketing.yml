@@ -11,11 +11,14 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Rebuild README
+
+      - name: Build README
         run: |
-          # 1. Create a template. The 'EOF' ensures no backticks are mangled.
-          cat << 'EOF' > README.template
+          # 1. Grab the rule first
+          SELECTED_RULE=$(grep "Rule " rules/persistence-kit.md | shuf -n 1)
+
+          # 2. Write the file using a quoted Heredoc to protect backticks and spacing
+          cat << 'EOF' > README.md
           # 🏛️ Agentic Architect: The Persistence Framework for Cursor
 
           Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a "chat-bot" into a stateful Architectural Partner.
@@ -37,16 +40,18 @@ jobs:
           * **bug-breaker.mdc**: A circuit-breaker that stops the AI when it enters a hallucination loop.
           * **persistence.mdc**: The engine that maintains your `LEARNING_LOG.md`—the "brain" of your project.
 
+          ---
+
+          ## 🛠️ Daily Senior Rule Update
+          > **REPLACE_ME**
+
+          ---
+
           ## 🚀 How it Works
 
           1. **Purchase**: Get the Kit via [Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit).
           2. **Install**: Drop the `.cursor/rules/` folder into your project root.
           3. **Maintain**: Initialize your `LEARNING_LOG.md` to track architectural shifts automatically.
-
-          ---
-          ## 🛠️ Daily Senior Rule Update
-          > **[[RULE_PLACEHOLDER]]**
-          ---
 
           ## 🏛️ Built for Senior .NET Environments
 
@@ -62,25 +67,9 @@ jobs:
           **[Purchase the full kit £19.99]** https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit
           EOF
 
-          # 2. Use Python to safely swap the rule without breaking formatting
-          python3 -c "
-          import random, os
-          
-          # Get the rule
-          rule = 'Rule: Persistence Protocol'
-          if os.path.exists('rules/persistence-kit.md'):
-              with open('rules/persistence-kit.md', 'r') as f:
-                  rules = [l.strip() for l in f if l.startswith('Rule ')]
-                  if rules: rule = random.choice(rules)
+          # 3. Use Python to swap the placeholder so we don't break the shell again
+          python3 -c "import sys; c = open('README.md').read(); open('README.md', 'w').write(c.replace('REPLACE_ME', sys.argv[1]))" "$SELECTED_RULE"
 
-          # Perform the swap
-          with open('README.template', 'r') as f:
-              content = f.read()
-          
-          with open('README.md', 'w') as f:
-              f.write(content.replace('[[RULE_PLACEHOLDER]]', rule))
-          "
-          
       - name: Commit and Push
         run: |
           git config --global user.name "Agentic Architect Bot"
