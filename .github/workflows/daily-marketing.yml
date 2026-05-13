@@ -12,14 +12,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Rebuild README
+      - name: Build README
+        shell: python
         run: |
-          # 1. Grab the rule
-          SELECTED_RULE=$(grep "Rule " rules/persistence-kit.md | shuf -n 1 || echo "Rule: Persistence Protocol")
+          import random
+          from pathlib import Path
 
-          # 2. Write the template to a temporary file using a literal heredoc
-          cat << 'EOF' > template.txt
-          # 🏛️ Agentic Architect: The Persistence Framework for Cursor
+          # 1. Selection Logic
+          rule_file = Path("rules/persistence-kit.md")
+          selected_rule = "Rule: Persistence Protocol"
+          if rule_file.exists():
+              lines = rule_file.read_text().splitlines()
+              rules = [l.strip() for l in lines if l.startswith("Rule ")]
+              if rules:
+                  selected_rule = random.choice(rules)
+
+          # 2. The Final Content (Raw String to prevent any character escaping)
+          content = r"""# 🏛️ Agentic Architect: The Persistence Framework for Cursor
 
           Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a "chat-bot" into a stateful Architectural Partner.
 
@@ -35,15 +44,15 @@ jobs:
 
           ## 📦 What's Inside the Kit:
 
-          * **arch-core.mdc**: Enforces SOLID boundaries.
-          * **dotnet-di.mdc**: Auditor for constructor injections.
-          * **bug-breaker.mdc**: Circuit-breaker for hallucination loops.
-          * **persistence.mdc**: Maintains your `LEARNING_LOG.md`—the "brain" of your project.
+          * **arch-core.mdc**: Enforces SOLID boundaries and prevents "Big Ball of Mud" suggestions.
+          * **dotnet-di.mdc**: A specialized auditor for constructor injections and service lifetimes.
+          * **bug-breaker.mdc**: A circuit-breaker that stops the AI when it enters a hallucination loop.
+          * **persistence.mdc**: The engine that maintains your `LEARNING_LOG.md`—the "brain" of your project.
 
           ---
 
           ## 🛠️ Daily Senior Rule Update
-          > **[[RULE]]**
+          > **{rule}**
 
           ---
 
@@ -51,11 +60,11 @@ jobs:
 
           1. **Purchase**: Get the Kit via [Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit).
           2. **Install**: Drop the `.cursor/rules/` folder into your project root.
-          3. **Maintain**: Initialize your `LEARNING_LOG.md` to track shifts.
+          3. **Maintain**: Initialize your `LEARNING_LOG.md` to track architectural shifts automatically.
 
           ## 🏛️ Built for Senior .NET Environments
 
-          This isn't a collection of "prompts." It's a directory-level configuration system that optimizes token usage.
+          This isn't a collection of "prompts." It's a directory-level configuration system that optimizes token usage by loading only the rules relevant to your current file.
 
           [Get the Framework for £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
 
@@ -65,27 +74,11 @@ jobs:
           * **Issue Tracking**: [Open a GitHub Issue](https://github.com/agentic-architect/rules/issues)
 
           **[Purchase the full kit £19.99]** https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit
-          EOF
+          """
 
-          # 3. Use Python to swap the rule and save as README.md
-          # This avoids shell interpolation and encoding errors
-          python3 -c "
-          import os
-          rule = os.getenv('RULE_VALUE')
-          with open('template.txt', 'r', encoding='utf-8') as f:
-              data = f.read()
-          with open('README.md', 'w', encoding='utf-8') as f:
-              f.write(data.replace('[[RULE]]', rule))
-          "
-        env:
-          RULE_VALUE: ${{ env.SELECTED_RULE }}
-          # Fallback if the env doesn't pass correctly through the step
-          
-      - name: Manual Rule Injection Fallback
-        # If the above python env failed, this sed command is the backup
-        run: |
-          SELECTED_RULE=$(grep "Rule " rules/persistence-kit.md | shuf -n 1 || echo "Rule: Persistence Protocol")
-          sed -i "s|\[\[RULE\]\]|$SELECTED_RULE|g" README.md
+          # 3. Direct Write (Bypasses Shell entirely)
+          output = content.replace("{rule}", selected_rule)
+          Path("README.md").write_text(output, encoding="utf-8")
 
       - name: Commit and Push
         run: |
