@@ -1,8 +1,8 @@
 name: Daily Marketing Engine
 on:
   schedule:
-    - cron: '0 9 * * *'
-  workflow_dispatch:
+    - cron: '0 9 * * *' # Runs at 9 AM daily
+  workflow_dispatch:   # Manual trigger
 
 jobs:
   update-readme:
@@ -14,10 +14,11 @@ jobs:
       
       - name: Rebuild README from Scratch
         run: |
-          # 1. Grab a random rule from your library
+          # 1. Grab a random rule from the library
           SELECTED_RULE=$(grep "Rule " rules/persistence-kit.md | shuf -n 1)
 
-          # 2. Overwrite the broken README with the 'Golden Copy'
+          # 2. Re-write the README exactly as it should appear
+          # Note: We escape the backticks using \ so the shell doesn't run them
           cat << EOF > README.md
           # 🏛️ Agentic Architect: The Persistence Framework for Cursor
           Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a "chat-bot" into a stateful Architectural Partner.
@@ -43,8 +44,8 @@ jobs:
 
           ## 🚀 How it Works
           1. Purchase the Kit via [Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit).
-          2. Drop the .cursor/rules/ folder into your project root.
-          3. Initialize your LEARNING_LOG.md: Cursor will now automatically track architectural shifts.
+          2. Drop the \`.cursor/rules/\` folder into your project root.
+          3. Initialize your \`LEARNING_LOG.md\`: Cursor will now automatically track architectural shifts.
 
           [Get the Framework for £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
 
