@@ -22,7 +22,7 @@ Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and 
 ---
 
 ## 🛠️ Daily Senior Rule Update
-> **Rule 1: The Result Pattern**
+> **Rule 2: Persistence Boundaries**
 
 ---
 
