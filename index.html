@@ -4,172 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
-
-  <title>Agentic Architect — Stop AI Context Rot in Your C#/.NET Project | Cursor Persistence Framework</title>
-  <meta name="description" content="The professional-grade Cursor persistence framework for Senior .NET Developers. 4 specialist .mdc rules + Learning Log protocol that lock your architecture into the AI's long-term memory. Stop paying the 15-minute Context Tax every morning." />
-  <meta name="keywords" content="Cursor AI, Cursor rules, .mdc rules, C# AI, .NET AI, AI persistence, Cursor IDE, agentic coding, AI context, AI drift, senior developer AI tools" />
-  <meta name="author" content="Agentic Architect" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Agentic Architect — The Persistence Framework for Cursor" />
-  <meta property="og:description" content="Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a chat-bot into a stateful Architectural Partner." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/" />
-  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <!-- Twitter -->
+  <title>Blog — Daily Senior Rule Updates | Agentic Architect</title>
+  <meta name="description" content="The Daily Senior Rule: one practical Cursor + C#/.NET pattern per day. Build your AI's architectural taste, one rule at a time." />
+  <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/" />
+  <meta property="og:title" content="Agentic Architect Blog — Daily Senior Rule Updates" />
+  <meta property="og:description" content="One practical Cursor + .NET pattern per day. Train your AI's architectural taste." />
+  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+  <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Agentic Architect — Persistence Framework for Cursor" />
-  <meta name="twitter:description" content="Stop paying the Context Tax. Lock your architectural decisions into Cursor's long-term memory." />
-  <meta name="twitter:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.png" />
-
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Architect — Daily Senior Rule" href="../feed.xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Schema.org Product -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Agentic Architect — Cursor Persistence Framework",
-    "description": "Professional-grade suite of 4 specialist .mdc Rules and a stateful persistence protocol designed to lock C#/.NET architectural decisions into Cursor's long-term memory.",
-    "image": "https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.png",
-    "brand": { "@type": "Brand", "name": "Agentic Architect" },
-    "category": "Developer Tools",
-    "offers": {
-      "@type": "Offer",
-      "url": "https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit",
-      "priceCurrency": "GBP",
-      "price": "19.99",
-      "availability": "https://schema.org/InStock",
-      "seller": { "@type": "Organization", "name": "Agentic Architect" }
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "bestRating": "5",
-      "ratingCount": "3"
-    }
-  }
-  </script>
-
-  <!-- Schema.org Organization -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Agentic Architect",
-    "url": "https://agenticstandardcontact-byte.github.io/agentic-architect/",
-    "logo": "https://agenticstandardcontact-byte.github.io/agentic-architect/favicon.svg",
-    "email": "agenticstandardcontact@gmail.com",
-    "sameAs": [
-      "https://github.com/agenticstandardcontact-byte/agentic-architect",
-      "https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit"
-    ]
-  }
-  </script>
-
-  <!-- Schema.org FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Isn't this just a few prompt files I could write myself?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You could, but the framework isn't the prompts — it's the directory-level loading strategy, the circuit-breaker pattern, and the Learning Log protocol that gives Cursor true statefulness. Writing it yourself is a weekend project; maintaining it is a second job."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Will this work with Cursor's built-in rules feature?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. The .mdc files plug directly into Cursor's native rules system."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does it work for non-.NET languages?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The persistence.mdc engine and bug-breaker.mdc are language-agnostic. arch-core.mdc and dotnet-di.mdc are tuned for C#/.NET. Non-.NET users get value from 2 of the 4 rules."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is it a subscription?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. One-time £19.99. Lifetime updates. MIT-licensed."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How is this different from generic Cursor rules repos on GitHub?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Most public rules are monolithic — a single rule dumped on every prompt. Agentic Architect uses scoped, directory-aware loading so only relevant rules activate per file. Plus, none of them solve persistence — the actual root cause of AI drift."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What if it doesn't work for me?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "14-day no-questions refund. Email agenticstandardcontact@gmail.com."
-        }
-      }
-    ]
-  }
-  </script>
-
-  <!-- Schema.org BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://agenticstandardcontact-byte.github.io/agentic-architect/"
-      }
-    ]
-  }
-  </script>
-
-  <!-- Privacy-friendly analytics (GoatCounter, no cookies, GDPR-safe by default) -->
-  <!-- Sign up free at https://www.goatcounter.com — replace YOUR-CODE below with your site code -->
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="blog.css" />
   <script data-goatcounter="https://YOUR-CODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
-  <!-- ========== ANNOUNCEMENT BAR ========== -->
-  <div class="announce-bar" role="banner">
-    <div class="announce-inner">
-      <span class="pulse-dot" aria-hidden="true"></span>
-      <span class="announce-text">
-        <strong>Founder's Edition</strong> — Launch price <s>£49</s> <b>£19.99</b> ends in
-        <span id="countdown" class="countdown" aria-live="polite">--:--:--</span>
-      </span>
-      <a class="announce-cta" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">Claim Now →</a>
-    </div>
-  </div>
-
-  <!-- ========== NAV ========== -->
   <header class="nav">
     <div class="container nav-inner">
-      <a href="#top" class="brand" aria-label="Agentic Architect home">
+      <a href="../" class="brand" aria-label="Agentic Architect home">
         <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
           <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
           <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -177,545 +33,57 @@
         <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
       </a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="#problem">The Problem</a>
-        <a href="#kit">What's Inside</a>
-        <a href="#proof">Proof</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#free">Free Rule</a>
-        <a href="#faq">FAQ</a>
-        <a href="blog/">Blog</a>
+        <a href="../#problem">The Problem</a>
+        <a href="../#kit">What's Inside</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="./" aria-current="page">Blog</a>
       </nav>
       <a class="btn btn-primary btn-sm nav-cta" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">Get the Kit</a>
     </div>
   </header>
 
-  <main id="top">
-
-    <!-- ========== HERO ========== -->
-    <section class="hero">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="grid-overlay"></div>
-        <div class="glow glow-1"></div>
-        <div class="glow glow-2"></div>
-      </div>
-
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <div class="eyebrow">
-            <span class="badge-dot"></span>
-            Built for Senior .NET Engineers using Cursor
-          </div>
-
-          <h1 class="hero-title">
-            Stop re-explaining your architecture<br />
-            to your AI <span class="strike">every single morning</span>.
-          </h1>
-
-          <p class="hero-sub">
-            <b>Agentic Architect</b> is the only directory-level persistence framework that turns Cursor from a forgetful chat-bot into a <span class="hl">stateful Architectural Partner</span> that remembers your DI patterns, your boundaries, and your decisions — across every session.
-          </p>
-
-          <ul class="hero-bullets">
-            <li><span class="check">✓</span> 4 specialist <code>.mdc</code> rules engineered for C#/.NET</li>
-            <li><span class="check">✓</span> Stateful <code>LEARNING_LOG.md</code> protocol — the "brain" of your project</li>
-            <li><span class="check">✓</span> Drop-in install. Zero config. Works in 60 seconds.</li>
-            <li><span class="check">✓</span> One-time payment. Lifetime updates. <b>No subscription.</b></li>
-          </ul>
-
-          <div class="hero-cta-row">
-            <a class="btn btn-primary btn-lg" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">
-              Get the Framework — £19.99
-              <span class="btn-sub">Instant download · MIT-licensed rules</span>
-            </a>
-            <a class="btn btn-ghost btn-lg" href="#kit">See What's Inside ↓</a>
-          </div>
-
-          <div class="hero-trust">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <span><b>Senior engineers</b> are switching away from generic prompt packs.</span>
-          </div>
-        </div>
-
-        <!-- Terminal mock -->
-        <div class="hero-visual" aria-hidden="true">
-          <div class="terminal">
-            <div class="terminal-bar">
-              <span class="dot dot-r"></span>
-              <span class="dot dot-y"></span>
-              <span class="dot dot-g"></span>
-              <span class="terminal-title">cursor — agentic-architect</span>
-            </div>
-            <div class="terminal-body">
-              <p><span class="t-dim">~/api/Services$</span> <span class="t-cmd">cursor agent</span></p>
-              <p><span class="t-ok">✓</span> Loaded <span class="t-acc">arch-core.mdc</span></p>
-              <p><span class="t-ok">✓</span> Loaded <span class="t-acc">dotnet-di.mdc</span></p>
-              <p><span class="t-ok">✓</span> Loaded <span class="t-acc">bug-breaker.mdc</span></p>
-              <p><span class="t-ok">✓</span> Hydrated <span class="t-acc">LEARNING_LOG.md</span> <span class="t-dim">(42 entries)</span></p>
-              <p>&nbsp;</p>
-              <p><span class="t-prompt">You</span> Add caching to OrderService</p>
-              <p>&nbsp;</p>
-              <p><span class="t-prompt t-ai">AI</span> Detected <span class="t-acc">Scoped</span> lifetime conflict with <span class="t-acc">IMemoryCache</span> (Singleton).<br/>
-                 Following <span class="t-acc">Log Entry #27</span>: "Prefer <span class="t-acc">IDistributedCache</span> abstraction in <span class="t-acc">/Infrastructure/Caching</span>."<br/>
-                 Applying decorator pattern via <span class="t-acc">Scrutor</span> per <span class="t-acc">arch-core.mdc §3</span>...</p>
-              <p>&nbsp;</p>
-              <p class="t-blink">▍</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Logo strip / micro-trust -->
-      <div class="container trust-strip">
-        <div class="trust-item"><b>60s</b><span>Install time</span></div>
-        <div class="trust-divider"></div>
-        <div class="trust-item"><b>4</b><span>Specialist rules</span></div>
-        <div class="trust-divider"></div>
-        <div class="trust-item"><b>0</b><span>Subscriptions</span></div>
-        <div class="trust-divider"></div>
-        <div class="trust-item"><b>£19.99</b><span>One-time</span></div>
-      </div>
-    </section>
-
-    <!-- ========== PROBLEM / PAIN ========== -->
-    <section id="problem" class="section section-dark">
+  <main>
+    <section class="blog-hero">
       <div class="container">
-        <div class="section-head">
-          <span class="kicker">The Hidden Cost</span>
-          <h2>You're Paying the <span class="grad">"Context Tax"</span> Every Single Morning.</h2>
-          <p class="lede">
-            Be honest. The first 15 minutes of every Cursor session, you're not coding —
-            you're <b>re-explaining your codebase to a goldfish</b>.
-          </p>
-        </div>
-
-        <div class="pain-grid">
-          <div class="pain-card">
-            <div class="pain-icon">⏱</div>
-            <h3>15 mins/day, lost to re-context</h3>
-            <p>That's <b>62 hours a year</b> typing the same "we use Mediator and Result&lt;T&gt; in this project…" preamble. Your senior salary deserves better.</p>
-          </div>
-          <div class="pain-card">
-            <div class="pain-icon">🧠</div>
-            <h3>The AI "drifts" by Wednesday</h3>
-            <p>By mid-week it's suggesting <code>HttpClient</code> instantiations in your repository layer. Generic prompts can't enforce <b>your</b> SOLID boundaries.</p>
-          </div>
-          <div class="pain-card">
-            <div class="pain-icon">🌀</div>
-            <h3>Hallucination loops cost hours</h3>
-            <p>The AI invents methods, doubles down when corrected, and burns tokens. There's no <b>circuit breaker</b>. So you become one.</p>
-          </div>
-          <div class="pain-card">
-            <div class="pain-icon">📉</div>
-            <h3>"Big Ball of Mud" by sprint 3</h3>
-            <p>Without persisted architectural rules, every PR slowly drags your clean architecture back into the swamp. You feel it. You can't stop it.</p>
-          </div>
-        </div>
-
-        <div class="pain-cta">
-          <p>This isn't a Cursor problem. It's a <b>persistence</b> problem.</p>
-          <a class="btn btn-primary" href="#solution">Show me the fix ↓</a>
-        </div>
+        <span class="kicker">The Daily Senior Rule</span>
+        <h1>One practical <span class="grad">Cursor + .NET pattern</span> per day.</h1>
+        <p class="lede">Field notes from building a stateful AI partner for production C#/.NET codebases. Each post is a single rule, a single anti-pattern, or a single lesson from real Cursor sessions.</p>
+        <a class="btn btn-ghost btn-sm" href="../feed.xml">📡 Subscribe via RSS</a>
       </div>
     </section>
 
-    <!-- ========== SOLUTION ========== -->
-    <section id="solution" class="section">
-      <div class="container">
-        <div class="section-head center">
-          <span class="kicker">The Persistence Protocol</span>
-          <h2>Lock your architecture into the AI's <span class="grad">long-term memory</span>.</h2>
-          <p class="lede">
-            Agentic Architect isn't another prompt pack. It's a <b>directory-level configuration system</b> — 4 specialist <code>.mdc</code> rules + a stateful Learning Log — that loads only the right context for the file you're editing.
-          </p>
-        </div>
-
-        <div class="before-after">
-          <div class="ba-col ba-before">
-            <div class="ba-label">BEFORE</div>
-            <h3>Generic prompts &amp; chat-bot Cursor</h3>
-            <ul>
-              <li><span class="x">✕</span> Re-context every session</li>
-              <li><span class="x">✕</span> AI forgets last week's refactor</li>
-              <li><span class="x">✕</span> Suggests anti-patterns confidently</li>
-              <li><span class="x">✕</span> Loops on the same hallucination</li>
-              <li><span class="x">✕</span> Token bloat — entire rules dumped every prompt</li>
-              <li><span class="x">✕</span> Architecture decays sprint after sprint</li>
-            </ul>
-          </div>
-          <div class="ba-arrow" aria-hidden="true">→</div>
-          <div class="ba-col ba-after">
-            <div class="ba-label">AFTER</div>
-            <h3>Cursor with Agentic Architect</h3>
-            <ul>
-              <li><span class="ok">✓</span> Sessions start <b>hydrated</b> — log auto-loads</li>
-              <li><span class="ok">✓</span> Knows every architectural decision you've made</li>
-              <li><span class="ok">✓</span> Refuses patterns that violate your boundaries</li>
-              <li><span class="ok">✓</span> <b>Circuit breaker</b> halts hallucination loops</li>
-              <li><span class="ok">✓</span> <b>Scoped loading</b> — only relevant rules per file</li>
-              <li><span class="ok">✓</span> Architecture <b>compounds</b> over time</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== WHAT'S INSIDE ========== -->
-    <section id="kit" class="section section-dark">
-      <div class="container">
-        <div class="section-head center">
-          <span class="kicker">What's Inside the Kit</span>
-          <h2>Four specialist rules. One stateful brain.</h2>
-          <p class="lede">Each rule is engineered for a specific architectural concern, loaded only when relevant — so the AI is always sharp and never overloaded.</p>
-        </div>
-
-        <div class="kit-grid">
-          <article class="kit-card">
-            <div class="kit-head">
-              <code class="kit-file">arch-core.mdc</code>
-              <span class="kit-tag tag-blue">Architecture</span>
-            </div>
-            <h3>The Boundary Guardian</h3>
-            <p>Enforces SOLID boundaries and prevents "Big Ball of Mud" suggestions. Stops the AI from crossing layer lines — no DbContext in controllers, no business logic in repositories, ever.</p>
-            <ul class="kit-points">
-              <li>SOLID compliance audits on every suggestion</li>
-              <li>Layered architecture boundary enforcement</li>
-              <li>Anti-pattern early-warning system</li>
-            </ul>
-          </article>
-
-          <article class="kit-card">
-            <div class="kit-head">
-              <code class="kit-file">dotnet-di.mdc</code>
-              <span class="kit-tag tag-violet">.NET DI</span>
-            </div>
-            <h3>The DI Auditor</h3>
-            <p>A specialized auditor for constructor injections and service lifetimes. Catches <code>Scoped → Singleton</code> capture bugs before they ship. Knows <code>IServiceCollection</code>, Scrutor, Autofac patterns by heart.</p>
-            <ul class="kit-points">
-              <li>Lifetime conflict detection</li>
-              <li>Constructor-injection best practices</li>
-              <li>Module registration discipline</li>
-            </ul>
-          </article>
-
-          <article class="kit-card">
-            <div class="kit-head">
-              <code class="kit-file">bug-breaker.mdc</code>
-              <span class="kit-tag tag-amber">Circuit Breaker</span>
-            </div>
-            <h3>The Hallucination Killer</h3>
-            <p>A circuit-breaker that stops the AI when it enters a hallucination loop. Detects repeated failed solutions, forces it to <b>step back, re-read the file, and ask</b> — instead of doubling down.</p>
-            <ul class="kit-points">
-              <li>Loop-detection on failed attempts</li>
-              <li>Forced context re-read protocol</li>
-              <li>Token waste prevention</li>
-            </ul>
-          </article>
-
-          <article class="kit-card kit-card-feature">
-            <div class="kit-head">
-              <code class="kit-file">persistence.mdc</code>
-              <span class="kit-tag tag-green">★ The Engine</span>
-            </div>
-            <h3>The Project's Long-Term Memory</h3>
-            <p>The engine that maintains your <code>LEARNING_LOG.md</code> — the persistent "brain" of your project. Every architectural decision, refactor reason, and "we tried that, don't do it again" lesson gets logged and re-hydrated <b>automatically</b>.</p>
-            <ul class="kit-points">
-              <li>Auto-append architectural decisions (ADR-style)</li>
-              <li>Session-start hydration protocol</li>
-              <li>Cross-session continuity — true statefulness</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="bonus-stack">
-          <h3>Plus, you'll also get:</h3>
-          <div class="bonus-grid">
-            <div class="bonus-item"><b>📘 Quickstart PDF</b><span>From zero to hydrated in 60 seconds.</span></div>
-            <div class="bonus-item"><b>🧩 LEARNING_LOG template</b><span>Pre-seeded for a typical .NET solution.</span></div>
-            <div class="bonus-item"><b>🛠 Daily Senior Rule Updates</b><span>New patterns dropped via the repo.</span></div>
-            <div class="bonus-item"><b>♾ Lifetime updates</b><span>Future rules &amp; protocol upgrades free.</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== HOW IT WORKS ========== -->
     <section class="section">
       <div class="container">
-        <div class="section-head center">
-          <span class="kicker">How It Works</span>
-          <h2>From zero to a stateful AI partner in <span class="grad">three steps</span>.</h2>
-        </div>
+        <ul class="post-list">
 
-        <ol class="steps">
-          <li class="step">
-            <div class="step-num">01</div>
-            <h3>Purchase &amp; download</h3>
-            <p>Instant access via Gumroad. You get the full <code>.cursor/rules/</code> folder and a pre-seeded <code>LEARNING_LOG.md</code> template.</p>
-          </li>
-          <li class="step">
-            <div class="step-num">02</div>
-            <h3>Drop into your project</h3>
-            <p>Copy <code>.cursor/rules/</code> into your repo root. Cursor auto-detects the rules. No build step. No CLI. No config files to edit.</p>
-          </li>
-          <li class="step">
-            <div class="step-num">03</div>
-            <h3>Initialize the Log</h3>
-            <p>Run the included "hydrate" prompt once. The AI seeds your <code>LEARNING_LOG.md</code> from your codebase and starts tracking decisions automatically.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ========== SOCIAL PROOF ========== -->
-    <section id="proof" class="section section-dark">
-      <div class="container">
-        <div class="section-head center">
-          <span class="kicker">Why Senior Engineers Switch</span>
-          <h2>This isn't theory. It's how serious teams use Cursor.</h2>
-        </div>
-
-        <div class="testimonials">
-          <figure class="quote">
-            <blockquote>"I've burned hours every week fighting AI drift on a complex DDD codebase. The Learning Log alone paid for itself in the first afternoon. The DI auditor caught a Scoped-into-Singleton bug that would've shipped."</blockquote>
-            <figcaption>
-              <div class="avatar" aria-hidden="true">JM</div>
-              <div><b>James M.</b><span>Principal Engineer, FinTech (.NET 8 / DDD)</span></div>
-            </figcaption>
-          </figure>
-
-          <figure class="quote">
-            <blockquote>"The bug-breaker rule is genuinely novel. The AI used to spiral when it didn't know an answer — now it stops, re-reads the file, and asks me. That's the behavior I actually want from a senior pair-programmer."</blockquote>
-            <figcaption>
-              <div class="avatar" aria-hidden="true">SR</div>
-              <div><b>Sara R.</b><span>Tech Lead, Clean Architecture shop</span></div>
-            </figcaption>
-          </figure>
-
-          <figure class="quote">
-            <blockquote>"Finally — Cursor rules that respect token budgets. Scoped loading per directory means the relevant <code>.mdc</code> kicks in for <i>that</i> file, not a 2,000-token preamble on every prompt."</blockquote>
-            <figcaption>
-              <div class="avatar" aria-hidden="true">DK</div>
-              <div><b>Daniel K.</b><span>Staff Engineer, SaaS platform</span></div>
-            </figcaption>
-          </figure>
-        </div>
-
-        <div class="proof-meta">
-          <div class="proof-meta-item"><b>£19.99</b><span>One-time. No subscription.</span></div>
-          <div class="proof-meta-item"><b>MIT</b><span>Licensed. Yours forever.</span></div>
-          <div class="proof-meta-item"><b>Lifetime</b><span>Updates included.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== WHO IT'S FOR ========== -->
-    <section class="section">
-      <div class="container">
-        <div class="two-col">
-          <div class="two-col-card good">
-            <h3>✅ This is for you if…</h3>
-            <ul>
-              <li>You're a <b>Senior / Staff / Principal</b> engineer on a real .NET codebase.</li>
-              <li>You use Cursor daily and feel the "context tax" pain.</li>
-              <li>You care about <b>architecture</b>, not just shipping features.</li>
-              <li>You want the AI to be a <b>partner</b>, not a fancy autocomplete.</li>
-              <li>You want a system you can <b>commit to your repo</b> and onboard your team to.</li>
-            </ul>
-          </div>
-          <div class="two-col-card bad">
-            <h3>❌ This isn't for you if…</h3>
-            <ul>
-              <li>You're learning your first language. (Come back when you have a codebase to protect.)</li>
-              <li>You think "good enough" prompts are fine.</li>
-              <li>You don't use Cursor.</li>
-              <li>You don't write C#/.NET. (Rules are tuned for the .NET ecosystem.)</li>
-              <li>You'd rather pay a £30/mo SaaS than own your tooling.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== PRICING ========== -->
-    <section id="pricing" class="section section-dark">
-      <div class="container">
-        <div class="section-head center">
-          <span class="kicker">Founder's Pricing</span>
-          <h2>Pays for itself in <span class="grad">one morning</span>.</h2>
-          <p class="lede">At your billing rate, you reclaim the cost in the first session. Then it compounds, forever.</p>
-        </div>
-
-        <div class="pricing-wrap">
-          <div class="pricing-card">
-            <div class="ribbon">FOUNDER'S EDITION</div>
-            <h3>The Persistence Kit</h3>
-            <p class="pricing-sub">Everything you need to turn Cursor into a stateful architectural partner.</p>
-
-            <div class="price-row">
-              <span class="price-old">£49</span>
-              <span class="price-now">£19.99</span>
-              <span class="price-once">one-time</span>
-            </div>
-
-            <ul class="price-list">
-              <li><span class="ok">✓</span> <b>arch-core.mdc</b> — SOLID boundary guardian</li>
-              <li><span class="ok">✓</span> <b>dotnet-di.mdc</b> — DI &amp; lifetime auditor</li>
-              <li><span class="ok">✓</span> <b>bug-breaker.mdc</b> — hallucination circuit breaker</li>
-              <li><span class="ok">✓</span> <b>persistence.mdc</b> — the Learning Log engine</li>
-              <li><span class="ok">✓</span> <b>LEARNING_LOG.md</b> template</li>
-              <li><span class="ok">✓</span> <b>Quickstart PDF</b> — 60-second install</li>
-              <li><span class="ok">✓</span> <b>Daily Senior Rule</b> updates</li>
-              <li><span class="ok">✓</span> <b>Lifetime updates</b> — pay once, own forever</li>
-              <li><span class="ok">✓</span> <b>MIT-licensed</b> — commit it, share with your team</li>
-            </ul>
-
-            <a class="btn btn-primary btn-xl" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">
-              Get Instant Access — £19.99 →
-            </a>
-
-            <div class="guarantee">
-              <div class="guarantee-badge">🛡</div>
-              <div>
-                <b>14-Day "Reclaim Your Mornings" Guarantee.</b><br/>
-                Install it. Use it. If it doesn't save you the first 15 minutes of every session, email <a href="mailto:agenticstandardcontact@gmail.com">agenticstandardcontact@gmail.com</a> for a full refund. No interrogation.
+          <li class="post-card">
+            <a href="01-the-context-tax.html" class="post-link">
+              <div class="post-meta">
+                <time datetime="2026-05-19">May 19, 2026</time>
+                <span class="post-tag">Architecture</span>
               </div>
-            </div>
-
-            <p class="pricing-fine">Secure checkout via Gumroad · Instant download · VAT handled automatically</p>
-          </div>
-        </div>
-
-        <div class="value-math">
-          <h3>The math is uncomfortable.</h3>
-          <div class="math-grid">
-            <div><b>15 min/day</b><span>Time you lose re-contexting</span></div>
-            <div><b>62 hrs/year</b><span>That's nearly 8 working days</span></div>
-            <div><b>@ £75/hr</b><span>= £4,650 of senior time lost</span></div>
-            <div class="math-pop"><b>£19.99</b><span>To get it all back</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== LEAD MAGNET ========== -->
-    <section id="free" class="section">
-      <div class="container">
-        <div class="lead-magnet">
-          <div class="lead-magnet-copy">
-            <span class="kicker">Try Before You Buy</span>
-            <h2>Get <span class="grad">one rule, free</span>. See if your AI stops drifting.</h2>
-            <p class="lede">
-              <code>arch-core-lite.mdc</code> is a stripped-down version of the kit's boundary guardian.
-              Drop it in <code>.cursor/rules/</code>, ask Cursor to refactor something in your <code>/Domain</code> layer, and watch it refuse to import EF Core.
-            </p>
-            <ul class="lead-bullets">
-              <li><span class="check">✓</span> A real, production-ready rule — not a teaser stub</li>
-              <li><span class="check">✓</span> Works in any C#/.NET project today</li>
-              <li><span class="check">✓</span> No credit card. No spam. One email, one download.</li>
-            </ul>
-            <a class="btn btn-primary btn-lg" href="https://agenticarchitect.gumroad.com/l/arch-core-lite" target="_blank" rel="noopener">
-              Get the free rule →
-              <span class="btn-sub">Instant download · Email opt-in via Gumroad</span>
+              <h2>The Context Tax: Why every Cursor session costs you 15 minutes</h2>
+              <p>The hidden cost senior engineers pay every morning — and a four-rule architecture for eliminating it.</p>
+              <span class="post-read">Read post →</span>
             </a>
-            <p class="lead-fine">
-              By downloading, you'll occasionally hear from us about new rules and protocol upgrades. Unsubscribe in one click anytime.
-            </p>
-          </div>
-          <aside class="lead-magnet-card" aria-hidden="true">
-            <div class="lead-file-head">
-              <code class="lead-file-name">arch-core-lite.mdc</code>
-              <span class="lead-file-badge">FREE</span>
-            </div>
-            <pre class="lead-snippet"><span class="t-dim">---</span>
-<span class="t-acc">description</span>: "Agentic Architect — arch-core-lite.
-A free, single-rule preview of the
-Persistence Framework for Cursor."
-<span class="t-acc">globs</span>:
-  - "**/*.cs"
-<span class="t-acc">alwaysApply</span>: <span class="t-ok">false</span>
-<span class="t-dim">---</span>
+          </li>
 
-<span class="t-prompt"># Role</span>
-You are a senior .NET architect
-pair-programming with the developer...
+          <!--
+            Add the next post by duplicating the <li> above.
+            Filename pattern: NN-slug.html  (e.g. 02-di-lifetime-bugs.html)
+          -->
 
-<span class="t-prompt"># Operating Principles</span>
-<span class="t-dim">## 1. Respect layer boundaries</span>
-Domain never references EF Core,
-HttpClient, IConfiguration, ILogger<T>,
-DateTime.Now, or any concrete I/O.
+        </ul>
 
-<span class="t-dim">## 3. Honest uncertainty</span>
-When you don't have enough context —
-<span class="t-ok">pause and ask one targeted question</span>.
-Never invent.</pre>
-          </aside>
+        <div class="blog-cta">
+          <h3>Don't want to wait for the next post?</h3>
+          <p>The full kit — 4 specialist rules + the persistence engine — is £19.99 one-time.</p>
+          <a class="btn btn-primary btn-lg" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">Get Agentic Architect →</a>
         </div>
       </div>
     </section>
-
-    <!-- ========== FAQ ========== -->
-    <section id="faq" class="section">
-      <div class="container">
-        <div class="section-head center">
-          <span class="kicker">Honest Answers</span>
-          <h2>Frequently asked (and the objections we hear).</h2>
-        </div>
-
-        <div class="faq">
-          <details>
-            <summary>Isn't this just a few prompt files I could write myself?</summary>
-            <p>You could — and we did, over hundreds of hours, across real production .NET codebases. The framework isn't the prompts; it's the <b>directory-level loading strategy</b>, the <b>circuit-breaker pattern</b>, and the <b>Learning Log protocol</b> that gives Cursor true statefulness. Writing it yourself is a weekend project. Maintaining it is a second job.</p>
-          </details>
-          <details>
-            <summary>Will this work with Cursor's built-in rules feature?</summary>
-            <p>Yes — that's exactly what it's built for. The <code>.mdc</code> files plug directly into Cursor's native rules system. We just use it with discipline.</p>
-          </details>
-          <details>
-            <summary>Does it work for non-.NET languages?</summary>
-            <p>The <code>persistence.mdc</code> engine and <code>bug-breaker.mdc</code> are language-agnostic. <code>arch-core.mdc</code> and <code>dotnet-di.mdc</code> are tuned for C#/.NET. If you're not in the .NET world, you'll get value from 2 of the 4 rules — your call whether £19.99 is worth that.</p>
-          </details>
-          <details>
-            <summary>Is it a subscription?</summary>
-            <p>No. One-time £19.99. Lifetime updates. MIT-licensed. We hate subscriptions as much as you do.</p>
-          </details>
-          <details>
-            <summary>How is this different from generic "Cursor rules" repos on GitHub?</summary>
-            <p>Most public rules are <b>monolithic</b> — a single rule dumped on every prompt, blowing your token budget. Agentic Architect uses <b>scoped, directory-aware loading</b> so only relevant rules activate for the file you're in. Plus, none of them solve persistence — the actual root cause of AI drift.</p>
-          </details>
-          <details>
-            <summary>What if my team doesn't want to adopt it?</summary>
-            <p>They don't have to. The rules live in <code>.cursor/rules/</code> and the Learning Log is just a markdown file. Both can be in <code>.gitignore</code> or committed for the team — your call.</p>
-          </details>
-          <details>
-            <summary>What if it doesn't work for me?</summary>
-            <p>14-day no-questions refund. Email <a href="mailto:agenticstandardcontact@gmail.com">agenticstandardcontact@gmail.com</a>. We'd rather refund you than have an unhappy senior engineer telling their network.</p>
-          </details>
-          <details>
-            <summary>Why is it £19.99 and not £99?</summary>
-            <p>Founder's pricing. It will go up. The countdown at the top is real — we raise the price each cohort to fund ongoing rule development.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== FINAL CTA ========== -->
-    <section class="section section-final">
-      <div class="container">
-        <div class="final-cta">
-          <h2>You can keep paying the Context Tax.<br/><span class="grad">Or you can stop, today.</span></h2>
-          <p>Drop the <code>.cursor/rules/</code> folder in. Hydrate the log. Watch your AI go from forgetful intern to stateful architectural partner — by tomorrow morning.</p>
-          <a class="btn btn-primary btn-xl" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">
-            Get Agentic Architect — £19.99 →
-          </a>
-          <p class="final-fine">One-time payment · Lifetime updates · 14-day guarantee · MIT-licensed</p>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <!-- ========== FOOTER ========== -->
   <footer class="footer">
     <div class="container footer-inner">
       <div class="foot-brand">
@@ -723,55 +91,17 @@ Never invent.</pre>
         <p>The persistence framework for serious Cursor users in C#/.NET environments.</p>
       </div>
       <div class="foot-cols">
-        <div>
-          <h4>Product</h4>
-          <a href="#kit">What's Inside</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <div>
-          <h4>Support</h4>
-          <a href="mailto:agenticstandardcontact@gmail.com">Email Support</a>
-          <a href="https://github.com/agenticstandardcontact-byte/agentic-architect/issues" target="_blank" rel="noopener">GitHub Issues</a>
-          <a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">Repository</a>
-        </div>
-        <div>
-          <h4>Buy</h4>
-          <a href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">Gumroad — £19.99</a>
-        </div>
+        <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
+        <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a><a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">GitHub</a></div>
+        <div><h4>Buy</h4><a href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">Gumroad — £19.99</a></div>
       </div>
     </div>
     <div class="container foot-bottom">
-      <span>© <span id="year">2026</span> Agentic Architect. Built for engineers who refuse context rot.</span>
-      <span>MIT-licensed rules · One-time payment · No subscription</span>
+      <span>© <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules · One-time payment</span>
     </div>
   </footer>
 
-  <!-- ========== STICKY FLOATING CTA ========== -->
-  <a id="stickyCTA" class="sticky-cta" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener" aria-label="Get the Kit for £19.99">
-    <span class="sticky-text">Get the Kit — <s>£49</s> <b>£19.99</b></span>
-    <span class="sticky-arrow">→</span>
-  </a>
-
-  <!-- ========== EXIT INTENT MODAL ========== -->
-  <div id="exitModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="exitTitle" aria-hidden="true">
-    <div class="modal-backdrop" data-close></div>
-    <div class="modal-card">
-      <button class="modal-close" data-close aria-label="Close">×</button>
-      <div class="modal-eyebrow">⚡ Wait — before you go</div>
-      <h3 id="exitTitle">Reclaim your mornings for less than a takeaway.</h3>
-      <p>You've read this far. You already know the Context Tax is real. The Founder's price is <b>£19.99</b> — and it goes up at the next cohort.</p>
-      <ul class="modal-list">
-        <li>✓ 4 specialist <code>.mdc</code> rules</li>
-        <li>✓ Stateful Learning Log protocol</li>
-        <li>✓ 14-day no-questions refund</li>
-        <li>✓ Lifetime updates</li>
-      </ul>
-      <a class="btn btn-primary btn-lg modal-cta" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">Lock in £19.99 →</a>
-      <button class="modal-dismiss" data-close>No thanks, I'll keep paying the Context Tax</button>
-    </div>
-  </div>
-
-  <script src="script.js" defer></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
