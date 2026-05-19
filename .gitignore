@@ -1,0 +1,21 @@
+# Handoff / session notes — local only, never push
+HANDOFF.md
+HANDOFF*.md
+*.handoff.md
+handoff/
+notes/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor scratch
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Local backups
+*.bak
