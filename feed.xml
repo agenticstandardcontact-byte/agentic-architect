@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Agentic Architect — Daily Senior Rule</title>
+    <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/</link>
+    <description>One practical Cursor + C#/.NET pattern per day. Field notes from building a stateful AI partner for production .NET codebases.</description>
+    <language>en-gb</language>
+    <atom:link href="https://agenticstandardcontact-byte.github.io/agentic-architect/feed.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>The Context Tax: Why every Cursor session costs you 15 minutes</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html</link>
+      <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html</guid>
+      <pubDate>Tue, 19 May 2026 22:00:00 +0000</pubDate>
+      <description>The hidden cost senior engineers pay every morning — and a four-rule architecture for eliminating it.</description>
+    </item>
+
+  </channel>
+</rss>
