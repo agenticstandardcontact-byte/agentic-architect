@@ -8,6 +8,14 @@
     <atom:link href="https://agenticstandardcontact-byte.github.io/agentic-architect/feed.xml" rel="self" type="application/rss+xml" />
 
     <item>
+      <title>The Scoped→Singleton DI bug your AI just suggested (and how to catch it)</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html</link>
+      <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html</guid>
+      <pubDate>Wed, 20 May 2026 08:00:00 +0000</pubDate>
+      <description>The .NET lifetime bug that ships silently — and the Cursor rule that catches it before merge.</description>
+    </item>
+
+    <item>
       <title>The Context Tax: Why every Cursor session costs you 15 minutes</title>
       <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html</link>
       <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html</guid>
