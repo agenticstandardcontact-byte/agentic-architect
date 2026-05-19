@@ -15,12 +15,15 @@
   <meta property="og:description" content="Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a chat-bot into a stateful Architectural Partner." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/" />
-  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.svg" />
+  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Agentic Architect — Persistence Framework for Cursor" />
   <meta name="twitter:description" content="Stop paying the Context Tax. Lock your architectural decisions into Cursor's long-term memory." />
+  <meta name="twitter:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.png" />
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,16 +38,119 @@
     "@type": "Product",
     "name": "Agentic Architect — Cursor Persistence Framework",
     "description": "Professional-grade suite of 4 specialist .mdc Rules and a stateful persistence protocol designed to lock C#/.NET architectural decisions into Cursor's long-term memory.",
+    "image": "https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.png",
     "brand": { "@type": "Brand", "name": "Agentic Architect" },
+    "category": "Developer Tools",
     "offers": {
       "@type": "Offer",
       "url": "https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit",
       "priceCurrency": "GBP",
       "price": "19.99",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/InStock",
+      "seller": { "@type": "Organization", "name": "Agentic Architect" }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "ratingCount": "3"
     }
   }
   </script>
+
+  <!-- Schema.org Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Agentic Architect",
+    "url": "https://agenticstandardcontact-byte.github.io/agentic-architect/",
+    "logo": "https://agenticstandardcontact-byte.github.io/agentic-architect/favicon.svg",
+    "email": "agenticstandardcontact@gmail.com",
+    "sameAs": [
+      "https://github.com/agenticstandardcontact-byte/agentic-architect",
+      "https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit"
+    ]
+  }
+  </script>
+
+  <!-- Schema.org FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Isn't this just a few prompt files I could write myself?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You could, but the framework isn't the prompts — it's the directory-level loading strategy, the circuit-breaker pattern, and the Learning Log protocol that gives Cursor true statefulness. Writing it yourself is a weekend project; maintaining it is a second job."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will this work with Cursor's built-in rules feature?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The .mdc files plug directly into Cursor's native rules system."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work for non-.NET languages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The persistence.mdc engine and bug-breaker.mdc are language-agnostic. arch-core.mdc and dotnet-di.mdc are tuned for C#/.NET. Non-.NET users get value from 2 of the 4 rules."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it a subscription?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. One-time £19.99. Lifetime updates. MIT-licensed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is this different from generic Cursor rules repos on GitHub?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most public rules are monolithic — a single rule dumped on every prompt. Agentic Architect uses scoped, directory-aware loading so only relevant rules activate per file. Plus, none of them solve persistence — the actual root cause of AI drift."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if it doesn't work for me?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "14-day no-questions refund. Email agenticstandardcontact@gmail.com."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://agenticstandardcontact-byte.github.io/agentic-architect/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Privacy-friendly analytics (GoatCounter, no cookies, GDPR-safe by default) -->
+  <!-- Sign up free at https://www.goatcounter.com — replace YOUR-CODE below with your site code -->
+  <script data-goatcounter="https://YOUR-CODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
@@ -75,7 +181,9 @@
         <a href="#kit">What's Inside</a>
         <a href="#proof">Proof</a>
         <a href="#pricing">Pricing</a>
+        <a href="#free">Free Rule</a>
         <a href="#faq">FAQ</a>
+        <a href="blog/">Blog</a>
       </nav>
       <a class="btn btn-primary btn-sm nav-cta" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">Get the Kit</a>
     </div>
@@ -485,6 +593,63 @@
             <div><b>@ £75/hr</b><span>= £4,650 of senior time lost</span></div>
             <div class="math-pop"><b>£19.99</b><span>To get it all back</span></div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== LEAD MAGNET ========== -->
+    <section id="free" class="section">
+      <div class="container">
+        <div class="lead-magnet">
+          <div class="lead-magnet-copy">
+            <span class="kicker">Try Before You Buy</span>
+            <h2>Get <span class="grad">one rule, free</span>. See if your AI stops drifting.</h2>
+            <p class="lede">
+              <code>arch-core-lite.mdc</code> is a stripped-down version of the kit's boundary guardian.
+              Drop it in <code>.cursor/rules/</code>, ask Cursor to refactor something in your <code>/Domain</code> layer, and watch it refuse to import EF Core.
+            </p>
+            <ul class="lead-bullets">
+              <li><span class="check">✓</span> A real, production-ready rule — not a teaser stub</li>
+              <li><span class="check">✓</span> Works in any C#/.NET project today</li>
+              <li><span class="check">✓</span> No credit card. No spam. One email, one download.</li>
+            </ul>
+            <a class="btn btn-primary btn-lg" href="https://agenticarchitect.gumroad.com/l/arch-core-lite" target="_blank" rel="noopener">
+              Get the free rule →
+              <span class="btn-sub">Instant download · Email opt-in via Gumroad</span>
+            </a>
+            <p class="lead-fine">
+              By downloading, you'll occasionally hear from us about new rules and protocol upgrades. Unsubscribe in one click anytime.
+            </p>
+          </div>
+          <aside class="lead-magnet-card" aria-hidden="true">
+            <div class="lead-file-head">
+              <code class="lead-file-name">arch-core-lite.mdc</code>
+              <span class="lead-file-badge">FREE</span>
+            </div>
+            <pre class="lead-snippet"><span class="t-dim">---</span>
+<span class="t-acc">description</span>: "Agentic Architect — arch-core-lite.
+A free, single-rule preview of the
+Persistence Framework for Cursor."
+<span class="t-acc">globs</span>:
+  - "**/*.cs"
+<span class="t-acc">alwaysApply</span>: <span class="t-ok">false</span>
+<span class="t-dim">---</span>
+
+<span class="t-prompt"># Role</span>
+You are a senior .NET architect
+pair-programming with the developer...
+
+<span class="t-prompt"># Operating Principles</span>
+<span class="t-dim">## 1. Respect layer boundaries</span>
+Domain never references EF Core,
+HttpClient, IConfiguration, ILogger<T>,
+DateTime.Now, or any concrete I/O.
+
+<span class="t-dim">## 3. Honest uncertainty</span>
+When you don't have enough context —
+<span class="t-ok">pause and ask one targeted question</span>.
+Never invent.</pre>
+          </aside>
         </div>
       </div>
     </section>
