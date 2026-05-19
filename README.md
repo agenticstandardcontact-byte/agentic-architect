@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="og-image.png" alt="Agentic Architect — Persistence Framework for Cursor" width="640" />
+<img src="og-image.jpg" alt="Agentic Architect — Persistence Framework for Cursor" width="640" />
 
 # 🏛️ Agentic Architect
 
