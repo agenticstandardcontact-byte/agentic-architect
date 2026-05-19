@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Agentic Architect</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07090f; --text: #e6eaf2; --dim: #9aa3b2; --brand: #ffb547;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: 'Inter', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(255,181,71,0.15), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .wrap { max-width: 560px; }
+    .code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--brand); font-weight: 700; font-size: 0.95rem;
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 800; margin: 0 0 14px; }
+    p { color: var(--dim); margin: 0 0 28px; }
+    a.btn {
+      display: inline-block;
+      background: linear-gradient(180deg, #ffc06a, var(--brand) 50%, #ff8a3d);
+      color: #1a1006; font-weight: 800;
+      padding: 14px 26px; border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 14px 36px rgba(255, 138, 61, 0.35);
+    }
+    a.btn:hover { transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="code">Error 404 · context_not_found</div>
+    <h1>This page drifted out of context.</h1>
+    <p>The AI couldn't find what you were looking for. But it remembers where home is.</p>
+    <a class="btn" href="/">← Back to safety</a>
+  </div>
+</body>
+</html>

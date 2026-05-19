@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#07090f"/>
+      <stop offset="100%" stop-color="#0f1422"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffc06a"/>
+      <stop offset="60%" stop-color="#ff8a3d"/>
+      <stop offset="100%" stop-color="#6ee7ff"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.15" cy="0.2" r="0.5">
+      <stop offset="0%" stop-color="#ffb547" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ffb547" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.9" cy="0.85" r="0.5">
+      <stop offset="0%" stop-color="#6ee7ff" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#6ee7ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" x="0" y="0" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Logo -->
+  <g transform="translate(80, 70)">
+    <path d="M30 0L0 16v28l30 16 30-16V16L30 0z" fill="none" stroke="#ffb547" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M16 26h28M16 32h28M16 38h22" stroke="#ffb547" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="80" y="38" font-family="Inter, sans-serif" font-size="28" font-weight="800" fill="#e6eaf2">Agentic<tspan fill="#ffb547">Architect</tspan></text>
+  </g>
+
+  <!-- Eyebrow -->
+  <g transform="translate(80, 200)">
+    <rect x="0" y="0" width="380" height="40" rx="20" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.16)"/>
+    <circle cx="22" cy="20" r="5" fill="#4ade80"/>
+    <text x="40" y="27" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#9aa3b2">Built for Senior .NET Engineers using Cursor</text>
+  </g>
+
+  <!-- Headline -->
+  <text x="80" y="320" font-family="Inter, sans-serif" font-size="62" font-weight="800" fill="#e6eaf2">Stop paying the</text>
+  <text x="80" y="395" font-family="Inter, sans-serif" font-size="62" font-weight="800" fill="url(#amber)">"Context Tax."</text>
+
+  <!-- Subline -->
+  <text x="80" y="465" font-family="Inter, sans-serif" font-size="24" font-weight="500" fill="#9aa3b2">The persistence framework that turns Cursor into a stateful</text>
+  <text x="80" y="498" font-family="Inter, sans-serif" font-size="24" font-weight="500" fill="#9aa3b2">architectural partner for C#/.NET projects.</text>
+
+  <!-- Price chip -->
+  <g transform="translate(80, 540)">
+    <rect x="0" y="0" width="320" height="56" rx="14" fill="#ffb547"/>
+    <text x="22" y="36" font-family="Inter, sans-serif" font-size="22" font-weight="800" fill="#1a1006">Founder's Price  £19.99 ’</text>
+  </g>
+
+  <!-- Right ornament: code lines -->
+  <g transform="translate(740, 200)" font-family="JetBrains Mono, monospace" font-size="16" fill="#e6eaf2">
+    <rect x="0" y="0" width="380" height="240" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)"/>
+    <text x="20" y="36" fill="#9aa3b2">~/api/Services$ <tspan fill="#6ee7ff">cursor agent</tspan></text>
+    <text x="20" y="64" fill="#4ade80"> <tspan fill="#e6eaf2">Loaded arch-core.mdc</tspan></text>
+    <text x="20" y="88" fill="#4ade80"> <tspan fill="#e6eaf2">Loaded dotnet-di.mdc</tspan></text>
+    <text x="20" y="112" fill="#4ade80"> <tspan fill="#e6eaf2">Loaded bug-breaker.mdc</tspan></text>
+    <text x="20" y="136" fill="#4ade80"> <tspan fill="#e6eaf2">Hydrated LEARNING_LOG.md</tspan></text>
+    <text x="20" y="160" fill="#9aa3b2">  <tspan fill="#9aa3b2">(42 entries)</tspan></text>
+    <text x="20" y="200" fill="#ffb547" font-weight="700">AI <tspan fill="#e6eaf2">Detected Scoped lifetime</tspan></text>
+    <text x="20" y="220" fill="#e6eaf2">   conflict with IMemoryCache...</text>
+  </g>
+</svg>
