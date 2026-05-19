@@ -420,7 +420,7 @@ After 30 days you'll have:
 
 - [ ] OG image looks right when you paste the URL into Slack/Discord/X (quick test)
 - [ ] All CTAs go to Gumroad — click each one
-- [ ] Lead magnet Gumroad product exists at `/l/arch-core-lite` (free, email required)
+- [ ] `arch-core-lite.mdc` is downloadable from the repo root (already deployed — free, no signup)
 - [ ] Analytics is firing (GoatCounter dashboard shows your own visit)
 - [ ] GitHub repo description, website, topics all set
 - [ ] Pinned tweet is the thread above
