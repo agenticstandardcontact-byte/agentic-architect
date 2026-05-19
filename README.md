@@ -60,9 +60,9 @@ your-dotnet-project/
 
 ## 🆓 Try one rule, free
 
-[**Download `arch-core-lite.mdc`**](https://agenticarchitect.gumroad.com/l/arch-core-lite) — a real, production-ready preview of the boundary-guardian rule. Drop it into `.cursor/rules/` and watch your AI refuse to import EF Core in your Domain layer.
+[**Download `arch-core-lite.mdc`**](arch-core-lite.mdc) — a real, production-ready preview of the boundary-guardian rule. Drop it into `.cursor/rules/` and watch your AI refuse to import EF Core in your Domain layer.
 
-> No credit card. No spam. One email, one download.
+> Free download. No signup. Just the file.
 
 ## 🚀 Quickstart (60 seconds)
 
