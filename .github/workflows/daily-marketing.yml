@@ -1,7 +1,10 @@
 name: Daily Marketing Engine
 on:
-  schedule:
-    - cron: '0 9 * * *'
+  # Cron disabled pending redesign — the previous run was overwriting README.md
+  # with a lower-quality version every day. Trigger manually via workflow_dispatch
+  # for now. Re-enable once the workflow writes to a safe target.
+  # schedule:
+  #   - cron: '0 9 * * *'
   workflow_dispatch:
 
 jobs:
