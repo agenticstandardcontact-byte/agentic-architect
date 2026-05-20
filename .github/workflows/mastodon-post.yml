@@ -1,0 +1,105 @@
+name: Mastodon Auto-Post
+
+# Posts a short status to Mastodon when:
+#   - the daily-rules.html page is updated (new rule), or
+#   - a new blog post is added to blog/.
+#
+# DISABLED BY DEFAULT. To enable:
+#   1. Create an account on a dev-friendly Mastodon instance (recommended: fosstodon.org).
+#      Sign up at https://fosstodon.org/auth/sign_up
+#   2. Settings -> Development -> New Application
+#      - Name: agentic-architect-bot
+#      - Scopes: write:statuses (uncheck the rest)
+#      - Click Submit, then open the new app and copy "Your access token"
+#   3. In GitHub: repo Settings -> Secrets and variables -> Actions -> New repository secret
+#      - Name: MASTODON_TOKEN          Value: the access token from step 2
+#      - Name: MASTODON_INSTANCE       Value: https://fosstodon.org   (or your instance)
+#   4. Uncomment the `if:` line below to re-enable the trigger.
+
+on:
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - 'blog/daily-rules.html'
+  #     - 'blog/*.html'
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Custom status text (optional — leave empty to auto-generate from latest daily rule)'
+        required: false
+        default: ''
+
+jobs:
+  toot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compose and post status
+        shell: python {0}
+        env:
+          MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
+          MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
+          CUSTOM_MESSAGE: ${{ github.event.inputs.message }}
+        run: |
+          import os
+          import re
+          import json
+          import urllib.request
+          import urllib.parse
+          from pathlib import Path
+
+          token = os.environ.get("MASTODON_TOKEN", "").strip()
+          instance = os.environ.get("MASTODON_INSTANCE", "").strip().rstrip("/")
+          custom = os.environ.get("CUSTOM_MESSAGE", "").strip()
+
+          if not token or not instance:
+              raise SystemExit("MASTODON_TOKEN or MASTODON_INSTANCE secret missing")
+
+          SITE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
+          DAILY_PAGE = SITE + "/blog/daily-rules.html"
+
+          # ----- Build status text -----
+          if custom:
+              status = custom
+          else:
+              # Extract most recent daily rule from blog/daily-rules.html
+              page = Path("blog/daily-rules.html").read_text(encoding="utf-8")
+              entry = re.search(
+                  r'<li class="post-card" data-date="([^"]+)">.*?<h2>(.*?)</h2>\s*<p>(.*?)</p>',
+                  page, re.DOTALL,
+              )
+              if not entry:
+                  raise SystemExit("Could not find a daily rule entry to post")
+              _, title, body = entry.group(1), entry.group(2).strip(), entry.group(3).strip()
+
+              # Trim to fit Mastodon's 500-char limit comfortably
+              hook = title
+              # Strip "Rule N: " prefix for cleaner hook
+              hook_clean = re.sub(r"^Rule\s+\d+:\s*", "", hook)
+              footer = f"\n\n— Daily Senior Rule\n{DAILY_PAGE}\n\n#dotnet #csharp #cursor #ai #devtools"
+              available = 500 - len(hook_clean) - len(footer) - 4  # buffer
+              if len(body) > available:
+                  body = body[:available - 1].rsplit(" ", 1)[0] + "…"
+              status = f"{hook_clean}\n\n{body}{footer}"
+
+          print("Posting status:")
+          print("-" * 40)
+          print(status)
+          print("-" * 40)
+
+          data = urllib.parse.urlencode({"status": status, "visibility": "public"}).encode()
+          req = urllib.request.Request(
+              f"{instance}/api/v1/statuses",
+              data=data,
+              headers={
+                  "Authorization": f"Bearer {token}",
+                  "Content-Type": "application/x-www-form-urlencoded",
+              },
+              method="POST",
+          )
+          with urllib.request.urlopen(req, timeout=15) as resp:
+              body = resp.read().decode("utf-8")
+              print(f"Mastodon response: {resp.status}")
+              data = json.loads(body)
+              print(f"Posted: {data.get('url', '(no url)')}")
