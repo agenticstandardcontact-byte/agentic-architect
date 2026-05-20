@@ -1,10 +1,41 @@
-# Handoff / session notes — local only, never push
+# --------------------------------------------------------------------
+# LOCAL-ONLY DEV NOTES, DRAFTS, AND MARKETING WORKING FILES
+# Anything matching these patterns stays on disk and never gets pushed.
+# README.md, LICENSE, and rules/persistence-kit.md are the only .md files
+# that should ever be tracked in this repo — everything else is internal.
+# --------------------------------------------------------------------
+
+# Named working files
 HANDOFF.md
 HANDOFF*.md
+LAUNCH.md
+LAUNCH*.md
+SITE_NOTES.md
+
+# Pattern-based protection (default-private for future .md files)
 *.handoff.md
+*.draft.md
+*.local.md
+*.private.md
+*.notes.md
+*.scratch.md
+
+# Folders sometimes used for working notes
 handoff/
 notes/
-SITE_NOTES.md
+drafts/
+scratch/
+
+# Working submission / cross-post files
+cursor-directory-submission.mdc
+devto-*.md
+medium-*.md
+hashnode-*.md
+linkedin-*.md
+hn-*.md
+reddit-*.md
+twitter-*.md
+x-thread-*.md
 
 # OS junk
 .DS_Store
