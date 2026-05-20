@@ -11,7 +11,7 @@ Static marketing website for the **Agentic Architect** Cursor persistence framew
 | `script.js` | Countdown timer, sticky CTA, scroll reveals, exit-intent modal |
 | `404.html` | On-brand error page |
 | `favicon.svg` | Site icon |
-| `og-image.svg` | Open Graph / social share image |
+| `og-image.jpg` | Open Graph / social share image (1200×630, canonical, referenced in all HTML meta tags) |
 | `robots.txt` / `sitemap.xml` | SEO basics |
 | `.nojekyll` | Tells GitHub Pages to skip Jekyll processing |
 
