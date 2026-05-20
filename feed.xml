@@ -23,5 +23,13 @@
       <description>The hidden cost senior engineers pay every morning — and a four-rule architecture for eliminating it.</description>
     </item>
 
+      <item>
+      <title>Rule 2: Persistence Boundaries</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/daily-rules.html#2026-05-20</link>
+      <guid isPermaLink="false">daily-rule-2026-05-20</guid>
+      <pubDate>Wed, 20 May 2026 09:00:00 +0000</pubDate>
+      <description>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</description>
+    </item>
+
   </channel>
 </rss>
