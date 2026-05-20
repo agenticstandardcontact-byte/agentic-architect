@@ -4,6 +4,7 @@ HANDOFF*.md
 *.handoff.md
 handoff/
 notes/
+SITE_NOTES.md
 
 # OS junk
 .DS_Store
