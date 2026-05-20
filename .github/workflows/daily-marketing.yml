@@ -1,92 +1,211 @@
-name: Daily Marketing Engine
+name: Daily Senior Rule Publisher
+
+# Publishes one rule from rules/persistence-kit.md per day to
+# blog/daily-rules.html, updates sitemap + feed, and commits the change.
+# This workflow NEVER touches README.md.
+
 on:
-  # Cron disabled pending redesign — the previous run was overwriting README.md
-  # with a lower-quality version every day. Trigger manually via workflow_dispatch
-  # for now. Re-enable once the workflow writes to a safe target.
-  # schedule:
-  #   - cron: '0 9 * * *'
+  schedule:
+    - cron: '0 9 * * *'   # 09:00 UTC daily
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  update-readme:
+  publish-daily-rule:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Build README
-        shell: python
+
+      - name: Publish today's rule
+        shell: python {0}
         run: |
-          import random
+          import re
+          import datetime
           from pathlib import Path
 
-          # 1. Selection Logic
-          rule_file = Path("rules/persistence-kit.md")
-          selected_rule = "Rule: Persistence Protocol"
-          if rule_file.exists():
-              lines = rule_file.read_text().splitlines()
-              rules = [l.strip() for l in lines if l.startswith("Rule ")]
-              if rules:
-                  selected_rule = random.choice(rules)
+          SITE_BASE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
+          MARKER = "<!-- DAILY-RULE-INSERTION-POINT -->"
+          CORPUS = Path("rules/persistence-kit.md")
+          PAGE = Path("blog/daily-rules.html")
+          SITEMAP = Path("sitemap.xml")
+          FEED = Path("feed.xml")
 
-          # 2. The Final Content (Raw String to prevent any character escaping)
-          content = r"""# 🏛️ Agentic Architect: The Persistence Framework for Cursor
+          # ----- 1. Load corpus -----
+          if not CORPUS.exists():
+              raise SystemExit("rules/persistence-kit.md not found")
 
-          Stop re-explaining your C# architecture to AI every morning. Transform Cursor from a "chat-bot" into a stateful Architectural Partner.
+          rules = []
+          current_title = None
+          current_body = []
+          rule_header = re.compile(r"^(Rule\s+\d+:\s*.+)$")
+          for line in CORPUS.read_text(encoding="utf-8").splitlines():
+              stripped = line.strip()
+              m = rule_header.match(stripped)
+              if m:
+                  if current_title:
+                      rules.append((current_title, " ".join(current_body).strip()))
+                  current_title = m.group(1)
+                  current_body = []
+              elif current_title and stripped and not stripped.startswith("#") and not stripped.startswith(">"):
+                  current_body.append(stripped)
+          if current_title:
+              rules.append((current_title, " ".join(current_body).strip()))
 
-          [Buy Agentic Architect](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
+          if not rules:
+              raise SystemExit("No rules parsed from corpus")
 
-          ## 🧠 The Problem: "The Context Tax"
+          # ----- 2. Pick today's rule deterministically -----
+          today = datetime.date.today()
+          idx = today.toordinal() % len(rules)
+          title, body = rules[idx]
+          today_iso = today.isoformat()
+          today_human = today.strftime("%B %d, %Y")
 
-          Every Senior Developer using Cursor pays a "Context Tax." You spend the first 15 minutes of every session re-syncing the AI on your DI patterns, project boundaries, and recent refactors. Without a persistence layer, the AI eventually "drifts," suggesting patterns that violate your core architecture.
+          # RFC 822 date for RSS
+          rfc822 = today.strftime("%a, %d %b %Y 09:00:00 +0000")
 
-          ## 🛡️ The Solution: The Persistence Protocol
+          print(f"Publishing rule {idx + 1}/{len(rules)} for {today_iso}: {title}")
 
-          Agentic Architect is a professional-grade suite of 4x Specialist .mdc Rules and a Stateful Persistence Protocol designed to lock your architectural decisions into the AI's "long-term memory."
+          # ----- 3. Idempotency check -----
+          if not PAGE.exists():
+              raise SystemExit(
+                  "blog/daily-rules.html missing — commit the bootstrap template first"
+              )
+          html = PAGE.read_text(encoding="utf-8")
+          if f'data-date="{today_iso}"' in html:
+              print(f"Today's rule ({today_iso}) is already present. Nothing to do.")
+              raise SystemExit(0)
 
-          ## 📦 What's Inside the Kit:
+          # ----- 4. Insert new entry above the marker -----
+          # Escape HTML in body/title (defensive, the corpus is trusted but cheap insurance)
+          def esc(s):
+              return (s.replace("&", "&amp;")
+                       .replace("<", "&lt;")
+                       .replace(">", "&gt;"))
+          title_html = esc(title)
+          body_html = esc(body)
 
-          * **arch-core.mdc**: Enforces SOLID boundaries and prevents "Big Ball of Mud" suggestions.
-          * **dotnet-di.mdc**: A specialized auditor for constructor injections and service lifetimes.
-          * **bug-breaker.mdc**: A circuit-breaker that stops the AI when it enters a hallucination loop.
-          * **persistence.mdc**: The engine that maintains your `LEARNING_LOG.md`—the "brain" of your project.
+          entry = f'''<li class="post-card" data-date="{today_iso}">
+            <div class="post-link" style="cursor:default;">
+              <div class="post-meta">
+                <time datetime="{today_iso}">{today_human}</time>
+                <span class="post-tag">Daily Rule</span>
+              </div>
+              <h2>{title_html}</h2>
+              <p>{body_html}</p>
+            </div>
+          </li>
+          '''
 
-          ---
+          if MARKER not in html:
+              raise SystemExit(f"Marker {MARKER!r} not found in {PAGE}")
+          html = html.replace(MARKER, MARKER + "\n          " + entry, 1)
+          PAGE.write_text(html, encoding="utf-8")
 
-          ## 🛠️ Daily Senior Rule Update
-          > **{rule}**
+          # ----- 5. Touch sitemap lastmod for daily-rules page -----
+          sitemap_text = SITEMAP.read_text(encoding="utf-8")
+          page_url = f"{SITE_BASE}/blog/daily-rules.html"
+          if page_url not in sitemap_text:
+              # Append the URL block before </urlset>
+              block = (f"  <url>\n"
+                       f"    <loc>{page_url}</loc>\n"
+                       f"    <lastmod>{today_iso}</lastmod>\n"
+                       f"    <changefreq>daily</changefreq>\n"
+                       f"    <priority>0.9</priority>\n"
+                       f"  </url>\n")
+              sitemap_text = sitemap_text.replace("</urlset>", block + "</urlset>")
+          else:
+              # Update or insert <lastmod> inside the daily-rules URL block
+              # Find the block, update lastmod
+              pattern = re.compile(
+                  r"(<url>\s*<loc>" + re.escape(page_url) + r"</loc>)(.*?)(</url>)",
+                  re.DOTALL,
+              )
+              def repl(m):
+                  block = m.group(2)
+                  if "<lastmod>" in block:
+                      block = re.sub(r"<lastmod>.*?</lastmod>", f"<lastmod>{today_iso}</lastmod>", block)
+                  else:
+                      block = f"\n    <lastmod>{today_iso}</lastmod>" + block
+                  return m.group(1) + block + m.group(3)
+              sitemap_text = pattern.sub(repl, sitemap_text)
+          SITEMAP.write_text(sitemap_text, encoding="utf-8")
 
-          ---
+          # ----- 6. Prepend new RSS item to feed.xml -----
+          feed_text = FEED.read_text(encoding="utf-8")
+          item = (
+              f"    <item>\n"
+              f"      <title>{title_html}</title>\n"
+              f"      <link>{page_url}#{today_iso}</link>\n"
+              f"      <guid isPermaLink=\"false\">daily-rule-{today_iso}</guid>\n"
+              f"      <pubDate>{rfc822}</pubDate>\n"
+              f"      <description>{body_html}</description>\n"
+              f"    </item>\n\n"
+          )
+          # Insert after the <atom:link ... /> line (top of <channel>)
+          atom_marker = re.search(r"<atom:link[^/]*/>\s*\n", feed_text)
+          if atom_marker:
+              insert_at = atom_marker.end()
+              feed_text = feed_text[:insert_at] + "\n" + item + feed_text[insert_at:]
+          else:
+              feed_text = feed_text.replace("</channel>", item + "  </channel>")
+          FEED.write_text(feed_text, encoding="utf-8")
 
-          ## 🚀 How it Works
+          print("Wrote: blog/daily-rules.html, sitemap.xml, feed.xml")
 
-          1. **Purchase**: Get the Kit via [Gumroad](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit).
-          2. **Install**: Drop the `.cursor/rules/` folder into your project root.
-          3. **Maintain**: Initialize your `LEARNING_LOG.md` to track architectural shifts automatically.
-
-          ## 🏛️ Built for Senior .NET Environments
-
-          This isn't a collection of "prompts." It's a directory-level configuration system that optimizes token usage by loading only the rules relevant to your current file.
-
-          [Get the Framework for £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
-
-          ## 📬 Support & Community
-
-          * **Professional Support**: agenticstandardcontact@gmail.com
-          * **Issue Tracking**: [Open a GitHub Issue](https://github.com/agentic-architect/rules/issues)
-
-          **[Purchase the full kit £19.99]** https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit
-          """
-
-          # 3. Direct Write (Bypasses Shell entirely)
-          output = content.replace("{rule}", selected_rule)
-          Path("README.md").write_text(output, encoding="utf-8")
-
-      - name: Commit and Push
+      - name: Commit and push
+        id: commit
         run: |
-          git config --global user.name "Agentic Architect Bot"
-          git config --global user.email "bot@agenticarchitect.com"
-          git add README.md
-          git commit -m "Auto-update: Daily Senior .NET Rule" || exit 0
-          git push
+          git config user.name "Agentic Architect Bot"
+          git config user.email "bot@agenticarchitect.com"
+          git add blog/daily-rules.html sitemap.xml feed.xml
+          if git diff --staged --quiet; then
+            echo "No changes — nothing to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Daily Senior Rule: $(date -u +%Y-%m-%d)"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Ping IndexNow
+        if: steps.commit.outputs.changed == 'true'
+        shell: python {0}
+        run: |
+          import json
+          import urllib.request
+          import urllib.error
+
+          HOST = "agenticstandardcontact-byte.github.io"
+          SITE_BASE = f"https://{HOST}/agentic-architect"
+          KEY = "b7d4f8a21c5e6f9d3a8b7c4e1d2f5a9c"
+
+          urls = [
+              f"{SITE_BASE}/blog/daily-rules.html",
+              f"{SITE_BASE}/blog/",
+              f"{SITE_BASE}/sitemap.xml",
+              f"{SITE_BASE}/feed.xml",
+          ]
+
+          payload = {
+              "host": HOST,
+              "key": KEY,
+              "keyLocation": f"{SITE_BASE}/{KEY}.txt",
+              "urlList": urls,
+          }
+          req = urllib.request.Request(
+              "https://api.indexnow.org/IndexNow",
+              data=json.dumps(payload).encode("utf-8"),
+              headers={"Content-Type": "application/json; charset=utf-8"},
+              method="POST",
+          )
+          try:
+              with urllib.request.urlopen(req, timeout=15) as resp:
+                  print(f"IndexNow: {resp.status} {resp.reason}")
+          except urllib.error.HTTPError as e:
+              body = e.read().decode("utf-8", errors="ignore")
+              print(f"IndexNow HTTPError: {e.code} {e.reason}\n{body}")
+              if e.code >= 500:
+                  raise
