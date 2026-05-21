@@ -8,6 +8,14 @@
     <atom:link href="https://agenticstandardcontact-byte.github.io/agentic-architect/feed.xml" rel="self" type="application/rss+xml" />
 
     <item>
+      <title>Teach Cursor Result&lt;T&gt; instead of throwing</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/04-cursor-result-not-throw.html</link>
+      <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/04-cursor-result-not-throw.html</guid>
+      <pubDate>Sat, 23 May 2026 08:00:00 +0000</pubDate>
+      <description>Keep Cursor on Result/ErrorOr when your team already rejected throw-based control flow.</description>
+    </item>
+
+    <item>
       <title>Seven words that stop Cursor hallucination loops</title>
       <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html</link>
       <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html</guid>
