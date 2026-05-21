@@ -1,35 +1,50 @@
 name: Bluesky Auto-Post
 
-# Posts a short status to Bluesky (AT Protocol) when enabled.
+# Posts the latest Daily Senior Rule from blog/index.html to Bluesky.
 #
-# Setup:
-#   1. bsky.app → Settings → App passwords → create password for "agentic-architect-bot"
-#   2. GitHub secrets:
-#        BLUESKY_HANDLE   e.g. agenticarchitect.bsky.social
-#        BLUESKY_APP_PASSWORD
-#   3. Test: gh workflow run bluesky-post.yml --ref main
-#   4. Uncomment push trigger when secrets work.
+# Triggers:
+#   - After Daily Senior Rule Publisher succeeds (new rule on blog)
+#   - 09:27 UTC daily (backup, 10 min after the 09:17 rule publish)
+#   - Manual workflow_dispatch (optional custom message; bypasses dedup)
 #
-# DISABLED push trigger until secrets are verified.
+# Secrets: BLUESKY_HANDLE (no @ prefix), BLUESKY_APP_PASSWORD (app password)
+# Profile: https://bsky.app/profile/agentic-architect.bsky.social
 
 on:
-  # push:
-  #   branches: [main]
-  #   paths:
-  #     - 'blog/index.html'
-  #     - 'blog/0*.html'
+  schedule:
+    # Off-peak minute — pairs with daily-marketing at 17 9 * * *
+    - cron: '27 9 * * *'
+  workflow_run:
+    workflows: [Daily Senior Rule Publisher]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
     inputs:
       message:
         description: 'Custom post text (empty = auto from latest daily rule)'
         required: false
         default: ''
+      force:
+        description: 'Post even if this blog/index.html was already posted'
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   skeet:
     runs-on: ubuntu-latest
+    # Only chain after daily publisher when that run succeeded
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        id: post-cache
+        with:
+          path: .cache/bluesky-posted
+          key: bluesky-posted-${{ hashFiles('blog/index.html') }}
 
       - name: Compose and post to Bluesky
         shell: python {0}
@@ -37,26 +52,32 @@ jobs:
           BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
           CUSTOM_MESSAGE: ${{ github.event.inputs.message }}
+          FORCE_POST: ${{ github.event.inputs.force }}
+          CACHE_HIT: ${{ steps.post-cache.outputs.cache-hit }}
         run: |
           import json
           import os
           import re
+          import urllib.error
           import urllib.request
           from pathlib import Path
 
           handle = os.environ.get("BLUESKY_HANDLE", "").strip().lstrip("@")
           password = os.environ.get("BLUESKY_APP_PASSWORD", "").strip()
           custom = os.environ.get("CUSTOM_MESSAGE", "").strip()
+          force = os.environ.get("FORCE_POST", "").lower() == "true"
+          cache_hit = os.environ.get("CACHE_HIT", "").lower() == "true"
 
           if not handle or not password:
               raise SystemExit("BLUESKY_HANDLE and BLUESKY_APP_PASSWORD secrets required.")
 
-          SITE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
-          BLOG = SITE + "/blog/"
-
           if custom:
               text = custom
           else:
+              if cache_hit and not force:
+                  print("Skip: already posted for this blog/index.html (cache hit).")
+                  print("Use workflow_dispatch with force=true to post again.")
+                  raise SystemExit(0)
               page = Path("blog/index.html").read_text(encoding="utf-8")
               entry = re.search(
                   r'<li[^>]*data-date="([^"]+)"[^>]*>.*?<h2>(.*?)</h2>\s*<p>(.*?)</p>',
@@ -64,9 +85,10 @@ jobs:
               )
               if not entry:
                   raise SystemExit("No daily rule found in blog/index.html")
-              _, title, body = entry.group(1), entry.group(2).strip(), entry.group(3).strip()
+              date, title, body = entry.group(1), entry.group(2).strip(), entry.group(3).strip()
               hook = re.sub(r"^Rule\s+\d+:\s*", "", title)
-              footer = f"\n\n{BLOG}\n#dotnet #csharp #cursor"
+              SITE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
+              footer = f"\n\n{SITE}/blog/#{date}\n#dotnet #csharp #cursor"
               avail = 300 - len(hook) - len(footer) - 4
               if len(body) > avail:
                   body = body[: max(0, avail - 1)].rsplit(" ", 1)[0] + "…"
@@ -105,10 +127,18 @@ jobs:
                   "createdAt": now,
               },
           }
-          result = api(
-              "POST",
-              f"{pds_url}/xrpc/com.atproto.repo.createRecord",
-              create_payload,
-              token=access,
-          )
+          try:
+              result = api(
+                  "POST",
+                  f"{pds_url}/xrpc/com.atproto.repo.createRecord",
+                  create_payload,
+                  token=access,
+              )
+          except urllib.error.HTTPError as e:
+              raise SystemExit(f"Bluesky post failed: {e.code} {e.read().decode()}")
+
           print(f"Posted: {result.get('uri', result)}")
+
+          if not custom:
+              Path(".cache/bluesky-posted").mkdir(parents=True, exist_ok=True)
+              (Path(".cache/bluesky-posted") / "posted").write_text(now, encoding="utf-8")
