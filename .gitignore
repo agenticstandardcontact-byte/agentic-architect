@@ -37,6 +37,11 @@ reddit-*.md
 twitter-*.md
 x-thread-*.md
 
+# Local API keys (never commit — .env.example is the template)
+.env
+.env.local
+.env.*.local
+
 # OS junk
 .DS_Store
 Thumbs.db
