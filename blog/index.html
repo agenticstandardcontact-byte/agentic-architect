@@ -47,28 +47,35 @@
       <div class="container">
         <span class="kicker">The Daily Senior Rule</span>
         <h1>One practical <span class="grad">Cursor + .NET pattern</span> per day.</h1>
-        <p class="lede">Field notes from building a stateful AI partner for production C#/.NET codebases. Each post is a single rule, a single anti-pattern, or a single lesson from real Cursor sessions.</p>
-        <p>
-          <a class="btn btn-primary btn-sm" href="daily-rules.html">View Daily Rule Feed →</a>
-          <a class="btn btn-ghost btn-sm" href="../feed.xml" style="margin-left:0.5rem;">Subscribe via RSS</a>
-        </p>
+        <p class="lede">Field notes from building a stateful AI partner for production C#/.NET codebases. A new Daily Senior Rule lands here every morning at 09:17 UTC, with longer essays mixed in.</p>
+        <a class="btn btn-ghost btn-sm" href="../feed.xml">Subscribe via RSS</a>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
         <ul class="post-list">
-
-          <li class="post-card">
-            <a href="daily-rules.html" class="post-link">
+          <!-- DAILY-RULE-INSERTION-POINT -->
+          <li class="post-card" data-date="2026-05-21">
+            <div class="post-link" style="cursor:default;">
               <div class="post-meta">
-                <time datetime="2026-05-21">Updated daily · 09:17 UTC</time>
-                <span class="post-tag">Daily Rule Feed</span>
+                <time datetime="2026-05-21">May 21, 2026</time>
+                <span class="post-tag">Daily Rule</span>
               </div>
-              <h2>The Daily Senior Rule — one Cursor + .NET rule every morning</h2>
-              <p>A new architectural guardrail every day, drawn from the same corpus that powers the full kit. Short, opinionated, immediately useful. Bookmark the feed or grab the RSS.</p>
-              <span class="post-read">View the feed →</span>
-            </a>
+              <h2>Rule 8: CancellationToken Propagation</h2>
+              <p>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</p>
+            </div>
+          </li>
+
+          <li class="post-card" data-date="2026-05-20">
+            <div class="post-link" style="cursor:default;">
+              <div class="post-meta">
+                <time datetime="2026-05-20">May 20, 2026</time>
+                <span class="post-tag">Daily Rule</span>
+              </div>
+              <h2>Rule 2: Persistence Boundaries</h2>
+              <p>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</p>
+            </div>
           </li>
 
           <li class="post-card">
