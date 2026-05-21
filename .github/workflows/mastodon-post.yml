@@ -20,8 +20,8 @@ on:
   # push:
   #   branches: [main]
   #   paths:
-  #     - 'blog/daily-rules.html'
-  #     - 'blog/*.html'
+  #     - 'blog/index.html'
+  #     - 'blog/0*.html'
   workflow_dispatch:
     inputs:
       message:
@@ -57,16 +57,16 @@ jobs:
               raise SystemExit("MASTODON_TOKEN or MASTODON_INSTANCE secret missing")
 
           SITE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
-          DAILY_PAGE = SITE + "/blog/daily-rules.html"
+          BLOG_INDEX = SITE + "/blog/"
 
           # ----- Build status text -----
           if custom:
               status = custom
           else:
-              # Extract most recent daily rule from blog/daily-rules.html
-              page = Path("blog/daily-rules.html").read_text(encoding="utf-8")
+              # Daily rules live on blog/index.html (daily-rules.html redirects)
+              page = Path("blog/index.html").read_text(encoding="utf-8")
               entry = re.search(
-                  r'<li class="post-card" data-date="([^"]+)">.*?<h2>(.*?)</h2>\s*<p>(.*?)</p>',
+                  r'<li[^>]*data-date="([^"]+)"[^>]*>.*?<h2>(.*?)</h2>\s*<p>(.*?)</p>',
                   page, re.DOTALL,
               )
               if not entry:
@@ -77,7 +77,7 @@ jobs:
               hook = title
               # Strip "Rule N: " prefix for cleaner hook
               hook_clean = re.sub(r"^Rule\s+\d+:\s*", "", hook)
-              footer = f"\n\n— Daily Senior Rule\n{DAILY_PAGE}\n\n#dotnet #csharp #cursor #ai #devtools"
+              footer = f"\n\n— Daily Senior Rule\n{BLOG_INDEX}\n\n#dotnet #csharp #cursor #ai #devtools"
               available = 500 - len(hook_clean) - len(footer) - 4  # buffer
               if len(body) > available:
                   body = body[:available - 1].rsplit(" ", 1)[0] + "…"
