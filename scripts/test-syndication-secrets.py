@@ -40,7 +40,7 @@ def check_devto() -> bool:
 
 
 def check_bluesky() -> bool:
-    handle = os.environ.get("BLUESKY_HANDLE", "").strip()
+    handle = os.environ.get("BLUESKY_HANDLE", "").strip().lstrip("@")
     password = os.environ.get("BLUESKY_APP_PASSWORD", "").strip()
     if not handle or not password:
         fail("BLUESKY_HANDLE or BLUESKY_APP_PASSWORD missing")
