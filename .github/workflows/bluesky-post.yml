@@ -44,7 +44,7 @@ jobs:
           import urllib.request
           from pathlib import Path
 
-          handle = os.environ.get("BLUESKY_HANDLE", "").strip()
+          handle = os.environ.get("BLUESKY_HANDLE", "").strip().lstrip("@")
           password = os.environ.get("BLUESKY_APP_PASSWORD", "").strip()
           custom = os.environ.get("CUSTOM_MESSAGE", "").strip()
 
