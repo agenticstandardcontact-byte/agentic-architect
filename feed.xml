@@ -11,7 +11,7 @@
       <title>Teach Cursor Result&lt;T&gt; instead of throwing</title>
       <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/04-cursor-result-not-throw.html</link>
       <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/04-cursor-result-not-throw.html</guid>
-      <pubDate>Sat, 23 May 2026 08:00:00 +0000</pubDate>
+      <pubDate>Thu, 21 May 2026 20:00:00 +0000</pubDate>
       <description>Keep Cursor on Result/ErrorOr when your team already rejected throw-based control flow.</description>
     </item>
 
@@ -19,7 +19,7 @@
       <title>Seven words that stop Cursor hallucination loops</title>
       <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html</link>
       <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html</guid>
-      <pubDate>Fri, 22 May 2026 08:00:00 +0000</pubDate>
+      <pubDate>Wed, 20 May 2026 08:00:00 +0000</pubDate>
       <description>Break the correction spiral — seven words, or a circuit-breaker .mdc rule.</description>
     </item>
 
@@ -27,7 +27,7 @@
       <title>The Scoped→Singleton DI bug your AI just suggested (and how to catch it)</title>
       <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html</link>
       <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html</guid>
-      <pubDate>Wed, 20 May 2026 08:00:00 +0000</pubDate>
+      <pubDate>Tue, 19 May 2026 08:00:00 +0000</pubDate>
       <description>The .NET lifetime bug that ships silently — and the Cursor rule that catches it before merge.</description>
     </item>
 
@@ -35,7 +35,7 @@
       <title>The Context Tax: Why every Cursor session costs you 15 minutes</title>
       <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html</link>
       <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html</guid>
-      <pubDate>Tue, 19 May 2026 22:00:00 +0000</pubDate>
+      <pubDate>Mon, 18 May 2026 08:00:00 +0000</pubDate>
       <description>The hidden cost senior engineers pay every morning — and a four-rule architecture for eliminating it.</description>
     </item>
 
