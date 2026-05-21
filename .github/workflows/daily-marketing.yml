@@ -1,7 +1,7 @@
 name: Daily Senior Rule Publisher
 
 # Publishes one rule from rules/persistence-kit.md per day to
-# blog/daily-rules.html, updates sitemap + feed, and commits the change.
+# blog/index.html, updates sitemap + feed, and commits the change.
 # This workflow NEVER touches README.md.
 
 on:
@@ -32,7 +32,7 @@ jobs:
           SITE_BASE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
           MARKER = "<!-- DAILY-RULE-INSERTION-POINT -->"
           CORPUS = Path("rules/persistence-kit.md")
-          PAGE = Path("blog/daily-rules.html")
+          PAGE = Path("blog/index.html")
           SITEMAP = Path("sitemap.xml")
           FEED = Path("feed.xml")
 
@@ -75,7 +75,7 @@ jobs:
           # ----- 3. Idempotency check -----
           if not PAGE.exists():
               raise SystemExit(
-                  "blog/daily-rules.html missing — commit the bootstrap template first"
+                  "blog/index.html missing — commit the bootstrap template first"
               )
           html = PAGE.read_text(encoding="utf-8")
           if f'data-date="{today_iso}"' in html:
@@ -100,17 +100,16 @@ jobs:
               <h2>{title_html}</h2>
               <p>{body_html}</p>
             </div>
-          </li>
-          '''
+          </li>'''
 
           if MARKER not in html:
               raise SystemExit(f"Marker {MARKER!r} not found in {PAGE}")
           html = html.replace(MARKER, MARKER + "\n          " + entry, 1)
           PAGE.write_text(html, encoding="utf-8")
 
-          # ----- 5. Touch sitemap lastmod for daily-rules page -----
+          # ----- 5. Touch sitemap lastmod for the blog index -----
           sitemap_text = SITEMAP.read_text(encoding="utf-8")
-          page_url = f"{SITE_BASE}/blog/daily-rules.html"
+          page_url = f"{SITE_BASE}/blog/"
           if page_url not in sitemap_text:
               # Append the URL block before </urlset>
               block = (f"  <url>\n"
@@ -187,7 +186,6 @@ jobs:
           KEY = "b7d4f8a21c5e6f9d3a8b7c4e1d2f5a9c"
 
           urls = [
-              f"{SITE_BASE}/blog/daily-rules.html",
               f"{SITE_BASE}/blog/",
               f"{SITE_BASE}/sitemap.xml",
               f"{SITE_BASE}/feed.xml",

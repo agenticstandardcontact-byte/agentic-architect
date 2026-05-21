@@ -25,7 +25,7 @@
 
       <item>
       <title>Rule 2: Persistence Boundaries</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/daily-rules.html#2026-05-20</link>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-20</link>
       <guid isPermaLink="false">daily-rule-2026-05-20</guid>
       <pubDate>Wed, 20 May 2026 09:00:00 +0000</pubDate>
       <description>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</description>
@@ -33,7 +33,7 @@
 
       <item>
       <title>Rule 8: CancellationToken Propagation</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/daily-rules.html#2026-05-21</link>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-21</link>
       <guid isPermaLink="false">daily-rule-2026-05-21</guid>
       <pubDate>Thu, 21 May 2026 09:00:00 +0000</pubDate>
       <description>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</description>
