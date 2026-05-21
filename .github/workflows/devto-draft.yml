@@ -47,6 +47,7 @@ jobs:
           import os
           import re
           import subprocess
+          import time
           import urllib.error
           import urllib.request
           from html.parser import HTMLParser
@@ -81,7 +82,7 @@ jobs:
                       return resp.status, json.loads(body) if body else {}
               except urllib.error.HTTPError as e:
                   err_body = e.read().decode("utf-8", errors="ignore")
-                  raise SystemExit(f"dev.to API {method} {path} failed: {e.code} {e.reason}\n{err_body}")
+                  raise RuntimeError(f"dev.to API {method} {path} failed: {e.code} {e.reason}\n{err_body}")
 
           def articles_by_canonical():
               by_canon = {}
@@ -271,7 +272,9 @@ jobs:
           created = 0
           published = 0
           skipped = 0
+          errors = 0
           for path in targets():
+              time.sleep(3)  # dev.to rate limit — avoid 429 when publishing several posts
               if not path.exists():
                   print(f"Skip missing file: {path}")
                   continue
@@ -290,14 +293,18 @@ jobs:
                   if publish_live:
                       art_id = art.get("id")
                       print(f"Publishing existing draft: {meta['title']} (id={art_id})")
-                      _, data = api_request(
-                          "PUT",
-                          f"/articles/{art_id}",
-                          {"article": {"published": True}},
-                      )
-                      url = data.get("url") or art.get("url", "(see dev.to)")
-                      print(f"  → published: {url}")
-                      published += 1
+                      try:
+                          _, data = api_request(
+                              "PUT",
+                              f"/articles/{art_id}",
+                              {"article": {"published": True}},
+                          )
+                          url = data.get("url") or art.get("url", "(see dev.to)")
+                          print(f"  → published: {url}")
+                          published += 1
+                      except RuntimeError as e:
+                          print(f"  → error: {e}")
+                          errors += 1
                       continue
                   print(f"Skip (draft exists, publish=false): {path}")
                   skipped += 1
@@ -315,12 +322,18 @@ jobs:
               }
               label = "Publishing" if publish_live else "Creating draft for"
               print(f"{label}: {meta['title']}")
-              status, data = api_request("POST", "/articles", payload)
-              url = data.get("url") or data.get("data", {}).get("url", "(see dev.to dashboard)")
-              print(f"  → {'published' if publish_live else 'draft created'} ({status}): {url}")
-              existing[canon] = data
-              created += 1
+              try:
+                  status, data = api_request("POST", "/articles", payload)
+                  url = data.get("url") or data.get("data", {}).get("url", "(see dev.to dashboard)")
+                  print(f"  → {'published' if publish_live else 'draft created'} ({status}): {url}")
+                  existing[canon] = data
+                  created += 1
+              except RuntimeError as e:
+                  print(f"  → error: {e}")
+                  errors += 1
 
-          print(f"Done. created={created} published={published} skipped={skipped}")
-          if created == 0 and skipped == 0:
-              print("No eligible blog/0*.html files to process.")
+          print(f"Done. created={created} published={published} skipped={skipped} errors={errors}")
+          if created == 0 and published == 0 and skipped == 0:
+              raise SystemExit("No eligible blog/0*.html files to process.")
+          if errors:
+              raise SystemExit(f"{errors} post(s) failed (often dev.to 429 — re-run in a few minutes)")
