@@ -26,6 +26,10 @@ notes/
 drafts/
 scratch/
 
+# Marketing PR helpers (local only)
+scripts/awesome-dotnet-prs.py
+scripts/pr-body-*.md
+
 # Working submission / cross-post files
 cursor-directory-submission.mdc
 devto-*.md
