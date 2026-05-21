@@ -1,0 +1,36 @@
+name: Blog Index Sort Check
+
+# Re-sorts blog/index.html when essays are added without running daily-marketing.
+# Commits only if order changed (newest first by <time datetime>).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blog/index.html'
+      - 'blog/0*.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sort:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sort post list by date
+        run: python3 scripts/sort-blog-index.py
+
+      - name: Commit if order changed
+        run: |
+          if git diff --quiet blog/index.html; then
+            echo "blog/index.html already in date order"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add blog/index.html
+          git commit -m "Sort blog index by date (newest first)"
+          git push

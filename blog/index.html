@@ -56,28 +56,6 @@
       <div class="container">
         <ul class="post-list">
           <!-- DAILY-RULE-INSERTION-POINT -->
-          <li class="post-card" data-date="2026-05-21">
-            <div class="post-link" style="cursor:default;">
-              <div class="post-meta">
-                <time datetime="2026-05-21">May 21, 2026</time>
-                <span class="post-tag">Daily Rule</span>
-              </div>
-              <h2>Rule 8: CancellationToken Propagation</h2>
-              <p>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</p>
-            </div>
-          </li>
-
-          <li class="post-card" data-date="2026-05-20">
-            <div class="post-link" style="cursor:default;">
-              <div class="post-meta">
-                <time datetime="2026-05-20">May 20, 2026</time>
-                <span class="post-tag">Daily Rule</span>
-              </div>
-              <h2>Rule 2: Persistence Boundaries</h2>
-              <p>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</p>
-            </div>
-          </li>
-
           <li class="post-card">
             <a href="04-cursor-result-not-throw.html" class="post-link">
               <div class="post-meta">
@@ -102,6 +80,17 @@
             </a>
           </li>
 
+          <li class="post-card" data-date="2026-05-21">
+            <div class="post-link" style="cursor:default;">
+              <div class="post-meta">
+                <time datetime="2026-05-21">May 21, 2026</time>
+                <span class="post-tag">Daily Rule</span>
+              </div>
+              <h2>Rule 8: CancellationToken Propagation</h2>
+              <p>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</p>
+            </div>
+          </li>
+
           <li class="post-card">
             <a href="02-scoped-singleton-di-bug.html" class="post-link">
               <div class="post-meta">
@@ -112,6 +101,17 @@
               <p>The .NET lifetime bug that ships to production silently — and the one Cursor rule that catches it before merge.</p>
               <span class="post-read">Read post →</span>
             </a>
+          </li>
+
+          <li class="post-card" data-date="2026-05-20">
+            <div class="post-link" style="cursor:default;">
+              <div class="post-meta">
+                <time datetime="2026-05-20">May 20, 2026</time>
+                <span class="post-tag">Daily Rule</span>
+              </div>
+              <h2>Rule 2: Persistence Boundaries</h2>
+              <p>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</p>
+            </div>
           </li>
 
           <li class="post-card">
@@ -127,8 +127,9 @@
           </li>
 
           <!--
-            Add the next post by duplicating the <li> above.
-            Filename pattern: NN-slug.html  (e.g. 03-something.html)
+            Add the next essay by duplicating a linked <li> above (include <time datetime="YYYY-MM-DD">).
+            Daily rules are inserted automatically; the publisher re-sorts the whole list by date.
+            Filename pattern: NN-slug.html  (e.g. 05-something.html)
           -->
 
         </ul>
