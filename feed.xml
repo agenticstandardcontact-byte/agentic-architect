@@ -8,6 +8,14 @@
     <atom:link href="https://agenticstandardcontact-byte.github.io/agentic-architect/feed.xml" rel="self" type="application/rss+xml" />
 
     <item>
+      <title>Seven words that stop Cursor hallucination loops</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html</link>
+      <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html</guid>
+      <pubDate>Fri, 22 May 2026 08:00:00 +0000</pubDate>
+      <description>Break the correction spiral — seven words, or a circuit-breaker .mdc rule.</description>
+    </item>
+
+    <item>
       <title>The Scoped→Singleton DI bug your AI just suggested (and how to catch it)</title>
       <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html</link>
       <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html</guid>
