@@ -1,17 +1,14 @@
 name: dev.to Draft Creator
 
-# Creates an unpublished dev.to draft when a numbered blog post is pushed.
-# Canonical URL points at our GitHub Pages article (SEO juice stays home).
+# Syncs numbered blog posts to dev.to (draft or live). Canonical URL stays on GitHub Pages.
 #
-# Setup (one-time):
-#   1. dev.to → Settings → Extensions → DEV Community API Keys → generate key
-#   2. GitHub repo → Settings → Secrets → Actions → New repository secret
-#      Name: DEVTO_API_KEY   Value: the key from step 1
-#   3. Push a new blog/0N-*.html post, or run manually:
-#        gh workflow run devto-draft.yml --ref main
+# Default: publish live on push. Draft-only: workflow_dispatch with publish=false.
 #
-# Skips posts that already have a dev.to draft/article with the same canonical_url,
-# or an <link rel="alternate" ... dev.to> tag in the HTML (manual cross-post marker).
+#   gh workflow run devto-draft.yml --repo agenticstandardcontact-byte/agentic-architect
+#   gh workflow run devto-draft.yml -f post=04-cursor-result-not-throw.html -f publish=true
+#
+# Skips HTML that already has <link rel="alternate" ... dev.to>. Unpublished drafts
+# with matching canonical_url are published when publish=true.
 
 on:
   push:
@@ -24,6 +21,11 @@ on:
         description: 'Specific post filename under blog/ (e.g. 02-scoped-singleton-di-bug.html). Leave empty for all eligible posts.'
         required: false
         default: ''
+      publish:
+        description: 'Publish live on dev.to (false = draft only)'
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   create-draft:
@@ -38,6 +40,7 @@ jobs:
         env:
           DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
           POST_INPUT: ${{ github.event.inputs.post }}
+          PUBLISH: ${{ github.event_name == 'push' || github.event.inputs.publish }}
         run: |
           import html
           import json
@@ -80,8 +83,8 @@ jobs:
                   err_body = e.read().decode("utf-8", errors="ignore")
                   raise SystemExit(f"dev.to API {method} {path} failed: {e.code} {e.reason}\n{err_body}")
 
-          def existing_canonicals():
-              canon = set()
+          def articles_by_canonical():
+              by_canon = {}
               page = 1
               while True:
                   _, data = api_request("GET", f"/articles/me?per_page=100&page={page}")
@@ -89,13 +92,13 @@ jobs:
                   if not items:
                       break
                   for art in items:
-                      c = (art.get("canonical_url") or "").strip()
+                      c = (art.get("canonical_url") or "").strip().rstrip("/")
                       if c:
-                          canon.add(c.rstrip("/"))
+                          by_canon[c] = art
                   if len(items) < 100:
                       break
                   page += 1
-              return canon
+              return by_canon
 
           def targets():
               manual = os.environ.get("POST_INPUT", "").strip()
@@ -260,10 +263,13 @@ jobs:
                   "body_markdown": body + footer,
               }
 
-          canon_existing = existing_canonicals()
-          print(f"Found {len(canon_existing)} existing dev.to canonical URL(s)")
+          publish_live = os.environ.get("PUBLISH", "true").lower() == "true"
+          existing = articles_by_canonical()
+          print(f"Found {len(existing)} dev.to article(s) with canonical URL")
+          print(f"Mode: {'publish live' if publish_live else 'draft only'}")
 
           created = 0
+          published = 0
           skipped = 0
           for path in targets():
               if not path.exists():
@@ -275,28 +281,46 @@ jobs:
                   skipped += 1
                   continue
               canon = meta["canonical_url"].rstrip("/")
-              if canon in canon_existing:
-                  print(f"Skip (canonical already on dev.to): {path}")
+              if canon in existing:
+                  art = existing[canon]
+                  if art.get("published"):
+                      print(f"Skip (already published): {path} → {art.get('url', '')}")
+                      skipped += 1
+                      continue
+                  if publish_live:
+                      art_id = art.get("id")
+                      print(f"Publishing existing draft: {meta['title']} (id={art_id})")
+                      _, data = api_request(
+                          "PUT",
+                          f"/articles/{art_id}",
+                          {"article": {"published": True}},
+                      )
+                      url = data.get("url") or art.get("url", "(see dev.to)")
+                      print(f"  → published: {url}")
+                      published += 1
+                      continue
+                  print(f"Skip (draft exists, publish=false): {path}")
                   skipped += 1
                   continue
               payload = {
                   "article": {
                       "title": meta["title"],
                       "body_markdown": meta["body_markdown"],
-                      "published": False,
+                      "published": publish_live,
                       "tags": DEFAULT_TAGS,
                       "canonical_url": meta["canonical_url"],
                       "description": meta["description"],
                       "main_image": COVER,
                   }
               }
-              print(f"Creating draft for: {meta['title']}")
+              label = "Publishing" if publish_live else "Creating draft for"
+              print(f"{label}: {meta['title']}")
               status, data = api_request("POST", "/articles", payload)
               url = data.get("url") or data.get("data", {}).get("url", "(see dev.to dashboard)")
-              print(f"  → draft created ({status}): {url}")
-              canon_existing.add(canon)
+              print(f"  → {'published' if publish_live else 'draft created'} ({status}): {url}")
+              existing[canon] = data
               created += 1
 
-          print(f"Done. created={created} skipped={skipped}")
+          print(f"Done. created={created} published={published} skipped={skipped}")
           if created == 0 and skipped == 0:
               print("No eligible blog/0*.html files to process.")
