@@ -156,7 +156,7 @@ jobs:
               feed_text = feed_text.replace("</channel>", item + "  </channel>")
           FEED.write_text(feed_text, encoding="utf-8")
 
-          print("Wrote: blog/daily-rules.html, sitemap.xml, feed.xml")
+          print("Wrote: blog/index.html, sitemap.xml, feed.xml")
 
       - name: Commit and push
         id: commit
