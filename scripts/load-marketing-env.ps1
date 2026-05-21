@@ -14,6 +14,7 @@ Get-Content $envFile | ForEach-Object {
     if ($line -match '^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$') {
         $name = $Matches[1]
         $value = $Matches[2].Trim().Trim('"').Trim("'")
+        if ($name -eq "BLUESKY_HANDLE") { $value = $value.TrimStart("@") }
         Set-Item -Path "env:$name" -Value $value
     }
 }
