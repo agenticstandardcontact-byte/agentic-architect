@@ -51,3 +51,10 @@ desktop.ini
 
 # Local backups
 *.bak
+
+# Marketing ops: skills, agents, strategy, command cheatsheets (never public)
+.local/
+.cursor/skills/
+commands.txt
+COMMANDS.txt
+**/agentic-marketing/

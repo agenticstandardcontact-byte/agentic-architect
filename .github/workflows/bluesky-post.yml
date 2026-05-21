@@ -1,0 +1,114 @@
+name: Bluesky Auto-Post
+
+# Posts a short status to Bluesky (AT Protocol) when enabled.
+#
+# Setup:
+#   1. bsky.app → Settings → App passwords → create password for "agentic-architect-bot"
+#   2. GitHub secrets:
+#        BLUESKY_HANDLE   e.g. agenticarchitect.bsky.social
+#        BLUESKY_APP_PASSWORD
+#   3. Test: gh workflow run bluesky-post.yml --ref main
+#   4. Uncomment push trigger when secrets work.
+#
+# DISABLED push trigger until secrets are verified.
+
+on:
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - 'blog/index.html'
+  #     - 'blog/0*.html'
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Custom post text (empty = auto from latest daily rule)'
+        required: false
+        default: ''
+
+jobs:
+  skeet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compose and post to Bluesky
+        shell: python {0}
+        env:
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          CUSTOM_MESSAGE: ${{ github.event.inputs.message }}
+        run: |
+          import json
+          import os
+          import re
+          import urllib.request
+          from pathlib import Path
+
+          handle = os.environ.get("BLUESKY_HANDLE", "").strip()
+          password = os.environ.get("BLUESKY_APP_PASSWORD", "").strip()
+          custom = os.environ.get("CUSTOM_MESSAGE", "").strip()
+
+          if not handle or not password:
+              raise SystemExit("BLUESKY_HANDLE and BLUESKY_APP_PASSWORD secrets required.")
+
+          SITE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
+          BLOG = SITE + "/blog/"
+
+          if custom:
+              text = custom
+          else:
+              page = Path("blog/index.html").read_text(encoding="utf-8")
+              entry = re.search(
+                  r'<li[^>]*data-date="([^"]+)"[^>]*>.*?<h2>(.*?)</h2>\s*<p>(.*?)</p>',
+                  page, re.DOTALL,
+              )
+              if not entry:
+                  raise SystemExit("No daily rule found in blog/index.html")
+              _, title, body = entry.group(1), entry.group(2).strip(), entry.group(3).strip()
+              hook = re.sub(r"^Rule\s+\d+:\s*", "", title)
+              footer = f"\n\n{BLOG}\n#dotnet #csharp #cursor"
+              avail = 300 - len(hook) - len(footer) - 4
+              if len(body) > avail:
+                  body = body[: max(0, avail - 1)].rsplit(" ", 1)[0] + "…"
+              text = f"{hook}\n\n{body}{footer}"
+
+          import datetime as dt
+
+          def api(method, url, payload=None, token=None):
+              headers = {"Content-Type": "application/json"}
+              if token:
+                  headers["Authorization"] = f"Bearer {token}"
+              data = json.dumps(payload).encode() if payload else None
+              req = urllib.request.Request(url, data=data, headers=headers, method=method)
+              with urllib.request.urlopen(req, timeout=20) as resp:
+                  return json.loads(resp.read().decode())
+
+          session = api("POST", "https://bsky.social/xrpc/com.atproto.server.createSession", {
+              "identifier": handle,
+              "password": password,
+          })
+          did = session["did"]
+          access = session["accessJwt"]
+          pds = session.get("didDoc", {}).get("service", [{}])
+          pds_url = next(
+              (s.get("serviceEndpoint") for s in pds if s.get("id") == "#atproto_pds"),
+              "https://bsky.social",
+          )
+
+          now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+          create_payload = {
+              "repo": did,
+              "collection": "app.bsky.feed.post",
+              "record": {
+                  "$type": "app.bsky.feed.post",
+                  "text": text[:300],
+                  "createdAt": now,
+              },
+          }
+          result = api(
+              "POST",
+              f"{pds_url}/xrpc/com.atproto.repo.createRecord",
+              create_payload,
+              token=access,
+          )
+          print(f"Posted: {result.get('uri', result)}")

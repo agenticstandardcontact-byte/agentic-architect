@@ -1,0 +1,302 @@
+name: dev.to Draft Creator
+
+# Creates an unpublished dev.to draft when a numbered blog post is pushed.
+# Canonical URL points at our GitHub Pages article (SEO juice stays home).
+#
+# Setup (one-time):
+#   1. dev.to → Settings → Extensions → DEV Community API Keys → generate key
+#   2. GitHub repo → Settings → Secrets → Actions → New repository secret
+#      Name: DEVTO_API_KEY   Value: the key from step 1
+#   3. Push a new blog/0N-*.html post, or run manually:
+#        gh workflow run devto-draft.yml --ref main
+#
+# Skips posts that already have a dev.to draft/article with the same canonical_url,
+# or an <link rel="alternate" ... dev.to> tag in the HTML (manual cross-post marker).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blog/0*.html'
+  workflow_dispatch:
+    inputs:
+      post:
+        description: 'Specific post filename under blog/ (e.g. 02-scoped-singleton-di-bug.html). Leave empty for all eligible posts.'
+        required: false
+        default: ''
+
+jobs:
+  create-draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Create dev.to drafts for new blog posts
+        shell: python {0}
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+          POST_INPUT: ${{ github.event.inputs.post }}
+        run: |
+          import html
+          import json
+          import os
+          import re
+          import subprocess
+          import urllib.error
+          import urllib.request
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          API = "https://dev.to/api"
+          SITE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
+          COVER = f"{SITE}/og-image-devto.jpg"
+          DEFAULT_TAGS = ["csharp", "dotnet", "ai", "cursor"]
+          POST_RE = re.compile(r"^blog/0\d+-.*\.html$")
+
+          api_key = os.environ.get("DEVTO_API_KEY", "").strip()
+          if not api_key:
+              raise SystemExit(
+                  "DEVTO_API_KEY secret is missing. "
+                  "Add it under Settings → Secrets → Actions (see workflow header)."
+              )
+
+          def api_request(method, path, payload=None):
+              headers = {
+                  "api-key": api_key,
+                  "Content-Type": "application/json",
+                  "User-Agent": "agentic-architect-devto-bot",
+              }
+              data = None
+              if payload is not None:
+                  data = json.dumps(payload).encode("utf-8")
+              req = urllib.request.Request(f"{API}{path}", data=data, headers=headers, method=method)
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as resp:
+                      body = resp.read().decode("utf-8")
+                      return resp.status, json.loads(body) if body else {}
+              except urllib.error.HTTPError as e:
+                  err_body = e.read().decode("utf-8", errors="ignore")
+                  raise SystemExit(f"dev.to API {method} {path} failed: {e.code} {e.reason}\n{err_body}")
+
+          def existing_canonicals():
+              canon = set()
+              page = 1
+              while True:
+                  _, data = api_request("GET", f"/articles/me?per_page=100&page={page}")
+                  items = data if isinstance(data, list) else []
+                  if not items:
+                      break
+                  for art in items:
+                      c = (art.get("canonical_url") or "").strip()
+                      if c:
+                          canon.add(c.rstrip("/"))
+                  if len(items) < 100:
+                      break
+                  page += 1
+              return canon
+
+          def targets():
+              manual = os.environ.get("POST_INPUT", "").strip()
+              if manual:
+                  p = manual if manual.startswith("blog/") else f"blog/{manual}"
+                  return [Path(p)]
+              try:
+                  out = subprocess.run(
+                      ["git", "diff", "--name-only", "HEAD^", "HEAD"],
+                      capture_output=True,
+                      text=True,
+                      check=True,
+                  )
+                  changed = [x for x in out.stdout.splitlines() if POST_RE.match(x.strip())]
+                  if changed:
+                      return [Path(x) for x in changed]
+              except subprocess.CalledProcessError:
+                  pass
+              return sorted(Path("blog").glob("0*.html"))
+
+          class ArticleHTML(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self._skip_depth = 0
+                  self._in_article = False
+                  self._capture = False
+                  self._buf = []
+                  self._stack = []
+                  self.markdown_parts = []
+                  self._link_href = None
+
+              def handle_starttag(self, tag, attrs):
+                  attrs_d = dict(attrs)
+                  cls = attrs_d.get("class", "")
+                  if tag == "article" and "post" in cls.split():
+                      self._in_article = True
+                  if not self._in_article:
+                      return
+                  if tag == "h1" and not self._capture:
+                      self._capture = True
+                      return
+                  if not self._capture:
+                      return
+                  if tag in ("hr",) and "post-divider" in cls:
+                      self._capture = False
+                      return
+                  if tag == "div" and ("post-cta" in cls or "post-cta-paid" in cls):
+                      self._capture = False
+                      return
+                  if tag in ("script", "style"):
+                      self._skip_depth += 1
+                      return
+                  if self._skip_depth:
+                      self._skip_depth += 1
+                      return
+                  if tag == "h2":
+                      self._flush_inline()
+                      self.markdown_parts.append("\n## ")
+                  elif tag == "h3":
+                      self._flush_inline()
+                      self.markdown_parts.append("\n### ")
+                  elif tag == "p":
+                      self._flush_inline()
+                      self.markdown_parts.append("\n\n")
+                  elif tag == "blockquote":
+                      self._flush_inline()
+                      self.markdown_parts.append("\n\n> ")
+                  elif tag == "li":
+                      self._flush_inline()
+                      parent = self._stack[-1] if self._stack else ""
+                      bullet = "1." if parent == "ol" else "-"
+                      self.markdown_parts.append(f"\n{bullet} ")
+                  elif tag == "pre":
+                      self._flush_inline()
+                      self.markdown_parts.append("\n\n```\n")
+                  elif tag == "code" and self._stack and self._stack[-1] != "pre":
+                      self.markdown_parts.append("`")
+                  elif tag in ("strong", "b"):
+                      self.markdown_parts.append("**")
+                  elif tag in ("em", "i"):
+                      self.markdown_parts.append("*")
+                  elif tag == "a":
+                      href = attrs_d.get("href", "")
+                      if href.startswith("../"):
+                          href = SITE + "/" + href[3:]
+                      elif href.startswith("/"):
+                          href = SITE + href
+                      elif href.startswith("./"):
+                          href = SITE + "/blog/" + href[2:]
+                      self._link_href = href
+                      self.markdown_parts.append("[")
+                  self._stack.append(tag)
+
+              def handle_endtag(self, tag):
+                  if tag == "article":
+                      self._in_article = False
+                  if self._skip_depth:
+                      self._skip_depth -= 1
+                      return
+                  if not self._capture:
+                      if self._stack and self._stack[-1] == tag:
+                          self._stack.pop()
+                      return
+                  if tag in ("h2", "h3", "p"):
+                      self.markdown_parts.append("\n")
+                  elif tag == "pre":
+                      self.markdown_parts.append("\n```\n")
+                  elif tag == "code" and len(self._stack) >= 2 and self._stack[-2] != "pre":
+                      self.markdown_parts.append("`")
+                  elif tag in ("strong", "b"):
+                      self.markdown_parts.append("**")
+                  elif tag in ("em", "i"):
+                      self.markdown_parts.append("*")
+                  elif tag == "a" and self._link_href:
+                      self.markdown_parts.append(f"]({self._link_href})")
+                      self._link_href = None
+                  if self._stack and self._stack[-1] == tag:
+                      self._stack.pop()
+
+              def handle_data(self, data):
+                  if self._skip_depth or not self._capture:
+                      return
+                  self._buf.append(html.unescape(data))
+
+              def _flush_inline(self):
+                  if self._buf:
+                      self.markdown_parts.append("".join(self._buf))
+                      self._buf.clear()
+
+              def get_markdown(self):
+                  self._flush_inline()
+                  md = "".join(self.markdown_parts)
+                  md = re.sub(r"\n{3,}", "\n\n", md).strip()
+                  return md
+
+          def parse_post(path: Path):
+              raw = path.read_text(encoding="utf-8")
+              if re.search(r'<link[^>]+rel=["\']alternate["\'][^>]+dev\.to', raw, re.I):
+                  return None
+              title_m = re.search(r"<title>(.*?)</title>", raw, re.I | re.S)
+              desc_m = re.search(r'<meta name="description" content="([^"]*)"', raw, re.I)
+              canon_m = re.search(r'<link rel="canonical" href="([^"]+)"', raw, re.I)
+              if not title_m or not canon_m:
+                  raise SystemExit(f"Missing title or canonical in {path}")
+              title = html.unescape(title_m.group(1).strip())
+              description = html.unescape(desc_m.group(1).strip()) if desc_m else ""
+              canonical = canon_m.group(1).strip()
+              parser = ArticleHTML()
+              parser.feed(raw)
+              body = parser.get_markdown()
+              if not body:
+                  raise SystemExit(f"Could not extract article body from {path}")
+              footer = (
+                  f"\n\n---\n\n"
+                  f"*Originally published at [{canonical}]({canonical}). "
+                  f"Part of the [Agentic Architect]({SITE}/) persistence kit for Cursor + .NET.*"
+              )
+              return {
+                  "title": title,
+                  "description": description,
+                  "canonical_url": canonical,
+                  "body_markdown": body + footer,
+              }
+
+          canon_existing = existing_canonicals()
+          print(f"Found {len(canon_existing)} existing dev.to canonical URL(s)")
+
+          created = 0
+          skipped = 0
+          for path in targets():
+              if not path.exists():
+                  print(f"Skip missing file: {path}")
+                  continue
+              meta = parse_post(path)
+              if meta is None:
+                  print(f"Skip (dev.to alternate link present): {path}")
+                  skipped += 1
+                  continue
+              canon = meta["canonical_url"].rstrip("/")
+              if canon in canon_existing:
+                  print(f"Skip (canonical already on dev.to): {path}")
+                  skipped += 1
+                  continue
+              payload = {
+                  "article": {
+                      "title": meta["title"],
+                      "body_markdown": meta["body_markdown"],
+                      "published": False,
+                      "tags": DEFAULT_TAGS,
+                      "canonical_url": meta["canonical_url"],
+                      "description": meta["description"],
+                      "main_image": COVER,
+                  }
+              }
+              print(f"Creating draft for: {meta['title']}")
+              status, data = api_request("POST", "/articles", payload)
+              url = data.get("url") or data.get("data", {}).get("url", "(see dev.to dashboard)")
+              print(f"  → draft created ({status}): {url}")
+              canon_existing.add(canon)
+              created += 1
+
+          print(f"Done. created={created} skipped={skipped}")
+          if created == 0 and skipped == 0:
+              print("No eligible blog/0*.html files to process.")
