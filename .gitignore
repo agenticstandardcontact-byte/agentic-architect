@@ -5,7 +5,7 @@
 # that should ever be tracked in this repo — everything else is internal.
 # --------------------------------------------------------------------
 
-# Named working files
+# Named working files (session continuity: use .local/SESSION-LOG.md only)
 HANDOFF.md
 HANDOFF*.md
 LAUNCH.md
