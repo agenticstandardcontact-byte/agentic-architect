@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f17" />
+  <title>Seven Words That Stop Cursor Hallucination Loops</title>
+  <meta name="description" content="When Cursor doubles down on a wrong fix, you become the circuit breaker. Seven words break the loop — and a scoped .mdc rule can enforce them automatically." />
+  <meta name="keywords" content="Cursor AI, AI hallucination loop, bug-breaker, Cursor rules, mdc rules, AI pair programming, senior developer" />
+  <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html" />
+
+  <meta property="og:title" content="Seven Words That Stop Cursor Hallucination Loops" />
+  <meta property="og:description" content="Break the correction spiral — manually with seven words, or automatically with a circuit-breaker rule." />
+  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+  <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-05-22T08:00:00Z" />
+  <meta property="article:author" content="Agentic Architect" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="blog.css" />
+  <script data-goatcounter="https://agentic-architect.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Seven Words That Stop Cursor Hallucination Loops",
+    "datePublished": "2026-05-22T08:00:00Z",
+    "dateModified": "2026-05-22T08:00:00Z",
+    "author": { "@type": "Organization", "name": "Agentic Architect" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Agentic Architect",
+      "logo": { "@type": "ImageObject", "url": "https://agenticstandardcontact-byte.github.io/agentic-architect/favicon.svg" }
+    },
+    "image": "https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg",
+    "mainEntityOfPage": "https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html",
+    "keywords": "Cursor AI, hallucination loop, circuit breaker, bug-breaker.mdc"
+  }
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="../" class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../#kit">What's Inside</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="./">Blog</a>
+      </nav>
+      <a class="btn btn-primary btn-sm nav-cta" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">Get the Kit</a>
+    </div>
+  </header>
+
+  <main>
+    <article class="post">
+      <div class="container post-narrow">
+        <div class="post-meta">
+          <time datetime="2026-05-22">May 22, 2026</time>
+          <span class="post-tag">Cursor rules</span>
+          <span class="post-read-time">6 min read</span>
+        </div>
+
+        <h1>Seven words that stop Cursor hallucination loops</h1>
+        <p class="post-lede">You have seen this spiral: the AI invents an API that does not exist, you correct it, it apologises and invents a <em>different</em> wrong API, you correct it again, and twenty minutes later you are debugging the assistant instead of your code. The fix is not a longer system prompt. It is a hard stop — seven words — and optionally a rule that enforces the same behaviour before you have to type them.</p>
+
+        <h2>What a hallucination loop looks like</h2>
+        <p>It usually starts on a method the model half-remembers. You ask Cursor to wire up a handler against an interface you know exists. It returns something plausible:</p>
+        <pre><code>await _mediator.Send(new ProcessOrderCommand(id), cancellationToken);</code></pre>
+        <p>Clean. Confident. Wrong — <code>ProcessOrderCommand</code> takes a <code>Guid</code> and a <code>CustomerContext</code>, not an <code>int</code>. You point that out. The model agrees, rewrites the call, and quietly changes the command constructor to match its mistake. You correct the constructor. It moves the validation into a private method that calls <code>_db.ValidateOrderAsync</code> — a method that does not exist and never will.</p>
+        <p>Each turn sounds cooperative. Each turn drifts further from the file on disk. That is a <strong>hallucination loop</strong>: high confidence, low grounding, escalating wrongness.</p>
+
+        <h2>Why "be more careful" never works</h2>
+        <p>Generic instructions — <em>think step by step</em>, <em>double-check your work</em>, <em>do not hallucinate</em> — do not change the failure mode. The model is already trying to satisfy your last correction. The problem is not effort; it is <strong>missing evidence</strong>. It is answering from pattern completion instead of re-opening the source.</p>
+        <p>Longer preambles make it worse. You burn tokens on politeness while the model still has not re-read the interface definition three files away. What you need is not encouragement. You need a <strong>circuit breaker</strong> — the same pattern you use when a retry policy should stop calling a failing downstream service.</p>
+
+        <h2>The seven words</h2>
+        <p>When you recognise the loop — two failed fixes on the same symbol, invented members, or repeated apologies without a file quote — paste this and nothing else:</p>
+        <blockquote>Stop. Re-read the file. Ask me.</blockquote>
+        <p>Seven words. No preamble. No new requirements. The phrase does three things:</p>
+        <ol>
+          <li><strong>Stop</strong> — halts the current generation strategy (more code is the wrong move).</li>
+          <li><strong>Re-read the file</strong> — forces grounding in the actual AST, not the last assistant message.</li>
+          <li><strong>Ask me</strong> — moves uncertainty to a targeted question instead of another guess.</li>
+        </ol>
+        <p>In practice the next reply is slower and shorter. It quotes real members. It asks whether you meant <code>ProcessOrderCommand</code> or the older <code>SubmitOrderCommand</code> before touching DI registration. That is the behaviour you want from a senior pair — not another speculative patch.</p>
+
+        <h2>When to trip the breaker</h2>
+        <p>Use it when any of these are true:</p>
+        <ul>
+          <li>The same error message or missing member appears <strong>twice</strong> after you corrected it once.</li>
+          <li>The model cites APIs, packages, or config keys you cannot find with ripgrep.</li>
+          <li>It refactors unrelated files to "fix" a local compile error.</li>
+          <li>It agrees with you, then contradicts its own fix in the next message.</li>
+        </ul>
+        <p>Do <em>not</em> use it for slow but steady progress — one wrong import fixed on the second try is normal. The breaker is for <strong>spirals</strong>, not single mistakes.</p>
+
+        <h2>From manual phrase to automatic rule</h2>
+        <p>Typing the seven words works, but you should not have to remember them at 17:30 on a Thursday. That is what <code>bug-breaker.mdc</code> is for in the <a href="../">Agentic Architect</a> kit: a scoped rule that loads on code files and encodes the same contract:</p>
+        <ul>
+          <li>After two failed attempts on the same problem in one session, <strong>stop proposing code</strong>.</li>
+          <li>Re-read the current file and any directly imported types before continuing.</li>
+          <li>Surface one specific question — with line references — instead of guessing.</li>
+        </ul>
+        <p>Because it is directory-scoped like the other kit rules, it does not inflate every prompt. It sits quiet until you are actually editing implementation code — exactly where loops hurt.</p>
+
+        <h2>How it pairs with persistence</h2>
+        <p>Hallucination loops are worse when the model has no memory of yesterday's decision. You explain that orders flow through Mediator, not direct repository calls. It forgets by Friday and loops on a repository shortcut again.</p>
+        <p>The circuit breaker stops the <em>session</em> spiral. <code>persistence.mdc</code> plus <code>LEARNING_LOG.md</code> stops the <em>week-over-week</em> spiral by writing decisions the model re-hydrates on session start. Together they address two different half-lives of the same problem — which is why the kit ships four rules, not one mega-prompt.</p>
+
+        <h2>What this does not fix</h2>
+        <p>Honest limits: the breaker will not save a prompt that contradicts your architecture, and it will not replace code review. It also cannot fix context rot at Monday stand-up — that is the <a href="01-the-context-tax.html">Context Tax</a> problem, solved with persistence and scoped boundaries, not a stop phrase.</p>
+        <p>What it <em>does</em> fix is the most expensive hour in AI-assisted development: the hour you spend as the human circuit breaker while the model confidently ships fiction.</p>
+
+        <hr class="post-divider" />
+
+        <div class="post-cta">
+          <h2>Start with the free boundary rule</h2>
+          <p><code>arch-core-lite.mdc</code> will not install the full circuit breaker, but it will train the model to pause when context is missing — a useful habit before you add <code>bug-breaker.mdc</code>. Direct download from the repo, no signup.</p>
+          <a class="btn btn-primary btn-lg" href="https://github.com/agenticstandardcontact-byte/agentic-architect/blob/main/arch-core-lite.mdc" target="_blank" rel="noopener">Download arch-core-lite.mdc →</a>
+        </div>
+
+        <div class="post-cta post-cta-paid">
+          <h3>Get the full hallucination circuit breaker.</h3>
+          <p>The complete Agentic Architect kit — including <code>bug-breaker.mdc</code>, the DI auditor, boundary enforcement, and the Learning Log engine — is £19.99 one-time. Lifetime updates. MIT-licensed. 14-day refund.</p>
+          <a class="btn btn-primary btn-lg" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">Get Agentic Architect — £19.99 →</a>
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand">
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <p>The persistence framework for serious Cursor users in C#/.NET environments.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
+        <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a><a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">GitHub</a></div>
+        <div><h4>Buy</h4><a href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit" target="_blank" rel="noopener">Gumroad — £19.99</a></div>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>© <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules · One-time payment</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
