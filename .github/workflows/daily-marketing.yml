@@ -105,7 +105,12 @@ jobs:
           if MARKER not in html:
               raise SystemExit(f"Marker {MARKER!r} not found in {PAGE}")
           html = html.replace(MARKER, MARKER + "\n          " + entry, 1)
+
           PAGE.write_text(html, encoding="utf-8")
+
+          # ----- 4b. Sort all posts newest-first (shared script; essays before rules on same day) -----
+          import subprocess
+          subprocess.run(["python3", "scripts/sort-blog-index.py"], check=True)
 
           # ----- 5. Touch sitemap lastmod for the blog index -----
           sitemap_text = SITEMAP.read_text(encoding="utf-8")
@@ -163,7 +168,7 @@ jobs:
         run: |
           git config user.name "Agentic Architect Bot"
           git config user.email "bot@agenticarchitect.com"
-          git add blog/daily-rules.html sitemap.xml feed.xml
+          git add blog/index.html sitemap.xml feed.xml
           if git diff --staged --quiet; then
             echo "No changes — nothing to commit."
             echo "changed=false" >> "$GITHUB_OUTPUT"
