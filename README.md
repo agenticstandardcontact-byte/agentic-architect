@@ -6,10 +6,10 @@
 
 ### The Persistence Framework for Cursor — built for senior C#/.NET engineers
 
-[![Get the Kit — £19.99](https://img.shields.io/badge/Get_the_Kit-%C2%A319.99-ff8a3d?style=for-the-badge&logo=gumroad&logoColor=white)](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
-[![Free Sample Rule](https://img.shields.io/badge/Free_Sample_Rule-arch--core--lite.mdc-6ee7ff?style=for-the-badge)](https://agenticstandardcontact-byte.github.io/agentic-architect/#free)
+[![Try the free sample first — arch-core-lite.mdc](https://img.shields.io/badge/Try_the_free_sample_first-arch--core--lite.mdc-6ee7ff?style=for-the-badge&logo=github&logoColor=white)](arch-core-lite.mdc?utm_source=github_readme&utm_medium=badge&utm_campaign=free_sample)
+[![Get the Kit — £19.99](https://img.shields.io/badge/Get_the_Kit-%C2%A319.99-ff8a3d?style=for-the-badge&logo=gumroad&logoColor=white)](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=github_readme&utm_medium=badge&utm_campaign=paid_kit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-4ade80?style=for-the-badge)](LICENSE)
-[![Lifetime Updates](https://img.shields.io/badge/Lifetime-Updates-ffb547?style=for-the-badge)](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)
+[![Lifetime Updates](https://img.shields.io/badge/Lifetime-Updates-ffb547?style=for-the-badge)](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=github_readme&utm_medium=badge&utm_campaign=paid_kit)
 
 #### 🌐 **[Visit the website →](https://agenticstandardcontact-byte.github.io/agentic-architect/)**
 
