@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f17" />
+  <title>Cursor Forgets Your Architecture Every Session — Here's How to Stop It</title>
+  <meta name="description" content="Every Cursor session starts with the same 15-minute ritual: re-explaining your DI patterns, boundaries, and decisions to an AI that has no memory of yesterday. Here's why it happens and the persistence pattern that ends it." />
+  <meta name="keywords" content="Cursor forgets context, Cursor no memory between sessions, Cursor persistence, AI re-explain architecture, Cursor context window cost, .NET Cursor rules" />
+  <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/learn/cursor-context-tax.html" />
+
+  <meta property="og:title" content="Cursor Forgets Your Architecture Every Session — Here's How to Stop It" />
+  <meta property="og:description" content="The 15-minute morning ritual senior engineers pay to a forgetful AI — and the persistence pattern that ends it." />
+  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+  <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/learn/cursor-context-tax.html" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../blog/blog.css" />
+  <script data-goatcounter="https://agentic-architect.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Cursor Forgets Your Architecture Every Session — Here's How to Stop It",
+    "description": "Why Cursor (and every other chat-based AI assistant) loses your project context between sessions, and the directory-scoped persistence pattern that fixes it.",
+    "datePublished": "2026-05-22T22:00:00Z",
+    "dateModified": "2026-05-22T22:00:00Z",
+    "author": { "@type": "Organization", "name": "Agentic Architect" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Agentic Architect",
+      "logo": { "@type": "ImageObject", "url": "https://agenticstandardcontact-byte.github.io/agentic-architect/favicon.svg" }
+    },
+    "image": "https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg",
+    "mainEntityOfPage": "https://agenticstandardcontact-byte.github.io/agentic-architect/learn/cursor-context-tax.html",
+    "keywords": "Cursor context, Cursor persistence, AI memory, .NET Cursor rules"
+  }
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="../" class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../#kit">What's Inside</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../blog/">Blog</a>
+      </nav>
+      <a class="btn btn-primary btn-sm nav-cta" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=learn_nav&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the Kit</a>
+    </div>
+  </header>
+
+  <main>
+    <article class="post">
+      <div class="container post-narrow">
+        <div class="post-meta">
+          <span class="post-tag">Quick Answer · 4 min read</span>
+        </div>
+
+        <h1>Cursor forgets your architecture every session. Here's how to stop it.</h1>
+
+        <p class="post-lede">If you open Cursor, ask for a new feature, and immediately watch the AI suggest patterns you explicitly rejected last week, you are paying the Context Tax. It happens because chat-based AI assistants have no persistent memory of your project — only the current chat and whatever it picked up from the active file. On a senior salary that's ~15 minutes lost per session, ~62 hours per year, ~£4,650 of senior time. Here is the short answer, why it happens, and the persistence pattern that ends the ritual.</p>
+
+        <h2>The short answer</h2>
+        <p>Cursor only remembers what is in (1) the open chat, (2) the active file, and (3) any rule files you have committed to <code>.cursor/rules/</code>. It does not remember decisions, conventions, or yesterday's discussion. The fix is to externalise the decisions into <strong>directory-scoped <code>.mdc</code> rules</strong> and a single committed <strong><code>LEARNING_LOG.md</code></strong> — both of which Cursor loads automatically for the directories they apply to.</p>
+
+        <h2>Why the chat alone can never fix this</h2>
+        <p>Every Cursor chat is born empty. Even within a single session, the model has a finite context window; once you cross it, your earlier explanations start falling off the front. Open a new chat tomorrow and you start from zero again. Worse: the model has no idea which of your earlier statements were architectural decisions and which were exploratory thinking — so even if it had the transcript, it could not separate signal from noise.</p>
+        <p>"Just give it more context" is not a strategy. It is the bill for the Context Tax.</p>
+
+        <h2>What persistence actually requires</h2>
+        <p>Three things, in this order, all committed alongside your code:</p>
+        <ol>
+          <li><strong>Scoped rule files</strong> in <code>.cursor/rules/</code> that activate only on the file types they apply to. A <code>dotnet-di.mdc</code> rule that loads on <code>Program.cs</code> and constructor edits — not on every prompt.</li>
+          <li><strong>A Learning Log</strong> — a single <code>LEARNING_LOG.md</code> the AI is instructed to read at session start and append to whenever a non-obvious decision is made ("we use <code>Result&lt;T&gt;</code> not throw", "DbContext stays in Infrastructure", "Scrutor decorators preferred over manual factories").</li>
+          <li><strong>A boundary-guardian rule</strong> that refuses cross-layer suggestions before they reach you — so you stop having to catch them in PR review.</li>
+        </ol>
+        <p>That triple gives Cursor the closest thing to long-term memory you can build today, without waiting for any vendor feature.</p>
+
+        <h2>The fix in 60 seconds</h2>
+        <p>Drop one rule file in <code>.cursor/rules/</code>. The free <code>arch-core-lite.mdc</code> (linked below) is the boundary guardian — it activates whenever Cursor edits anything in your project and refuses cross-layer violations. The morning re-explanation ritual stops the same day you commit it. The kit's other rules layer on top: DI auditor, hallucination circuit-breaker, the Learning Log engine.</p>
+
+        <h2>Want the full picture?</h2>
+        <p>The long-form essay walks through the maths of the Context Tax, the four-rule architecture, and why this is a persistence problem, not a Cursor problem.</p>
+        <p><a href="../blog/01-the-context-tax.html">→ Read: The Context Tax — why every Cursor session costs you 15 minutes</a></p>
+
+        <hr class="post-divider" />
+
+        <div class="post-cta">
+          <h2>Try the boundary rule for free</h2>
+          <p>The <code>arch-core-lite.mdc</code> rule — drop it in <code>.cursor/rules/</code> today and your AI starts refusing the cross-layer suggestions it shipped yesterday. No signup, no email.</p>
+          <a class="btn btn-primary btn-lg" href="https://github.com/agenticstandardcontact-byte/agentic-architect/blob/main/arch-core-lite.mdc?utm_source=site&utm_medium=learn_page&utm_campaign=free_sample" target="_blank" rel="noopener">Download arch-core-lite.mdc →</a>
+        </div>
+
+        <div class="post-cta post-cta-paid">
+          <h3>Or get the full persistence engine.</h3>
+          <p>The complete kit — 4 specialist rules + the <code>LEARNING_LOG.md</code> protocol — is £19.99 one-time. Lifetime updates. MIT-licensed. 14-day refund.</p>
+          <a class="btn btn-primary btn-lg" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=learn_page&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect — £19.99 →</a>
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand">
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <p>The persistence framework for serious Cursor users in C#/.NET environments.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
+        <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a><a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">GitHub</a></div>
+        <div><h4>Buy</h4><a href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=learn_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Gumroad — £19.99</a></div>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>© <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules · One-time payment</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
