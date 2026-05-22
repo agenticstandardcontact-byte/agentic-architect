@@ -26,6 +26,11 @@ on:
         type: boolean
         required: false
         default: true
+      force_update:
+        description: 'Re-write an already-published digest in place (manual repair only)'
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   digest:
@@ -39,6 +44,7 @@ jobs:
           DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
           AS_OF: ${{ github.event.inputs.as_of }}
           PUBLISH: ${{ github.event_name == 'schedule' || github.event.inputs.publish }}
+          FORCE_UPDATE: ${{ github.event.inputs.force_update }}
         run: |
           import datetime as dt
           import html
@@ -251,8 +257,10 @@ jobs:
                   break
               page_idx += 1
 
-          if existing and existing.get("published"):
+          force_update = os.environ.get("FORCE_UPDATE", "").lower() == "true"
+          if existing and existing.get("published") and not force_update:
               print(f"Skip: digest ending {as_of} already published → {existing.get('url')}")
+              print("Re-run with force_update=true to repair in place.")
               raise SystemExit(0)
 
           payload = {
