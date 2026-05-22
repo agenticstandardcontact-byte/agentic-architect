@@ -120,8 +120,13 @@ jobs:
               p_m = p_re.search(inner)
               if not h2_m or not p_m:
                   continue
-              title = html.unescape(re.sub(r"\s+", " ", h2_m.group(1)).strip())
-              body = html.unescape(re.sub(r"\s+", " ", p_m.group(1)).strip())
+              # Unescape entities then re-escape bare angle brackets so dev.to's
+              # markdown parser doesn't eat generics like Result<T> as HTML tags.
+              def md_safe(s):
+                  s = html.unescape(re.sub(r"\s+", " ", s)).strip()
+                  return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+              title = md_safe(h2_m.group(1))
+              body = md_safe(p_m.group(1))
               href_m = href_re.search(inner)
               if href_m:
                   link = f"{BLOG}{href_m.group(1)}"
