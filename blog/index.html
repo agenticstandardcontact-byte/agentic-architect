@@ -57,6 +57,17 @@
       <div class="container">
         <ul class="post-list">
           <!-- DAILY-RULE-INSERTION-POINT -->
+          <li class="post-card" data-date="2026-05-23">
+  <div class="post-link" style="cursor:default;">
+    <div class="post-meta">
+      <time datetime="2026-05-23">May 23, 2026</time>
+      <span class="post-tag">Daily Rule</span>
+    </div>
+    <h2>Rule 10: AsNoTracking for Reads</h2>
+    <p>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</p>
+  </div>
+</li>
+
           <li class="post-card" data-date="2026-05-22">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
