@@ -67,11 +67,16 @@ jobs:
 
           api_key = os.environ.get("KIT_API_KEY", "").strip()
           if not api_key:
-              raise SystemExit(
-                  "KIT_API_KEY secret is missing. "
-                  "Get one at https://app.kit.com/account_settings/developer_settings, "
-                  "then add it under Settings -> Secrets and variables -> Actions."
+              # Skip gracefully (exit 0) so the workflow doesn't paint a red X
+              # on every blog push before the user has set up Kit. Emits a
+              # clear message in the run logs so anyone debugging knows why.
+              print(
+                  "KIT_API_KEY secret not set - skipping Kit syndication.\n"
+                  "Get an API key at https://app.kit.com/account_settings/developer_settings, "
+                  "then add it under Settings -> Secrets and variables -> Actions "
+                  "to enable automated newsletter broadcasts."
               )
+              raise SystemExit(0)
 
           publish_live = os.environ.get("PUBLISH", "true").lower() == "true"
 
