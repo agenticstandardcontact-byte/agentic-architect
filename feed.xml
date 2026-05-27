@@ -87,5 +87,13 @@
       <description>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</description>
     </item>
 
+      <item>
+      <title>Rule 14: Sealed By Default</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-27</link>
+      <guid isPermaLink="false">daily-rule-2026-05-27</guid>
+      <pubDate>Wed, 27 May 2026 09:00:00 +0000</pubDate>
+      <description>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</description>
+    </item>
+
   </channel>
 </rss>
