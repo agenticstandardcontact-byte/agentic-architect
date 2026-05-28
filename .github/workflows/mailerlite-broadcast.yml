@@ -1,0 +1,183 @@
+name: MailerLite Newsletter Broadcast
+
+# Fires on push to main when a new blog post HTML is added to blog/.
+# Also supports manual dispatch so you can trigger a broadcast any time.
+# Reads the latest blog post, extracts title + summary, and schedules a
+# MailerLite campaign for the next Tuesday at 09:00 UTC.
+#
+# Prerequisites:
+#   - MAILERLITE_API_KEY repository secret set (MailerLite → Integrations → Developer API)
+#   - MAILERLITE_GROUP_ID repository secret set (the subscriber group/list ID in MailerLite)
+#
+# If either secret is missing, the workflow skips gracefully — same pattern
+# as the old kit-broadcast.yml (skip-on-missing-secret).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blog/**.html'
+  workflow_dispatch:
+    inputs:
+      post_path:
+        description: 'Path to the blog post HTML (relative to repo root)'
+        required: false
+        default: ''
+
+jobs:
+  broadcast:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Skip if MailerLite secret is not configured
+        id: check_secret
+        run: |
+          if [ -z "${{ secrets.MAILERLITE_API_KEY }}" ]; then
+            echo "MAILERLITE_API_KEY not set — skipping broadcast (add the secret to enable)"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout
+        if: steps.check_secret.outputs.skip == 'false'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Find latest blog post
+        if: steps.check_secret.outputs.skip == 'false'
+        id: find_post
+        run: |
+          # Use the manually specified post, or find the most recently added blog HTML
+          if [ -n "${{ github.event.inputs.post_path }}" ]; then
+            POST_PATH="${{ github.event.inputs.post_path }}"
+          else
+            POST_PATH=$(git diff --name-only HEAD~1 HEAD -- 'blog/*.html' | tail -1)
+          fi
+
+          if [ -z "$POST_PATH" ]; then
+            echo "No new blog post found in this push — skipping"
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "post_path=$POST_PATH" >> $GITHUB_OUTPUT
+          echo "skip=false" >> $GITHUB_OUTPUT
+          echo "Found post: $POST_PATH"
+
+      - name: Extract post title and first paragraph
+        if: steps.check_secret.outputs.skip == 'false' && steps.find_post.outputs.skip == 'false'
+        id: extract
+        run: |
+          POST_PATH="${{ steps.find_post.outputs.post_path }}"
+
+          # Extract <title> tag content
+          TITLE=$(grep -oP '(?<=<title>)[^<]+' "$POST_PATH" | head -1 | sed 's/ — Agentic Architect//')
+
+          # Extract first <p> that is longer than 80 chars (skip short intro snippets)
+          SUMMARY=$(grep -oP '(?<=<p>)[^<]{80,}' "$POST_PATH" | head -1 | sed 's/<[^>]*>//g')
+
+          # Derive the public URL from the filename
+          FILENAME=$(basename "$POST_PATH")
+          POST_URL="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/$FILENAME"
+
+          echo "title=$TITLE" >> $GITHUB_OUTPUT
+          echo "summary=$SUMMARY" >> $GITHUB_OUTPUT
+          echo "post_url=$POST_URL" >> $GITHUB_OUTPUT
+          echo "Title: $TITLE"
+          echo "URL: $POST_URL"
+
+      - name: Calculate next Tuesday 09:00 UTC
+        if: steps.check_secret.outputs.skip == 'false' && steps.find_post.outputs.skip == 'false'
+        id: schedule
+        run: |
+          python3 - <<'EOF'
+          import datetime, os
+          today = datetime.datetime.utcnow()
+          days_until_tuesday = (1 - today.weekday()) % 7  # 1 = Tuesday
+          if days_until_tuesday == 0:
+              days_until_tuesday = 7  # if today IS Tuesday, schedule next week
+          send_date = today + datetime.timedelta(days=days_until_tuesday)
+          send_dt = send_date.replace(hour=9, minute=0, second=0, microsecond=0)
+          # MailerLite expects ISO 8601: 2026-06-02 09:00:00
+          formatted = send_dt.strftime("%Y-%m-%d %H:%M:%S")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"send_at={formatted}\n")
+          print(f"Scheduled for: {formatted}")
+          EOF
+
+      - name: Create MailerLite campaign and schedule broadcast
+        if: steps.check_secret.outputs.skip == 'false' && steps.find_post.outputs.skip == 'false'
+        env:
+          MAILERLITE_API_KEY: ${{ secrets.MAILERLITE_API_KEY }}
+          MAILERLITE_GROUP_ID: ${{ secrets.MAILERLITE_GROUP_ID }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, os, urllib.request, urllib.error
+
+          api_key   = os.environ["MAILERLITE_API_KEY"]
+          group_id  = os.environ.get("MAILERLITE_GROUP_ID", "")
+          title     = "${{ steps.extract.outputs.title }}"
+          summary   = "${{ steps.extract.outputs.summary }}"
+          post_url  = "${{ steps.extract.outputs.post_url }}"
+          send_at   = "${{ steps.schedule.outputs.send_at }}"
+
+          subject   = f"[Senior Dev Stack] {title}"
+          html_body = f"""
+          <html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+                             color:#24292f;max-width:600px;margin:0 auto;padding:20px;">
+            <p style="color:#57606a;font-size:13px;">Senior Dev Stack &mdash; weekly .NET + AI tooling</p>
+            <hr style="border:none;border-top:1px solid #d0d7de;margin:12px 0;">
+            <h2 style="font-size:20px;font-weight:600;">{title}</h2>
+            <p style="font-size:15px;line-height:1.6;">{summary}</p>
+            <p>
+              <a href="{post_url}"
+                 style="display:inline-block;background:#0969da;color:#fff;padding:10px 20px;
+                        border-radius:6px;text-decoration:none;font-size:14px;font-weight:500;">
+                Read the full post &rarr;
+              </a>
+            </p>
+            <hr style="border:none;border-top:1px solid #d0d7de;margin:24px 0 12px;">
+            <p style="font-size:12px;color:#57606a;">
+              You're receiving this because you signed up for the Agentic Architect newsletter.
+              <a href="{{{{ unsubscribe_url }}}}" style="color:#57606a;">Unsubscribe</a>
+            </p>
+          </body></html>
+          """
+
+          # Build the groups array — if no group ID set, send to all subscribers
+          groups = [int(group_id)] if group_id.strip() else []
+
+          payload = {
+              "name":     f"Broadcast: {title[:60]}",
+              "type":     "regular",
+              "subject":  subject,
+              "from":     {"email": "agenticstandardcontact@gmail.com", "name": "Marco — Agentic Architect"},
+              "content":  {"html": html_body},
+              "schedule": {"delivery": "scheduled", "datetime": send_at, "timezone": "UTC"},
+          }
+          if groups:
+              payload["groups"] = groups
+
+          body = json.dumps(payload).encode()
+          req  = urllib.request.Request(
+              "https://connect.mailerlite.com/api/campaigns",
+              data=body,
+              headers={
+                  "Content-Type":  "application/json",
+                  "Accept":        "application/json",
+                  "Authorization": f"Bearer {api_key}",
+              },
+              method="POST",
+          )
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  data = json.loads(resp.read())
+                  campaign_id = data.get("data", {}).get("id", "unknown")
+                  print(f"✅ Campaign created: id={campaign_id}, scheduled for {send_at}")
+          except urllib.error.HTTPError as e:
+              err = e.read().decode()
+              print(f"❌ MailerLite API error {e.code}: {err}")
+              raise SystemExit(1)
+          PYEOF
