@@ -103,5 +103,13 @@
       <description>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</description>
     </item>
 
+      <item>
+      <title>Rule 16: async void Outside Event Handlers</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-29</link>
+      <guid isPermaLink="false">daily-rule-2026-05-29</guid>
+      <pubDate>Fri, 29 May 2026 09:00:00 +0000</pubDate>
+      <description>async void is a deadlock and unhandled-exception trap everywhere except UI event handlers. The AI uses it routinely for "fire and forget" — wrong answer every time. Flag it on sight.</description>
+    </item>
+
   </channel>
 </rss>
