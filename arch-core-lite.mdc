@@ -11,7 +11,7 @@ alwaysApply: false
 
 > **This is a free single-rule preview of [Agentic Architect](https://agenticstandardcontact-byte.github.io/agentic-architect/).**
 > The full kit ships four scoped rules plus the **`persistence.mdc`** engine that maintains your project's `LEARNING_LOG.md` across sessions.
-> 👉 **Get the full framework — £19.99 one-time: https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit**
+> 👉 **Get the full framework — £9.00 one-time: https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit**
 
 ---
 
@@ -101,7 +101,7 @@ This file is a **single rule** from the Agentic Architect kit. The full framewor
 | `bug-breaker.mdc` | Circuit-breaker that stops AI hallucination loops |
 | `persistence.mdc` | Maintains `LEARNING_LOG.md` — the project's stateful "brain" across sessions |
 
-### Get the full kit — £19.99 one-time, lifetime updates, MIT-licensed
+### Get the full kit — £9.00 one-time, lifetime updates, MIT-licensed
 
 👉 **https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit**
 

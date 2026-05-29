@@ -7,7 +7,7 @@
 ### The Persistence Framework for Cursor — built for senior C#/.NET engineers
 
 [![Try the free sample first — arch-core-lite.mdc](https://img.shields.io/badge/Try_the_free_sample_first-arch--core--lite.mdc-6ee7ff?style=for-the-badge&logo=github&logoColor=white)](arch-core-lite.mdc?utm_source=github_readme&utm_medium=badge&utm_campaign=free_sample)
-[![Get the Kit — £19.99](https://img.shields.io/badge/Get_the_Kit-%C2%A319.99-ff8a3d?style=for-the-badge&logo=gumroad&logoColor=white)](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=github_readme&utm_medium=badge&utm_campaign=paid_kit)
+[![Get the Kit — £9.00](https://img.shields.io/badge/Get_the_Kit-%C2%A39.00-ff8a3d?style=for-the-badge&logo=gumroad&logoColor=white)](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=github_readme&utm_medium=badge&utm_campaign=paid_kit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-4ade80?style=for-the-badge)](LICENSE)
 [![Lifetime Updates](https://img.shields.io/badge/Lifetime-Updates-ffb547?style=for-the-badge)](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=github_readme&utm_medium=badge&utm_campaign=paid_kit)
 
@@ -92,14 +92,14 @@ That's it. Next session, the AI starts hydrated.
 
 | | |
 |---|---|
-| **Founder's Edition** | **£19.99** one-time |
+| **Founder's Edition** | **£9.00** one-time |
 | Original price | ~~£49~~ |
 | Subscription | None. Pay once, own forever. |
 | Updates | Lifetime, free |
 | Licence | MIT |
 | Guarantee | 14-day no-questions refund |
 
-**[👉 Get the kit — £19.99](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)**
+**[👉 Get the kit — £9.00](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)**
 
 ## ❓ FAQ
 
@@ -118,13 +118,13 @@ Yes — that's exactly what it's built for. The <code>.mdc</code> files plug dir
 <details>
 <summary><b>Does it work for non-.NET languages?</b></summary>
 <br />
-The <code>persistence.mdc</code> engine and <code>bug-breaker.mdc</code> are language-agnostic. <code>arch-core.mdc</code> and <code>dotnet-di.mdc</code> are tuned for C#/.NET. If you're not in the .NET world, you'll get value from 2 of the 4 rules — your call whether £19.99 is worth that.
+The <code>persistence.mdc</code> engine and <code>bug-breaker.mdc</code> are language-agnostic. <code>arch-core.mdc</code> and <code>dotnet-di.mdc</code> are tuned for C#/.NET. If you're not in the .NET world, you'll get value from 2 of the 4 rules — your call whether £9.00 is worth that.
 </details>
 
 <details>
 <summary><b>Is it a subscription?</b></summary>
 <br />
-No. One-time £19.99. Lifetime updates. MIT-licensed. We hate subscriptions as much as you do.
+No. One-time £9.00. Lifetime updates. MIT-licensed. We hate subscriptions as much as you do.
 </details>
 
 <details>
@@ -151,7 +151,7 @@ Most public rules are monolithic — a single rule dumped on every prompt, blowi
 
 ### Stop paying the Context Tax.
 
-**[Get Agentic Architect — £19.99 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)**
+**[Get Agentic Architect — £9.00 →](https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit)**
 
 One-time payment · Lifetime updates · 14-day guarantee · MIT-licensed
 
