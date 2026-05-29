@@ -65,8 +65,8 @@ def main():
         fill=MUTED,
     )
 
-    # CTA pill — Founder's Edition £19.99
-    btn_label = "Founder's Edition  ·  £19.99 one-time  →"
+    # CTA pill — Founder's Edition £9.00
+    btn_label = "Founder's Edition  ·  £9.00 one-time  →"
     bbox = draw.textbbox((0, 0), btn_label, font=font_button)
     text_w = bbox[2] - bbox[0]
     text_h = bbox[3] - bbox[1]
