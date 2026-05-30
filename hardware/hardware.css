@@ -1,0 +1,495 @@
+/* =========================================================
+   Agentic Architect — Hardware Comparison Pages
+   Dark, premium, developer-tuned.
+   Shared by hardware/index.html and comparison pages.
+   ========================================================= */
+
+/* ----- Hardware Index Hero ----- */
+.hw-index-hero {
+  padding: 80px 0 40px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.hw-index-hero .kicker {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--brand);
+  margin-bottom: 16px;
+}
+
+.hw-index-hero h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.hw-index-hero .grad {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hw-index-hero .lede {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ----- Hardware Index Grid ----- */
+.hw-index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.hw-index-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.hw-index-card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+.hw-index-card-body {
+  flex: 1;
+}
+
+.hw-index-vs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.hw-index-product {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.hw-index-vs-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--brand);
+  background: rgba(255, 181, 71, 0.1);
+  padding: 2px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.hw-index-desc {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+
+.hw-index-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.hw-index-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-3);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.hw-index-card .btn {
+  align-self: flex-start;
+}
+
+/* ----- Coming Next List ----- */
+.hw-coming-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hw-coming-list li {
+  background: var(--panel);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.hw-coming-list li strong {
+  color: var(--text);
+}
+
+/* ----- Section Title ----- */
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+}
+
+/* =========================================================
+   Comparison Page Specific Styles
+   ========================================================= */
+
+/* ----- Hero / Lede ----- */
+.hw-hero {
+  padding: 80px 0 40px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hw-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.hw-hero h1 em {
+  font-style: normal;
+  color: var(--brand);
+}
+
+.hw-lede {
+  max-width: 780px;
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin: 0 0 32px;
+}
+
+/* ----- Product Card Row ----- */
+.hw-card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+/* ----- Product Cards ----- */
+.hw-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hw-card-a { border-top: 3px solid var(--accent); }
+.hw-card-b { border-top: 3px solid var(--brand); }
+
+.hw-card-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.hw-card-price {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--brand);
+  margin-bottom: 16px;
+}
+
+.hw-card-pros,
+.hw-card-cons {
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.hw-card-pros h4,
+.hw-card-cons h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 8px;
+}
+
+.hw-card-pros h4 { color: var(--good); }
+.hw-card-cons h4 { color: var(--bad); }
+
+.hw-card-pros ul,
+.hw-card-cons ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.hw-card-pros li,
+.hw-card-cons li {
+  padding: 3px 0 3px 18px;
+  position: relative;
+}
+
+.hw-card-pros li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--good);
+  font-weight: 700;
+}
+
+.hw-card-cons li::before {
+  content: '\2013';
+  position: absolute;
+  left: 0;
+  color: var(--bad);
+  font-weight: 700;
+}
+
+.hw-buy-btn {
+  margin-top: auto;
+  text-align: center;
+}
+
+.hw-card-disclosure {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ----- Spec Table ----- */
+.hw-content {
+  padding: 40px 0;
+}
+
+.hw-section {
+  margin-bottom: 48px;
+}
+
+.hw-section h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0 0 16px;
+  letter-spacing: -0.01em;
+}
+
+.hw-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.hw-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.hw-spec-table thead {
+  background: var(--bg-3);
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.hw-spec-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+}
+
+.hw-spec-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+
+.hw-spec-table tr:last-child td {
+  border-bottom: none;
+}
+
+.spec-label {
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  width: 28%;
+}
+
+.spec-a, .spec-b {
+  width: 36%;
+}
+
+/* ----- Benchmark Note ----- */
+.hw-benchmark-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* ----- Use Case Analysis ----- */
+.hw-use-cases {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.hw-use-case {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+}
+
+.hw-use-case h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.hw-use-case p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.hw-use-case p strong {
+  color: var(--brand);
+}
+
+/* ----- Verdict ----- */
+.hw-verdict {
+  background: var(--panel);
+  border: 2px solid var(--brand);
+  border-radius: var(--radius);
+  padding: 36px;
+  margin-bottom: 48px;
+}
+
+.hw-verdict h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 20px;
+  color: var(--brand);
+}
+
+.hw-verdict-body {
+  font-size: 1rem;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+.hw-verdict-body p {
+  margin: 0 0 12px;
+}
+
+.hw-verdict-body p:last-child {
+  margin-bottom: 0;
+}
+
+.hw-verdict-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+/* ----- Affiliate Disclosure Aside ----- */
+.hw-disclosure {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  margin: 0 auto 60px;
+  max-width: 780px;
+}
+
+.hw-disclosure h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+.hw-disclosure p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.hw-disclosure a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 768px) {
+  .hw-card-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hw-use-cases {
+    grid-template-columns: 1fr;
+  }
+
+  .hw-index-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hw-hero h1,
+  .hw-index-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hw-verdict-buttons {
+    flex-direction: column;
+  }
+
+  .hw-verdict-buttons .btn {
+    text-align: center;
+  }
+}

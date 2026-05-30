@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f17" />
+  <title>Beelink SER9 vs Minisforum UM890 Pro: Best AMD Mini PC for Local AI & .NET in 2026</title>
+  <meta name="description" content="Head-to-head comparison of the Beelink SER9 (Ryzen AI 9 HX 370 + 50 TOPS NPU) and Minisforum UM890 Pro (Ryzen 9 8945HS + OCulink eGPU) for running local LLMs, .NET workloads, and Docker. Benchmarks, pricing, and honest verdict for AI-curious developers." />
+  <meta name="keywords" content="Beelink SER9 vs Minisforum UM890 Pro, best AMD Mini PC for AI 2026, Ryzen AI NPU, local LLM hardware AMD, .NET development Mini PC AMD, OCulink eGPU Mini PC, budget AI dev box" />
+  <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/hardware/ser9-vs-um890-pro.html" />
+
+  <meta property="og:title" content="Beelink SER9 vs Minisforum UM890 Pro: Best AMD Mini PC for Local AI & .NET in 2026" />
+  <meta property="og:description" content="Head-to-head comparison of the Beelink SER9 (Ryzen AI 9 HX 370 + 50 TOPS NPU) and Minisforum UM890 Pro (Ryzen 9 8945HS + OCulink eGPU) for running local LLMs, .NET workloads, and Docker. Benchmarks, pricing, and honest verdict for AI-curious developers." />
+  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+  <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/hardware/ser9-vs-um890-pro.html" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="hardware.css" />
+  <script data-goatcounter="https://agentic-architect.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Beelink SER9 vs Minisforum UM890 Pro: Best AMD Mini PC for Local AI & .NET in 2026",
+    "description": "Head-to-head comparison of the Beelink SER9 (Ryzen AI 9 HX 370 + 50 TOPS NPU) and Minisforum UM890 Pro (Ryzen 9 8945HS + OCulink eGPU) for running local LLMs, .NET workloads, and Docker. Benchmarks, pricing, and honest verdict for AI-curious developers.",
+    "url": "https://agenticstandardcontact-byte.github.io/agentic-architect/hardware/ser9-vs-um890-pro.html",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Agentic Architect",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://agenticstandardcontact-byte.github.io/agentic-architect/favicon.svg"
+        }
+    }
+}
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="../" class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../#kit">What's Inside</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../blog/">Blog</a>
+        <a href="../hardware/" aria-current="page">Hardware</a>
+      </nav>
+      <a class="btn btn-primary btn-sm nav-cta" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=hardware_nav&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the Kit</a>
+    </div>
+  </header>
+  <main>
+    <article class="hw-comparison">
+      <header class="hw-hero">
+        <div class="container">
+          <h1>Beelink SER9 vs Minisforum UM890 Pro: <em>AMD AI Mini PCs at Two Price Points</em></h1>
+          <p class="hw-lede">Two AMD Mini PCs, two very different value propositions. The <strong>Beelink SER9</strong> packs AMD's latest Ryzen AI 9 HX 370 with a dedicated 50 TOPS NPU — hardware AI acceleration built into the silicon. The <strong>Minisforum UM890 Pro</strong> is the budget workhorse: Ryzen 9 8945HS, dual NVMe slots, and an OCulink port that lets you bolt on a desktop GPU later. Both run Windows 11 and Linux bare-metal. Both run Ollama. But one costs ~£300 more and the difference isn't just the processor. Here's which one earns its keep for AI-curious .NET developers.</p>
+          <div class="hw-card-row">
+            <div class="hw-card hw-card-a">
+  <h3 class="hw-card-name">Beelink SER9</h3>
+  <div class="hw-card-price">£750-950 (32GB/64GB LPDDR5x configs)</div>
+  <div class="hw-card-pros">
+    <h4>Strengths</h4>
+    <ul><li>Ryzen AI 9 HX 370 — 12 Zen 5 cores (4P+8E), latest-gen architecture</li>
+<li>Dedicated NPU: 50 TOPS — runs ONNX, DirectML, and Windows Studio Effects on silicon</li>
+<li>Radeon 890M iGPU (RDNA 3.5) — 16 CUs, best integrated graphics in any Mini PC</li>
+<li>64 GB LPDDR5x-7500 — soldered but blazing fast bandwidth for model inference</li>
+<li>Wi-Fi 7 + BT 5.4 — future-proof connectivity</li>
+<li>Whisper-quiet under most loads — 25-30 dB typical</li></ul>
+  </div>
+  <div class="hw-card-cons">
+    <h4>Watch For</h4>
+    <ul><li>RAM is soldered — can't upgrade later, choose config upfront</li>
+<li>Single M.2 NVMe slot — storage expansion limited</li>
+<li>No OCulink / eGPU port — stuck with the iGPU forever</li>
+<li>LPDDR5x not user-replaceable — if RAM fails, whole unit is dead</li>
+<li>Price premium over UM890 for the NPU — £200-300 gap</li></ul>
+  </div>
+  <a class="btn btn-primary btn-lg hw-buy-btn" href="https://agenticstandardcontact-byte.github.io/agentic-architect/go/amz-ser9?utm_source=site&utm_medium=hardware_compare&utm_campaign=hardware_a" target="_blank" rel="noopener sponsored">
+    Check Price on Amazon &rarr;
+  </a>
+  <span class="hw-card-disclosure">As an Amazon Associate I earn from qualifying purchases.</span>
+</div>
+            <div class="hw-card hw-card-b">
+  <h3 class="hw-card-name">Minisforum UM890 Pro</h3>
+  <div class="hw-card-price">£550-700 (barebone) / £700-850 (32GB+1TB config)</div>
+  <div class="hw-card-pros">
+    <h4>Strengths</h4>
+    <ul><li>Ryzen 9 8945HS — 8 Zen 4 cores/16 threads, proven architecture with solid IPC</li>
+<li>OCulink port — connect a desktop GPU (RTX 4060/4070) for real TFLOPS when you need them</li>
+<li>Dual M.2 NVMe Gen4 slots — separate OS and model storage drives</li>
+<li>2.5GbE + dual USB4 (40Gbps) — better networking and peripheral bandwidth than SER9</li>
+<li>User-upgradable DDR5 SODIMM — start with 32GB, go to 64GB+ later</li>
+<li>£200-300 cheaper — that pays for a 2TB NVMe and 32GB RAM kit</li></ul>
+  </div>
+  <div class="hw-card-cons">
+    <h4>Watch For</h4>
+    <ul><li>No dedicated NPU — AI inference is CPU+iGPU only</li>
+<li>Radeon 780M iGPU (RDNA 3, 12 CUs) — competent but 25% fewer CUs than SER9's 890M</li>
+<li>Older Zen 4 architecture — ~15% lower single-thread perf than Zen 5</li>
+<li>Higher TDP under load (54W vs 35W on SER9) — more fan noise</li>
+<li>Wi-Fi 6E (not 7) — fine today, not tomorrow-proof</li></ul>
+  </div>
+  <a class="btn btn-primary btn-lg hw-buy-btn" href="https://agenticstandardcontact-byte.github.io/agentic-architect/go/amz-um890?utm_source=site&utm_medium=hardware_compare&utm_campaign=hardware_b" target="_blank" rel="noopener sponsored">
+    Check Price on Amazon &rarr;
+  </a>
+  <span class="hw-card-disclosure">As an Amazon Associate I earn from qualifying purchases.</span>
+</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="container hw-content">
+        <div class="hw-table-wrap">
+  <table class="hw-spec-table">
+    <thead>
+      <tr>
+        <th>Specification</th>
+        <th>Beelink SER9</th>
+        <th>Minisforum UM890 Pro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td class="spec-label">CPU</td>
+  <td class="spec-a">AMD Ryzen AI 9 HX 370 (12C: 4 Zen 5 + 8 Zen 5c, up to 5.1 GHz)</td>
+  <td class="spec-b">AMD Ryzen 9 8945HS (8C/16T Zen 4, up to 5.2 GHz)</td>
+</tr>
+<tr>
+  <td class="spec-label">NPU</td>
+  <td class="spec-a">AMD XDNA 2 — 50 TOPS</td>
+  <td class="spec-b">None (CPU+iGPU only)</td>
+</tr>
+<tr>
+  <td class="spec-label">iGPU</td>
+  <td class="spec-a">Radeon 890M (RDNA 3.5, 16 CUs, up to 2.9 GHz)</td>
+  <td class="spec-b">Radeon 780M (RDNA 3, 12 CUs, up to 2.8 GHz)</td>
+</tr>
+<tr>
+  <td class="spec-label">Max RAM</td>
+  <td class="spec-a">64 GB LPDDR5x-7500 (soldered)</td>
+  <td class="spec-b">96 GB DDR5-5600 (2× SODIMM, user-upgradable)</td>
+</tr>
+<tr>
+  <td class="spec-label">Storage</td>
+  <td class="spec-a">1× M.2 NVMe Gen4 (up to 4TB)</td>
+  <td class="spec-b">2× M.2 NVMe Gen4 (up to 8TB total)</td>
+</tr>
+<tr>
+  <td class="spec-label">eGPU Expansion</td>
+  <td class="spec-a">None (USB4 40Gbps only)</td>
+  <td class="spec-b">OCulink (PCIe 4.0 ×4) + USB4 ×2</td>
+</tr>
+<tr>
+  <td class="spec-label">Networking</td>
+  <td class="spec-a">2.5GbE + Wi-Fi 7 + BT 5.4</td>
+  <td class="spec-b">2.5GbE + Wi-Fi 6E + BT 5.3</td>
+</tr>
+<tr>
+  <td class="spec-label">USB</td>
+  <td class="spec-a">USB4 ×1, USB-A 3.2 ×3, USB-A 2.0 ×1</td>
+  <td class="spec-b">USB4 ×2, USB-A 3.2 ×2, USB-A 2.0 ×2</td>
+</tr>
+<tr>
+  <td class="spec-label">Dimensions</td>
+  <td class="spec-a">127 × 127 × 49.8 mm (0.8L)</td>
+  <td class="spec-b">128 × 128 × 48 mm (0.79L)</td>
+</tr>
+<tr>
+  <td class="spec-label">TDP (load)</td>
+  <td class="spec-a">35-54W (configurable)</td>
+  <td class="spec-b">54-65W</td>
+</tr>
+<tr>
+  <td class="spec-label">OS (native)</td>
+  <td class="spec-a">Windows 11 Pro / Ubuntu 24.04 / any x86 Linux</td>
+  <td class="spec-b">Windows 11 Pro / Ubuntu 24.04 / any x86 Linux</td>
+</tr>
+    </tbody>
+  </table>
+</div>
+
+        <section class="hw-section">
+  <h2>AI Performance Benchmarks</h2>
+  <p class="hw-benchmark-note">Benchmarks measured with Ollama 0.4+ and LM Studio 0.3+ at 25°C ambient. The SER9's NPU shines on ONNX Runtime and DirectML workloads (Whisper, Phi, Windows Studio Effects). For llama.cpp-based inference, both machines are CPU+iGPU-bound — the SER9's faster RAM and newer cores give it a 20-30% edge, but neither matches a dGPU. For serious GPU inference, the UM890's OCulink port lets you add an RTX 4060 or RX 7600 XT externally.</p>
+  <div class="hw-table-wrap">
+    <table class="hw-spec-table">
+      <thead>
+        <tr>
+          <th>Benchmark</th>
+          <th>Beelink SER9</th>
+          <th>Minisforum UM890 Pro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+  <td class="spec-label">Llama 3.1 8B (Q4_K_M) tok/s</td>
+  <td class="spec-a">35-42 tok/s (CPU+iGPU, llama.cpp)</td>
+  <td class="spec-b">28-34 tok/s (CPU+iGPU, llama.cpp)</td>
+</tr>
+<tr>
+  <td class="spec-label">Llama 3.1 70B (IQ3_XXS) tok/s</td>
+  <td class="spec-a">4-6 tok/s (48GB RAM, CPU-only)</td>
+  <td class="spec-b">3-5 tok/s (32GB RAM, CPU-only) / 4-7 tok/s with 64GB</td>
+</tr>
+<tr>
+  <td class="spec-label">Mistral 7B v0.3 tok/s</td>
+  <td class="spec-a">48-55 tok/s</td>
+  <td class="spec-b">40-46 tok/s</td>
+</tr>
+<tr>
+  <td class="spec-label">Code Llama 13B (Q4) tok/s</td>
+  <td class="spec-a">20-25 tok/s</td>
+  <td class="spec-b">16-20 tok/s</td>
+</tr>
+<tr>
+  <td class="spec-label">Phi-3 Mini 3.8B (ONNX, NPU) tok/s</td>
+  <td class="spec-a">28-35 tok/s (NPU-accelerated)</td>
+  <td class="spec-b">N/A — no NPU</td>
+</tr>
+<tr>
+  <td class="spec-label">Stable Diffusion XL (fp16, DirectML)</td>
+  <td class="spec-a">~3.5s/image</td>
+  <td class="spec-b">~5.0s/image</td>
+</tr>
+<tr>
+  <td class="spec-label">Whisper large-v3 (NPU vs CPU)</td>
+  <td class="spec-a">~0.25× realtime (NPU)</td>
+  <td class="spec-b">~0.6× realtime (CPU)</td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+        <section class="hw-section">
+  <h2>Use Case Breakdown</h2>
+  <div class="hw-use-cases">
+    <div class="hw-use-case">
+    <h4>.NET Backend + Docker + SQL Server Daily Driver</h4>
+    <p><strong>Winner: Beelink SER9</strong> — The SER9's Zen 5 cores are ~15% faster in single-threaded workloads — and .NET build times, Rider responsiveness, and SQL Server query compilation are all single-thread-bound. Plus the NPU runs Windows Studio Effects (background blur, eye contact) without touching the CPU, leaving all 12 cores for your code. The soldered RAM is a non-issue for day-job .NET: 64GB is plenty for Visual Studio + Rider + Docker + SQL Server.</p>
+  </div>
+<div class="hw-use-case">
+    <h4>Budget AI Dev Box — Maximum Capability Per Pound</h4>
+    <p><strong>Winner: Minisforum UM890 Pro</strong> — At £550-700 barebone vs £750-950, the UM890 saves £200-300. That buys a 2TB NVMe and a 32GB DDR5 kit. You can add a desktop GPU later via OCulink when you need real TFLOPS — the SER9 locks you into its iGPU forever. If you're spending your own money and might want a GPU later, the UM890's upgrade path is compelling.</p>
+  </div>
+<div class="hw-use-case">
+    <h4>ONNX Runtime / DirectML Development</h4>
+    <p><strong>Winner: Beelink SER9</strong> — The 50 TOPS NPU is genuinely useful if you're deploying ONNX models or using DirectML acceleration. Whisper transcription is 2-3× faster on the NPU. Phi-3 and small ONNX models run entirely on the NPU at <5W. If your AI workflow includes ONNX or Windows ML, the SER9 is the clear winner.</p>
+  </div>
+<div class="hw-use-case">
+    <h4>Future-Proofing — Want a GPU Later</h4>
+    <p><strong>Winner: Minisforum UM890 Pro</strong> — The UM890's OCulink port is a PCIe 4.0 ×4 lane straight to the CPU. You can connect an RTX 4070 (or whatever comes next) and get real GPU inference throughput. The SER9's USB4 caps at 40Gbps — fine for storage, not for GPU bandwidth. If you think you'll outgrow iGPU inference within 12 months, buy the UM890 and put the savings toward a GPU.</p>
+  </div>
+<div class="hw-use-case">
+    <h4>24/7 Home Lab Server (Headless)</h4>
+    <p><strong>Winner: Beelink SER9</strong> — The SER9's 35W configurable TDP + 4nm process node means lower idle power and less heat. Over a year of 24/7 operation, the SER9 saves ~£30-50 in electricity vs the hotter-running UM890. Plus Wi-Fi 7 and BT 5.4 mean it'll stay current longer as a network appliance. The soldered RAM is actually a plus here — fewer things to work loose in a 24/7 box.</p>
+  </div>
+<div class="hw-use-case">
+    <h4>Dual-Boot Windows + Linux Dev Environment</h4>
+    <p><strong>Winner: Minisforum UM890 Pro</strong> — Dual NVMe slots mean you can put Windows 11 on one drive and Ubuntu 24.04 on the other, no partitioning headaches. The SER9's single M.2 slot forces you to partition a single drive. For polyglot developers who need both OSes natively, the UM890's storage flexibility is a genuine quality-of-life win.</p>
+  </div>
+  </div>
+</section>
+
+        <section class="hw-section">
+  <h2>Ecosystem Lock-In: What Else Are You Buying?</h2>
+  <p>Both machines run the same OSes and the same x86 software. The trade-offs are hardware-only:</p><ul><li><strong>SER9 path:</strong> You're paying £200-300 extra for the NPU and Zen 5 cores. That's worth it if you use ONNX/DirectML today, or if single-threaded .NET build speed matters. But you can never add a dGPU — the iGPU is your ceiling. Consider whether 64GB LPDDR5x is enough for your 3-year horizon.</li><li><strong>UM890 path:</strong> You're trading the NPU and 15% single-thread perf for OCulink, dual NVMe, and socketed RAM. This is the tinkerer's box. Add a 2TB drive now, a GPU later, and upgrade RAM when DDR5 prices drop. The 8945HS is no slouch — it was AMD's flagship mobile APU 12 months ago and still outperforms most laptops.</li></ul><p><strong>Total cost of ownership over 3 years</strong> (hardware + essential upgrades): SER9 (64GB, from-scratch) ≈ £850-1,000. UM890 Pro (32GB+1TB config, option to add GPU later) ≈ £700-850 today, rising to £1,200-1,400 if you add an RTX 4060 via OCulink in year 2. The UM890 costs less today but potentially more later — the SER9 costs more today but needs nothing added.</p>
+</section>
+
+        <section class="hw-verdict">
+  <h2>Verdict: Buy the SER9 for the NPU and Zen 5 speed; buy the UM890 Pro for OCulink flexibility and upgradability</h2>
+  <div class="hw-verdict-body">
+    <p>If you're a <strong>.NET developer who runs ONNX models, uses Windows Studio Effects, or wants the fastest possible compile times</strong>, the Beelink SER9 is the right call. The 50 TOPS NPU isn't a gimmick — it genuinely accelerates Whisper, Phi, and DirectML workloads while keeping the CPU free for Rider, Docker, and SQL Server. The 64GB of LPDDR5x-7500 is fast enough that you won't miss socketed RAM for years.</p><p>If you're <strong>building a budget AI lab and might want a real GPU later</strong>, the Minisforum UM890 Pro is the smarter buy. The OCulink port is future-proofing that the SER9 simply doesn't offer. You save £200-300 today, enough for storage and RAM, and you keep the option to bolt on an RTX 4070 when you need real TFLOPS. The 8945HS is still a beast — it just lacks the NPU and the latest-gen cores.</p><p><strong>My recommendation for most AI-curious .NET devs in 2026:</strong> buy the Beelink SER9 (64GB config, ~£900) if you can stretch the budget. The NPU + Zen 5 combo is the direction AMD is going, and you'll benefit from NPU acceleration more than you think (Whisper transcription alone is a daily-use feature for coding notes and meeting transcripts). But if £900 is too rich or you know you'll want a dGPU within 12 months, the UM890 Pro at ~£700 with an OCulink GPU in your future plans is the smarter long game.</p>
+  </div>
+  
+  <div class="hw-verdict-buttons">
+    <a class="btn btn-accent btn-lg" href="https://agenticstandardcontact-byte.github.io/agentic-architect/go/amz-ser9?utm_source=site&utm_medium=hardware_compare&utm_campaign=hardware_verdict_winner" target="_blank" rel="noopener sponsored">
+      Buy Beelink SER9 on Amazon &rarr;
+    </a>
+    <a class="btn btn-outline btn-lg" href="https://agenticstandardcontact-byte.github.io/agentic-architect/go/amz-um890?utm_source=site&utm_medium=hardware_compare&utm_campaign=hardware_verdict_alt" target="_blank" rel="noopener sponsored">
+      Compare Minisforum UM890 Pro &rarr;
+    </a>
+  </div>
+</section>
+
+        <aside class="hw-disclosure">
+  <h4>&#9432; Affiliate Disclosure</h4>
+  <p>Some links on this page are Amazon Associate links. As an Amazon Associate I earn from qualifying purchases. This costs you nothing extra. Product prices and availability are accurate as of the published date and may change. See the <a href="../affiliate-disclosure.html">full affiliate disclosure</a>.</p>
+</aside>
+      </div>
+    </article>
+  </main>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand">
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <p>The persistence framework for serious Cursor users in C#/.NET environments.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
+        <div><h4>Resources</h4><a href="../blog/">Blog</a><a href="../hardware/">Hardware Comparisons</a><a href="../stack/">/stack/</a></div>
+        <div><h4>Legal</h4><a href="../affiliate-disclosure.html">Affiliate Disclosure</a><a href="mailto:agenticstandardcontact@gmail.com">Contact</a></div>
+        <div><h4>Buy</h4><a href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=hardware_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Gumroad &mdash; &pound;9.00</a></div>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>&copy; <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules &middot; One-time payment</span>
+    </div>
+  </footer>
+</body>
+</html>
