@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f17" />
+
+  <title>Stack — Agentic Architect</title>
+  <meta name="description" content="The tools, hardware, and services we personally use to build AI-powered .NET applications — with cash-only affiliate links where applicable." />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Stack — Tools we use at Agentic Architect" />
+  <meta property="og:description" content="Every SaaS tool, hardware item, and service in the Agentic Architect development stack. Affiliate links only where we actually use the product." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/stack.html" />
+  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stack — Tools we use at Agentic Architect" />
+  <meta name="twitter:description" content="Every SaaS tool, hardware item, and service in the Agentic Architect development stack. Affiliate links only where we actually use the product." />
+  <meta name="twitter:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .stack-page { max-width: var(--maxw); margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+
+    .stack-header { text-align: center; margin-bottom: 3.5rem; }
+    .stack-header h1 { font-size: 2.75rem; font-weight: 800; margin: 0 0 0.75rem; color: #e6eaf2; letter-spacing: -0.02em; }
+    .stack-header .subtitle { font-size: 1.1rem; color: var(--text-dim); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+    .back-link:hover { text-decoration: underline; }
+
+    /* Category sections */
+    .stack-category { margin-bottom: 3.5rem; }
+    .stack-category__title { font-size: 1.35rem; font-weight: 700; color: var(--brand); margin: 0 0 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 0.5rem; }
+    .stack-category__title .icon { font-size: 1.4rem; }
+
+    /* Product card grid */
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.25rem; }
+    .stack-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .stack-card:hover { border-color: var(--line-strong); box-shadow: var(--shadow-1); }
+    .stack-card__name { font-size: 1.1rem; font-weight: 700; color: #e6eaf2; margin: 0 0 0.35rem; }
+    .stack-card__role { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin: 0 0 0.75rem; }
+    .stack-card__desc { font-size: 0.9rem; color: var(--text-dim); line-height: 1.55; margin: 0 0 1rem; }
+    .stack-card__link {
+      display: inline-block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--brand);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .stack-card__link:hover { border-bottom-color: var(--brand); }
+    .stack-card__badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .badge-affiliate { background: rgba(255, 181, 71, 0.12); color: var(--brand); }
+    .badge-free { background: rgba(74, 222, 128, 0.12); color: var(--good); }
+    .badge-perk { background: rgba(110, 231, 255, 0.12); color: var(--accent); }
+
+    /* Email capture */
+    .stack-signup {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      margin: 3rem 0 2rem;
+    }
+    .stack-signup__eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.5rem; }
+    .stack-signup__headline { font-size: 1.2rem; font-weight: 700; color: #e6eaf2; margin: 0 0 0.4rem; }
+    .stack-signup__sub { font-size: 0.9rem; color: var(--text-dim); margin: 0 0 1.5rem; line-height: 1.5; }
+    .stack-signup .ml-capture { background: transparent; border: none; padding: 0; margin: 0; }
+    .stack-signup .ml-capture .ml-form-embedContainer .ml-form-embedWrapper { background: transparent !important; border: none !important; box-shadow: none !important; }
+    .stack-signup .ml-capture .ml-form-embedContainer .ml-form-fieldRow input {
+      background: var(--bg) !important; border: 1px solid var(--line-strong) !important; border-radius: 6px !important;
+      color: #e6eaf2 !important; font-size: 0.9rem !important; padding: 0.65rem 0.75rem !important;
+    }
+    .stack-signup .ml-capture .ml-form-embedContainer button[type="submit"] {
+      background: var(--accent) !important; color: var(--bg) !important; font-weight: 700 !important;
+      border: none !important; border-radius: 6px !important; padding: 0.65rem 1.5rem !important; cursor: pointer !important; font-size: 0.9rem !important;
+    }
+    .stack-signup .ml-capture .ml-form-embedContainer button[type="submit"]:hover { background: #9ef0ff !important; }
+    .stack-signup__disclaimer { font-size: 0.72rem; color: var(--text-muted); margin: 0.75rem 0 0; }
+    .stack-signup__disclaimer a { color: var(--text-muted); }
+
+    .stack-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--line); color: var(--text-muted); font-size: 0.85rem; line-height: 1.7; }
+    .stack-footer a { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .stack-page { padding: 2rem 1rem 4rem; }
+      .stack-header h1 { font-size: 2rem; }
+      .stack-grid { grid-template-columns: 1fr; }
+      .stack-signup { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stack-page">
+    <a href="/agentic-architect/" class="back-link">&larr; Agentic Architect</a>
+
+    <header class="stack-header">
+      <h1>The Stack</h1>
+      <p class="subtitle">
+        Every tool, service, and piece of hardware we use to build AI-powered .NET applications.
+        Affiliate links are marked — we only recommend products we actually use and pay for ourselves.
+      </p>
+    </header>
+
+    <!-- ── AI Coding ─────────────────────────────────────────── -->
+    <section class="stack-category">
+      <h2 class="stack-category__title"><span class="icon">🤖</span> AI Coding Tools</h2>
+      <div class="stack-grid">
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">Cursor</h3>
+          <p class="stack-card__role">AI Code Editor</p>
+          <p class="stack-card__desc">
+            The AI-first code editor we use daily for .NET development. Composer agent mode with custom .mdc rules provides the architectural guardrails that make up the Agentic Architect framework.
+          </p>
+          <a href="https://cursor.com/" class="stack-card__link" target="_blank" rel="noopener">cursor.com</a>
+        </div>
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">Claude (Anthropic)</h3>
+          <p class="stack-card__role">LLM Backend</p>
+          <p class="stack-card__desc">
+            Claude 3.5 Sonnet and Claude Opus 4 power the reasoning behind Cursor's agent mode. We find Claude's .NET code generation significantly more accurate than alternatives for enterprise patterns.
+          </p>
+          <a href="https://claude.ai/" class="stack-card__link" target="_blank" rel="noopener">claude.ai</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── .NET Development ──────────────────────────────────── -->
+    <section class="stack-category">
+      <h2 class="stack-category__title"><span class="icon">💻</span> .NET Development</h2>
+      <div class="stack-grid">
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">JetBrains Rider</h3>
+          <p class="stack-card__role">.NET IDE</p>
+          <p class="stack-card__desc">
+            Our primary .NET IDE for solution-wide refactoring, debugging, and test running. We pair it with Cursor — Rider for heavy .NET lifting, Cursor for AI-assisted feature work.
+          </p>
+          <span class="stack-card__badge badge-affiliate">affiliate pending</span>
+          <a href="https://www.jetbrains.com/rider/" class="stack-card__link" target="_blank" rel="noopener">jetbrains.com/rider</a>
+        </div>
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">.NET 9 SDK</h3>
+          <p class="stack-card__role">Runtime & Framework</p>
+          <p class="stack-card__desc">
+            The latest LTS .NET release powers all our projects. We target `net9.0` across all libraries and applications, using native AOT where it makes sense.
+          </p>
+          <span class="stack-card__badge badge-free">free</span>
+          <a href="https://dotnet.microsoft.com/" class="stack-card__link" target="_blank" rel="noopener">dotnet.microsoft.com</a>
+        </div>
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">Entity Framework Core 9</h3>
+          <p class="stack-card__role">ORM / Data Access</p>
+          <p class="stack-card__desc">
+            Our persistence layer of choice. The Agentic Architect kit includes dedicated .mdc rules for EF Core query patterns, `AsNoTracking()` discipline, and `DbContext` lifetime management.
+          </p>
+          <span class="stack-card__badge badge-free">free / OSS</span>
+          <a href="https://learn.microsoft.com/en-us/ef/core/" class="stack-card__link" target="_blank" rel="noopener">docs.microsoft.com/ef-core</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Infrastructure & Hosting ──────────────────────────── -->
+    <section class="stack-category">
+      <h2 class="stack-category__title"><span class="icon">☁️</span> Infrastructure & Hosting</h2>
+      <div class="stack-grid">
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">GitHub Pages</h3>
+          <p class="stack-card__role">Static Hosting</p>
+          <p class="stack-card__desc">
+            This entire site — blog, stack page, landing pages — is served from GitHub Pages. Free, fast, and deploys on every `git push` via GitHub Actions.
+          </p>
+          <span class="stack-card__badge badge-free">free</span>
+          <a href="https://pages.github.com/" class="stack-card__link" target="_blank" rel="noopener">pages.github.com</a>
+        </div>
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">GitHub Actions</h3>
+          <p class="stack-card__role">CI/CD</p>
+          <p class="stack-card__desc">
+            All builds, deployments, and scheduled broadcasts run on GitHub Actions. The `mailerlite-broadcast.yml` workflow sends newsletter campaigns automatically on every post push.
+          </p>
+          <span class="stack-card__badge badge-free">free</span>
+          <a href="https://github.com/features/actions" class="stack-card__link" target="_blank" rel="noopener">github.com/features/actions</a>
+        </div>
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">Cloudflare Tunnel</h3>
+          <p class="stack-card__role">Click Tracker Hosting</p>
+          <p class="stack-card__desc">
+            Our self-owned `/go/` click tracker runs on a local mini PC exposed via Cloudflare Tunnel. Zero hosting cost, full analytics ownership, no third-party tracking.
+          </p>
+          <span class="stack-card__badge badge-free">free</span>
+          <a href="https://www.cloudflare.com/products/tunnel/" class="stack-card__link" target="_blank" rel="noopener">cloudflare.com/tunnel</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Email & Marketing ─────────────────────────────────── -->
+    <section class="stack-category">
+      <h2 class="stack-category__title"><span class="icon">📬</span> Email & Marketing</h2>
+      <div class="stack-grid">
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">MailerLite</h3>
+          <p class="stack-card__role">Email Platform</p>
+          <p class="stack-card__desc">
+            We chose MailerLite because it's genuinely free-forever (up to 1,000 subscribers) with full automation — no 14-day trial trap. Powers the Agentic Architect newsletter, welcome sequence, and broadcast campaigns.
+          </p>
+          <span class="stack-card__badge badge-affiliate">affiliate</span>
+          <a href="/go/mailerlite" class="stack-card__link">Try MailerLite free</a>
+        </div>
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">Gumroad</h3>
+          <p class="stack-card__role">Payment & Delivery</p>
+          <p class="stack-card__desc">
+            The Agentic Architect Kit is sold through Gumroad. They handle VAT, payment processing, and digital delivery — no Stripe setup or company website required. Pays weekly to bank.
+          </p>
+          <a href="https://gumroad.com/" class="stack-card__link" target="_blank" rel="noopener">gumroad.com</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Hardware ──────────────────────────────────────────── -->
+    <section class="stack-category">
+      <h2 class="stack-category__title"><span class="icon">🖥️</span> Hardware & Gear</h2>
+      <div class="stack-grid">
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">Amazon Dev Gear</h3>
+          <p class="stack-card__role">Books, Hardware & Accessories</p>
+          <p class="stack-card__desc">
+            Our curated list of .NET development books, mechanical keyboards, monitors, and desk accessories — the actual hardware we use daily. Updated as we test new gear.
+          </p>
+          <span class="stack-card__badge badge-affiliate">affiliate</span>
+          <a href="https://amzn.to/4u9zsxk" class="stack-card__link" target="_blank" rel="noopener sponsored">View our gear picks</a>
+        </div>
+
+        <div class="stack-card">
+          <h3 class="stack-card__name">Mini PC (Home Server)</h3>
+          <p class="stack-card__role">Click Tracker Host</p>
+          <p class="stack-card__desc">
+            A low-power mini PC running 24/7 at home hosts the click tracker and MCP server. Cost: ~£5/month electricity. Alternative to cloud VPS for always-on lightweight services.
+          </p>
+          <a href="/blog/stack.html" class="stack-card__link">Read the setup guide</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Email Capture ─────────────────────────────────────── -->
+    <section class="stack-signup" aria-label="Free starter kit signup">
+      <!-- MailerLite Universal JS -->
+      <script>
+        (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+        .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+        n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,
+        document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+        ml('account', '2387970');
+      </script>
+
+      <p class="stack-signup__eyebrow">Free download</p>
+      <h3 class="stack-signup__headline">Get the Agentic Architect Starter Kit — free</h3>
+      <p class="stack-signup__sub">
+        3 Cursor rules that stop the most common .NET regressions. Installs in 3 minutes.
+        Join the newsletter for updates when we add new tools to the stack.
+      </p>
+
+      <div class="ml-capture">
+        <div class="ml-embedded" data-form="w50Wv4"></div>
+      </div>
+
+      <p class="stack-signup__disclaimer">
+        Free. No spam. Unsubscribe any time. By subscribing you agree to the
+        <a href="/agentic-architect/affiliate-disclosure.html">privacy & disclosure policy</a>.
+      </p>
+    </section>
+
+    <!-- ── Footer ────────────────────────────────────────────── -->
+    <div class="stack-footer">
+      <p>
+        <strong>Disclosure:</strong> Links marked <span class="stack-card__badge badge-affiliate" style="font-size:0.7rem;">affiliate</span> may earn us a commission at no cost to you.
+        We only link to products we've paid for and use ourselves. See the full
+        <a href="/agentic-architect/affiliate-disclosure.html">affiliate disclosure</a> for details.
+      </p>
+      <p>Last updated: May 2026 &mdash; <a href="/agentic-architect/">Agentic Architect</a></p>
+    </div>
+  </div>
+</body>
+</html>
