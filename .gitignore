@@ -61,6 +61,9 @@ desktop.ini
 # Local backups
 *.bak
 
+# History rewrite tool (local only, never pushed)
+.mailmap
+
 # Marketing ops: skills, agents, strategy, command cheatsheets (never public)
 .local/
 .cursor/skills/
