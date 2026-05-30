@@ -695,6 +695,53 @@ p  { margin: 0 0 1em; color: var(--text-dim); }
   color: #8df2ff !important;
 }
 
+/* MailerLite GDPR / permissions block — override dark defaults for dark theme */
+.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissions {
+  background: transparent !important;
+  border-top: 1px solid var(--line) !important;
+  margin-top: 14px !important;
+  padding-top: 12px !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsContent h4 {
+  color: var(--text) !important;
+  font-family: var(--font) !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 4px !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsContent p {
+  color: var(--text-dim) !important;
+  font-family: var(--font) !important;
+  font-size: 0.74rem !important;
+  line-height: 1.4 !important;
+  margin: 0 0 8px !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox label {
+  color: var(--text) !important;
+  font-family: var(--font) !important;
+  font-size: 0.8rem !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox .label-description {
+  color: var(--text) !important;
+  font-family: var(--font) !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox .description {
+  color: var(--text-muted) !important;
+  font-family: var(--font) !important;
+  font-size: 0.72rem !important;
+  line-height: 1.4 !important;
+  margin: 0 0 6px !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox input[type="checkbox"] {
+  accent-color: var(--accent) !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedMailerLite-GDPR p {
+  color: var(--text-muted) !important;
+  font-family: var(--font) !important;
+  font-size: 0.7rem !important;
+  line-height: 1.4 !important;
+}
+
 /* Success message styling */
 .ml-capture-box .ml-form-embedContainer .ml-form-embedSuccess {
   color: var(--text) !important;
