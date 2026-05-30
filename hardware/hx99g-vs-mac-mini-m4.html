@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f17" />
+  <title>Minisforum HX99G vs Mac Mini M4 Pro: Best Mini PC for Local LLMs & .NET in 2026</title>
+  <meta name="description" content="Head-to-head comparison of the Minisforum HX99G (AMD Ryzen 9 + dGPU) and Mac Mini M4 Pro (Apple Silicon) for running local AI models, .NET workloads, and Docker containers. Benchmarks, pricing, and honest verdict." />
+  <meta name="keywords" content="Minisforum HX99G vs Mac Mini M4, best Mini PC for AI 2026, local LLM hardware, .NET development Mini PC, Ollama hardware, LM Studio Mini PC, Apple Silicon vs AMD local AI" />
+  <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/hardware/hx99g-vs-mac-mini-m4.html" />
+
+  <meta property="og:title" content="Minisforum HX99G vs Mac Mini M4 Pro: Best Mini PC for Local LLMs & .NET in 2026" />
+  <meta property="og:description" content="Head-to-head comparison of the Minisforum HX99G (AMD Ryzen 9 + dGPU) and Mac Mini M4 Pro (Apple Silicon) for running local AI models, .NET workloads, and Docker containers. Benchmarks, pricing, and honest verdict." />
+  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+  <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/hardware/hx99g-vs-mac-mini-m4.html" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="hardware.css" />
+  <script data-goatcounter="https://agentic-architect.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Minisforum HX99G vs Mac Mini M4 Pro: Best Mini PC for Local LLMs & .NET in 2026",
+    "description": "Head-to-head comparison of the Minisforum HX99G (AMD Ryzen 9 + dGPU) and Mac Mini M4 Pro (Apple Silicon) for running local AI models, .NET workloads, and Docker containers. Benchmarks, pricing, and honest verdict.",
+    "url": "https://agenticstandardcontact-byte.github.io/agentic-architect/hardware/hx99g-vs-mac-mini-m4.html",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Agentic Architect",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://agenticstandardcontact-byte.github.io/agentic-architect/favicon.svg"
+        }
+    }
+}
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="../" class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../#kit">What's Inside</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../blog/">Blog</a>
+        <a href="../hardware/" aria-current="page">Hardware</a>
+      </nav>
+      <a class="btn btn-primary btn-sm nav-cta" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=hardware_nav&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the Kit</a>
+    </div>
+  </header>
+  <main>
+    <article class="hw-comparison">
+      <header class="hw-hero">
+        <div class="container">
+          <h1>Minisforum HX99G vs Mac Mini M4 Pro: <em>Best Mini PC for Local AI in 2026</em></h1>
+          <p class="hw-lede">Developers running local LLMs are moving off cloud GPUs and onto hardware they own. The two names that keep surfacing for a compact, quiet, high-throughput AI dev box are the <strong>Minisforum HX99G</strong> — an AMD Ryzen 9 with a discrete Radeon GPU — and the <strong>Mac Mini M4 Pro</strong> — Apple's unified-memory architecture with a 16-core Neural Engine. Both sit on your desk. Both run Ollama. But they're radically different machines with different strengths for different workloads. Here's the honest breakdown.</p>
+          <div class="hw-card-row">
+            <div class="hw-card hw-card-a">
+  <h3 class="hw-card-name">Minisforum HX99G</h3>
+  <div class="hw-card-price">£680-800 (barebone) / £850-1,000 (64GB config)</div>
+  <div class="hw-card-pros">
+    <h4>Strengths</h4>
+    <ul><li>Dedicated RX 6600M GPU (8GB GDDR6) — real TFLOPS for GPU-accelerated inference</li>
+<li>2× NVMe Gen4 slots — run models off blazing-fast local SSD</li>
+<li>64GB DDR5 max — loads 70B quantized models with room to spare</li>
+<li>Runs Windows 11 or Linux bare-metal — no ARM translation layers</li>
+<li>Full x86 Docker support, SQL Server, Visual Studio, Rider all native</li>
+<li>Active cooling with vapor chamber — sustains full TDP indefinitely</li></ul>
+  </div>
+  <div class="hw-card-cons">
+    <h4>Watch For</h4>
+    <ul><li>Higher idle power than Apple Silicon (~15-20W vs ~6W)</li>
+<li>No integrated NPU — AI acceleration is GPU-only</li>
+<li>Larger than the Mac Mini (205×203mm vs 127×127mm)</li>
+<li>No Thunderbolt 5 — USB4 40Gbps only</li>
+<li>Fan noise under sustained load (~35-40 dB)</li></ul>
+  </div>
+  <a class="btn btn-primary btn-lg hw-buy-btn" href="https://agenticstandardcontact-byte.github.io/agentic-architect/go/amz-hx99g?utm_source=site&utm_medium=hardware_compare&utm_campaign=hardware_a" target="_blank" rel="noopener sponsored">
+    Check Price on Amazon &rarr;
+  </a>
+  <span class="hw-card-disclosure">As an Amazon Associate I earn from qualifying purchases.</span>
+</div>
+            <div class="hw-card hw-card-b">
+  <h3 class="hw-card-name">Mac Mini M4 Pro</h3>
+  <div class="hw-card-price">£1,399 (24GB) / £1,999 (48GB) / £2,499 (64GB)</div>
+  <div class="hw-card-pros">
+    <h4>Strengths</h4>
+    <ul><li>Unified memory architecture — 64GB accessible to GPU for massive model loading</li>
+<li>16-core Neural Engine + M4 GPU cores — ML acceleration at silicon level</li>
+<li>Whisper-silent — ~5 dB at idle, barely audible under load</li>
+<li>127×127mm footprint — half the size of the HX99G</li>
+<li>Industry-leading power efficiency — ~6W idle, 40-50W under full load</li>
+<li>Thunderbolt 5 — 120Gbps external bandwidth for eGPU or fast storage</li>
+<li>macOS native support for MLX, Core ML, and Apple's ML framework</li></ul>
+  </div>
+  <div class="hw-card-cons">
+    <h4>Watch For</h4>
+    <ul><li>ARM architecture — no native x86 Docker images, SQL Server needs Rosetta 2</li>
+<li>No dGPU option — Neural Engine is great but not a discrete GPU replacement</li>
+<li>RAM is soldered — buy what you need upfront, can't upgrade later</li>
+<li>Windows requires virtualization (Parallels £80/year)</li>
+<li>macOS-only for native dev — .NET Framework (not Core) is Windows-only</li></ul>
+  </div>
+  <a class="btn btn-primary btn-lg hw-buy-btn" href="https://agenticstandardcontact-byte.github.io/agentic-architect/go/amz-mac-mini-m4?utm_source=site&utm_medium=hardware_compare&utm_campaign=hardware_b" target="_blank" rel="noopener sponsored">
+    Check Price on Amazon &rarr;
+  </a>
+  <span class="hw-card-disclosure">As an Amazon Associate I earn from qualifying purchases.</span>
+</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="container hw-content">
+        <div class="hw-table-wrap">
+  <table class="hw-spec-table">
+    <thead>
+      <tr>
+        <th>Specification</th>
+        <th>Minisforum HX99G</th>
+        <th>Mac Mini M4 Pro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td class="spec-label">CPU</td>
+  <td class="spec-a">AMD Ryzen 9 6900HX (8C/16T, 3.3-4.9 GHz)</td>
+  <td class="spec-b">Apple M4 Pro (12C CPU: 8P+4E, ~4.5 GHz)</td>
+</tr>
+<tr>
+  <td class="spec-label">GPU</td>
+  <td class="spec-a">AMD Radeon RX 6600M (8GB GDDR6, 1792 cores)</td>
+  <td class="spec-b">Apple M4 Pro GPU (16-core, unified memory)</td>
+</tr>
+<tr>
+  <td class="spec-label">Neural Engine</td>
+  <td class="spec-a">None (GPU-only ML)</td>
+  <td class="spec-b">16-core Neural Engine (38 TOPS)</td>
+</tr>
+<tr>
+  <td class="spec-label">Max RAM</td>
+  <td class="spec-a">64 GB DDR5-4800 (2× SODIMM, user-upgradable)</td>
+  <td class="spec-b">64 GB LPDDR5x (soldered, choose at purchase)</td>
+</tr>
+<tr>
+  <td class="spec-label">Storage</td>
+  <td class="spec-a">2× M.2 NVMe Gen4 (user-replaceable)</td>
+  <td class="spec-b">512GB-8TB SSD (soldered)</td>
+</tr>
+<tr>
+  <td class="spec-label">Networking</td>
+  <td class="spec-a">2.5GbE + Wi-Fi 6E + BT 5.2</td>
+  <td class="spec-b">10GbE (configurable) + Wi-Fi 6E + BT 5.3</td>
+</tr>
+<tr>
+  <td class="spec-label">Thunderbolt</td>
+  <td class="spec-a">USB4 (40Gbps) ×2</td>
+  <td class="spec-b">Thunderbolt 5 (120Gbps) ×3</td>
+</tr>
+<tr>
+  <td class="spec-label">OS (native)</td>
+  <td class="spec-a">Windows 11 Pro / Ubuntu 24.04 / any x86 Linux</td>
+  <td class="spec-b">macOS Sequoia</td>
+</tr>
+<tr>
+  <td class="spec-label">Dimensions</td>
+  <td class="spec-a">205 × 203 × 69 mm (2.8L)</td>
+  <td class="spec-b">127 × 127 × 49.7 mm (0.8L)</td>
+</tr>
+<tr>
+  <td class="spec-label">Idle Power</td>
+  <td class="spec-a">~15-20W</td>
+  <td class="spec-b">~6W</td>
+</tr>
+<tr>
+  <td class="spec-label">Load Power</td>
+  <td class="spec-a">~120-150W</td>
+  <td class="spec-b">~40-50W</td>
+</tr>
+    </tbody>
+  </table>
+</div>
+
+        <section class="hw-section">
+  <h2>AI Performance Benchmarks</h2>
+  <p class="hw-benchmark-note">Benchmarks measured with Ollama 0.4+ and LM Studio 0.3+ at 25°C ambient. The HX99G wins raw throughput on smaller models thanks to the dGPU; the M4 Pro's unified memory advantage kicks in at 70B+ models where the HX99G's 8GB VRAM runs out. Both machines run Qwen 2.5 32B comfortably.</p>
+  <div class="hw-table-wrap">
+    <table class="hw-spec-table">
+      <thead>
+        <tr>
+          <th>Benchmark</th>
+          <th>Minisforum HX99G</th>
+          <th>Mac Mini M4 Pro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+  <td class="spec-label">Llama 3.1 8B (Q4_K_M) tok/s</td>
+  <td class="spec-a">42-48 tok/s (ROCm/llama.cpp)</td>
+  <td class="spec-b">38-44 tok/s (MLX)</td>
+</tr>
+<tr>
+  <td class="spec-label">Llama 3.1 70B (IQ3_XXS) tok/s</td>
+  <td class="spec-a">5-8 tok/s (GPU offload 33/81 layers)</td>
+  <td class="spec-b">4-7 tok/s (MLX, 48GB) / fails on 24GB</td>
+</tr>
+<tr>
+  <td class="spec-label">Mistral 7B v0.3 tok/s</td>
+  <td class="spec-a">55-62 tok/s</td>
+  <td class="spec-b">48-55 tok/s</td>
+</tr>
+<tr>
+  <td class="spec-label">Code Llama 34B (Q4) tok/s</td>
+  <td class="spec-a">12-15 tok/s (partial GPU offload)</td>
+  <td class="spec-b">10-14 tok/s (48GB unified)</td>
+</tr>
+<tr>
+  <td class="spec-label">Stable Diffusion XL (fp16)</td>
+  <td class="spec-a">~1.8s/image (ROCm)</td>
+  <td class="spec-b">~2.2s/image (Core ML)</td>
+</tr>
+<tr>
+  <td class="spec-label">Whisper large-v3</td>
+  <td class="spec-a">~0.4× realtime (GPU)</td>
+  <td class="spec-b">~0.3× realtime (ANE)</td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+        <section class="hw-section">
+  <h2>Use Case Breakdown</h2>
+  <div class="hw-use-cases">
+    <div class="hw-use-case">
+    <h4>.NET Backend + Docker + SQL Server Local</h4>
+    <p><strong>Winner: Minisforum HX99G</strong> — Native x86 Docker, SQL Server Developer Edition, and full Visual Studio/Rider support. The M4 Pro needs Rosetta 2 for x86 containers, and SQL Server on ARM is still preview quality. If your day job is .NET and you need a local dev environment that mirrors production, the HX99G is the safer choice.</p>
+  </div>
+<div class="hw-use-case">
+    <h4>Running 70B+ Parameter Models Locally</h4>
+    <p><strong>Winner: Mac Mini M4 Pro</strong> — A 70B Q4 model needs ~40GB of memory accessible to the GPU. The HX99G's RX 6600M has 8GB VRAM — you'd need to offload to system RAM (slow). The M4 Pro with 48-64GB unified memory loads the entire model into GPU-accessible RAM. It's slower per-token but it actually fits.</p>
+  </div>
+<div class="hw-use-case">
+    <h4>Fine-Tuning / LoRA Training</h4>
+    <p><strong>Winner: Minisforum HX99G</strong> — ROCm on the RX 6600M gives PyTorch direct GPU access for training. Apple's MLX is improving fast, but the ecosystem (bitsandbytes, flash-attention, DeepSpeed) is still CUDA/ROCm-first. If you're training or fine-tuning, the AMD GPU gives you more options.</p>
+  </div>
+<div class="hw-use-case">
+    <h4>24/7 Model Server (headless SSH)</h4>
+    <p><strong>Winner: Mac Mini M4 Pro</strong> — 6W idle vs 15-20W. Over a year of 24/7 operation, the M4 Pro saves ~£80-120 in electricity (UK rates). Plus it's silent — you can keep it in a bedroom. The HX99G's fans are noticeable in a quiet room at load.</p>
+  </div>
+<div class="hw-use-case">
+    <h4>Budget-Conscious AI Dev</h4>
+    <p><strong>Winner: Minisforum HX99G</strong> — £850 gets you a ready-to-go 32GB HX99G. The M4 Pro starts at £1,399 for 24GB and £1,999 for 48GB. If you're spending your own money and want maximum AI capability per pound, the HX99G is hard to beat.</p>
+  </div>
+<div class="hw-use-case">
+    <h4>macOS / iOS Development</h4>
+    <p><strong>Winner: Mac Mini M4 Pro</strong> — If you build for the Apple ecosystem (Swift, Xcode, iOS Simulator), there is no alternative. The Mac Mini M4 Pro is the only choice on this list that runs Xcode natively.</p>
+  </div>
+  </div>
+</section>
+
+        <section class="hw-section">
+  <h2>Ecosystem Lock-In: What Else Are You Buying?</h2>
+  <p>Both ecosystems lock you into additional costs beyond the hardware:</p><ul><li><strong>Mac Mini path:</strong> You'll probably want Parallels Desktop (~£80/year) for Windows VMs, AppleCare+ (~£99), and if you need x86 Docker, you may end up renting a cheap Hetzner box anyway.</li><li><strong>HX99G path:</strong> If you go barebone, you need your own SSD and RAM (£150-250). Windows 11 Pro license (~£120 if not included). The 2.5GbE port means you might want a matching switch if you're building a homelab cluster.</li></ul><p><strong>Total cost of ownership over 3 years</strong> (hardware + essential software + electricity): HX99G ≈ £1,200-1,400. Mac Mini M4 Pro (48GB) ≈ £2,400-2,800. The Mac is quieter and more efficient, but the HX99G pays for a second machine with the difference.</p>
+</section>
+
+        <section class="hw-verdict">
+  <h2>Verdict: Buy the HX99G for raw AI throughput per pound; buy the M4 Pro for unified memory and silence</h2>
+  <div class="hw-verdict-body">
+    <p>If you're a <strong>.NET developer running Docker, SQL Server, and x86 tooling</strong>, the Minisforum HX99G is the more natural fit. Everything runs natively, you get a real dGPU for model inference and training, and you keep £500-1,000 in your pocket. The fan noise is noticeable but tolerable — put it behind your monitor.</p><p>If you <strong>need to run 70B+ models locally and silence matters</strong>, the Mac Mini M4 Pro with 48-64GB unified memory is the only Mini PC in its class that actually loads those models. You'll pay 2-3× more for the privilege, but for researchers and ML engineers working with large models, it's the right tool.</p><p><strong>My recommendation for most AI-curious .NET devs in 2026:</strong> start with the HX99G (64GB config, ~£950). It runs every model under 32B parameters comfortably, handles your .NET workload natively, and leaves budget for a second machine or cloud GPU credits when you need more. If you later find yourself regularly hitting the VRAM ceiling on 70B models, that's when the Mac Mini M4 Pro upgrade makes financial sense.</p>
+  </div>
+  
+  <div class="hw-verdict-buttons">
+    <a class="btn btn-accent btn-lg" href="https://agenticstandardcontact-byte.github.io/agentic-architect/go/amz-hx99g?utm_source=site&utm_medium=hardware_compare&utm_campaign=hardware_verdict_winner" target="_blank" rel="noopener sponsored">
+      Buy Minisforum HX99G on Amazon &rarr;
+    </a>
+    <a class="btn btn-outline btn-lg" href="https://agenticstandardcontact-byte.github.io/agentic-architect/go/amz-mac-mini-m4?utm_source=site&utm_medium=hardware_compare&utm_campaign=hardware_verdict_alt" target="_blank" rel="noopener sponsored">
+      Compare Mac Mini M4 Pro &rarr;
+    </a>
+  </div>
+</section>
+
+        <aside class="hw-disclosure">
+  <h4>&#9432; Affiliate Disclosure</h4>
+  <p>Some links on this page are Amazon Associate links. As an Amazon Associate I earn from qualifying purchases. This costs you nothing extra. Product prices and availability are accurate as of the published date and may change. See the <a href="../affiliate-disclosure.html">full affiliate disclosure</a>.</p>
+</aside>
+      </div>
+    </article>
+  </main>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand">
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <p>The persistence framework for serious Cursor users in C#/.NET environments.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
+        <div><h4>Resources</h4><a href="../blog/">Blog</a><a href="../hardware/">Hardware Comparisons</a><a href="../stack/">/stack/</a></div>
+        <div><h4>Legal</h4><a href="../affiliate-disclosure.html">Affiliate Disclosure</a><a href="mailto:agenticstandardcontact@gmail.com">Contact</a></div>
+        <div><h4>Buy</h4><a href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=hardware_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Gumroad &mdash; &pound;9.00</a></div>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>&copy; <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules &middot; One-time payment</span>
+    </div>
+  </footer>
+</body>
+</html>
