@@ -192,6 +192,20 @@ p  { margin: 0 0 1em; color: var(--text-dim); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 38px rgba(255, 138, 61, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35); }
 .btn-primary:active { transform: translateY(0); }
 
+.btn-accent {
+  background: linear-gradient(180deg, #8df2ff 0%, var(--accent) 45%, #3db8d6 100%);
+  color: #061014;
+  box-shadow: 0 12px 28px rgba(110, 231, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  flex-direction: column;
+}
+.btn-accent .btn-sub,
+.btn-accent-stack .btn-sub {
+  display: block; font-weight: 500; font-size: 0.78rem; opacity: .7; margin-top: 4px;
+}
+.btn-accent-stack { flex-direction: column; }
+.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 18px 38px rgba(110, 231, 255, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35); }
+.btn-accent:active { transform: translateY(0); }
+
 .btn-ghost {
   background: rgba(255, 255, 255, 0.04);
   border-color: var(--line-strong);
