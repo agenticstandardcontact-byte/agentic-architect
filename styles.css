@@ -637,6 +637,73 @@ p  { margin: 0 0 1em; color: var(--text-dim); }
 .ml-capture-box .ml-capture-benefits li::before {
   content: '✓ '; color: var(--accent); font-weight: 700;
 }
+/* Style MailerLite-injected heading/paragraph/list content (no inline styles allowed by ML) */
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent h2,
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent h3,
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent h4 {
+  color: var(--text) !important;
+  font-family: var(--font) !important;
+  font-weight: 700 !important;
+  margin: 0 0 8px !important;
+  line-height: 1.3 !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent h2 { font-size: 1.2rem !important; }
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent h3,
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent h4 { font-size: 1.05rem !important; }
+
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent p {
+  color: var(--text-dim) !important;
+  font-family: var(--font) !important;
+  font-size: 0.9rem !important;
+  margin: 0 0 10px !important;
+  line-height: 1.5 !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent p strong {
+  color: var(--text) !important;
+}
+
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 0 14px !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent ul li {
+  color: var(--text-dim) !important;
+  font-family: var(--font) !important;
+  font-size: 0.85rem !important;
+  margin: 0 0 4px !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent ul li::before {
+  content: '✓ ';
+  color: var(--accent);
+  font-weight: 700;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent code {
+  font-family: var(--mono) !important;
+  font-size: 0.82rem !important;
+  color: var(--accent) !important;
+  background: rgba(255,255,255,0.06) !important;
+  padding: 1px 5px !important;
+  border-radius: 4px !important;
+}
+
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent a {
+  color: var(--accent) !important;
+  text-decoration: underline !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedContent a:hover {
+  color: #8df2ff !important;
+}
+
+/* Success message styling */
+.ml-capture-box .ml-form-embedContainer .ml-form-embedSuccess {
+  color: var(--text) !important;
+  font-family: var(--font) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  text-align: center !important;
+}
+
 .ml-capture-box .ml-form-embedContainer .ml-form-embedWrapper {
   background: transparent !important;
   border: none !important;
