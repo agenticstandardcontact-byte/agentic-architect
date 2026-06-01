@@ -127,5 +127,13 @@
       <description>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</description>
     </item>
 
+      <item>
+      <title>Rule 19: NetArchTest for Boundaries</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-01</link>
+      <guid isPermaLink="false">daily-rule-2026-06-01</guid>
+      <pubDate>Mon, 01 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</description>
+    </item>
+
   </channel>
 </rss>
