@@ -76,7 +76,7 @@
         </div>
 
         <h1>The Scoped→Singleton DI bug your AI just suggested (and how to catch it)</h1>
-        <p class="post-lede">Of all the bugs that ship to production silently, the captured-dependency lifetime bug is one of the most expensive. It compiles. It passes your tests. It runs fine in dev. Then in production, under load, it starts corrupting data across requests. And AI assistants suggest it constantly. Here's why — and the one Cursor rule that catches it before merge.</p>
+        <p class="post-lede">Of all the bugs that ship to production silently, the captured-dependency lifetime bug is one of the most expensive. It compiles. It passes your tests. It runs fine in dev. Then in production, under load, it starts corrupting data across requests. And AI assistants suggest it constantly. I'll walk through why, and the one Cursor rule that catches it before merge.</p>
 
         <h2>The bug, in 30 lines</h2>
         <p>You ask Cursor to add caching to <code>OrderService</code>. It gives you this:</p>
@@ -110,13 +110,13 @@ builder.Services.AddMemoryCache(); // ← registers IMemoryCache as Singleton</c
         <p>Looks correct. Compiles. Tests pass. Shipped.</p>
 
         <h2>What actually happens at runtime</h2>
-        <p><code>IMemoryCache</code> is registered as <strong>Singleton</strong> — one instance for the entire app's lifetime. <code>OrderService</code> is registered as <strong>Scoped</strong> — one instance per HTTP request.</p>
-        <p>On its own, that's fine. The problem is what you cached: an <code>Order</code> entity, which is in turn attached to <code>OrderDbContext</code> — also Scoped. The cache, alive for the lifetime of the application, now holds a reference to an entity attached to a DbContext that was disposed when the original request ended.</p>
-        <p>Now request #2 comes in. It hits the cache, gets the order, mutates a property. Then request #3 hits the cache, sees the mutation, and decides to write something else based on it. Then request #4 wakes up the entity's dispose-tracking and explodes with <code>ObjectDisposedException</code> — but only sometimes, depending on the GC pressure that day.</p>
+        <p><code>IMemoryCache</code> is registered as <strong>Singleton</strong>, one instance for the entire app's lifetime. <code>OrderService</code> is registered as <strong>Scoped</strong>, one instance per HTTP request.</p>
+        <p>On its own, that's fine. The problem is what you cached: an <code>Order</code> entity, which is in turn attached to <code>OrderDbContext</code>, also Scoped. The cache, alive for the lifetime of the application, now holds a reference to an entity attached to a DbContext that was disposed when the original request ended.</p>
+        <p>Now request #2 comes in. It hits the cache, gets the order, mutates a property. Then request #3 hits the cache, sees the mutation, and decides to write something else based on it. Then request #4 wakes up the entity's dispose-tracking and explodes with <code>ObjectDisposedException</code>, but only sometimes, depending on the GC pressure that day.</p>
         <p>Welcome to the longest debugging session of your year.</p>
 
         <h2>Why AI assistants suggest this constantly</h2>
-        <p>The patterns the AI has seen most often in its training data — short examples, blog tutorials, StackOverflow answers — almost always omit DI registration. A typical "caching with IMemoryCache" snippet looks like ten lines, with no reference to where the service is registered or with what lifetime.</p>
+        <p>The patterns the AI has seen most often in its training data, short examples, blog tutorials, StackOverflow answers, almost always omit DI registration. A typical "caching with IMemoryCache" snippet looks like ten lines, with no reference to where the service is registered or with what lifetime.</p>
         <p>The AI learned the surface pattern (<em>"inject IMemoryCache, call .Set"</em>) without the surrounding constraint (<em>"…unless the consumer is Scoped and the cached value graph reaches into Scoped infrastructure"</em>). When you ask it to add caching to <em>your</em> codebase, it pattern-matches against the surface form. The constraint is invisible to it.</p>
         <p>This isn't a "the AI is dumb" critique. <strong>Most senior developers ship this exact bug at least once.</strong> The patterns in the wild teach the wrong lesson.</p>
 
@@ -128,22 +128,22 @@ builder.Services.AddMemoryCache(); // ← registers IMemoryCache as Singleton</c
         <p><strong>The rule:</strong> when adding a constructor parameter, check the parameter type's registered lifetime. If the consumer is Singleton and the parameter is Scoped/Transient, refuse and surface the issue.</p>
 
         <h3>2. DbContext captured by anything Singleton</h3>
-        <p>Special case of #1 but worth its own callout. <code>DbContext</code> is always Scoped — it has to be, it tracks per-request state. <strong>Any Singleton that captures a DbContext is a bug.</strong> If you need DB access from a Singleton, inject <code>IServiceScopeFactory</code> and create a scope per operation.</p>
+        <p>Special case of #1 but worth its own callout. <code>DbContext</code> is always Scoped, it has to be, it tracks per-request state. <strong>Any Singleton that captures a DbContext is a bug.</strong> If you need DB access from a Singleton, inject <code>IServiceScopeFactory</code> and create a scope per operation.</p>
 
         <h3>3. Cached entities still attached to a DbContext</h3>
         <p>The bug from the example. The cache outlives the DbContext, but holds a graph that depends on it.</p>
         <p><strong>The rule:</strong> what goes into long-lived caches must be either (a) <code>AsNoTracking()</code>'d, (b) projected to a DTO, or (c) detached explicitly.</p>
 
         <h3>4. <code>HttpClient</code> instantiated with <code>new</code></h3>
-        <p>A long-running app that does <code>new HttpClient()</code> on every call leaks sockets — eventually exhausting the connection pool. Even worse: a Singleton that captures a single <code>HttpClient</code> reuses DNS forever.</p>
+        <p>A long-running app that does <code>new HttpClient()</code> on every call leaks sockets, eventually exhausting the connection pool. Even worse: a Singleton that captures a single <code>HttpClient</code> reuses DNS forever.</p>
         <p><strong>The rule:</strong> always inject <code>IHttpClientFactory</code> and call <code>CreateClient(name)</code>. Never <code>new HttpClient()</code> outside of one-shot scripts.</p>
 
         <h3>5. Hosted services touching Scoped dependencies directly</h3>
-        <p><code>IHostedService</code> is Singleton-by-construction. Inject a Scoped repo into one and it'll be alive for the lifetime of the process — every "scoped" operation will share state. Worse, the DbContext will leak.</p>
+        <p><code>IHostedService</code> is Singleton-by-construction. Inject a Scoped repo into one and it'll be alive for the lifetime of the process, every "scoped" operation will share state. Worse, the DbContext will leak.</p>
         <p><strong>The rule:</strong> in any <code>BackgroundService</code> or <code>IHostedService</code>, never inject Scoped dependencies directly. Inject <code>IServiceScopeFactory</code> and create a scope per unit of work.</p>
 
         <h2>The Cursor rule that catches all five</h2>
-        <p>The <code>dotnet-di.mdc</code> rule in <a href="../">Agentic Architect</a> codifies the above. When Cursor is editing a file where DI is happening — <code>Program.cs</code>, <code>Startup.cs</code>, <code>ServiceCollectionExtensions.cs</code>, any class constructor — the rule activates and audits suggestions for:</p>
+        <p>The <code>dotnet-di.mdc</code> rule in <a href="../">Agentic Architect</a> codifies the above. When Cursor is editing a file where DI is happening, <code>Program.cs</code>, <code>Startup.cs</code>, <code>ServiceCollectionExtensions.cs</code>, any class constructor, the rule activates and audits suggestions for:</p>
         <ul>
           <li>Lifetime mismatches between consumer and constructor parameters</li>
           <li>Captured Scoped dependencies inside hosted services or background workers</li>
@@ -151,25 +151,25 @@ builder.Services.AddMemoryCache(); // ← registers IMemoryCache as Singleton</c
           <li>Captured tracked entities in long-lived caches</li>
           <li>Static helpers reaching into scoped infrastructure</li>
         </ul>
-        <p>The trick is the <em>scoping</em>: it loads only on files where DI is actually happening — not on every prompt. Your token budget stays sane. The AI stays sharp on the file you're actually in.</p>
+        <p>The trick is the <em>scoping</em>: it loads only on files where DI is actually happening, not on every prompt. Your token budget stays sane. The AI stays sharp on the file you're actually in.</p>
 
         <h2>The bigger pattern: enforce, don't suggest</h2>
         <p>The reframe that took me a year of using AI assistants to internalize is this: <strong>generic prompts ask the AI to <em>suggest</em> good patterns. Scoped rules force it to <em>enforce</em> them.</strong></p>
         <p>"Be careful with DI lifetimes" is a suggestion. The AI will agree, nod sagely, then ship the captured-Scoped bug an hour later when you're tired.</p>
-        <p>"Before suggesting any constructor change, audit the lifetime contract" is a rule. The AI now has a checklist. It pauses, runs the check, and either suggests a boundary-respecting alternative or asks you a targeted question — instead of confidently shipping the bug.</p>
+        <p>"Before suggesting any constructor change, audit the lifetime contract" is a rule. The AI now has a checklist. It pauses, runs the check, and either suggests a boundary-respecting alternative or asks you a targeted question, instead of confidently shipping the bug.</p>
         <p>The first time the AI catches a Scoped-into-Singleton in code <em>you</em> wrote, the kit pays for itself.</p>
 
         <hr class="post-divider" />
 
         <div class="post-cta">
           <h2>Try the boundary rule for free</h2>
-          <p>The <code>arch-core-lite.mdc</code> rule — the boundary-guardian preview from the kit — is a free direct download from the repo. Drop it in <code>.cursor/rules/</code> and your AI will start refusing to suggest cross-layer violations today. No signup, no email.</p>
+          <p>The <code>arch-core-lite.mdc</code> rule, the boundary-guardian preview from the kit, is a free direct download from the repo. Drop it in <code>.cursor/rules/</code> and your AI will start refusing to suggest cross-layer violations today. No signup, no email.</p>
           <a class="btn btn-primary btn-lg" href="https://github.com/agenticstandardcontact-byte/agentic-architect/blob/main/arch-core-lite.mdc?utm_source=site&utm_medium=essay_post_cta&utm_campaign=free_sample" target="_blank" rel="noopener">Download arch-core-lite.mdc →</a>
         </div>
 
         <div class="post-cta post-cta-paid">
           <h3>Or get the full DI auditor (and the other three rules).</h3>
-          <p>The complete Agentic Architect kit — 4 specialist rules including the full <code>dotnet-di.mdc</code> auditor + the persistence engine — is £9.00 one-time. Lifetime updates. MIT-licensed. 14-day no-questions refund.</p>
+          <p>The complete Agentic Architect kit, 4 specialist rules including the full <code>dotnet-di.mdc</code> auditor + the persistence engine, is £9.00 one-time. Lifetime updates. MIT-licensed. 14-day no-questions refund.</p>
           <a class="btn btn-primary btn-lg" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect — £9.00 →</a>
         </div>
 
