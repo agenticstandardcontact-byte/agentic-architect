@@ -135,5 +135,13 @@
       <description>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</description>
     </item>
 
+      <item>
+      <title>Rule 20: Source-Generated JSON Serialisation</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-02</link>
+      <guid isPermaLink="false">daily-rule-2026-06-02</guid>
+      <pubDate>Tue, 02 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own — add a rule that flags new DTO classes and asks whether they should be source-generated.</description>
+    </item>
+
   </channel>
 </rss>
