@@ -75,19 +75,19 @@
         </div>
 
         <h1>The Context Tax: Why every Cursor session costs you 15 minutes</h1>
-        <p class="post-lede">There's a hidden cost senior engineers pay every morning when they open Cursor. It compounds quietly, it doesn't show up on any dashboard, and at a typical senior billing rate it's worth thousands of pounds a year. I call it the Context Tax. Here's why it happens, what it actually costs, and the four-rule architecture I built to eliminate it.</p>
+        <p class="post-lede">There's a hidden cost senior engineers pay every morning when they open Cursor. It compounds quietly, it doesn't show up on any dashboard, and at a typical senior billing rate it's worth thousands of pounds a year. I call it the Context Tax. Below: why it happens, what it costs, and the four-rule setup I use to cut it down.</p>
 
         <h2>The 15-minute problem</h2>
-        <p>Open Cursor on Monday morning. New chat. You're picking up where you left off Friday — adding a caching layer to <code>OrderService</code>. You type:</p>
+        <p>Open Cursor on Monday morning. New chat. You're picking up where you left off Friday, adding a caching layer to <code>OrderService</code>. You type:</p>
         <blockquote>"Add Redis caching to this method."</blockquote>
         <p>And the AI returns something technically correct, but architecturally wrong. It instantiates <code>ConnectionMultiplexer</code> directly in the service constructor. It uses <code>IMemoryCache</code> as if your project doesn't already register <code>IDistributedCache</code>. It writes a synchronous wrapper around an async call.</p>
         <p>You sigh. You type the preamble. <em>Again.</em></p>
-        <blockquote>"This project uses Mediator and Result&lt;T&gt;. We register caching through IDistributedCache in /Infrastructure/Caching. Don't reach into ConnectionMultiplexer directly. Don't put any caching logic in the Service layer — wrap it via a decorator in Infrastructure. And we never instantiate dependencies, we inject them via constructor."</blockquote>
+        <blockquote>"This project uses Mediator and Result&lt;T&gt;. We register caching through IDistributedCache in /Infrastructure/Caching. Don't reach into ConnectionMultiplexer directly. Don't put any caching logic in the Service layer, wrap it via a decorator in Infrastructure. And we never instantiate dependencies, we inject them via constructor."</blockquote>
         <p>Three paragraphs. Maybe four. By the time the AI has the context it needs to actually be useful, you've spent fifteen minutes typing what your codebase has already shown it dozens of times before.</p>
         <p>That's the Context Tax.</p>
 
         <h2>Why it happens</h2>
-        <p>Cursor — like every other AI coding tool right now — has no persistent memory between sessions. Each new chat starts fresh. Every architectural decision your team has ever made, every refactor your codebase has ever absorbed, every "we tried that, it doesn't work for us" — gone the moment you close the window.</p>
+        <p>Cursor, like every other AI coding tool right now, has no persistent memory between sessions. Each new chat starts fresh. Every architectural decision your team has ever made, every refactor your codebase has ever absorbed, every "we tried that, it doesn't work for us", gone the moment you close the window.</p>
         <p>The AI isn't stupid. It's amnesiac.</p>
         <p>Worse: even <em>within</em> a session, the AI's understanding of your architecture is a fragile probability cloud. By Wednesday afternoon it has "forgotten" the convention it followed on Monday. It starts suggesting patterns that violate your boundaries. You correct it. It double-downs. You correct it again. It loops on the same hallucination, burning tokens, burning your time.</p>
         <p>This is what I call <strong>AI drift</strong>, and on a long project it's the single biggest reason senior engineers go from "Cursor is incredible" to "I've turned the autocomplete off."</p>
@@ -98,7 +98,7 @@
           <li><strong>15 minutes per day</strong> spent on re-context and correcting drift.</li>
           <li><strong>~250 working days per year.</strong></li>
           <li>That's <strong>62.5 hours</strong>. Nearly <strong>eight full working days</strong> annually.</li>
-          <li>At a UK senior dev billing rate of around <strong>£75/hour</strong>, that's <strong>£4,687.50</strong> of senior time, per engineer, per year — bleeding out invisibly.</li>
+          <li>At a UK senior dev billing rate of around <strong>£75/hour</strong>, that's <strong>£4,687.50</strong> of senior time, per engineer, per year, bleeding out invisibly.</li>
         </ul>
         <p>On a five-engineer team that's the cost of a junior hire.</p>
 
@@ -112,10 +112,10 @@
         <p>You don't need a longer prompt. You need <em>persistence</em>.</p>
 
         <h2>What persistence actually looks like</h2>
-        <p>The breakthrough — once you stop thinking of Cursor as a chat-bot and start thinking of it as a stateful pair-programmer — is that the AI needs three things to behave like a senior:</p>
+        <p>Once you stop thinking of Cursor as a chat-bot and start treating it as a stateful pair-programmer, the AI needs three things to behave like a senior:</p>
         <ol>
           <li><strong>A long-term memory file</strong> that lives in the repo, that the AI reads on every session start, and that the AI itself updates whenever it learns something new. Architectural Decision Records (ADRs) for the AI, by the AI.</li>
-          <li><strong>Scoped, directory-aware rules</strong> that load only when relevant — a DI rule fires on <code>Startup.cs</code> and <code>ServiceCollectionExtensions.cs</code>, not on every controller. Token budget preserved.</li>
+          <li><strong>Scoped, directory-aware rules</strong> that load only when relevant, a DI rule fires on <code>Startup.cs</code> and <code>ServiceCollectionExtensions.cs</code>, not on every controller. Token budget preserved.</li>
           <li><strong>A circuit breaker</strong> that detects when the AI is in a hallucination loop and forces it to stop, re-read the file, and ask a question rather than double down.</li>
         </ol>
         <p>None of these are exotic. They're standard senior-engineering moves applied to the AI itself.</p>
@@ -123,10 +123,10 @@
         <h2>The four-rule architecture</h2>
         <p>I packaged the pattern I've been using on real .NET codebases into four <code>.mdc</code> files Cursor reads natively:</p>
         <ul>
-          <li><strong><code>arch-core.mdc</code></strong> — boundary enforcement. Detects which layer the current file lives in and refuses suggestions that cross it.</li>
-          <li><strong><code>dotnet-di.mdc</code></strong> — DI auditor. Catches <code>Scoped → Singleton</code> capture, <code>HttpClient</code> instantiation, <code>IConfiguration</code> leaks into business logic.</li>
-          <li><strong><code>bug-breaker.mdc</code></strong> — the circuit breaker. Watches for repeated failed attempts on the same problem and forces re-reading instead of doubling down.</li>
-          <li><strong><code>persistence.mdc</code></strong> — the engine. Maintains <code>LEARNING_LOG.md</code> across sessions. Auto-appends decisions in an ADR-style format. Hydrates the AI on session start.</li>
+          <li><strong><code>arch-core.mdc</code></strong>, boundary enforcement. Detects which layer the current file lives in and refuses suggestions that cross it.</li>
+          <li><strong><code>dotnet-di.mdc</code></strong>, DI auditor. Catches <code>Scoped → Singleton</code> capture, <code>HttpClient</code> instantiation, <code>IConfiguration</code> leaks into business logic.</li>
+          <li><strong><code>bug-breaker.mdc</code></strong>, the circuit breaker. Watches for repeated failed attempts on the same problem and forces re-reading instead of doubling down.</li>
+          <li><strong><code>persistence.mdc</code></strong>, the engine. Maintains <code>LEARNING_LOG.md</code> across sessions. Auto-appends decisions in an ADR-style format. Hydrates the AI on session start.</li>
         </ul>
         <p>The whole thing lives in <code>.cursor/rules/</code> and a single root-level <code>LEARNING_LOG.md</code>. Zero config. Zero build step. Commit it to your repo, your whole team gets the same baseline.</p>
 
@@ -147,7 +147,7 @@
 
         <div class="post-cta post-cta-paid">
           <h3>Or just stop the Context Tax today.</h3>
-          <p>The full Agentic Architect kit — 4 specialist rules + the persistence engine + Learning Log template — is £9.00 one-time. Lifetime updates. MIT-licensed. 14-day no-questions refund.</p>
+          <p>The full Agentic Architect kit, 4 specialist rules + the persistence engine + Learning Log template, is £9.00 one-time. Lifetime updates. MIT-licensed. 14-day no-questions refund.</p>
           <a class="btn btn-primary btn-lg" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the full framework — £9.00 →</a>
         </div>
 

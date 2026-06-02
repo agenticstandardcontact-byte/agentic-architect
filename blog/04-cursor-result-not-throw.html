@@ -76,10 +76,10 @@
         </div>
 
         <h1>Teach Cursor <code>Result&lt;T&gt;</code> instead of throwing</h1>
-        <p class="post-lede">If your team already models failures as <code>Result&lt;T&gt;</code>, <code>ErrorOr&lt;T&gt;</code>, or railway-style responses, Cursor will still reach for <code>throw</code> and <code>null</code> on the next prompt. That is not malice — it is training bias. Here is why it happens, what it costs, and how scoped rules teach the AI to match the error model you already paid for.</p>
+        <p class="post-lede">If your team already models failures as <code>Result&lt;T&gt;</code>, <code>ErrorOr&lt;T&gt;</code>, or railway-style responses, Cursor will still reach for <code>throw</code> and <code>null</code> on the next prompt. That is not malice, it is training bias. Here is why it happens, what it costs, and how scoped rules teach the AI to match the error model you already paid for.</p>
 
         <h2>The default the model learned</h2>
-        <p>Most C# examples on the public internet — tutorials, StackOverflow, even Microsoft docs samples — use exceptions for business failures and <code>null</code> for "not found". Ask Cursor to add an endpoint that rejects duplicate orders and you will get something like:</p>
+        <p>Most C# examples on the public internet, tutorials, StackOverflow, even Microsoft docs samples, use exceptions for business failures and <code>null</code> for "not found". Ask Cursor to add an endpoint that rejects duplicate orders and you will get something like:</p>
         <pre><code>public async Task&lt;OrderDto&gt; CreateAsync(CreateOrderRequest request, CancellationToken ct)
 {
     var existing = await _db.Orders.FirstOrDefaultAsync(o =&gt; o.Reference == request.Reference, ct);
@@ -128,26 +128,26 @@
         <p>You paste "we use Result pattern, do not throw for business errors" into chat. It complies for that file. Three prompts later, on a validator or a repository method, it throws <code>NotFoundException</code> again because:</p>
         <ol>
           <li>The <strong>local context</strong> is a file that still has legacy throws from 2019.</li>
-          <li>The <strong>prompt</strong> did not mention ErrorOr vs Result vs FluentResults — so it picks whichever type name it saw most recently in training.</li>
-          <li>There is <strong>no enforced rule</strong> on Application-layer files — only a memory in a chat you closed yesterday.</li>
+          <li>The <strong>prompt</strong> did not mention ErrorOr vs Result vs FluentResults, so it picks whichever type name it saw most recently in training.</li>
+          <li>There is <strong>no enforced rule</strong> on Application-layer files, only a memory in a chat you closed yesterday.</li>
         </ol>
-        <p>This is the same persistence problem as the <a href="01-the-context-tax.html">Context Tax</a>, applied to error modelling. You need the convention to reload when the relevant layer opens — not when you remember to lecture the model.</p>
+        <p>This is the same persistence problem as the <a href="01-the-context-tax.html">Context Tax</a>, applied to error modelling. You need the convention to reload when the relevant layer opens, not when you remember to lecture the model.</p>
 
         <h2>The rule contract (what to encode)</h2>
         <p>A useful Cursor rule for result-shaped codebases does not need to mandate a specific NuGet package. It should:</p>
         <ul>
-          <li><strong>Detect the house style</strong> — if the project already references <code>FluentResults</code>, <code>ErrorOr</code>, or an internal <code>Result&lt;T&gt;</code>, match that type exactly.</li>
-          <li><strong>Forbid null-as-missing</strong> on public Application APIs when Results are in use — return <code>NotFound</code> errors instead of <code>null</code>.</li>
-          <li><strong>Reserve exceptions</strong> for truly exceptional cases: programmer errors, cancelled operations, infrastructure timeouts — not "email already taken".</li>
-          <li><strong>Require mapping at the edge</strong> — handlers return Results; endpoints map them. No throws in Minimal API lambdas for domain failures.</li>
-          <li><strong>Keep validators ahead of handlers</strong> — FluentValidation failures should become Results before handler logic runs (pairs well with MediatR pipelines).</li>
+          <li><strong>Detect the house style</strong>, if the project already references <code>FluentResults</code>, <code>ErrorOr</code>, or an internal <code>Result&lt;T&gt;</code>, match that type exactly.</li>
+          <li><strong>Forbid null-as-missing</strong> on public Application APIs when Results are in use, return <code>NotFound</code> errors instead of <code>null</code>.</li>
+          <li><strong>Reserve exceptions</strong> for truly exceptional cases: programmer errors, cancelled operations, infrastructure timeouts, not "email already taken".</li>
+          <li><strong>Require mapping at the edge</strong>, handlers return Results; endpoints map them. No throws in Minimal API lambdas for domain failures.</li>
+          <li><strong>Keep validators ahead of handlers</strong>, FluentValidation failures should become Results before handler logic runs (pairs well with MediatR pipelines).</li>
         </ul>
-        <p><code>arch-core.mdc</code> in the <a href="../">Agentic Architect</a> kit encodes the "match existing Result / ErrorOr / OneOf patterns" clause on Application and API-adjacent files. It is the boundary guardian applied to control flow — not just folder placement.</p>
+        <p><code>arch-core.mdc</code> in the <a href="../">Agentic Architect</a> kit encodes the "match existing Result / ErrorOr / OneOf patterns" clause on Application and API-adjacent files. It is the boundary guardian applied to control flow, not just folder placement.</p>
 
         <h2>A prompt you can use today (before the full kit)</h2>
         <p>Until rules are committed, pin this at the top of any handler or endpoint edit:</p>
         <blockquote>Business failures are Result errors, not exceptions. Match the Result/ErrorOr type already used in this project. Map to HTTP at the API boundary only.</blockquote>
-        <p>Short. Boring. Repeatable. It cuts throw regressions roughly in half in my experience — but discipline still decays without scoped <code>.mdc</code> files and a <code>LEARNING_LOG.md</code> entry the model reads on session start.</p>
+        <p>Short. Boring. Repeatable. It cuts throw regressions roughly in half in my experience, but discipline still decays without scoped <code>.mdc</code> files and a <code>LEARNING_LOG.md</code> entry the model reads on session start.</p>
 
         <h2>Log the decision once, enforce it forever</h2>
         <p>When you adopt Results team-wide, add one Learning Log line the persistence engine can re-hydrate:</p>
@@ -158,7 +158,7 @@
         <p>Next Monday, the model sees the ADR before it suggests <code>throw new InvalidOperationException("duplicate")</code> in a handler that has returned Results for six months.</p>
 
         <h2>Pair with the other failure modes</h2>
-        <p>Result discipline does not replace DI lifetime audits (<a href="02-scoped-singleton-di-bug.html">Scoped→Singleton capture</a>) or hallucination breakers (<a href="03-cursor-hallucination-loop-breaker.html">seven-word stop phrase</a>). It addresses a third failure mode: <strong>silent style regression</strong> — code that compiles, looks professional, and slowly erodes the conventions your team chose on purpose.</p>
+        <p>Result discipline does not replace DI lifetime audits (<a href="02-scoped-singleton-di-bug.html">Scoped→Singleton capture</a>) or hallucination breakers (<a href="03-cursor-hallucination-loop-breaker.html">seven-word stop phrase</a>). It addresses a third failure mode: <strong>silent style regression</strong>, code that compiles, looks professional, and slowly erodes the conventions your team chose on purpose.</p>
 
         <hr class="post-divider" />
 
@@ -170,7 +170,7 @@
 
         <div class="post-cta post-cta-paid">
           <h3>Enforce the full error model across four rules.</h3>
-          <p>Agentic Architect ships <code>arch-core.mdc</code>, <code>dotnet-di.mdc</code>, <code>bug-breaker.mdc</code>, and <code>persistence.mdc</code> — directory-scoped, with the Learning Log protocol. £9.00 one-time, lifetime updates, 14-day refund.</p>
+          <p>Agentic Architect ships <code>arch-core.mdc</code>, <code>dotnet-di.mdc</code>, <code>bug-breaker.mdc</code>, and <code>persistence.mdc</code>, directory-scoped, with the Learning Log protocol. £9.00 one-time, lifetime updates, 14-day refund.</p>
           <a class="btn btn-primary btn-lg" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect — £9.00 →</a>
         </div>
 

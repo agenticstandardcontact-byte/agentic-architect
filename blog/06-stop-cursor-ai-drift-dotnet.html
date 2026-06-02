@@ -82,51 +82,51 @@
         </div>
 
         <h1>How to stop Cursor AI <em>forgetting</em> your .NET architecture (the $9 fix)</h1>
-        <p class="post-lede">Your Cursor session starts. You type your first prompt. The AI confidently suggests instantiating <code>HttpClient</code> inside your repository — the exact anti-pattern you banned six months ago. You sigh, type 'actually we use typed HttpClients registered via DI,' and burn 15 minutes re-teaching an AI that was supposed to <em>help</em> you. This is the Context Tax. Every .NET developer using Cursor pays it. Here's how to stop.</p>
+        <p class="post-lede">Your Cursor session starts. You type your first prompt. The AI confidently suggests instantiating <code>HttpClient</code> inside your repository, the exact anti-pattern you banned six months ago. You sigh, type 'actually we use typed HttpClients registered via DI,' and burn 15 minutes re-teaching an AI that was supposed to <em>help</em> you. This is the Context Tax. Every .NET developer using Cursor pays it. Here's how to stop.</p>
 
         <h2>The Context Tax: what it costs you every morning</h2>
         <p>The Context Tax is the fifteen minutes you spend <strong>re-explaining your codebase to Cursor</strong> at the start of every session. You describe your DI conventions, your Clean Architecture layers, your EF Core patterns, your Result<T> pipeline. Cursor nods along. You build a feature. Session ends. Next morning? Back to square one.</p>
-        <p>Multiply that by 250 working days and you're losing <strong>62 hours a year</strong> — nearly two full working weeks — just re-establishing context. At a senior contractor rate of £75/hr, that's £4,650 of lost time. Per developer.</p>
+        <p>Multiply that by 250 working days and you're losing <strong>62 hours a year</strong>, nearly two full working weeks, just re-establishing context. At a senior contractor rate of £75/hr, that's £4,650 of lost time. Per developer.</p>
         <h2>Why Cursor's built-in rules aren't enough</h2>
         <p>Cursor supports a <code>.cursor/rules/</code> directory. You can drop <code>.mdc</code> files in there and the AI reads them. So why doesn't that solve the problem?</p>
         <h3>1. Monolithic rules dump tokens, not context</h3>
         <p>Most public Cursor rules repos give you a single <code>rules.mdc</code> file that gets loaded on every prompt. Every. Single. Prompt. That's 2,000+ tokens of preamble <em>before</em> your actual instruction. Your fast-request budget evaporates on rules that aren't even relevant to the file you're editing.</p>
-        <h3>2. Rules describe — they don't persist</h3>
+        <h3>2. Rules describe, they don't persist</h3>
         <p>A rule that says "use Result<T> not exceptions" tells Cursor what to do. But it doesn't tell Cursor <em>why</em> you chose that pattern, what you tried before it, or what edge cases you hit. That's state. And rules alone don't carry state.</p>
         <h3>3. No circuit breaker on hallucinations</h3>
-        <p>When Cursor gets stuck — and it will — it doesn't know when to stop. It invents methods that don't exist, doubles down on wrong answers, and burns tokens in a loop. There's no built-in mechanism to say "step back and re-read the file."</p>
+        <p>When Cursor gets stuck. And it will, it doesn't know when to stop. It invents methods that don't exist, doubles down on wrong answers, and burns tokens in a loop. There's no built-in mechanism to say "step back and re-read the file."</p>
         <h2>The fix: directory-scoped rules + a stateful Learning Log</h2>
-        <p>The solution to context drift isn't a bigger prompt file. It's a <strong>persistence protocol</strong> — a system that loads only the right rules for the right files, and maintains a Learning Log that the AI reads, updates, and carries across sessions.</p>
-        <p>Here's what that looks like in practice. When you open a file in <code>~/api/Services/</code>, only the DI auditor and architecture boundary rules activate. When you're in the data layer, only the EF Core read-pattern enforcer kicks in. And every architectural decision you make gets logged — so tomorrow morning, the AI picks up right where you left off.</p>
+        <p>The solution to context drift isn't a bigger prompt file. It's a <strong>persistence protocol</strong>, a system that loads only the right rules for the right files, and maintains a Learning Log that the AI reads, updates, and carries across sessions.</p>
+        <p>Here's what that looks like in practice. When you open a file in <code>~/api/Services/</code>, only the DI auditor and architecture boundary rules activate. When you're in the data layer, only the EF Core read-pattern enforcer kicks in. And every architectural decision you make gets logged, so tomorrow morning, the AI picks up right where you left off.</p>
         <h2>The 4 rules that make Cursor stateful</h2>
         <p>The Agentic Architect framework ships four specialist <code>.mdc</code> rules. Each solves a specific failure mode of the Context Tax.</p>
-        <h3><code>arch-core.mdc</code> — The Boundary Guardian</h3>
+        <h3><code>arch-core.mdc</code>, The Boundary Guardian</h3>
         <p>Enforces your Clean Architecture layers. No <code>DbContext</code> in controllers. No business logic in repositories. No crossing layer boundaries without explicit justification. The AI starts every prompt already knowing your SOLID boundaries.</p>
         <ul>
           <li>SOLID compliance audits on every AI suggestion</li>
           <li>Layer boundary enforcement (Presentation / Application / Domain / Infrastructure)</li>
-          <li>Anti-pattern early-warning — catches the 'Big Ball of Mud' before it starts</li>
+          <li>Anti-pattern early-warning, catches the 'Big Ball of Mud' before it starts</li>
         </ul>
-        <h3><code>dotnet-di.mdc</code> — The DI Auditor</h3>
+        <h3><code>dotnet-di.mdc</code>, The DI Auditor</h3>
         <p>A dedicated dependency injection auditor that catches <code>Scoped → Singleton</code> capture bugs during AI code generation. Knows <code>IServiceCollection</code>, Scrutor, Autofac, and the Microsoft DI container cold.</p>
         <ul>
           <li>Lifetime mismatch detection (Scoped injected into Singleton)</li>
           <li>Constructor-injection best-practice enforcement</li>
-          <li>Module registration discipline — prevents spaghetti registrations</li>
+          <li>Module registration discipline, prevents spaghetti registrations</li>
         </ul>
-        <h3><code>bug-breaker.mdc</code> — The Hallucination Killer</h3>
-        <p>A circuit-breaker that detects when the AI is looping on a bad solution. Forces Cursor to step back, re-read the file, and ask you — instead of inventing methods that don't exist and burning through your token budget.</p>
+        <h3><code>bug-breaker.mdc</code>, The Hallucination Killer</h3>
+        <p>A circuit-breaker that detects when the AI is looping on a bad solution. Forces Cursor to step back, re-read the file, and ask you, instead of inventing methods that don't exist and burning through your token budget.</p>
         <ul>
           <li>Loop-detection on repeated failed attempts</li>
-          <li>Forced context re-read protocol — stops the spiral</li>
-          <li>Token waste prevention — fewer tokens burned on hallucinations</li>
+          <li>Forced context re-read protocol, stops the spiral</li>
+          <li>Token waste prevention, fewer tokens burned on hallucinations</li>
         </ul>
-        <h3><code>persistence.mdc</code> — The Learning Log Engine ★</h3>
-        <p>The crown jewel. This rule maintains a <code>LEARNING_LOG.md</code> file at your project root — a living document that records every architectural decision, refactor reason, constraint discovery, and 'we tried that, don't do it again' lesson. Each session starts with the AI <strong>auto-hydrating</strong> from the log.</p>
+        <h3><code>persistence.mdc</code>, The Learning Log Engine ★</h3>
+        <p>The crown jewel. This rule maintains a <code>LEARNING_LOG.md</code> file at your project root, a living document that records every architectural decision, refactor reason, constraint discovery, and 'we tried that, don't do it again' lesson. Each session starts with the AI <strong>auto-hydrating</strong> from the log.</p>
         <ul>
           <li>ADR-style decision logging (architectural decisions get timestamped entries)</li>
-          <li>Session-start hydration — AI reads the log before processing any prompt</li>
-          <li>Cross-session continuity — the AI remembers decisions from last week, last month</li>
+          <li>Session-start hydration, AI reads the log before processing any prompt</li>
+          <li>Cross-session continuity, the AI remembers decisions from last week, last month</li>
         </ul>
         <h2>What the rules actually prevent (real drift examples)</h2>
         <p>These aren't hypothetical. These are the specific regressions the framework catches that raw Cursor will happily generate.</p>
@@ -134,44 +134,44 @@
         <table class="post-table">
           <thead><tr><th>The Drift</th><th>What Cursor Does</th><th>What the Rules Do</th></tr></thead>
           <tbody>
-          <tr><td>throw instead of Result<T></td><td>Cursor defaults to try/catch/throw in controllers — ignores your Result<T> convention set 6 months ago</td><td>arch-core.mdc blocks throw in controllers. dotnet-di.mdc requires Result<T> through your pipeline.</td></tr>
-          <tr><td>Captive DI dependencies</td><td>AI injects a Scoped DbContext into a Singleton cache service — compiles fine, explodes at runtime</td><td>dotnet-di.mdc catches the lifetime mismatch during generation and blocks the suggestion.</td></tr>
-          <tr><td>Missing AsNoTracking()</td><td>Cursor generates reads that track every entity — memory balloons, queries slow</td><td>ef-core-reads.mdc enforces AsNoTracking() on all query-only operations.</td></tr>
+          <tr><td>throw instead of Result<T></td><td>Cursor defaults to try/catch/throw in controllers, ignores your Result<T> convention set 6 months ago</td><td>arch-core.mdc blocks throw in controllers. dotnet-di.mdc requires Result<T> through your pipeline.</td></tr>
+          <tr><td>Captive DI dependencies</td><td>AI injects a Scoped DbContext into a Singleton cache service, compiles fine, explodes at runtime</td><td>dotnet-di.mdc catches the lifetime mismatch during generation and blocks the suggestion.</td></tr>
+          <tr><td>Missing AsNoTracking()</td><td>Cursor generates reads that track every entity, memory balloons, queries slow</td><td>ef-core-reads.mdc enforces AsNoTracking() on all query-only operations.</td></tr>
           <tr><td>Hallucination spiral</td><td>AI invents IOrderRepository.FindByLegacyCode(), code doesn't compile, AI invents another method to fix it</td><td>bug-breaker.mdc detects 3+ failed attempts on the same file, forces a re-read, and asks you.</td></tr>
           </tbody>
         </table>
         </div>
         <h2>Install in 60 seconds. No build step. No config.</h2>
         <ol>
-          <li><strong>Download the kit</strong> — you get the full <code>.cursor/rules/</code> folder and a pre-seeded <code>LEARNING_LOG.md</code>.</li>
-          <li><strong>Drop into your project root</strong> — <code>.cursor/rules/</code> auto-detects. No CLI commands. No build tools.</li>
-          <li><strong>Run the hydrate prompt once</strong> — the AI reads your codebase, seeds the Learning Log with existing patterns, and starts tracking from there.</li>
+          <li><strong>Download the kit</strong>, you get the full <code>.cursor/rules/</code> folder and a pre-seeded <code>LEARNING_LOG.md</code>.</li>
+          <li><strong>Drop into your project root</strong>, <code>.cursor/rules/</code> auto-detects. No CLI commands. No build tools.</li>
+          <li><strong>Run the hydrate prompt once</strong>, the AI reads your codebase, seeds the Learning Log with existing patterns, and starts tracking from there.</li>
         </ol>
         <h2>All 9 specialist rules, one £9.00 payment</h2>
-        <p>The full kit ships with all 9 production-tested <code>.mdc</code> rules — the 4 described above plus 5 more covering Result pattern discipline, EF Core performance patterns, MediatR conventions, and more. MIT-licensed. Commit them. Share them with your team. Modify them. They're yours.</p>
+        <p>The full kit ships with all 9 production-tested <code>.mdc</code> rules, the 4 described above plus 5 more covering Result pattern discipline, EF Core performance patterns, MediatR conventions, and more. MIT-licensed. Commit them. Share them with your team. Modify them. They're yours.</p>
         <ul>
-          <li>9 specialist <code>.mdc</code> rules — directory-scoped, token-efficient</li>
+          <li>9 specialist <code>.mdc</code> rules, directory-scoped, token-efficient</li>
           <li>Pre-seeded <code>LEARNING_LOG.md</code> template</li>
-          <li>Quickstart PDF — install and hydrate in 60 seconds</li>
-          <li>Lifetime updates — new rules and protocol upgrades free forever</li>
-          <li>MIT-licensed — no subscription, no cloud lock-in, no vendor dependency</li>
-          <li>14-day no-questions refund — if it doesn't stop the Context Tax, get your money back</li>
+          <li>Quickstart PDF, install and hydrate in 60 seconds</li>
+          <li>Lifetime updates, new rules and protocol upgrades free forever</li>
+          <li>MIT-licensed, no subscription, no cloud lock-in, no vendor dependency</li>
+          <li>14-day no-questions refund, if it doesn't stop the Context Tax, get your money back</li>
         </ul>
         <h2>Built for senior .NET engineers, not beginners</h2>
         <p>This framework assumes you already have a Clean Architecture/DDD codebase, you use Cursor daily, and you're tired of the AI forgetting your conventions. If you're learning C# for the first time, come back when you have architecture to protect.</p>
-        <p>If you're a Staff Engineer who's spent the last 6 months building a MediatR pipeline with Result<T> and orchestrated handlers — and Cursor still suggests <code>throw new Exception()</code> in your controllers — this is for you.</p>
+        <p>If you're a Staff Engineer who's spent the last 6 months building a MediatR pipeline with Result<T> and orchestrated handlers. And Cursor still suggests <code>throw new Exception()</code> in your controllers, this is for you.</p>
 
         <hr class="post-divider" />
 
         <div class="post-cta">
-          <h2>Stop the Context Tax — free</h2>
+          <h2>Stop the Context Tax, free</h2>
           <p>Get the <strong>Free Starter Kit</strong>: 3 Cursor rules that prevent the most common .NET regressions. Installs in 3 minutes. No credit card.</p>
           <a class="btn btn-accent btn-lg" href="../#free-kit-signup">Get the Free Kit &mdash; &pound;0 &rarr;</a>
         </div>
 
         <div class="post-cta post-cta-paid">
           <h3>Ready for the full persistence framework?</h3>
-          <p>Agentic Architect ships 9 specialist <code>.mdc</code> rules — directory-scoped, token-efficient — plus the stateful Learning Log protocol. &pound;9.00 one-time, lifetime updates, 14-day refund.</p>
+          <p>Agentic Architect ships 9 specialist <code>.mdc</code> rules, directory-scoped, token-efficient, plus the stateful Learning Log protocol. &pound;9.00 one-time, lifetime updates, 14-day refund.</p>
           <a class="btn btn-primary btn-lg" href="https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect &mdash; &pound;9.00 &rarr;</a>
         </div>
 
