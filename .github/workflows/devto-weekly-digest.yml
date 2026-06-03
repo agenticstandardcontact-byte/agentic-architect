@@ -1,4 +1,4 @@
-name: dev.to Weekly Digest
+﻿name: dev.to Weekly Digest
 
 # Bundles the last 7 days of daily rules + essays from blog/index.html into a
 # single dev.to article with canonical_url pointing back to the GitHub Pages
@@ -59,7 +59,7 @@ jobs:
           SITE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
           BLOG = f"{SITE}/blog/"
           COVER = f"{SITE}/og-image-devto.jpg"
-          KIT = "https://agenticarchitect.gumroad.com/l/dotnet-persistence-kit"
+          KIT = "https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01"
           SAMPLE = f"https://github.com/agenticstandardcontact-byte/agentic-architect/blob/main/arch-core-lite.mdc"
           TAGS = ["csharp", "dotnet", "ai", "cursor"]
 
@@ -215,14 +215,14 @@ jobs:
               f"The free **[`arch-core-lite.mdc`]({SAMPLE}?utm_source=devto&utm_medium=weekly_digest&utm_campaign=free_sample)** "
               "is one drop-in Cursor rule that ends the morning re-explanation ritual. "
               "Install in 60 seconds, see whether Cursor actually remembers your DI lifetimes, "
-              "and decide for yourself whether the full kit is worth £19.99."
+              "and decide for yourself whether the full kit is worth £9.00."
           )
           lines.append("")
           lines.append(
               f"- **Free sample:** [`arch-core-lite.mdc` on GitHub]({SAMPLE}?utm_source=devto&utm_medium=weekly_digest&utm_campaign=free_sample)"
           )
           lines.append(
-              f"- **Full kit (£19.99, one-time):** [Agentic Architect on Gumroad]({KIT}?utm_source=devto&utm_medium=weekly_digest&utm_campaign=paid_kit)"
+              f"- **Full kit (£9.00, one-time):** [Agentic Architect Kit]({KIT}?utm_source=devto&utm_medium=weekly_digest&utm_campaign=paid_kit)"
           )
           lines.append(
               f"- **Daily rules feed:** [{BLOG}]({BLOG}?utm_source=devto&utm_medium=weekly_digest&utm_campaign=blog_index)"
