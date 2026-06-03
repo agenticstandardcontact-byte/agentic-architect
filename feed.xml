@@ -143,5 +143,13 @@
       <description>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own — add a rule that flags new DTO classes and asks whether they should be source-generated.</description>
     </item>
 
+      <item>
+      <title>Rule 21: Channels for Producer Consumer</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-03</link>
+      <guid isPermaLink="false">daily-rule-2026-06-03</guid>
+      <pubDate>Wed, 03 Jun 2026 09:00:00 +0000</pubDate>
+      <description>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</description>
+    </item>
+
   </channel>
 </rss>
