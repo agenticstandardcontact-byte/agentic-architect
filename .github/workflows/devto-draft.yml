@@ -55,7 +55,7 @@ jobs:
 
           API = "https://dev.to/api"
           SITE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
-          COVER = f"{SITE}/og-image-devto.jpg"
+          COVER = f"{SITE}/og-image-devto.jpg?v=2"
           DEFAULT_TAGS = ["csharp", "dotnet", "ai", "cursor"]
           POST_RE = re.compile(r"^blog/0\d+-.*\.html$")
 
