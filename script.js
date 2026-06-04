@@ -14,6 +14,17 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ---------- Mobile nav ---------- */
+  const navToggle = document.querySelector('.nav-toggle');
+  const navPanel = document.querySelector('.nav-links-panel');
+  if (navToggle && navPanel) {
+    navToggle.addEventListener('click', () => {
+      const open = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!open));
+      navPanel.classList.toggle('open', !open);
+    });
+  }
+
   /* ---------- Countdown (rolling 48h, persisted) ---------- */
   const countdownEl = document.getElementById('countdown');
   if (countdownEl) {

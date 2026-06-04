@@ -50,19 +50,22 @@
 
   <header class="nav">
     <div class="container nav-inner">
-      <a href="../" class="brand">
+      <a href="../" class="brand" aria-label="Agentic Architect home">
         <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
           <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
           <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
         <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
       </a>
-      <nav class="nav-links" aria-label="Primary">
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">Menu</button>
+      <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
         <a href="../#kit">What's Inside</a>
         <a href="../#pricing">Pricing</a>
-        <a href="./">Blog</a>
+        <a href="./" aria-current="page">Blog</a>
+        <a href="../hardware/">Hardware</a>
+        <a href="../learn/">Quick Fixes</a>
       </nav>
-      <a class="btn btn-primary btn-sm nav-cta" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_nav&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the Kit</a>
+      <a class="btn btn-primary btn-sm nav-cta" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_nav&utm_campaign=paid_kit" target="_blank" rel="noopener">Buy now</a>
     </div>
   </header>
 
@@ -162,17 +165,16 @@ builder.Services.AddMemoryCache(); // ← registers IMemoryCache as Singleton</c
         <hr class="post-divider" />
 
         <div class="post-cta">
-          <h2>Try the boundary rule for free</h2>
-          <p>The <code>arch-core-lite.mdc</code> rule, the boundary-guardian preview from the kit, is a free direct download from the repo. Drop it in <code>.cursor/rules/</code> and your AI will start refusing to suggest cross-layer violations today. No signup, no email.</p>
-          <a class="btn btn-primary btn-lg" href="https://github.com/agenticstandardcontact-byte/agentic-architect/blob/main/arch-core-lite.mdc?utm_source=site&utm_medium=essay_post_cta&utm_campaign=free_sample" target="_blank" rel="noopener">Download arch-core-lite.mdc →</a>
+          <h2>Free starter: 3 rules for .NET regressions</h2>
+          <p><code>result-pattern.mdc</code>, <code>di-scoping.mdc</code>, and <code>ef-core-reads.mdc</code>. Drop them into <code>.cursor/rules/</code> in about 3 minutes. Email capture on the homepage, no card.</p>
+          <a class="btn btn-accent btn-lg" href="../#free-kit-signup">Get the free kit &mdash; &pound;0 &rarr;</a>
         </div>
 
         <div class="post-cta post-cta-paid">
-          <h3>Or get the full DI auditor (and the other three rules).</h3>
-          <p>The complete Agentic Architect kit, 4 specialist rules including the full <code>dotnet-di.mdc</code> auditor + the persistence engine, is £9.00 one-time. Lifetime updates. MIT-licensed. 14-day no-questions refund.</p>
-          <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect — £9.00 →</a>
+          <h3>Lock your architecture into the AI's memory</h3>
+          <p>9 directory-scoped <code>.mdc</code> rules, ADR templates, and the Learning Log protocol. One Scoped-in-Singleton or missing <code>AsNoTracking()</code> in review usually costs more than &pound;9. One-time purchase, lifetime updates, <strong>30-day refund</strong>.</p>
+          <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the full kit &mdash; &pound;9.00 &rarr;</a>
         </div>
-
       </div>
     </article>
   </main>
@@ -186,15 +188,28 @@ builder.Services.AddMemoryCache(); // ← registers IMemoryCache as Singleton</c
       <div class="foot-cols">
         <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
         <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a><a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">GitHub</a></div>
-        <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit — £9.00</a></div>
+        <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit &mdash; &pound;9.00</a></div>
       </div>
     </div>
     <div class="container foot-bottom">
-      <span>© <span id="year">2026</span> Agentic Architect.</span>
-      <span>MIT-licensed rules · One-time payment</span>
+      <span>&copy; <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules &middot; One-time payment</span>
     </div>
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script>
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var menu = document.querySelector('.nav-links-panel');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open', !open);
+    });
+  })();
+  </script>
 </body>
 </html>
