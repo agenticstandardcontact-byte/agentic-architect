@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f17" />
+  <title>Cursor Rules for .NET Engineers — Scoped .mdc + LEARNING_LOG | Agentic Architect</title>
+  <meta name="description" content="How senior .NET teams use directory-scoped Cursor rules and a LEARNING_LOG so AI pair programming stops forgetting DI, EF Core, and Clean Architecture. Full kit £9.00 one-time." />
+  <meta name="keywords" content="Cursor rules for .NET, Cursor rules C#, AI coding rules, architectural persistence for Cursor, .mdc rules .NET" />
+  <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/learn/cursor-rules-dotnet.html" />
+
+  <meta property="og:title" content="Cursor Rules for .NET Engineers | Agentic Architect" />
+  <meta property="og:description" content="Scoped .mdc rules + LEARNING_LOG persistence for senior C#/.NET Cursor workflows. £9.00 one-time." />
+  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+  <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/learn/cursor-rules-dotnet.html" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../blog/blog.css" />
+  <script data-goatcounter="https://agentic-architect.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Cursor Rules for .NET Engineers",
+    "description": "Directory-scoped AI coding rules and architectural persistence for Cursor on C#/.NET codebases.",
+    "datePublished": "2026-06-04T12:00:00Z",
+    "dateModified": "2026-06-04T12:00:00Z",
+    "author": { "@type": "Organization", "name": "Agentic Architect" },
+    "mainEntityOfPage": "https://agenticstandardcontact-byte.github.io/agentic-architect/learn/cursor-rules-dotnet.html"
+  }
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="../" class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../#kit">What's Inside</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../blog/">Blog</a>
+      </nav>
+      <a class="btn btn-primary btn-sm nav-cta" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_nav&utm_campaign=paid_kit" target="_blank" rel="noopener">Buy now</a>
+    </div>
+  </header>
+
+  <main>
+    <article class="post">
+      <div class="container post-narrow">
+        <div class="post-meta">
+          <span class="post-tag">Guide · 6 min read</span>
+        </div>
+
+        <h1>Cursor rules for .NET engineers</h1>
+
+        <p class="post-lede">Generic Cursor prompts treat every C# repo like a tutorial sample. Senior teams need <strong>AI coding rules</strong> that load only where they apply, plus <strong>architectural persistence for Cursor</strong> so decisions survive new chats. This page is the map; the <a href="../">Agentic Architect kit</a> is the implementation.</p>
+
+        <h2>What "Cursor rules for .NET" actually means</h2>
+        <p>Cursor reads <code>.mdc</code> files from <code>.cursor/rules/</code>. When you scope a rule to <code>Infrastructure/**/*.cs</code>, EF Core guardrails fire on data access, not on your API layer. That is the difference between a 2,000-token preamble on every prompt and a sharp, file-aware assistant.</p>
+        <p>For .NET specifically you want separate rules for DI lifetimes, Result&lt;T&gt; discipline, EF reads, and layer boundaries. One monolithic "be a good architect" rule does not survive a real MediatR pipeline.</p>
+
+        <h2>Architectural persistence for Cursor</h2>
+        <p>Chat history is not memory. Persistence means a committed <code>LEARNING_LOG.md</code> plus a rule (<code>persistence.mdc</code>) that tells the agent to hydrate the log at session start and append ADR-style entries when you make non-obvious calls.</p>
+        <p>Example entry after you reject a suggestion:</p>
+        <pre><code>## ADR-009 — Order queries
+- Read paths use AsNoTracking via IOrderReadRepository.
+- No Include deeper than 2 levels on list endpoints.</code></pre>
+        <p>Next morning, new chat, same repo: the model reads entry #9 before touching <code>OrderRepository.cs</code>.</p>
+
+        <h2>Circuit breaker for hallucination loops</h2>
+        <p>When Cursor invents APIs that do not exist, most engineers become the circuit breaker manually. <code>bug-breaker.mdc</code> automates that: after repeated failed edits on one file, generation stops and the agent must re-read real sources.</p>
+
+        <h2>Related essays (free)</h2>
+        <ul>
+          <li><a href="../blog/01-the-context-tax.html">The Context Tax</a></li>
+          <li><a href="../blog/06-stop-cursor-ai-drift-dotnet.html">Stop Cursor AI drift on .NET</a></li>
+          <li><a href="../blog/07-cursor-efcore-patterns.html">EF Core patterns with Cursor</a></li>
+          <li><a href="../blog/05-cursor-vs-rider-dotnet.html">Cursor vs Rider for .NET</a></li>
+        </ul>
+
+        <hr class="post-divider" />
+
+        <div class="post-cta post-cta-paid">
+          <h2>Get the full rule pack</h2>
+          <p>Nine scoped <code>.mdc</code> rules, templates, hydrate prompt, Quickstart. <strong>£9.00</strong> one-time via Stripe. Lifetime updates. 30-day refund. MIT for team repos.</p>
+          <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_page&utm_campaign=paid_kit" target="_blank" rel="noopener">Buy now — £9.00 →</a>
+          <a class="btn btn-ghost btn-lg" href="../#kit" style="margin-top:12px">See what's included on the product page</a>
+        </div>
+
+        <div class="post-cta">
+          <h3>Free starter (3 rules)</h3>
+          <p><code>result-pattern</code>, <code>di-scoping</code>, <code>ef-core-reads</code> via email signup.</p>
+          <a class="btn btn-accent btn-lg" href="../#free-kit-signup">Free starter — £0</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand">
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <p>Cursor rules for .NET engineers who refuse context rot.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a></div>
+        <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Buy now — £9.00</a></div>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>© <span id="year">2026</span> Agentic Architect.</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

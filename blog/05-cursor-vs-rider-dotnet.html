@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -56,19 +56,22 @@
 
   <header class="nav">
     <div class="container nav-inner">
-      <a href="../" class="brand">
+      <a href="../" class="brand" aria-label="Agentic Architect home">
         <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
           <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
           <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
         <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
       </a>
-      <nav class="nav-links" aria-label="Primary">
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">Menu</button>
+      <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
         <a href="../#kit">What's Inside</a>
         <a href="../#pricing">Pricing</a>
-        <a href="./">Blog</a>
+        <a href="./" aria-current="page">Blog</a>
+        <a href="../hardware/">Hardware</a>
+        <a href="../learn/">Quick Fixes</a>
       </nav>
-      <a class="btn btn-primary btn-sm nav-cta" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_nav&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the Kit</a>
+      <a class="btn btn-primary btn-sm nav-cta" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_nav&utm_campaign=paid_kit" target="_blank" rel="noopener">Buy now</a>
     </div>
   </header>
 
@@ -82,7 +85,7 @@
         </div>
 
         <h1>Cursor vs JetBrains Rider for C#/.NET in 2026: <em>which to pay for</em></h1>
-        <p class="post-lede">Senior C#/.NET teams aren't really choosing between <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a> and <a href="https://www.jetbrains.com/rider/" target="_blank" rel="noopener">JetBrains Rider</a>. Most pay for both, wire them to share state, and refuse to pick a side. This is the honest comparison, the pricing math, and the 90-second setup that keeps the two tools from drifting apart on the same codebase.</p>
+        <p class="post-lede">Senior C#/.NET teams aren't really choosing between <a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a> and <a href="https://www.jetbrains.com/rider/" target="_blank" rel="noopener">JetBrains Rider</a> &mdash; they're paying for both, configuring them to share state, and refusing to choose. This essay is the honest comparison, the pricing math, and the 90-second setup that stops the two tools from drifting out of sync on the same codebase.</p>
 
         <h2>The wrong question (and the right one)</h2>
         <p>Search the .NET subreddit on any given week and you'll find a thread titled something like "Should I drop Rider for Cursor?" The answers split into two camps: "Cursor is the future, Rider is dying" and "Cursor is a glorified VS Code, Rider's debugger alone is worth the licence." Both miss the point.</p>
@@ -180,123 +183,19 @@ git commit -m &quot;chore: align Cursor + Rider on house style&quot;</code></pre
         <hr class="post-divider" />
 
         <div class="post-cta">
-          <h2>Get the free Starter Kit (3 rules, no card)</h2>
-          <p>The Agentic Architect Starter Kit contains <code>result-pattern.mdc</code>, <code>di-scoping.mdc</code>, and <code>ef-core-reads.mdc</code>, the three rules that stop the most expensive .NET regressions. Free. Installs in 3 minutes.</p>
-          <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/28EfZh4Ho3I51cig4GcIE00?utm_source=site&utm_medium=essay_post_cta&utm_campaign=free_kit" target="_blank" rel="noopener">Get the free starter kit &rarr;</a>
+          <h2>Free starter: 3 rules for .NET regressions</h2>
+          <p><code>result-pattern.mdc</code>, <code>di-scoping.mdc</code>, and <code>ef-core-reads.mdc</code>. Drop them into <code>.cursor/rules/</code> in about 3 minutes. Email capture on the homepage, no card.</p>
+          <a class="btn btn-accent btn-lg" href="../#free-kit-signup">Get the free kit &mdash; &pound;0 &rarr;</a>
         </div>
 
         <div class="post-cta post-cta-paid">
-          <h3>Stop paying the Context Tax across both tools.</h3>
-          <p>The full Agentic Architect Kit adds 6 more rules, 3 pre-written ADRs, and a prompt that hydrates your Learning Log from your existing codebase. &pound;9.00 one-time, lifetime updates, 30-day refund.</p>
+          <h3>Lock your architecture into the AI's memory</h3>
+          <p>9 directory-scoped <code>.mdc</code> rules, ADR templates, and the Learning Log protocol. One Scoped-in-Singleton or missing <code>AsNoTracking()</code> in review usually costs more than &pound;9. One-time purchase, lifetime updates, <strong>30-day refund</strong>.</p>
           <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the full kit &mdash; &pound;9.00 &rarr;</a>
         </div>
 
       </div>
-    
-<!-- ml-capture-injected -->
-<script>
-  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-  .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-  n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,
-  document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-  ml('account', '2387970');
-</script>
-<div class="container">
-<aside class="ml-capture" aria-label="Free starter kit signup">
-  <style>
-    .ml-capture {
-      background: #1a1f2e;
-      border: 1px solid #2d3748;
-      border-left: 3px solid #38bdf8;
-      border-radius: 6px;
-      padding: 1.5rem 2rem;
-      margin: 2.5rem 0;
-      font-family: inherit;
-    }
-    .ml-capture__eyebrow {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #38bdf8;
-      margin: 0 0 0.5rem;
-    }
-    .ml-capture__headline {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #e2e8f0;
-      margin: 0 0 0.4rem;
-      line-height: 1.3;
-    }
-    .ml-capture__sub {
-      font-size: 0.88rem;
-      color: #94a3b8;
-      margin: 0 0 1.25rem;
-      line-height: 1.5;
-    }
-    /* MailerLite injects its own form markup inside .ml-form-embedContainer.
-       These rules make it match our dark theme. */
-    .ml-capture .ml-form-embedContainer .ml-form-embedWrapper {
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
-    .ml-capture .ml-form-embedContainer .ml-form-fieldRow input {
-      background: #0f1117 !important;
-      border: 1px solid #2d3748 !important;
-      border-radius: 4px !important;
-      color: #e2e8f0 !important;
-      font-size: 0.9rem !important;
-      padding: 0.6rem 0.75rem !important;
-    }
-    .ml-capture .ml-form-embedContainer .ml-form-fieldRow input::placeholder {
-      color: #64748b !important;
-    }
-    .ml-capture .ml-form-embedContainer button[type="submit"] {
-      background: #38bdf8 !important;
-      color: #0f1117 !important;
-      font-weight: 700 !important;
-      border: none !important;
-      border-radius: 4px !important;
-      padding: 0.6rem 1.25rem !important;
-      cursor: pointer !important;
-      font-size: 0.9rem !important;
-    }
-    .ml-capture .ml-form-embedContainer button[type="submit"]:hover {
-      background: #7dd3fc !important;
-    }
-    .ml-capture__disclaimer {
-      font-size: 0.72rem;
-      color: #475569;
-      margin: 0.75rem 0 0;
-    }
-    .ml-capture__disclaimer a {
-      color: #64748b;
-    }
-  </style>
-
-  <div class="ml-capture__copy">
-    <p class="ml-capture__eyebrow">Free download</p>
-    <h3 class="ml-capture__headline">
-      Stop Cursor's 3 most common .NET regressions, free
-    </h3>
-    <p class="ml-capture__sub">
-      Get the Agentic Architect Starter Kit: 3 Cursor rules that prevent
-      <code>throw</code> instead of <code>Result&lt;T&gt;</code>, captive DI
-      dependencies, and missing <code>AsNoTracking()</code>. Installs in 3 minutes.
-    </p>
-  </div>
-
-  <!-- MailerLite embedded form -->
-  <div class="ml-embedded" data-form="w50Wv4"></div>
-
-  <p class="ml-capture__disclaimer">
-    Free. No spam. Unsubscribe any time. By subscribing you agree to the
-    <a href="/affiliate-disclosure.html">privacy &amp; disclosure policy</a>.
-  </p>
-</aside>
-</div>
-</article>
+    </article>
   </main>
 
   <footer class="footer">
@@ -318,5 +217,17 @@ git commit -m &quot;chore: align Cursor + Rider on house style&quot;</code></pre
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var menu = document.querySelector('.nav-links-panel');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open', !open);
+    });
+  })();
+  </script>
 </body>
 </html>

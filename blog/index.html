@@ -32,7 +32,8 @@
         </svg>
         <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
       </a>
-      <nav class="nav-links" aria-label="Primary">
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">Menu</button>
+      <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
         <a href="../#problem">The Problem</a>
         <a href="../#kit">What's Inside</a>
         <a href="../#pricing">Pricing</a>
@@ -79,6 +80,17 @@
     <p>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</p>
   </div>
 </li>
+          <li class="post-card">
+            <a href="08-cursor-vs-copilot-dotnet.html" class="post-link">
+              <div class="post-meta">
+                <time datetime="2026-06-02">June 2, 2026</time>
+                <span class="post-tag">.NET tooling</span>
+              </div>
+              <h2>Cursor vs GitHub Copilot for C#/.NET in 2026: which to pay for</h2>
+              <p>Real pricing, where each one wins on agentic .NET edits, where each one loses, and a straight verdict on which to pay for.</p>
+              <span class="post-read">Read post &rarr;</span>
+            </a>
+          </li>
 
           <li class="post-card" data-date="2026-06-02">
   <div class="post-link" style="cursor:default;">
@@ -133,18 +145,6 @@
               </div>
               <h2>How to use Cursor AI with Entity Framework Core (without blowing up your database)</h2>
               <p>Cursor AI generates N+1 queries, eager-loads entire databases, and skips AsNoTracking. Here's a rule-based guardrail system that catches 90% of EF Core mistakes before production.</p>
-              <span class="post-read">Read post →</span>
-            </a>
-          </li>
-
-          <li class="post-card">
-            <a href="06-stop-cursor-ai-drift-dotnet.html" class="post-link">
-              <div class="post-meta">
-                <time datetime="2026-05-30">May 30, 2026</time>
-                <span class="post-tag">.NET tooling</span>
-              </div>
-              <h2>How to stop Cursor AI forgetting your .NET architecture (the $9 fix)</h2>
-              <p>Cursor forgets your DI patterns, boundaries, and conventions every session. Here's a 4-rule framework that locks your architecture into the AI's long-term memory.</p>
               <span class="post-read">Read post →</span>
             </a>
           </li>
@@ -329,7 +329,7 @@
 
         <div class="blog-cta">
           <h3>Don't want to wait for the next post?</h3>
-          <p>The full kit — 4 specialist rules + the persistence engine — is £9.00 one-time.</p>
+          <p>The full kit — 9 specialist rules + the persistence engine — is £9.00 one-time.</p>
           <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=blog_index_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect →</a>
         </div>
       </div>
@@ -355,5 +355,6 @@
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="../script.js" defer></script>
 </body>
 </html>
