@@ -20,11 +20,13 @@
   </url>
   <url>
     <loc>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html</loc>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html</loc>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
