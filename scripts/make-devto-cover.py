@@ -4,7 +4,7 @@ Run from repo root:
     python scripts/make-devto-cover.py
 
 Source: assets/ai-kit-main.png
-Outputs: og-image-devto.jpg (used by devto-draft.yml and devto-weekly-digest.yml)
+Outputs: og-image-devto.jpg (dev.to workflows use .../og-image-devto.jpg?v=N — bump N after in-place JPEG updates)
 """
 from pathlib import Path
 

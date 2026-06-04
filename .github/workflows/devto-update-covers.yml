@@ -30,7 +30,8 @@ jobs:
 
           API = "https://dev.to/api"
           SITE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
-          COVER = f"{SITE}/og-image-devto.jpg"
+          # Bump ?v= when og-image-devto.jpg changes in-place — dev.to caches remote URLs by string.
+          COVER = f"{SITE}/og-image-devto.jpg?v=2"
 
           api_key = os.environ.get("DEVTO_API_KEY", "").strip()
           if not api_key:

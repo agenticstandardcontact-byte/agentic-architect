@@ -58,7 +58,7 @@ jobs:
           API = "https://dev.to/api"
           SITE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
           BLOG = f"{SITE}/blog/"
-          COVER = f"{SITE}/og-image-devto.jpg"
+          COVER = f"{SITE}/og-image-devto.jpg?v=2"
           KIT = "https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01"
           SAMPLE = f"https://github.com/agenticstandardcontact-byte/agentic-architect/blob/main/arch-core-lite.mdc"
           TAGS = ["csharp", "dotnet", "ai", "cursor"]
