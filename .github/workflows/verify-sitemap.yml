@@ -20,14 +20,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: XML well-formed (xmllint)
-        run: xmllint --noout sitemap.xml
-
-      - name: Sitemap bytes (no BOM, XML declaration, trailing newline)
+      - name: Sitemap bytes and well-formed XML (Python)
         run: |
           python3 <<'PY'
           import sys
           from pathlib import Path
+          from xml.etree import ElementTree as ET
+
+          # Well-formed XML (replaces xmllint; not installed on ubuntu-latest by default)
+          ET.parse("sitemap.xml")
 
           raw = Path("sitemap.xml").read_bytes()
           if raw.startswith(b"\xef\xbb\xbf"):
@@ -40,13 +41,12 @@ jobs:
               sys.exit("sitemap.xml must end with a newline")
           if not Path(".nojekyll").is_file():
               sys.exit(".nojekyll missing (disables Jekyll on GitHub Pages)")
-          print("OK: no BOM, XML header, trailing newline, .nojekyll present")
+          print("OK: well-formed XML, no BOM, header, trailing newline, .nojekyll present")
           PY
 
       - name: Sitemap loc and robots Sitemap line
         run: |
           python3 <<'PY'
-          import re
           import sys
           from pathlib import Path
           from xml.etree import ElementTree as ET
