@@ -122,3 +122,26 @@
   background: linear-gradient(135deg, rgba(255,181,71,0.18), rgba(255,138,61,0.08));
   border-color: rgba(255,181,71,0.45);
 }
+
+.post-related {
+  margin: 40px 0 8px;
+  padding: 24px 28px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.post-related h2 {
+  margin: 0 0 14px;
+  font-size: 1.15rem;
+}
+.post-related ul {
+  margin: 0 0 16px;
+  padding-left: 1.25rem;
+}
+.post-related li { margin-bottom: 8px; }
+.post-related-hub {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+.post-related-hub a { font-weight: 600; }
