@@ -42,8 +42,10 @@
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "Agentic Architect — Cursor Rules for .NET Engineers",
-    "description": "Nine scoped .mdc Cursor rules and a LEARNING_LOG persistence protocol for senior C#/.NET teams. One-time £9.00, lifetime updates.",
-    "image": "https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg",
+    "description": "Nine scoped .mdc Cursor rules and a LEARNING_LOG persistence protocol for senior C#/.NET teams. One-time £9.00 via Stripe, instant ZIP download, lifetime updates, 30-day refund.",
+    "image": [
+      "https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg"
+    ],
     "brand": { "@type": "Brand", "name": "Agentic Architect" },
     "category": "Developer Tools",
     "offers": {
@@ -52,7 +54,38 @@
       "priceCurrency": "GBP",
       "price": "9.00",
       "availability": "https://schema.org/InStock",
-      "seller": { "@type": "Organization", "name": "Agentic Architect" }
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": { "@type": "Organization", "name": "Agentic Architect" },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "GB",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 30,
+        "returnFees": "https://schema.org/FreeReturn"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "GBP"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
+          }
+        }
+      }
     }
   }
   </script>
@@ -100,7 +133,7 @@
         "name": "Does it work for non-.NET languages?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The persistence.mdc engine and bug-breaker.mdc are language-agnostic. arch-core.mdc and dotnet-di.mdc are tuned for C#/.NET. Non-.NET users get value from 2 of the 4 rules."
+          "text": "The persistence.mdc engine and bug-breaker.mdc are language-agnostic. Seven of the nine .mdc rules are tuned for C#/.NET (DI, EF Core, Result<T>, API, testing, and related guardrails). Non-.NET users still get value from the persistence and circuit-breaker rules."
         }
       },
       {
