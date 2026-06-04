@@ -145,6 +145,12 @@ Most public rules are monolithic — a single rule dumped on every prompt, blowi
 - **GitHub Issues:** [Open one →](https://github.com/agenticstandardcontact-byte/agentic-architect/issues)
 - **Website:** [agenticstandardcontact-byte.github.io/agentic-architect](https://agenticstandardcontact-byte.github.io/agentic-architect/)
 
+### Search Console (project site)
+
+GitHub Pages serves this repo under `/agentic-architect/`. Submit this sitemap URL in Google Search Console (URL-prefix property on the site root above), not `/sitemap.xml` at the domain root:
+
+`https://agenticstandardcontact-byte.github.io/agentic-architect/sitemap.xml`
+
 ---
 
 <div align="center">
