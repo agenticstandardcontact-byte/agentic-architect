@@ -58,6 +58,17 @@
       <div class="container">
         <ul class="post-list">
           <!-- DAILY-RULE-INSERTION-POINT -->
+          <li class="post-card" data-date="2026-06-04">
+  <div class="post-link" style="cursor:default;">
+    <div class="post-meta">
+      <time datetime="2026-06-04">June 04, 2026</time>
+      <span class="post-tag">Daily Rule</span>
+    </div>
+    <h2>Rule 22: BackgroundService Over Task.Run</h2>
+    <p>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</p>
+  </div>
+</li>
+
           <li class="post-card" data-date="2026-06-03">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">

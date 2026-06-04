@@ -151,5 +151,13 @@
       <description>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</description>
     </item>
 
+      <item>
+      <title>Rule 22: BackgroundService Over Task.Run</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-04</link>
+      <guid isPermaLink="false">daily-rule-2026-06-04</guid>
+      <pubDate>Thu, 04 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</description>
+    </item>
+
   </channel>
 </rss>
