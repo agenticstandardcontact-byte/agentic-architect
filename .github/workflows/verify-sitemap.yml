@@ -7,6 +7,7 @@ on:
     paths:
       - 'sitemap.xml'
       - 'robots.txt'
+      - '.nojekyll'
       - '.github/workflows/verify-sitemap.yml'
   pull_request:
     paths:
@@ -21,6 +22,26 @@ jobs:
 
       - name: XML well-formed (xmllint)
         run: xmllint --noout sitemap.xml
+
+      - name: Sitemap bytes (no BOM, XML declaration, trailing newline)
+        run: |
+          python3 <<'PY'
+          import sys
+          from pathlib import Path
+
+          raw = Path("sitemap.xml").read_bytes()
+          if raw.startswith(b"\xef\xbb\xbf"):
+              sys.exit("sitemap.xml must not have UTF-8 BOM")
+          if not raw.startswith(b"<?xml"):
+              sys.exit("sitemap.xml must start with <?xml")
+          if b"encoding=\"UTF-8\"" not in raw[:120] and b"encoding='UTF-8'" not in raw[:120]:
+              sys.exit("sitemap.xml must declare encoding UTF-8")
+          if raw[-1:] not in (b"\n", b"\r"):
+              sys.exit("sitemap.xml must end with a newline")
+          if not Path(".nojekyll").is_file():
+              sys.exit(".nojekyll missing (disables Jekyll on GitHub Pages)")
+          print("OK: no BOM, XML header, trailing newline, .nojekyll present")
+          PY
 
       - name: Sitemap loc and robots Sitemap line
         run: |
