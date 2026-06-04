@@ -1,0 +1,57 @@
+# Fail fast if sitemap.xml is not well-formed or loc URLs drift from project-site base.
+name: Verify sitemap
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - '.github/workflows/verify-sitemap.yml'
+  pull_request:
+    paths:
+      - 'sitemap.xml'
+      - 'robots.txt'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: XML well-formed (xmllint)
+        run: xmllint --noout sitemap.xml
+
+      - name: Sitemap loc and robots Sitemap line
+        run: |
+          python3 <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+
+          SITE_BASE = "https://agenticstandardcontact-byte.github.io/agentic-architect"
+          NS = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+
+          tree = ET.parse("sitemap.xml")
+          root = tree.getroot()
+          if root.tag != f"{{{NS['sm']}}}urlset":
+              sys.exit(f"root must be urlset, got {root.tag}")
+
+          locs = [e.text.strip() for e in root.findall("sm:url/sm:loc", NS) if e.text]
+          if not locs:
+              sys.exit("no <loc> entries")
+
+          bad = [u for u in locs if not u.startswith(SITE_BASE + "/") and u != SITE_BASE + "/"]
+          if bad:
+              for u in bad:
+                  print("loc outside project base:", u)
+              sys.exit(1)
+
+          robots = Path("robots.txt").read_text(encoding="utf-8")
+          expected = f"Sitemap: {SITE_BASE}/sitemap.xml"
+          if expected not in robots:
+              sys.exit(f"robots.txt must contain: {expected}")
+
+          print(f"OK: {len(locs)} URLs, robots Sitemap line present")
+          PY
