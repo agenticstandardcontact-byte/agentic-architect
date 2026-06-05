@@ -159,5 +159,13 @@
       <description>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</description>
     </item>
 
+      <item>
+      <title>Rule 23: No Bool Flag Parameters</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-05</link>
+      <guid isPermaLink="false">daily-rule-2026-06-05</guid>
+      <pubDate>Fri, 05 Jun 2026 09:00:00 +0000</pubDate>
+      <description>SendEmail(string to, bool isHtml) should be SendHtmlEmail and SendPlainEmail. Bool flags hide branching that belongs in the type system. Flag any method signature with two or more bool parameters as a refactor candidate.</description>
+    </item>
+
   </channel>
 </rss>
