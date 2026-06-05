@@ -61,10 +61,16 @@
         "applicableCountry": "GB",
         "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
         "merchantReturnDays": 30,
-        "returnFees": "https://schema.org/FreeReturn"
+        "returnFees": "https://schema.org/FreeReturn",
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "merchantReturnLink": "https://agenticstandardcontact-byte.github.io/agentic-architect/#faq"
       },
       "shippingDetails": {
         "@type": "OfferShippingDetails",
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "GB"
+        },
         "shippingRate": {
           "@type": "MonetaryAmount",
           "value": "0",
