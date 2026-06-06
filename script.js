@@ -72,7 +72,7 @@
 
   /* ---------- Scroll reveals ---------- */
   const revealTargets = document.querySelectorAll(
-    '.section-head, .pain-card, .ba-col, .kit-card, .step, .quote, .two-col-card, .pricing-card, .bonus-stack, .math-grid, .final-cta, .trust-strip'
+    '.section-head, .pain-card, .ba-col, .kit-card, .step, .quote, .two-col-card, .pricing-card, .bonus-stack, .math-grid, .final-cta, .trust-strip, .hero-details-inner, .example-card, .related-card'
   );
   revealTargets.forEach((el) => el.classList.add('reveal'));
 
