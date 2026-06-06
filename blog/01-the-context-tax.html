@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -10,7 +10,7 @@
   <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html" />
   <link rel="alternate" type="text/html" href="https://dev.to/agentic_standard/the-context-tax-why-every-cursor-session-costs-you-15-minutes-cl1" title="Also published on dev.to" />
   <meta property="og:title" content="The Context Tax: Why Every Cursor Session Costs You 15 Minutes" />
-  <meta property="og:description" content="The hidden cost senior engineers pay every morning — and a four-rule architecture for eliminating it." />
+  <meta property="og:description" content="The hidden cost senior engineers pay every morning � and a four-rule architecture for eliminating it." />
   <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
   <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html" />
   <meta property="og:type" content="article" />
@@ -77,7 +77,7 @@
           <time datetime="2026-05-18">May 18, 2026</time>
           <span class="post-tag">Architecture</span>
           <span class="post-read-time">7 min read</span>
-          <a class="post-tag" href="https://dev.to/agentic_standard/the-context-tax-why-every-cursor-session-costs-you-15-minutes-cl1" target="_blank" rel="noopener" style="text-decoration:none;">Also on dev.to →</a>
+          <a class="post-tag" href="https://dev.to/agentic_standard/the-context-tax-why-every-cursor-session-costs-you-15-minutes-cl1" target="_blank" rel="noopener" style="text-decoration:none;">Also on dev.to ?</a>
         </div>
 
         <h1>The Context Tax: Why every Cursor session costs you 15 minutes</h1>
@@ -104,7 +104,7 @@
           <li><strong>15 minutes per day</strong> spent on re-context and correcting drift.</li>
           <li><strong>~250 working days per year.</strong></li>
           <li>That's <strong>62.5 hours</strong>. Nearly <strong>eight full working days</strong> annually.</li>
-          <li>At a UK senior dev billing rate of around <strong>£75/hour</strong>, that's <strong>£4,687.50</strong> of senior time, per engineer, per year, bleeding out invisibly.</li>
+          <li>At a UK senior dev billing rate of around <strong>�75/hour</strong>, that's <strong>�4,687.50</strong> of senior time, per engineer, per year, bleeding out invisibly.</li>
         </ul>
         <p>On a five-engineer team that's the cost of a junior hire.</p>
 
@@ -130,7 +130,7 @@
         <p>I packaged the pattern I've been using on real .NET codebases into four <code>.mdc</code> files Cursor reads natively:</p>
         <ul>
           <li><strong><code>arch-core.mdc</code></strong>, boundary enforcement. Detects which layer the current file lives in and refuses suggestions that cross it.</li>
-          <li><strong><code>dotnet-di.mdc</code></strong>, DI auditor. Catches <code>Scoped → Singleton</code> capture, <code>HttpClient</code> instantiation, <code>IConfiguration</code> leaks into business logic.</li>
+          <li><strong><code>dotnet-di.mdc</code></strong>, DI auditor. Catches <code>Scoped ? Singleton</code> capture, <code>HttpClient</code> instantiation, <code>IConfiguration</code> leaks into business logic.</li>
           <li><strong><code>bug-breaker.mdc</code></strong>, the circuit breaker. Watches for repeated failed attempts on the same problem and forces re-reading instead of doubling down.</li>
           <li><strong><code>persistence.mdc</code></strong>, the engine. Maintains <code>LEARNING_LOG.md</code> across sessions. Auto-appends decisions in an ADR-style format. Hydrates the AI on session start.</li>
         </ul>
@@ -140,13 +140,13 @@
         <p>Monday morning, two months in. New chat:</p>
         <blockquote>"Add Redis caching to OrderService."</blockquote>
         <p>The AI responds:</p>
-        <blockquote>"Detected Scoped lifetime conflict with <code>IMemoryCache</code> (Singleton). Following Log Entry #27: 'Prefer <code>IDistributedCache</code> abstraction in <code>/Infrastructure/Caching</code>.' Applying decorator pattern via Scrutor per <code>arch-core.mdc §3</code>..."</blockquote>
+        <blockquote>"Detected Scoped lifetime conflict with <code>IMemoryCache</code> (Singleton). Following Log Entry #27: 'Prefer <code>IDistributedCache</code> abstraction in <code>/Infrastructure/Caching</code>.' Applying decorator pattern via Scrutor per <code>arch-core.mdc �3</code>..."</blockquote>
         <p>No preamble. No correction loop. The AI already knows.</p>
 
         <nav class="post-related" aria-label="Keep reading">
           <h2>Keep reading</h2>
           <ul>
-          <li><a href="02-scoped-singleton-di-bug.html">Scoped→Singleton DI bug</a></li>
+          <li><a href="02-scoped-singleton-di-bug.html">Scoped?Singleton DI bug</a></li>
           <li><a href="06-stop-cursor-ai-drift-dotnet.html">Stop Cursor drift on .NET</a></li>
           </ul>
           <p class="post-related-hub">Kit: <a href="../">Agentic Architect</a> &middot; Local models: <a href="../hardware/">Hardware hub</a></p>
@@ -178,6 +178,7 @@
       <div class="foot-cols">
         <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
         <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a><a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">GitHub</a></div>
+        <div><h4>Legal</h4><a href="../privacy-policy.html">Privacy Policy</a><a href="../terms-of-service.html">Terms of Service</a><a href="../affiliate-disclosure.html">Affiliate Disclosure</a></div>
         <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit &mdash; &pound;9.00</a></div>
       </div>
     </div>
