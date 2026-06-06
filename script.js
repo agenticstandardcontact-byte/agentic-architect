@@ -14,20 +14,38 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Mobile nav (hamburger + auto-close) ---------- */
+  /* ---------- Mobile nav (overlay panel + auto-close) ---------- */
   const navToggle = document.querySelector('.nav-toggle');
   const navPanel = document.querySelector('.nav-links-panel');
+  const navCta = document.querySelector('.nav-cta');
   if (navToggle && navPanel) {
+    let backdrop = document.querySelector('.nav-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'nav-backdrop';
+      backdrop.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(backdrop);
+    }
+
+    if (navCta && !navPanel.querySelector('.nav-menu-cta')) {
+      const mobileCta = navCta.cloneNode(true);
+      mobileCta.classList.remove('nav-cta');
+      mobileCta.classList.add('nav-menu-cta');
+      navPanel.appendChild(mobileCta);
+    }
+
     const closeNav = () => {
       navToggle.setAttribute('aria-expanded', 'false');
       navToggle.setAttribute('aria-label', 'Open menu');
       navPanel.classList.remove('open');
+      backdrop.classList.remove('open');
       document.body.classList.remove('nav-open');
     };
     const openNav = () => {
       navToggle.setAttribute('aria-expanded', 'true');
       navToggle.setAttribute('aria-label', 'Close menu');
       navPanel.classList.add('open');
+      backdrop.classList.add('open');
       document.body.classList.add('nav-open');
     };
 
@@ -36,6 +54,8 @@
       if (isOpen) closeNav();
       else openNav();
     });
+
+    backdrop.addEventListener('click', closeNav);
 
     navPanel.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => closeNav());
