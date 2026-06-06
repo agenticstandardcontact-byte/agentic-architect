@@ -498,7 +498,57 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 }
 
 @media (min-width: 821px) {
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 0 24px;
+    min-height: 52px;
+  }
+  .brand {
+    flex-shrink: 0;
+    margin-right: 28px;
+  }
+  .brand-text { font-size: 0.95rem; }
+  .nav-links-panel {
+    display: flex;
+    flex: 1;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 24px;
+    min-width: 0;
+  }
+  .nav-links-panel > a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text);
+    padding: 0;
+    white-space: nowrap;
+    border: none;
+    min-height: auto;
+    line-height: 1.4;
+    display: inline;
+  }
+  .nav-links-panel > a:hover { color: var(--brand); }
+  .nav-ctas {
+    flex-shrink: 0;
+    margin-left: 20px;
+    gap: 10px;
+  }
+  .nav-ctas .btn-sm {
+    font-size: 0.8125rem;
+    padding: 7px 14px;
+  }
+  .nav-toggle { display: none !important; }
   .nav-menu-ctas { display: none !important; }
+}
+
+@media (min-width: 821px) and (max-width: 1100px) {
+  .nav-links-panel { gap: 16px; }
+  .nav-links-panel > a { font-size: 0.8125rem; }
+  .brand { margin-right: 20px; }
+  .nav-ctas { margin-left: 14px; }
 }
 
 /* =========================================================
