@@ -1,0 +1,46 @@
+/* Shared layout for legal / policy pages */
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --radius: 6px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  padding: 2rem 1rem;
+}
+.legal-container { max-width: 680px; margin: 0 auto; }
+.legal-header { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.legal-header a { color: var(--accent); text-decoration: none; font-size: 0.875rem; }
+.legal-header a:hover { text-decoration: underline; }
+.legal-header h1 { font-size: 1.75rem; font-weight: 600; color: #e6edf3; margin-top: 0.5rem; }
+.legal-meta { color: var(--muted); font-size: 0.875rem; margin-top: 0.25rem; }
+.legal-container h2 { font-size: 1.125rem; font-weight: 600; color: #e6edf3; margin: 2rem 0 0.75rem; }
+.legal-container p { margin-bottom: 1rem; }
+.legal-container a { color: var(--accent); }
+.legal-container a:hover { text-decoration: underline; }
+.legal-container ul { margin: 0 0 1rem 1.25rem; line-height: 1.8; }
+.legal-callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.legal-callout p:last-child { margin-bottom: 0; }
+.legal-container table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; }
+.legal-container th { text-align: left; padding: 0.5rem 0.75rem; background: var(--surface); color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--border); }
+.legal-container td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+.legal-container tr:last-child td { border-bottom: none; }
+.legal-footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.875rem; }
+.legal-footer a { color: var(--muted); }
+.legal-footer p { margin-bottom: 0.5rem; }

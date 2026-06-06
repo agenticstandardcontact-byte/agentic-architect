@@ -1,16 +1,16 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
-  <title>Teach Cursor to Use Result&lt;T&gt; Instead of throw in C# â€” A One-Rule Fix</title>
+  <title>Teach Cursor to Use Result&lt;T&gt; Instead of throw in C# — A One-Rule Fix</title>
   <meta name="description" content="Your codebase uses the Result&lt;T&gt; or ErrorOr error model. Cursor keeps suggesting throw and null on every new method. Here's the one Cursor rule that teaches it to respect the pattern across sessions." />
   <meta name="keywords" content="Cursor Result pattern C#, ErrorOr Cursor, teach AI Result instead of throw, C# error handling AI, Cursor .NET rules" />
   <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/learn/cursor-result-pattern-csharp.html" />
 
   <meta property="og:title" content="Teach Cursor to Use Result&lt;T&gt; Instead of throw in C#" />
-  <meta property="og:description" content="Stop the AI from undoing your Result/ErrorOr error model with throw and null on every new prompt â€” one rule, committed once." />
+  <meta property="og:description" content="Stop the AI from undoing your Result/ErrorOr error model with throw and null on every new prompt — one rule, committed once." />
   <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
   <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/learn/cursor-result-pattern-csharp.html" />
   <meta property="og:type" content="article" />
@@ -75,18 +75,18 @@
     <article class="post">
       <div class="container post-narrow">
         <div class="post-meta">
-          <span class="post-tag">Quick Answer Â· 3 min read</span>
+          <span class="post-tag">Quick Answer · 3 min read</span>
         </div>
 
         <h1>Teach Cursor to use <code>Result&lt;T&gt;</code> instead of <code>throw</code> in C#</h1>
 
-        <p class="post-lede">Your team standardised on <code>Result&lt;T&gt;</code> (or <a href="https://github.com/amantinband/error-or" target="_blank" rel="noopener">ErrorOr</a>, or your own discriminated-union helper). Yet every new method Cursor writes uses <code>throw new InvalidOperationException(...)</code> or returns <code>null</code>. You correct it. The next prompt forgets. This is not a model intelligence problem â€” it is a rule problem. Here is the one Cursor rule that teaches the AI to respect the pattern across sessions.</p>
+        <p class="post-lede">Your team standardised on <code>Result&lt;T&gt;</code> (or <a href="https://github.com/amantinband/error-or" target="_blank" rel="noopener">ErrorOr</a>, or your own discriminated-union helper). Yet every new method Cursor writes uses <code>throw new InvalidOperationException(...)</code> or returns <code>null</code>. You correct it. The next prompt forgets. This is not a model intelligence problem — it is a rule problem. Here is the one Cursor rule that teaches the AI to respect the pattern across sessions.</p>
 
         <h2>The short answer</h2>
-        <p>Cursor will keep suggesting <code>throw</code> until you commit a <code>.cursor/rules/error-model.mdc</code> file that says, in plain language, "<em>this codebase returns <code>Result&lt;T&gt;</code>, never throws for expected failure paths.</em>" Without that rule, the AI defaults to the dominant pattern in its training data â€” which is exception-based error handling, because that is what Stack Overflow shows. With it, the AI defaults to your project's pattern, because the rule loads on every prompt that touches a return type.</p>
+        <p>Cursor will keep suggesting <code>throw</code> until you commit a <code>.cursor/rules/error-model.mdc</code> file that says, in plain language, "<em>this codebase returns <code>Result&lt;T&gt;</code>, never throws for expected failure paths.</em>" Without that rule, the AI defaults to the dominant pattern in its training data — which is exception-based error handling, because that is what Stack Overflow shows. With it, the AI defaults to your project's pattern, because the rule loads on every prompt that touches a return type.</p>
 
         <h2>Why your corrections don't stick</h2>
-        <p>When you tell Cursor "use <code>Result&lt;T&gt;</code> not throw", you are giving it a one-shot instruction inside a chat. The next chat â€” or the next time the context window rolls over â€” that instruction is gone. The model goes back to its training-data prior, which is <em>most C# code in the wild throws</em>. You are not fighting the AI; you are fighting the statistical centre of gravity of every C# tutorial ever written.</p>
+        <p>When you tell Cursor "use <code>Result&lt;T&gt;</code> not throw", you are giving it a one-shot instruction inside a chat. The next chat — or the next time the context window rolls over — that instruction is gone. The model goes back to its training-data prior, which is <em>most C# code in the wild throws</em>. You are not fighting the AI; you are fighting the statistical centre of gravity of every C# tutorial ever written.</p>
         <p>A committed rule wins because it is loaded into the AI's context <em>every prompt</em>, not once. It does not rely on you remembering to re-explain.</p>
 
         <h2>What the rule should contain</h2>
@@ -99,24 +99,24 @@
         </ol>
 
         <h2>The fix in 60 seconds</h2>
-        <p>Add a 30-line <code>error-model.mdc</code> to <code>.cursor/rules/</code> with the four points above. Commit it. The very next prompt that touches a service method will return <code>Result&lt;T&gt;</code> by default. You will still get the occasional drift â€” usually when Cursor is editing code outside your service layer â€” at which point you can either scope the rule more tightly (only on files under <code>/Application/</code>, for example) or accept the friction at the boundary.</p>
+        <p>Add a 30-line <code>error-model.mdc</code> to <code>.cursor/rules/</code> with the four points above. Commit it. The very next prompt that touches a service method will return <code>Result&lt;T&gt;</code> by default. You will still get the occasional drift — usually when Cursor is editing code outside your service layer — at which point you can either scope the rule more tightly (only on files under <code>/Application/</code>, for example) or accept the friction at the boundary.</p>
 
         <h2>Want the full picture?</h2>
         <p>The long-form essay walks through the worked example with FluentResults, shows the exact rule content, and covers the edge cases (FluentValidation results, MediatR handlers, ASP.NET Core minimal-API endpoints).</p>
-        <p><a href="../blog/04-cursor-result-not-throw.html">â†’ Read: Teach Cursor Result&lt;T&gt; instead of throwing</a></p>
+        <p><a href="../blog/04-cursor-result-not-throw.html">? Read: Teach Cursor Result&lt;T&gt; instead of throwing</a></p>
 
         <hr class="post-divider" />
 
         <div class="post-cta">
           <h2>Try the boundary rule for free</h2>
-          <p>The <code>arch-core-lite.mdc</code> rule is the boundary-guardian preview from the kit â€” it enforces the architectural boundary on every Cursor suggestion. No signup, no email.</p>
-          <a class="btn btn-primary btn-lg" href="https://github.com/agenticstandardcontact-byte/agentic-architect/blob/main/arch-core-lite.mdc?utm_source=site&utm_medium=learn_page&utm_campaign=free_sample" target="_blank" rel="noopener">Download arch-core-lite.mdc â†’</a>
+          <p>The <code>arch-core-lite.mdc</code> rule is the boundary-guardian preview from the kit — it enforces the architectural boundary on every Cursor suggestion. No signup, no email.</p>
+          <a class="btn btn-primary btn-lg" href="https://github.com/agenticstandardcontact-byte/agentic-architect/blob/main/arch-core-lite.mdc?utm_source=site&utm_medium=learn_page&utm_campaign=free_sample" target="_blank" rel="noopener">Download arch-core-lite.mdc ?</a>
         </div>
 
         <div class="post-cta post-cta-paid">
           <h3>Or get the full kit (four rules + Learning Log engine).</h3>
-          <p>The complete Agentic Architect kit â€” 4 specialist rules + the persistence engine for teaching Cursor your project's decisions â€” is Â£9.00 one-time. Lifetime updates. MIT-licensed. 14-day refund.</p>
-          <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_page&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect â€” Â£9.00 â†’</a>
+          <p>The complete Agentic Architect kit — 4 specialist rules + the persistence engine for teaching Cursor your project's decisions — is £9.00 one-time. Lifetime updates. MIT-licensed. 14-day refund.</p>
+          <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_page&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect — £9.00 ?</a>
         </div>
 
       </div>
@@ -132,12 +132,13 @@
       <div class="foot-cols">
         <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
         <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a><a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">GitHub</a></div>
-        <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit â€” Â£9.00</a></div>
+        <div><h4>Legal</h4><a href="../privacy-policy.html">Privacy Policy</a><a href="../terms-of-service.html">Terms of Service</a><a href="../affiliate-disclosure.html">Affiliate Disclosure</a></div>
+        <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit — £9.00</a></div>
       </div>
     </div>
     <div class="container foot-bottom">
-      <span>Â© <span id="year">2026</span> Agentic Architect.</span>
-      <span>MIT-licensed rules Â· One-time payment</span>
+      <span>© <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules · One-time payment</span>
     </div>
   </footer>
 

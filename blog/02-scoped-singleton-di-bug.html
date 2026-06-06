@@ -1,16 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
-  <title>The Scoped→Singleton DI Bug Your AI Just Suggested</title>
+  <title>The Scoped?Singleton DI Bug Your AI Just Suggested</title>
   <meta name="description" content="The .NET dependency-injection lifetime bug that ships to production silently. Why AI assistants suggest it. And the one Cursor rule that catches it before merge." />
   <meta name="keywords" content="C# dependency injection, .NET DI lifetimes, Scoped Singleton bug, captured dependency, IServiceCollection, Cursor AI, AI code review" />
   <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html" />
 
-  <meta property="og:title" content="The Scoped→Singleton DI Bug Your AI Just Suggested" />
-  <meta property="og:description" content="The .NET lifetime bug that ships silently — and the Cursor rule that catches it before merge." />
+  <meta property="og:title" content="The Scoped?Singleton DI Bug Your AI Just Suggested" />
+  <meta property="og:description" content="The .NET lifetime bug that ships silently � and the Cursor rule that catches it before merge." />
   <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
   <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html" />
   <meta property="og:type" content="article" />
@@ -31,7 +31,7 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "The Scoped→Singleton DI Bug Your AI Just Suggested (and How to Catch It)",
+    "headline": "The Scoped?Singleton DI Bug Your AI Just Suggested (and How to Catch It)",
     "datePublished": "2026-05-19T08:00:00Z",
     "dateModified": "2026-05-19T08:00:00Z",
     "author": { "@type": "Organization", "name": "Agentic Architect" },
@@ -81,7 +81,7 @@
           <span class="post-read-time">6 min read</span>
         </div>
 
-        <h1>The Scoped→Singleton DI bug your AI just suggested (and how to catch it)</h1>
+        <h1>The Scoped?Singleton DI bug your AI just suggested (and how to catch it)</h1>
         <p class="post-lede">Of all the bugs that ship to production silently, the captured-dependency lifetime bug is one of the most expensive. It compiles. It passes your tests. It runs fine in dev. Then in production, under load, it starts corrupting data across requests. And AI assistants suggest it constantly. I'll walk through why, and the one Cursor rule that catches it before merge.</p>
 
         <h2>The bug, in 30 lines</h2>
@@ -111,7 +111,7 @@ public class OrderService : IOrderService
 // Program.cs
 builder.Services.AddDbContext&lt;OrderDbContext&gt;(...);
 builder.Services.AddScoped&lt;IOrderService, OrderService&gt;();
-builder.Services.AddMemoryCache(); // ← registers IMemoryCache as Singleton</code></pre>
+builder.Services.AddMemoryCache(); // ? registers IMemoryCache as Singleton</code></pre>
 
         <p>Looks correct. Compiles. Tests pass. Shipped.</p>
 
@@ -123,7 +123,7 @@ builder.Services.AddMemoryCache(); // ← registers IMemoryCache as Singleton</c
 
         <h2>Why AI assistants suggest this constantly</h2>
         <p>The patterns the AI has seen most often in its training data, short examples, blog tutorials, StackOverflow answers, almost always omit DI registration. A typical "caching with IMemoryCache" snippet looks like ten lines, with no reference to where the service is registered or with what lifetime.</p>
-        <p>The AI learned the surface pattern (<em>"inject IMemoryCache, call .Set"</em>) without the surrounding constraint (<em>"…unless the consumer is Scoped and the cached value graph reaches into Scoped infrastructure"</em>). When you ask it to add caching to <em>your</em> codebase, it pattern-matches against the surface form. The constraint is invisible to it.</p>
+        <p>The AI learned the surface pattern (<em>"inject IMemoryCache, call .Set"</em>) without the surrounding constraint (<em>"�unless the consumer is Scoped and the cached value graph reaches into Scoped infrastructure"</em>). When you ask it to add caching to <em>your</em> codebase, it pattern-matches against the surface form. The constraint is invisible to it.</p>
         <p>This isn't a "the AI is dumb" critique. <strong>Most senior developers ship this exact bug at least once.</strong> The patterns in the wild teach the wrong lesson.</p>
 
         <h2>The five lifetime traps to teach the AI</h2>
@@ -200,6 +200,7 @@ builder.Services.AddMemoryCache(); // ← registers IMemoryCache as Singleton</c
       <div class="foot-cols">
         <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
         <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a><a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">GitHub</a></div>
+        <div><h4>Legal</h4><a href="../privacy-policy.html">Privacy Policy</a><a href="../terms-of-service.html">Terms of Service</a><a href="../affiliate-disclosure.html">Affiliate Disclosure</a></div>
         <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit &mdash; &pound;9.00</a></div>
       </div>
     </div>
