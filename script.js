@@ -14,15 +14,41 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Mobile nav ---------- */
+  /* ---------- Mobile nav (hamburger + auto-close) ---------- */
   const navToggle = document.querySelector('.nav-toggle');
   const navPanel = document.querySelector('.nav-links-panel');
   if (navToggle && navPanel) {
+    const closeNav = () => {
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open menu');
+      navPanel.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    };
+    const openNav = () => {
+      navToggle.setAttribute('aria-expanded', 'true');
+      navToggle.setAttribute('aria-label', 'Close menu');
+      navPanel.classList.add('open');
+      document.body.classList.add('nav-open');
+    };
+
     navToggle.addEventListener('click', () => {
-      const open = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', String(!open));
-      navPanel.classList.toggle('open', !open);
+      const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeNav();
+      else openNav();
     });
+
+    navPanel.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => closeNav());
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navPanel.classList.contains('open')) closeNav();
+    });
+
+    const desktopMQ = window.matchMedia('(min-width: 821px)');
+    const onDesktop = (e) => { if (e.matches) closeNav(); };
+    if (desktopMQ.addEventListener) desktopMQ.addEventListener('change', onDesktop);
+    else desktopMQ.addListener(onDesktop);
   }
 
   /* ---------- Countdown (rolling 48h, persisted) ---------- */

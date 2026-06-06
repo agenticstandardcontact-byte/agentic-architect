@@ -63,7 +63,7 @@
         </svg>
         <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
       </a>
-      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">Menu</button>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu"><span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
       <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
         <a href="../#kit">What's Inside</a>
         <a href="../#pricing">Pricing</a>
@@ -190,17 +190,6 @@
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script>
-  (function () {
-    var btn = document.querySelector('.nav-toggle');
-    var menu = document.querySelector('.nav-links-panel');
-    if (!btn || !menu) return;
-    btn.addEventListener('click', function () {
-      var open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!open));
-      menu.classList.toggle('open', !open);
-    });
-  })();
-  </script>
+  <script src="../script.js" defer></script>
 </body>
 </html>
