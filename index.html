@@ -254,7 +254,7 @@
           </h1>
 
           <p class="hero-value">
-            Cursor rules for .NET engineers who are tired of <span class="grad">re-explaining the same architecture</span> every morning.
+            Cursor rules for .NET engineers who are tired of re-explaining the same architecture every morning.
           </p>
 
           <p class="hero-audience">
@@ -325,12 +325,12 @@
     <section class="hero-details" aria-label="Product summary">
       <div class="container hero-details-inner">
         <p class="hero-sub">
-          <b>What it is:</b> nine scoped <code>.mdc</code> files and a <code>LEARNING_LOG.md</code> protocol you commit beside your code.
-          <b>Who it's for:</b> staff-level .NET teams protecting Clean Architecture, MediatR, Result&lt;T&gt;, and EF Core boundaries.
-          <b>Why it matters:</b> Cursor has no memory between chats; this is the persistence layer that stops Wednesday drift.
+          <span class="fact-label">What it is:</span> nine scoped <code>.mdc</code> files and a <code>LEARNING_LOG.md</code> protocol you commit beside your code.
+          <span class="fact-label">Who it's for:</span> staff-level .NET teams protecting Clean Architecture, MediatR, Result&lt;T&gt;, and EF Core boundaries.
+          <span class="fact-label">Why it matters:</span> Cursor has no memory between chats; this is the persistence layer that stops Wednesday drift.
         </p>
         <ul class="hero-bullets hero-bullets-compact">
-          <li><span class="check">✓</span> <b>£9.00</b> one-time (Stripe checkout, instant ZIP)</li>
+          <li><span class="check">✓</span> <span class="price-em">£9.00</span> one-time (Stripe checkout, instant ZIP)</li>
           <li><span class="check">✓</span> 9 production <code>.mdc</code> rules, directory-scoped</li>
           <li><span class="check">✓</span> Stateful log + hallucination circuit breaker</li>
           <li><span class="check">✓</span> MIT license — safe for team repos</li>
@@ -343,10 +343,9 @@
       <div class="container">
         <div class="section-head">
           <span class="kicker">The Hidden Cost</span>
-          <h2>You're Paying the <span class="grad">"Context Tax"</span> Every Single Morning.</h2>
+          <h2>Cursor has no memory between sessions.</h2>
           <p class="lede">
-            Be honest. The first 15 minutes of every Cursor session, you're not coding —
-            you're <b>re-explaining your codebase to a goldfish</b>.
+            The first 15 minutes of every Cursor session, you're not coding — you're re-explaining your codebase from scratch.
           </p>
         </div>
 
@@ -354,17 +353,17 @@
           <div class="pain-card">
             <div class="pain-icon">⏱</div>
             <h3>15 mins/day, lost to re-context</h3>
-            <p>That's <b>62 hours a year</b> typing the same "we use Mediator and Result&lt;T&gt; in this project…" preamble. Your senior salary deserves better.</p>
+            <p>That's 62 hours a year typing the same "we use Mediator and Result&lt;T&gt; in this project…" preamble. Your senior salary deserves better.</p>
           </div>
           <div class="pain-card">
             <div class="pain-icon">🧠</div>
             <h3>The AI "drifts" by Wednesday</h3>
-            <p>By mid-week it's suggesting <code>HttpClient</code> instantiations in your repository layer. Generic prompts can't enforce <b>your</b> SOLID boundaries.</p>
+            <p>By mid-week it's suggesting <code>HttpClient</code> instantiations in your repository layer. Generic prompts can't enforce your SOLID boundaries.</p>
           </div>
           <div class="pain-card">
             <div class="pain-icon">🌀</div>
             <h3>Hallucination loops cost hours</h3>
-            <p>The AI invents methods, doubles down when corrected, and burns tokens. There's no <b>circuit breaker</b>. So you become one.</p>
+            <p>The AI invents methods, doubles down when corrected, and burns tokens. There's no circuit breaker. So you become one.</p>
           </div>
           <div class="pain-card">
             <div class="pain-icon">📉</div>
@@ -374,7 +373,7 @@
         </div>
 
         <div class="pain-cta">
-          <p>This isn't a Cursor problem. It's a <b>persistence</b> problem.</p>
+          <p>This isn't a Cursor problem. It's a persistence problem.</p>
           <a class="btn btn-primary" href="#solution">Show me the fix ↓</a>
         </div>
 
@@ -386,7 +385,7 @@
     </section>
 
     <!-- ========== SOLUTION ========== -->
-    <section id="solution" class="section section-alt">
+    <section id="solution" class="section section-dark">
       <div class="container">
         <div class="section-head center">
           <span class="kicker">The Persistence Protocol</span>
@@ -431,12 +430,12 @@ Ask user which lookup method exists.</code></pre>
             <div class="ba-label">AFTER</div>
             <h3>Cursor with Agentic Architect</h3>
             <ul>
-              <li><span class="ok">✓</span> Sessions start <b>hydrated</b> — log auto-loads</li>
+              <li><span class="ok">✓</span> Sessions start hydrated — log auto-loads</li>
               <li><span class="ok">✓</span> Knows every architectural decision you've made</li>
               <li><span class="ok">✓</span> Refuses patterns that violate your boundaries</li>
-              <li><span class="ok">✓</span> <b>Circuit breaker</b> halts hallucination loops</li>
-              <li><span class="ok">✓</span> <b>Scoped loading</b> — only relevant rules per file</li>
-              <li><span class="ok">✓</span> Architecture <b>compounds</b> over time</li>
+              <li><span class="ok">✓</span> Circuit breaker halts hallucination loops</li>
+              <li><span class="ok">✓</span> Scoped loading — only relevant rules per file</li>
+              <li><span class="ok">✓</span> Architecture compounds over time</li>
             </ul>
           </div>
         </div>
@@ -498,7 +497,7 @@ Ask user which lookup method exists.</code></pre>
               <span class="kit-tag tag-amber">Circuit Breaker</span>
             </div>
             <h3>The Hallucination Killer</h3>
-            <p>A circuit-breaker that stops the AI when it enters a hallucination loop. Detects repeated failed solutions, forces it to <b>step back, re-read the file, and ask</b> — instead of doubling down.</p>
+            <p>A circuit-breaker that stops the AI when it enters a hallucination loop. Detects repeated failed solutions, forces it to step back, re-read the file, and ask — instead of doubling down.</p>
             <ul class="kit-points">
               <li>Loop-detection on failed attempts</li>
               <li>Forced context re-read protocol</li>
@@ -512,7 +511,7 @@ Ask user which lookup method exists.</code></pre>
               <span class="kit-tag tag-green">★ The Engine</span>
             </div>
             <h3>The Project's Long-Term Memory</h3>
-            <p>The engine that maintains your <code>LEARNING_LOG.md</code> — the persistent "brain" of your project. Every architectural decision, refactor reason, and "we tried that, don't do it again" lesson gets logged and re-hydrated <b>automatically</b>.</p>
+            <p>The engine that maintains your <code>LEARNING_LOG.md</code> — the persistent "brain" of your project. Every architectural decision, refactor reason, and "we tried that, don't do it again" lesson gets logged and re-hydrated automatically.</p>
             <ul class="kit-points">
               <li>Auto-append architectural decisions (ADR-style)</li>
               <li>Session-start hydration protocol</li>
@@ -557,7 +556,7 @@ Ask user which lookup method exists.</code></pre>
       <div class="container">
         <div class="section-head center">
           <span class="kicker">How It Works</span>
-          <h2>From zero to a stateful AI partner in <span class="grad">three steps</span>.</h2>
+          <h2>Install in three steps</h2>
         </div>
 
         <ol class="steps">
@@ -590,12 +589,12 @@ Ask user which lookup method exists.</code></pre>
         </div>
 
         <ul class="use-case-list">
-          <li><b>Context Tax</b> — stop the 15-minute morning re-brief. <a href="blog/01-the-context-tax.html">Read the essay</a></li>
-          <li><b>Scoped → Singleton DI</b> — catch captive dependencies before runtime. <a href="blog/02-scoped-singleton-di-bug.html">DI bug write-up</a></li>
-          <li><b>Hallucination loops</b> — circuit breaker after repeated failed edits. <a href="blog/03-cursor-hallucination-loop-breaker.html">Loop breaker</a></li>
-          <li><b>Result&lt;T&gt; regression</b> — block <code>throw</code> in controllers. <a href="blog/04-cursor-result-not-throw.html">Result pattern</a></li>
-          <li><b>Cursor vs Rider</b> — same rules on both tools. <a href="blog/05-cursor-vs-rider-dotnet.html">Comparison</a></li>
-          <li><b>EF Core guardrails</b> — AsNoTracking, Include depth, N+1. <a href="blog/07-cursor-efcore-patterns.html">EF patterns</a></li>
+          <li>Context Tax — stop the 15-minute morning re-brief. <a href="blog/01-the-context-tax.html">Read the essay</a></li>
+          <li>Scoped → Singleton DI — catch captive dependencies before runtime. <a href="blog/02-scoped-singleton-di-bug.html">DI bug write-up</a></li>
+          <li>Hallucination loops — circuit breaker after repeated failed edits. <a href="blog/03-cursor-hallucination-loop-breaker.html">Loop breaker</a></li>
+          <li>Result&lt;T&gt; regression — block <code>throw</code> in controllers. <a href="blog/04-cursor-result-not-throw.html">Result pattern</a></li>
+          <li>Cursor vs Rider — same rules on both tools. <a href="blog/05-cursor-vs-rider-dotnet.html">Comparison</a></li>
+          <li>EF Core guardrails — AsNoTracking, Include depth, N+1. <a href="blog/07-cursor-efcore-patterns.html">EF patterns</a></li>
         </ul>
 
         <blockquote class="proof-pull">
@@ -621,11 +620,11 @@ Ask user which lookup method exists.</code></pre>
           <div class="two-col-card good">
             <h3>✅ This is for you if…</h3>
             <ul>
-              <li>You're a <b>Senior / Staff / Principal</b> engineer on a real .NET codebase.</li>
+              <li>You're a Senior / Staff / Principal engineer on a real .NET codebase.</li>
               <li>You use Cursor daily and feel the "context tax" pain.</li>
-              <li>You care about <b>architecture</b>, not just shipping features.</li>
-              <li>You want the AI to be a <b>partner</b>, not a fancy autocomplete.</li>
-              <li>You want a system you can <b>commit to your repo</b> and onboard your team to.</li>
+              <li>You care about architecture, not just shipping features.</li>
+              <li>You want the AI to be a partner, not a fancy autocomplete.</li>
+              <li>You want a system you can commit to your repo and onboard your team to.</li>
             </ul>
           </div>
           <div class="two-col-card bad">
@@ -647,7 +646,7 @@ Ask user which lookup method exists.</code></pre>
       <div class="container">
         <div class="section-head center">
           <span class="kicker">Free Starter Kit</span>
-          <h2>Get 3 Cursor rules that stop <span class="grad">.NET regressions</span> — free.</h2>
+          <h2>Get 3 Cursor rules that stop .NET regressions — free.</h2>
         </div>
 
         <div class="ml-capture-box">
@@ -673,12 +672,12 @@ Ask user which lookup method exists.</code></pre>
     </section>
 
     <!-- ========== PRICING ========== -->
-    <section id="pricing" class="section section-dark">
+    <section id="pricing" class="section section-alt">
       <div class="container">
         <div class="section-head center">
           <span class="kicker">Founder's Pricing</span>
-          <h2>Pays for itself in <span class="grad">one morning</span>.</h2>
-          <p class="lede">At your billing rate, you reclaim the cost in the first session. Then it compounds, forever.</p>
+          <h2>One-time purchase. Lifetime updates.</h2>
+          <p class="lede">£9.00 founder price via Stripe. Instant ZIP download. 30-day refund.</p>
         </div>
 
         <div class="pricing-wrap">
@@ -687,7 +686,7 @@ Ask user which lookup method exists.</code></pre>
             <h3>The Persistence Kit</h3>
             <p class="pricing-sub">Everything you need to turn Cursor into a stateful architectural partner.</p>
 
-            <p class="price-anchor">Senior .NET time is roughly <b>£60–120/hr</b>. This kit targets <b>2+ hours</b> of Cursor re-regressions saved per sprint. Launch price: <b>£9.00</b> (rises when the video walkthrough ships).</p>
+            <p class="price-anchor">Senior .NET time is roughly £60–120/hr. This kit targets 2+ hours of Cursor re-regressions saved per sprint. Launch price: £9.00 (rises when the video walkthrough ships).</p>
 
             <div class="price-row">
               <span class="price-old">£49</span>
@@ -696,13 +695,13 @@ Ask user which lookup method exists.</code></pre>
             </div>
 
             <ul class="price-list">
-              <li><span class="ok">✓</span> <b>9 × .mdc rules</b> — arch, DI, EF, Result, API, testing, domain, logging, perf</li>
-              <li><span class="ok">✓</span> <b>persistence.mdc</b> + <b>LEARNING_LOG.md</b> template</li>
-              <li><span class="ok">✓</span> <b>bug-breaker.mdc</b> — hallucination circuit breaker</li>
-              <li><span class="ok">✓</span> <b>Hydrate prompt</b> — seed log from your repo</li>
-              <li><span class="ok">✓</span> <b>Quickstart PDF</b> — ~5 min install</li>
-              <li><span class="ok">✓</span> <b>Lifetime updates</b> — pay once, own forever</li>
-              <li><span class="ok">✓</span> <b>MIT-licensed</b> — commit rules + log for your team</li>
+              <li><span class="ok">✓</span> 9 × .mdc rules — arch, DI, EF, Result, API, testing, domain, logging, perf</li>
+              <li><span class="ok">✓</span> persistence.mdc + LEARNING_LOG.md template</li>
+              <li><span class="ok">✓</span> bug-breaker.mdc — hallucination circuit breaker</li>
+              <li><span class="ok">✓</span> Hydrate prompt — seed log from your repo</li>
+              <li><span class="ok">✓</span> Quickstart PDF — ~5 min install</li>
+              <li><span class="ok">✓</span> Lifetime updates — pay once, own forever</li>
+              <li><span class="ok">✓</span> MIT-licensed — commit rules + log for your team</li>
             </ul>
 
             <div class="pricing-trust">
@@ -722,23 +721,23 @@ Ask user which lookup method exists.</code></pre>
             <div class="guarantee">
               <div class="guarantee-badge">🛡</div>
               <div>
-                <b>30-day "Reclaim Your Mornings" guarantee.</b><br/>
+                <strong>30-day "Reclaim Your Mornings" guarantee.</strong><br/>
                 Install it. Use it. If it doesn't save you the first 15 minutes of every session, email <a href="mailto:agenticstandardcontact@gmail.com">agenticstandardcontact@gmail.com</a> for a full refund. No interrogation.
               </div>
             </div>
 
             <p class="pricing-fine">Checkout: Stripe Payment Link · Delivery: ZIP with <code>.cursor/rules/</code> + templates (email receipt) · Refund: 30 days, no questionnaire · Updates: lifetime via repo</p>
-            <p class="pricing-reminder"><b>£9.00</b> founder price — locks in before the walkthrough video ships.</p>
+            <p class="pricing-reminder">£9.00 founder price — locks in before the walkthrough video ships.</p>
           </div>
         </div>
 
         <div class="value-math">
-          <h3>The math is uncomfortable.</h3>
+          <h3>Time cost of daily re-contexting</h3>
           <div class="math-grid">
-            <div><b>15 min/day</b><span>Time you lose re-contexting</span></div>
-            <div><b>62 hrs/year</b><span>That's nearly 8 working days</span></div>
-            <div><b>@ £75/hr</b><span>= £4,650 of senior time lost</span></div>
-            <div class="math-pop"><b>£9.00</b><span>To get it all back</span></div>
+            <div>15 min/day<span>Time you lose re-contexting</span></div>
+            <div>62 hrs/year<span>That's nearly 8 working days</span></div>
+            <div>@ £75/hr<span>= £4,650 of senior time lost</span></div>
+            <div class="math-pop">£9.00<span>To get it all back</span></div>
           </div>
         </div>
       </div>
@@ -769,13 +768,13 @@ Ask user which lookup method exists.</code></pre>
       <div class="container">
         <div class="section-head center">
           <span class="kicker">Honest Answers</span>
-          <h2>Frequently asked (and the objections we hear).</h2>
+          <h2>Frequently asked questions</h2>
         </div>
 
         <div class="faq">
           <details>
             <summary>Isn't this just a few prompt files I could write myself?</summary>
-            <p>You could — and we did, over hundreds of hours, across real production .NET codebases. The framework isn't the prompts; it's the <b>directory-level loading strategy</b>, the <b>circuit-breaker pattern</b>, and the <b>Learning Log protocol</b> that gives Cursor true statefulness. Writing it yourself is a weekend project. Maintaining it is a second job.</p>
+            <p>You could — and we did, over hundreds of hours, across real production .NET codebases. The framework isn't the prompts; it's the directory-level loading strategy, the circuit-breaker pattern, and the Learning Log protocol that gives Cursor true statefulness. Writing it yourself is a weekend project. Maintaining it is a second job.</p>
           </details>
           <details>
             <summary>Will this work with Cursor's built-in rules feature?</summary>
@@ -791,7 +790,7 @@ Ask user which lookup method exists.</code></pre>
           </details>
           <details>
             <summary>How is this different from generic "Cursor rules" repos on GitHub?</summary>
-            <p>Most public rules are <b>monolithic</b> — a single rule dumped on every prompt, blowing your token budget. Agentic Architect uses <b>scoped, directory-aware loading</b> so only relevant rules activate for the file you're in. Plus, none of them solve persistence — the actual root cause of AI drift.</p>
+            <p>Most public rules are monolithic — a single rule dumped on every prompt, blowing your token budget. Agentic Architect uses scoped, directory-aware loading so only relevant rules activate for the file you're in. Plus, none of them solve persistence — the actual root cause of AI drift.</p>
           </details>
           <details>
             <summary>What if my team doesn't want to adopt it?</summary>
@@ -825,8 +824,8 @@ Ask user which lookup method exists.</code></pre>
     <section class="section section-final">
       <div class="container">
         <div class="final-cta">
-          <h2>You can keep paying the Context Tax.<br/><span class="grad">Or you can stop, today.</span></h2>
-          <p>Drop the <code>.cursor/rules/</code> folder in. Hydrate the log. Watch your AI go from forgetful intern to stateful architectural partner — by tomorrow morning.</p>
+          <h2>Install the kit. Hydrate the log.</h2>
+          <p>Drop the <code>.cursor/rules/</code> folder in. Run the hydrate prompt once. Cursor picks up your architectural decisions on the next session.</p>
           <a class="btn btn-primary btn-xl" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=final_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">
             Buy now — £9.00 →
           </a>
@@ -885,7 +884,7 @@ Ask user which lookup method exists.</code></pre>
       <button class="modal-close" data-close aria-label="Close">×</button>
       <div class="modal-eyebrow">⚡ Wait — before you go</div>
       <h3 id="exitTitle">Reclaim your mornings for less than a takeaway.</h3>
-      <p>You've read this far. You already know the Context Tax is real. The Founder's price is <b>£9.00</b> — and it goes up at the next cohort.</p>
+      <p>You've read this far. The Founder's price is £9.00 — and it goes up at the next cohort.</p>
       <ul class="modal-list">
         <li>✓ 9 specialist <code>.mdc</code> rules</li>
         <li>✓ Stateful Learning Log protocol</li>
