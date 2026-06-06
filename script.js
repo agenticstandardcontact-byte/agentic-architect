@@ -10,6 +10,172 @@
 (() => {
   'use strict';
 
+  /* ---------- Cookie consent (site-wide, injected once) ---------- */
+  const COOKIE_KEY = 'aa_cookie_consent_v1';
+  const PREFS_KEY = 'aa_cookie_prefs_v1';
+
+  const sitePrefix = () => {
+    const path = window.location.pathname;
+    const marker = '/agentic-architect/';
+    const idx = path.indexOf(marker);
+    const rest = idx >= 0 ? path.slice(idx + marker.length) : path.replace(/^\//, '');
+    const depth = (rest.match(/\//g) || []).length;
+    return depth ? '../'.repeat(depth) : '';
+  };
+
+  const readPrefs = () => {
+    try {
+      const raw = localStorage.getItem(PREFS_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (_) { /* ignore corrupt prefs */ }
+    return { analytics: true, marketing: true };
+  };
+
+  const writePrefs = (prefs) => {
+    localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+  };
+
+  const applyConsent = (choice, prefs) => {
+    localStorage.setItem(COOKIE_KEY, choice);
+    if (prefs) writePrefs(prefs);
+    document.documentElement.classList.add('cookie-consent-set');
+    document.dispatchEvent(new CustomEvent('aa:cookie-consent', { detail: { choice, prefs: prefs || readPrefs() } }));
+  };
+
+  const hideBar = (bar) => {
+    bar.classList.add('is-hidden');
+    bar.setAttribute('aria-hidden', 'true');
+  };
+
+  const prefix = sitePrefix();
+  const privacyHref = `${prefix}affiliate-disclosure.html`;
+  const thirdPartyHref = `${prefix}index.html#faq`;
+
+  const infoIcon = '<svg class="cookie-consent-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>';
+
+  const mountCookieConsent = () => {
+    if (document.getElementById('cookie-consent')) return;
+
+    const bar = document.createElement('div');
+    bar.id = 'cookie-consent';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Cookie consent');
+    bar.innerHTML = `
+      <div class="cookie-consent-inner">
+        ${infoIcon}
+        <div class="cookie-consent-body">
+          <p class="cookie-consent-text">
+            We use optional cookies for analytics (GoatCounter) and to improve the site, including newsletter forms (MailerLite).
+            You can accept, reject, or manage preferences.
+            See our <a href="${privacyHref}">Privacy statement</a> and
+            <a href="${thirdPartyHref}">Third-party cookies</a>.
+          </p>
+          <div class="cookie-consent-actions">
+            <button type="button" class="cookie-consent-btn cookie-consent-btn--accept" data-cookie-action="accept">Accept</button>
+            <button type="button" class="cookie-consent-btn cookie-consent-btn--reject" data-cookie-action="reject">Reject</button>
+            <button type="button" class="cookie-consent-btn cookie-consent-btn--manage" data-cookie-action="manage" aria-expanded="false" aria-controls="cookie-consent-panel">Manage cookies</button>
+          </div>
+          <div class="cookie-consent-panel" id="cookie-consent-panel">
+            <div class="cookie-pref-row">
+              <div class="cookie-pref-info">
+                <strong>Essential</strong>
+                <span>Required for the site to work. Always on.</span>
+              </div>
+              <label class="cookie-pref-toggle" aria-label="Essential cookies, always on">
+                <input type="checkbox" checked disabled>
+                <span class="cookie-pref-slider"></span>
+              </label>
+            </div>
+            <div class="cookie-pref-row">
+              <div class="cookie-pref-info">
+                <strong>Analytics</strong>
+                <span>GoatCounter, privacy-friendly page views. No ad tracking.</span>
+              </div>
+              <label class="cookie-pref-toggle" aria-label="Analytics cookies">
+                <input type="checkbox" id="cookie-pref-analytics" checked>
+                <span class="cookie-pref-slider"></span>
+              </label>
+            </div>
+            <div class="cookie-pref-row">
+              <div class="cookie-pref-info">
+                <strong>Marketing</strong>
+                <span>MailerLite signup forms and optional newsletter features.</span>
+              </div>
+              <label class="cookie-pref-toggle" aria-label="Marketing cookies">
+                <input type="checkbox" id="cookie-pref-marketing" checked>
+                <span class="cookie-pref-slider"></span>
+              </label>
+            </div>
+            <div class="cookie-consent-panel-actions">
+              <button type="button" class="cookie-consent-btn cookie-consent-btn--accept" data-cookie-action="save-prefs">Save preferences</button>
+              <button type="button" class="cookie-consent-btn cookie-consent-btn--reject" data-cookie-action="cancel-manage">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+    const insertTarget = document.body.firstChild;
+    if (insertTarget) document.body.insertBefore(bar, insertTarget);
+    else document.body.appendChild(bar);
+
+    const manageBtn = bar.querySelector('[data-cookie-action="manage"]');
+    const analyticsInput = bar.querySelector('#cookie-pref-analytics');
+    const marketingInput = bar.querySelector('#cookie-pref-marketing');
+
+    const openManage = () => {
+      const prefs = readPrefs();
+      analyticsInput.checked = !!prefs.analytics;
+      marketingInput.checked = !!prefs.marketing;
+      bar.classList.add('is-managing');
+      manageBtn.setAttribute('aria-expanded', 'true');
+    };
+
+    const closeManage = () => {
+      bar.classList.remove('is-managing');
+      manageBtn.setAttribute('aria-expanded', 'false');
+    };
+
+    bar.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-cookie-action]');
+      if (!btn) return;
+
+      const action = btn.getAttribute('data-cookie-action');
+      if (action === 'accept') {
+        applyConsent('accepted', { analytics: true, marketing: true });
+        hideBar(bar);
+        return;
+      }
+      if (action === 'reject') {
+        applyConsent('rejected', { analytics: false, marketing: false });
+        hideBar(bar);
+        return;
+      }
+      if (action === 'manage') {
+        openManage();
+        return;
+      }
+      if (action === 'save-prefs') {
+        const prefs = {
+          analytics: analyticsInput.checked,
+          marketing: marketingInput.checked,
+        };
+        applyConsent('managed', prefs);
+        hideBar(bar);
+        return;
+      }
+      if (action === 'cancel-manage') closeManage();
+    });
+
+    return bar;
+  };
+
+  const storedConsent = localStorage.getItem(COOKIE_KEY);
+  if (storedConsent) {
+    document.documentElement.classList.add('cookie-consent-set');
+  } else {
+    mountCookieConsent();
+  }
+
   /* ---------- Year stamp ---------- */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
