@@ -1334,8 +1334,12 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   transform: translateY(-1px);
 }
 .ml-capture-fine {
-  font-size: 0.74rem; color: var(--text-muted); margin: 12px 0 0;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin: 12px auto 0;
   text-align: center;
+  max-width: none;
+  line-height: 1.55;
 }
 .ml-capture-fine a { color: var(--text-dim); text-decoration: underline; }
 
