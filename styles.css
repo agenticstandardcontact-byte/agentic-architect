@@ -366,7 +366,13 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   transition: color .15s ease;
 }
 .nav-links a:hover { color: var(--text); }
-.nav-cta { white-space: nowrap; }
+.nav-ctas {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.nav-ctas .btn-sm { white-space: nowrap; }
 
 .nav-toggle {
   display: none;
@@ -429,7 +435,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   }
   .brand { min-width: 0; flex: 1; }
   .nav-toggle { display: inline-flex; flex-shrink: 0; }
-  .nav-cta { display: none; }
+  .nav-ctas { display: none !important; }
 
   .nav-backdrop {
     display: none;
@@ -462,7 +468,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
     box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
   }
   .nav-links-panel.open { display: flex; }
-  .nav-links-panel a {
+  .nav-links-panel > a {
     padding: 14px 0;
     font-size: 1.05rem;
     font-weight: 500;
@@ -472,17 +478,27 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
     display: flex;
     align-items: center;
   }
-  .nav-links-panel a:last-of-type:not(.nav-menu-cta) { border-bottom: none; }
-  .nav-links-panel .nav-menu-cta {
+  .nav-links-panel > a:last-of-type { border-bottom: none; }
+  .nav-menu-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    width: 100%;
+  }
+  .nav-menu-ctas .btn {
     width: 100%;
     justify-content: center;
-    border-bottom: none;
     min-height: 48px;
-    font-size: 0.95rem;
   }
   .nav-inner > .nav-links:not(.nav-links-panel) { display: none; }
   body.nav-open { overflow: hidden; }
+}
+
+@media (min-width: 821px) {
+  .nav-menu-ctas { display: none !important; }
 }
 
 /* =========================================================
@@ -1832,10 +1848,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 
 /* v2.5 — mobile nav + spacing (wins over .btn display) */
 @media (max-width: 820px) {
-  .nav-inner .nav-cta,
-  .nav-inner a.nav-cta.btn {
-    display: none !important;
-  }
+  .nav-ctas { display: none !important; }
   .nav-inner .nav-toggle {
     order: 10;
     margin-left: auto;
