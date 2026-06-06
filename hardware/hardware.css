@@ -469,10 +469,26 @@
 /* ----- Responsive ----- */
 @media (max-width: 768px) {
   .hw-index-hero,
-  .hw-hero { padding: 56px 0 32px; text-align: center; }
+  .hw-hero {
+    padding: 48px 0 28px;
+    text-align: left;
+  }
+
+  .hw-index-hero .container,
+  .hw-hero .container,
+  .hw-content.container,
+  .section > .container {
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+  }
 
   .hw-index-hero .lede,
-  .hw-lede { margin-left: auto; margin-right: auto; font-size: 1rem; }
+  .hw-lede {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.65;
+    max-width: none;
+  }
 
   .hw-card-row,
   .hw-use-cases,
@@ -480,23 +496,73 @@
 
   .hw-index-card,
   .hw-card,
-  .hw-verdict { padding: 20px 18px; }
+  .hw-verdict,
+  .hw-use-case { padding: 20px 18px; }
 
   .hw-hero h1,
-  .hw-index-hero h1 { font-size: clamp(1.5rem, 6vw, 1.85rem); }
+  .hw-index-hero h1 {
+    font-size: clamp(1.45rem, 5.5vw, 1.8rem);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
 
-  .hw-section h2 { font-size: 1.3rem; }
-  .section-title { font-size: 1.35rem; text-align: center; }
+  .hw-section {
+    margin-bottom: 36px;
+    padding: 0;
+  }
+  .hw-section h2 {
+    font-size: 1.25rem;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 1.3rem;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+
+  .hw-benchmark-note {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .hw-content { padding: 32px 0 48px; }
 
   .hw-verdict-buttons { flex-direction: column; }
   .hw-verdict-buttons .btn { width: 100%; text-align: center; }
 
   .hw-table-wrap {
-    margin: 0 -4px;
+    margin: 0;
     -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-sm);
   }
-  .hw-spec-table { font-size: 0.82rem; }
-  .hw-spec-table th,
-  .hw-spec-table td { padding: 8px 10px; }
-  .spec-label { white-space: normal; }
+  .hw-spec-table {
+    font-size: 0.78rem;
+    min-width: 480px;
+  }
+  .hw-spec-table th {
+    font-size: 0.68rem;
+    padding: 10px 12px;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    vertical-align: bottom;
+    word-break: break-word;
+  }
+  .hw-spec-table td {
+    padding: 10px 12px;
+    line-height: 1.45;
+    vertical-align: top;
+  }
+  .spec-label {
+    white-space: normal;
+    min-width: 90px;
+    max-width: 110px;
+  }
+
+  .hw-disclosure {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 16px 18px;
+  }
 }
