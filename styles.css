@@ -290,55 +290,6 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 }
 
 /* =========================================================
-   ANNOUNCEMENT BAR
-   ========================================================= */
-.announce-bar {
-  background: var(--bg-2);
-  border-bottom: 1px solid var(--line);
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  position: relative;
-  z-index: 40;
-}
-.announce-inner {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 10px 24px;
-  display: flex; align-items: center; justify-content: center;
-  gap: 14px; flex-wrap: wrap;
-}
-.announce-text strong { color: var(--brand); font-weight: 600; }
-.announce-text s { color: var(--text-muted); }
-.announce-text b { color: var(--text); font-weight: 600; }
-.countdown {
-  font-family: var(--mono); font-weight: 600;
-  background: var(--brand-soft);
-  border: 1px solid rgba(180, 83, 9, 0.18);
-  color: var(--brand);
-  padding: 2px 8px; border-radius: 6px;
-  margin-left: 4px;
-}
-.announce-cta {
-  background: var(--brand); color: #fff;
-  padding: 6px 14px; border-radius: 999px;
-  font-weight: 600; font-size: 0.84rem;
-  transition: transform .15s ease, box-shadow .15s ease;
-}
-.announce-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(180, 83, 9, 0.25); }
-.pulse-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--brand);
-  box-shadow: 0 0 0 0 rgba(180, 83, 9, 0.35);
-  animation: pulse 2s infinite;
-  display: inline-block;
-}
-@keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(180, 83, 9, 0.35); }
-  70%  { box-shadow: 0 0 0 8px rgba(180, 83, 9, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(180, 83, 9, 0); }
-}
-
-/* =========================================================
    NAV
    ========================================================= */
 .nav {
@@ -1790,13 +1741,6 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 @media (max-width: 640px) {
   h1 { font-size: clamp(1.75rem, 7vw, 2.25rem); }
   h2 { font-size: clamp(1.35rem, 5.5vw, 1.75rem); }
-
-  .announce-inner {
-    padding: 10px 16px;
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-  }
 
   .hero { padding: 56px 0 0; }
   .hero-inner { padding-bottom: 36px; gap: 28px; }

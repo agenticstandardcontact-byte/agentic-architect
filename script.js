@@ -1,6 +1,5 @@
 /* =========================================================
    Agentic Architect — Marketing site interactions
-   - Rolling 48h countdown (persisted via localStorage)
    - Sticky CTA visibility after hero
    - Scroll reveals
    - Exit-intent modal (desktop) / scroll-tail trigger (mobile)
@@ -272,35 +271,6 @@
     const onDesktop = (e) => { if (e.matches) closeNav(); };
     if (desktopMQ.addEventListener) desktopMQ.addEventListener('change', onDesktop);
     else desktopMQ.addListener(onDesktop);
-  }
-
-  /* ---------- Countdown (rolling 48h, persisted) ---------- */
-  const countdownEl = document.getElementById('countdown');
-  if (countdownEl) {
-    const KEY = 'aa_deadline_v1';
-    const WINDOW_MS = 48 * 60 * 60 * 1000; // 48h rolling deadline
-
-    let deadline = parseInt(localStorage.getItem(KEY) || '0', 10);
-    const now = Date.now();
-    if (!deadline || deadline < now) {
-      deadline = now + WINDOW_MS;
-      localStorage.setItem(KEY, String(deadline));
-    }
-
-    const pad = (n) => String(Math.max(0, n)).padStart(2, '0');
-    const tick = () => {
-      const diff = deadline - Date.now();
-      if (diff <= 0) {
-        countdownEl.textContent = '00:00:00';
-        return;
-      }
-      const h = Math.floor(diff / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      countdownEl.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-    };
-    tick();
-    setInterval(tick, 1000);
   }
 
   /* ---------- Sticky CTA visibility ---------- */
