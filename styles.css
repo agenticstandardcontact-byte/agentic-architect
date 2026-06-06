@@ -1,5 +1,5 @@
 /* =========================================================
-   Agentic Architect — Marketing Site (v2.2)
+   Agentic Architect — Marketing Site (v2.3)
    Hybrid light theme: calm product-led surfaces.
    Dark surfaces: hero (soft), persistence section, code blocks.
    ========================================================= */
@@ -75,7 +75,7 @@ code, .mono { font-family: var(--mono); font-size: 0.9em; }
   width: 100%;
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(16px, 4vw, 24px);
 }
 
 h1, h2, h3, h4 { margin: 0 0 .45em; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); }
@@ -175,34 +175,89 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   display: none;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   font-family: inherit;
-  font-size: 0.86rem;
-  font-weight: 600;
   color: var(--text);
   background: var(--panel);
   border: 1px solid var(--line-strong);
-  border-radius: 8px;
-  padding: 8px 14px;
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   cursor: pointer;
 }
 .nav-toggle:hover { border-color: rgba(180, 83, 9, 0.3); }
+.nav-toggle-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 20px;
+  height: 14px;
+}
+.nav-toggle-icon span {
+  display: block;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 @media (max-width: 820px) {
-  .nav-inner { position: relative; flex-wrap: wrap; }
-  .nav-toggle { display: inline-flex; order: 2; margin-left: auto; }
-  .nav-cta { order: 3; width: 100%; justify-content: center; margin-top: 4px; }
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas:
+      "brand toggle cta"
+      "menu menu menu";
+    align-items: center;
+    gap: 10px 12px;
+    padding: 12px clamp(16px, 4vw, 24px);
+  }
+  .brand { grid-area: brand; min-width: 0; }
+  .nav-toggle { display: inline-flex; grid-area: toggle; }
+  .nav-cta {
+    grid-area: cta;
+    width: auto;
+    margin-top: 0;
+    white-space: nowrap;
+    font-size: 0.78rem;
+    padding: 8px 12px;
+  }
   .nav-links-panel {
     display: none;
-    order: 4;
+    grid-area: menu;
     width: 100%;
     flex-direction: column;
-    gap: 8px;
-    padding: 12px 0 4px;
+    gap: 4px;
+    padding: 12px 0 8px;
     border-top: 1px solid var(--line);
-    margin-top: 8px;
+    margin-top: 4px;
+    background: var(--bg-2);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   }
   .nav-links-panel.open { display: flex; }
-  .nav-links-panel a { padding: 6px 0; }
+  .nav-links-panel a {
+    padding: 12px 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--line);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .nav-links-panel a:last-child { border-bottom: none; }
+  .nav-inner > .nav-links:not(.nav-links-panel) { display: none; }
+  body.nav-open { overflow: hidden; }
 }
 
 /* =========================================================
@@ -1451,6 +1506,10 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   .trust-item { padding: 20px 12px; }
   .trust-item b { font-size: 1.25rem; }
 
+  .pain-card, .kit-card, .step, .two-col-card, .bonus-item {
+    padding: 20px 18px;
+  }
+
   .pain-cta {
     flex-direction: column;
     text-align: center;
@@ -1459,7 +1518,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   }
   .pain-cta .btn { width: 100%; }
 
-  .pricing-card { padding: 32px 22px; }
+  .pricing-card { padding: 28px 20px; }
   .price-now { font-size: 2.4rem; }
 
   .ml-capture-box { padding: 24px 18px; }
@@ -1480,6 +1539,17 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 @media (max-width: 380px) {
   .container { padding: 0 16px; }
   .related-grid { grid-template-columns: 1fr; }
+  .nav-cta { display: none; }
+  .nav-inner { grid-template-columns: 1fr auto; grid-template-areas: "brand toggle" "menu menu"; }
+}
+
+/* Card overflow guard — all surfaces */
+.pain-card, .kit-card, .step, .pricing-card, .two-col-card,
+.bonus-item, .related-card, .example-card, .ba-col, .pain-cta,
+.final-cta, .ml-capture-box, .post-card, .hw-index-card, .hw-card {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 @media (prefers-reduced-motion: reduce) {

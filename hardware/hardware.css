@@ -48,7 +48,7 @@
 /* ----- Hardware Index Grid ----- */
 .hw-index-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   gap: 24px;
   margin-top: 32px;
 }
@@ -468,28 +468,35 @@
 
 /* ----- Responsive ----- */
 @media (max-width: 768px) {
-  .hw-card-row {
-    grid-template-columns: 1fr;
-  }
+  .hw-index-hero,
+  .hw-hero { padding: 56px 0 32px; text-align: center; }
 
-  .hw-use-cases {
-    grid-template-columns: 1fr;
-  }
+  .hw-index-hero .lede,
+  .hw-lede { margin-left: auto; margin-right: auto; font-size: 1rem; }
 
-  .hw-index-grid {
-    grid-template-columns: 1fr;
-  }
+  .hw-card-row,
+  .hw-use-cases,
+  .hw-index-grid { grid-template-columns: 1fr; }
+
+  .hw-index-card,
+  .hw-card,
+  .hw-verdict { padding: 20px 18px; }
 
   .hw-hero h1,
-  .hw-index-hero h1 {
-    font-size: 1.8rem;
-  }
+  .hw-index-hero h1 { font-size: clamp(1.5rem, 6vw, 1.85rem); }
 
-  .hw-verdict-buttons {
-    flex-direction: column;
-  }
+  .hw-section h2 { font-size: 1.3rem; }
+  .section-title { font-size: 1.35rem; text-align: center; }
 
-  .hw-verdict-buttons .btn {
-    text-align: center;
+  .hw-verdict-buttons { flex-direction: column; }
+  .hw-verdict-buttons .btn { width: 100%; text-align: center; }
+
+  .hw-table-wrap {
+    margin: 0 -4px;
+    -webkit-overflow-scrolling: touch;
   }
+  .hw-spec-table { font-size: 0.82rem; }
+  .hw-spec-table th,
+  .hw-spec-table td { padding: 8px 10px; }
+  .spec-label { white-space: normal; }
 }
