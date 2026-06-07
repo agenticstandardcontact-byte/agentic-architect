@@ -180,8 +180,9 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ---------- Shared nav CTAs (Get the free kit + Buy now) ---------- */
-  const STRIPE_FREE =
-    'https://buy.stripe.com/28EfZh4Ho3I51cig4GcIE00?utm_source=site&utm_medium=nav_free&utm_campaign=free_kit';
+  const freeKitHref = /\/(blog|hardware|learn)\//.test(window.location.pathname)
+    ? '../#free-kit-signup'
+    : '#free-kit-signup';
   const STRIPE_BUY =
     'https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit';
 
@@ -194,21 +195,23 @@
     navInner.querySelectorAll('.nav-cta').forEach((el) => el.remove());
     navPanel.querySelectorAll('.nav-menu-cta').forEach((el) => el.remove());
 
-    const makeBtn = (href, label, extraClass) => {
+    const makeBtn = (href, label, extraClass, external = false) => {
       const a = document.createElement('a');
       a.href = href;
       a.className = extraClass;
       a.textContent = label;
-      a.target = '_blank';
-      a.rel = 'noopener';
+      if (external) {
+        a.target = '_blank';
+        a.rel = 'noopener';
+      }
       return a;
     };
 
     if (!navInner.querySelector('.nav-ctas')) {
       const desktop = document.createElement('div');
       desktop.className = 'nav-ctas';
-      desktop.appendChild(makeBtn(STRIPE_FREE, 'Get the free kit', 'btn btn-ghost btn-sm nav-cta-free'));
-      desktop.appendChild(makeBtn(STRIPE_BUY, 'Buy now', 'btn btn-primary btn-sm nav-cta-buy'));
+      desktop.appendChild(makeBtn(freeKitHref, 'Get the free kit', 'btn btn-ghost btn-sm nav-cta-free'));
+      desktop.appendChild(makeBtn(STRIPE_BUY, 'Buy now', 'btn btn-primary btn-sm nav-cta-buy', true));
       if (navToggle) navInner.insertBefore(desktop, navToggle);
       else navInner.appendChild(desktop);
     }
@@ -216,8 +219,8 @@
     if (!navPanel.querySelector('.nav-menu-ctas')) {
       const mobile = document.createElement('div');
       mobile.className = 'nav-menu-ctas';
-      mobile.appendChild(makeBtn(STRIPE_FREE, 'Get the free kit', 'btn btn-ghost btn-sm'));
-      mobile.appendChild(makeBtn(STRIPE_BUY, 'Buy now', 'btn btn-primary btn-sm'));
+      mobile.appendChild(makeBtn(freeKitHref, 'Get the free kit', 'btn btn-ghost btn-sm'));
+      mobile.appendChild(makeBtn(STRIPE_BUY, 'Buy now', 'btn btn-primary btn-sm', true));
       navPanel.appendChild(mobile);
     }
   };
