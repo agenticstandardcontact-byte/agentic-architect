@@ -369,7 +369,16 @@
     const successBody = section.querySelector('#ml-capture-success-body');
     if (!box || !successPanel || !successBody) return;
 
-    const SESSION_KEY = 'aa_free_kit_signup_v2';
+    const SESSION_KEY = 'aa_free_kit_signup_v3';
+    let submitAttempted = false;
+    let pollTimer = null;
+
+    const isVisible = (el) => {
+      if (!el) return false;
+      const style = window.getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden') return false;
+      return el.getClientRects().length > 0;
+    };
 
     const getEmail = () => {
       const input = box.querySelector('input[type="email"]');
@@ -378,34 +387,61 @@
 
     const captureMailerLiteMessage = () => {
       const selectors = [
+        '.ml-form-successBody .ml-form-successContent',
+        '.row-success .ml-form-successContent',
         '.ml-form-successBody',
-        '.ml-form-embedSuccess .ml-form-successContent',
-        '.ml-form-embedSuccess',
         '.row-success',
       ];
       for (const sel of selectors) {
         const el = box.querySelector(sel);
-        if (el?.textContent?.trim()) {
+        if (isVisible(el)) {
           return el.innerHTML.trim();
         }
       }
       return '';
     };
 
-    const showSuccess = (email, messageHtml) => {
-      const html =
-        messageHtml ||
-        captureMailerLiteMessage() ||
-        `<p><strong>Check your inbox!</strong></p><p>We sent a confirmation link to <strong>${email || 'your email address'}</strong>. Open that message to verify your address.</p>`;
+    const mailerLiteSucceeded = () => {
+      if (!submitAttempted) return false;
+      const successEl = box.querySelector('.ml-form-successBody, .row-success');
+      return isVisible(successEl);
+    };
+
+    const fallbackMessage = (email) =>
+      `<p><strong>Check your inbox!</strong></p><p>We sent a confirmation link to <strong>${email || 'your email address'}</strong>. Open that message to verify your address.</p>`;
+
+    const showSuccess = (email, messageHtml, fromSession = false) => {
+      if (pollTimer) {
+        window.clearInterval(pollTimer);
+        pollTimer = null;
+      }
 
       box.classList.remove('is-submitting');
       box.classList.add('is-submitted');
-      successBody.innerHTML = html;
-      successPanel.hidden = false;
+
+      const nativeHtml = captureMailerLiteMessage();
+      const html = messageHtml || nativeHtml || fallbackMessage(email);
+      const useNative = !fromSession && !!nativeHtml;
+
+      box.classList.toggle('ml-native-success', useNative);
+      box.classList.toggle('use-custom-success', !useNative);
+
+      if (useNative) {
+        successPanel.hidden = true;
+      } else {
+        successBody.innerHTML = html;
+        successPanel.hidden = false;
+      }
+
       try {
         sessionStorage.setItem(
           SESSION_KEY,
-          JSON.stringify({ email: email || '', messageHtml: html, at: Date.now() })
+          JSON.stringify({
+            email: email || '',
+            messageHtml: html,
+            useNative: useNative,
+            at: Date.now(),
+          })
         );
       } catch (_) { /* private mode */ }
     };
@@ -424,28 +460,45 @@
         btn.setAttribute('aria-busy', 'true');
       } else if (!box.classList.contains('is-submitted')) {
         btn.disabled = false;
-        btn.textContent = btn.dataset.aaOriginalLabel || 'Get the free kit';
+        btn.textContent = btn.dataset.aaOriginalLabel || 'Submit';
         btn.classList.remove('is-loading');
         btn.removeAttribute('aria-busy');
       }
     };
 
-    const mailerLiteSucceeded = () => {
-      if (box.querySelector('.ml-form-successBody, .ml-form-embedSuccess, .row-success')) {
-        return true;
-      }
-      const formBody = box.querySelector('.ml-form-embedBody');
-      const successWrap = box.querySelector('.ml-form-successContent, .ml-form-successBody');
-      if (successWrap && successWrap.offsetParent !== null) return true;
-      if (formBody && formBody.style.display === 'none') return true;
-      return false;
+    const beginSubmit = () => {
+      if (box.classList.contains('is-submitted')) return;
+      submitAttempted = true;
+      setSubmitting(true);
+
+      if (pollTimer) window.clearInterval(pollTimer);
+      pollTimer = window.setInterval(() => {
+        if (mailerLiteSucceeded()) {
+          showSuccess(getEmail());
+        }
+      }, 250);
+
+      window.setTimeout(() => {
+        if (pollTimer) {
+          window.clearInterval(pollTimer);
+          pollTimer = null;
+        }
+        if (!box.classList.contains('is-submitted')) {
+          setSubmitting(false);
+        }
+      }, 20000);
     };
 
     try {
       const saved = sessionStorage.getItem(SESSION_KEY);
       if (saved) {
-        const { email, messageHtml } = JSON.parse(saved);
-        showSuccess(email, messageHtml);
+        const { email, messageHtml, useNative } = JSON.parse(saved);
+        submitAttempted = true;
+        showSuccess(email, messageHtml, true);
+        if (useNative) {
+          box.classList.remove('use-custom-success');
+          box.classList.add('ml-native-success');
+        }
         return;
       }
     } catch (_) { /* ignore */ }
@@ -458,10 +511,7 @@
           e.stopPropagation();
           return;
         }
-        setSubmitting(true);
-        window.setTimeout(() => {
-          if (!box.classList.contains('is-submitted')) setSubmitting(false);
-        }, 15000);
+        beginSubmit();
       },
       true
     );
@@ -472,10 +522,7 @@
         const btn = e.target.closest('button[type="submit"], button.primary');
         if (!btn || !box.contains(btn) || box.classList.contains('is-submitted')) return;
         if (box.classList.contains('is-submitting')) return;
-        setSubmitting(true);
-        window.setTimeout(() => {
-          if (!box.classList.contains('is-submitted')) setSubmitting(false);
-        }, 15000);
+        beginSubmit();
       },
       true
     );
@@ -484,7 +531,6 @@
       if (box.classList.contains('is-submitted')) return;
       if (mailerLiteSucceeded()) {
         showSuccess(getEmail());
-        observer.disconnect();
       }
     });
     observer.observe(box, {

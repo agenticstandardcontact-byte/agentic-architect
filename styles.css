@@ -1216,20 +1216,22 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 #free-kit-signup .ml-capture-box [id^="mlb2-"].ml-form-embedContainer,
 #free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-form-align-center,
 #free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-form-embedWrapper,
-#free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-form-embedBody,
-#free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-form-embedBody.row-form,
 #free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-block-form,
 #free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-form-formContent,
 #free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-form-embedContent {
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
-  display: block !important;
   margin-left: auto !important;
   margin-right: auto !important;
   padding: 0 !important;
   text-align: center !important;
   box-sizing: border-box !important;
+}
+/* Do NOT force display on .row-form / .ml-form-embedBody — MailerLite toggles form vs success */
+#free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-form-embedBody.row-form,
+#free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-form-embedContent {
+  display: block !important;
 }
 .ml-capture-box .ml-embedded,
 .ml-capture-box .ml-form-embedContainer {
@@ -1401,6 +1403,46 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   font-size: 0.88rem !important;
   text-align: center !important;
 }
+/* MailerLite ships white success text in inline CSS — override for light theme */
+.ml-capture-box .ml-form-successBody,
+.ml-capture-box .ml-form-successBody .ml-form-successContent,
+.ml-capture-box .row-success,
+.ml-capture-box .row-success .ml-form-successContent {
+  text-align: center !important;
+}
+.ml-capture-box .ml-form-successBody h4,
+.ml-capture-box .ml-form-successBody p,
+.ml-capture-box .ml-form-successContent h4,
+.ml-capture-box .ml-form-successContent p,
+.ml-capture-box .row-success h4,
+.ml-capture-box .row-success p {
+  color: var(--text-dim) !important;
+  font-family: var(--font) !important;
+  text-align: center !important;
+}
+.ml-capture-box .ml-form-successBody h4,
+.ml-capture-box .ml-form-successContent h4,
+.ml-capture-box .row-success h4 {
+  color: var(--text) !important;
+  font-size: 1.05rem !important;
+  font-weight: 600 !important;
+  margin: 0 0 8px !important;
+}
+.ml-capture-box .ml-form-successBody p,
+.ml-capture-box .ml-form-successContent p,
+.ml-capture-box .row-success p {
+  font-size: 0.9rem !important;
+  line-height: 1.55 !important;
+  margin: 0 0 8px !important;
+}
+.ml-capture-box.is-submitted.ml-native-success .row-form,
+.ml-capture-box.is-submitted.ml-native-success .ml-form-embedBody.row-form {
+  display: none !important;
+}
+.ml-capture-box.is-submitted.ml-native-success .ml-form-successBody,
+.ml-capture-box.is-submitted.ml-native-success .row-success {
+  display: block !important;
+}
 .ml-capture-box .ml-form-embedContainer .ml-form-embedWrapper {
   background: transparent !important;
   border: none !important;
@@ -1467,11 +1509,14 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 .ml-capture-fine a { color: var(--text-dim); text-decoration: underline; }
 
 /* Free kit signup — loading, success, session lock */
-.ml-capture-box.is-submitted .ml-embedded,
-.ml-capture-box.is-submitted [id^="mlb2-"] {
+.ml-capture-box.is-submitted.use-custom-success .ml-embedded,
+.ml-capture-box.is-submitted.use-custom-success [id^="mlb2-"] {
   display: none !important;
 }
-.ml-capture-box.is-submitted .ml-capture-fine {
+.ml-capture-box.is-submitted.use-custom-success .ml-capture-fine {
+  display: none;
+}
+.ml-capture-box.is-submitted.ml-native-success .ml-capture-fine {
   display: none;
 }
 .ml-capture-success {
@@ -1479,7 +1524,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   text-align: center;
   padding: 8px 4px 4px;
 }
-.ml-capture-box.is-submitted .ml-capture-success {
+.ml-capture-box.is-submitted.use-custom-success .ml-capture-success {
   display: block;
 }
 .ml-capture-success-body {
