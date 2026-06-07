@@ -175,5 +175,13 @@
       <description>ValueTask is a perf optimisation for hot paths that often return synchronously. It is not a drop-in for Task. Cursor swaps them around without thinking. Flag ValueTask returns and ask whether the method is actually mostly synchronous. If not, revert to Task.</description>
     </item>
 
+      <item>
+      <title>Rule 25: ActivitySource for OpenTelemetry</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-07</link>
+      <guid isPermaLink="false">daily-rule-2026-06-07</guid>
+      <pubDate>Sun, 07 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Logs alone won't debug a distributed system. Add a static readonly ActivitySource per project and wrap every external call (DB, HTTP, queue) in StartActivity. Cursor never adds OTEL spans on its own — give it a rule that recognises external-call patterns and proposes the trace.</description>
+    </item>
+
   </channel>
 </rss>

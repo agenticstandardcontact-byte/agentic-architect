@@ -61,6 +61,17 @@
       <div class="container">
         <ul class="post-list">
           <!-- DAILY-RULE-INSERTION-POINT -->
+          <li class="post-card" data-date="2026-06-07">
+  <div class="post-link" style="cursor:default;">
+    <div class="post-meta">
+      <time datetime="2026-06-07">June 07, 2026</time>
+      <span class="post-tag">Daily Rule</span>
+    </div>
+    <h2>Rule 25: ActivitySource for OpenTelemetry</h2>
+    <p>Logs alone won't debug a distributed system. Add a static readonly ActivitySource per project and wrap every external call (DB, HTTP, queue) in StartActivity. Cursor never adds OTEL spans on its own — give it a rule that recognises external-call patterns and proposes the trace.</p>
+  </div>
+</li>
+
           <li class="post-card" data-date="2026-06-06">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
