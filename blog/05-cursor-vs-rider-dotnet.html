@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
   <title>Cursor vs JetBrains Rider for C#/.NET in 2026: which to pay for</title>
-  <meta name="description" content="Senior .NET teams aren't picking between Cursor and Rider - they're paying for both. Here's how the tools overlap, where each one wins, and the configuration that makes them share state without context drift." />
+  <meta name="description" content="Cursor vs JetBrains Rider for C# in 2026: GBP pricing, agent mode vs the debugger, and when senior .NET teams pay for one tool, both, or neither." />
   <meta name="keywords" content="Cursor vs Rider, JetBrains Rider, Cursor AI for C#, .NET IDE 2026, ReSharper, Cursor pricing, Rider pricing, AI pair programming C#, MediatR, Clean Architecture" />
   <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/05-cursor-vs-rider-dotnet.html" />
 
   <meta property="og:title" content="Cursor vs JetBrains Rider for C#/.NET in 2026: which to pay for" />
-  <meta property="og:description" content="Senior .NET teams aren't picking between Cursor and Rider - they're paying for both. Here's how the tools overlap, where each one wins, and the configuration that makes them share state without context drift." />
+  <meta property="og:description" content="Cursor vs JetBrains Rider for C# in 2026: GBP pricing, agent mode vs the debugger, and when senior .NET teams pay for one tool, both, or neither." />
   <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
   <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/05-cursor-vs-rider-dotnet.html" />
   <meta property="og:type" content="article" />
@@ -63,18 +63,15 @@
         </svg>
         <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
       </a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">Menu</button>
       <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
-        <a href="../#problem">The Problem</a>
         <a href="../#kit">What's Inside</a>
-        <a href="../#proof">Proof</a>
         <a href="../#pricing">Pricing</a>
-        <a href="../#faq">FAQ</a>
         <a href="./" aria-current="page">Blog</a>
         <a href="../hardware/">Hardware</a>
         <a href="../learn/">Quick Fixes</a>
-        <a href="../#resources">Guides</a>
       </nav>
-<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu"><span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
+      <a class="btn btn-primary btn-sm nav-cta" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_nav&utm_campaign=paid_kit" target="_blank" rel="noopener">Buy now</a>
     </div>
   </header>
 
@@ -230,6 +227,17 @@ git commit -m &quot;chore: align Cursor + Rider on house style&quot;</code></pre
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="../script.js" defer></script>
+  <script>
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var menu = document.querySelector('.nav-links-panel');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open', !open);
+    });
+  })();
+  </script>
 </body>
 </html>
