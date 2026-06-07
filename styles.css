@@ -1340,7 +1340,6 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   border-top: 1px solid var(--line) !important;
   margin-top: 10px !important;
   padding-top: 10px !important;
-  text-align: center !important;
 }
 .ml-capture-box .ml-form-embedContainer .ml-form-fieldRow,
 .ml-capture-box .ml-form-embedContainer .ml-field-group {
@@ -1349,47 +1348,9 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   text-align: center !important;
   width: auto !important;
 }
-.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptions {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 12px !important;
-  width: 100% !important;
-}
-.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox {
-  width: 100% !important;
-  max-width: 40ch !important;
-  margin: 0 auto !important;
+/* MailerLite checkbox rows: keep native inline layout (do not restyle) */
+.ml-capture-box .ml-form-embedContainer .ml-form-embedMailerLite-GDPR p {
   text-align: center !important;
-}
-.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox label {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 6px !important;
-  text-align: center !important;
-  cursor: pointer !important;
-  width: 100% !important;
-}
-.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox input[type="checkbox"] {
-  display: block !important;
-  margin: 0 auto 4px !important;
-  float: none !important;
-  position: static !important;
-  accent-color: var(--accent) !important;
-}
-.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox .label-description {
-  text-align: center !important;
-  font-weight: 600 !important;
-}
-.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsContent {
-  text-align: center !important;
-  width: 100% !important;
-}
-.ml-capture-box .ml-form-embedContainer .ml-form-embedMailerLite-GDPR {
-  text-align: center !important;
-  width: 100% !important;
   max-width: 42ch !important;
   margin: 8px auto 0 !important;
 }
@@ -1409,9 +1370,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   margin: 0 0 4px !important;
   text-align: center !important;
 }
-.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsContent p,
-.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox .description,
-.ml-capture-box .ml-form-embedContainer .ml-form-embedMailerLite-GDPR p {
+.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsContent > p {
   color: var(--text-muted) !important;
   font-family: var(--font) !important;
   font-size: 0.72rem !important;
@@ -1421,12 +1380,20 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   margin-left: auto !important;
   margin-right: auto !important;
 }
+.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox .description {
+  color: var(--text-muted) !important;
+  font-family: var(--font) !important;
+  font-size: 0.72rem !important;
+  line-height: 1.45 !important;
+}
 .ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox label,
 .ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox .label-description {
   color: var(--text) !important;
   font-family: var(--font) !important;
   font-size: 0.78rem !important;
-  width: 100% !important;
+}
+.ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox input[type="checkbox"] {
+  accent-color: var(--accent) !important;
 }
 .ml-capture-box .ml-form-embedContainer .ml-form-embedSuccess {
   color: var(--text) !important;
