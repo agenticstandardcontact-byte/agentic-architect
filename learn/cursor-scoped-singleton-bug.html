@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
-  <title>Cursor Suggested a Scoped?Singleton DI Bug — How to Catch It Before Merge</title>
+  <title>Cursor Suggested a Scoped?Singleton DI Bug â€” How to Catch It Before Merge</title>
   <meta name="description" content="Cursor and other AI assistants regularly suggest .NET dependency-injection lifetime captures that ship to production silently. Here's why, and the 60-second Cursor rule that catches the bug at the constructor." />
   <meta name="keywords" content="Cursor C# scoped singleton bug, .NET DI lifetime captured dependency, IServiceCollection scoped vs singleton, AI suggested DI bug, Cursor .NET rules" />
   <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/learn/cursor-scoped-singleton-bug.html" />
 
-  <meta property="og:title" content="Cursor Suggested a Scoped?Singleton DI Bug — How to Catch It" />
-  <meta property="og:description" content="The .NET DI lifetime bug Cursor ships silently — and the one rule that catches it at the constructor." />
+  <meta property="og:title" content="Cursor Suggested a Scoped?Singleton DI Bug â€” How to Catch It" />
+  <meta property="og:description" content="The .NET DI lifetime bug Cursor ships silently â€” and the one rule that catches it at the constructor." />
   <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
   <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/learn/cursor-scoped-singleton-bug.html" />
   <meta property="og:type" content="article" />
@@ -29,7 +29,7 @@
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "headline": "Cursor Suggested a Scoped?Singleton DI Bug — How to Catch It Before Merge",
+    "headline": "Cursor Suggested a Scoped?Singleton DI Bug â€” How to Catch It Before Merge",
     "description": "Why AI assistants like Cursor suggest captured-dependency DI bugs in .NET, and the rule pattern that catches them at the constructor.",
     "datePublished": "2026-05-22T22:00:00Z",
     "dateModified": "2026-05-22T22:00:00Z",
@@ -75,24 +75,24 @@
     <article class="post">
       <div class="container post-narrow">
         <div class="post-meta">
-          <span class="post-tag">Quick Answer · 4 min read</span>
+          <span class="post-tag">Quick Answer Â· 4 min read</span>
         </div>
 
         <h1>Cursor suggested a Scoped?Singleton DI bug. Here's how to catch it before merge.</h1>
 
-        <p class="post-lede">You asked Cursor to add caching, retry, or background work to a .NET service. It returned compiling, test-passing code that ships a captured-dependency lifetime bug to production. This is the most expensive class of .NET DI mistake — and AI assistants make it constantly, because the patterns they learned from blog posts and Stack Overflow snippets almost never show DI registration. Here is the short answer, what's actually happening at runtime, and the 60-second rule that catches the bug at the constructor.</p>
+        <p class="post-lede">You asked Cursor to add caching, retry, or background work to a .NET service. It returned compiling, test-passing code that ships a captured-dependency lifetime bug to production. This is the most expensive class of .NET DI mistake â€” and AI assistants make it constantly, because the patterns they learned from blog posts and Stack Overflow snippets almost never show DI registration. Here is the short answer, what's actually happening at runtime, and the 60-second rule that catches the bug at the constructor.</p>
 
         <h2>The short answer</h2>
-        <p>A class registered as <code>Singleton</code> that takes a <code>Scoped</code> service in its constructor will <strong>capture</strong> that scoped instance for the lifetime of the application. Every request after the first one shares the same captured object — including any <code>DbContext</code>, repository, or unit-of-work it reaches through. The result is silent state corruption, not a clean exception.</p>
+        <p>A class registered as <code>Singleton</code> that takes a <code>Scoped</code> service in its constructor will <strong>capture</strong> that scoped instance for the lifetime of the application. Every request after the first one shares the same captured object â€” including any <code>DbContext</code>, repository, or unit-of-work it reaches through. The result is silent state corruption, not a clean exception.</p>
         <p>The fix is to audit every constructor before merge: <em>if the consumer is Singleton and any parameter is Scoped or Transient, refuse the suggestion or inject <code>IServiceScopeFactory</code> instead.</em></p>
 
         <h2>What's actually happening at runtime</h2>
         <p><code>IMemoryCache</code>, <code>ILogger&lt;T&gt;</code>, hosted services, anything registered as <code>AddSingleton</code> is created <strong>once per process</strong>. <code>DbContext</code>, repositories, MediatR's <code>ISender</code>, anything registered as <code>AddScoped</code> is created <strong>once per HTTP request</strong>.</p>
-        <p>When the AI suggests adding caching to <code>OrderService</code>, it usually proposes injecting <code>IMemoryCache</code> and stashing entities directly. Those entities are still attached to a <code>DbContext</code> that's about to be disposed. The cache, alive for hours or days, holds graph references into disposed scoped infrastructure. The first request after a deploy looks fine. Request 50,000 explodes with <code>ObjectDisposedException</code>. Or — worse — silently corrupts a downstream record.</p>
+        <p>When the AI suggests adding caching to <code>OrderService</code>, it usually proposes injecting <code>IMemoryCache</code> and stashing entities directly. Those entities are still attached to a <code>DbContext</code> that's about to be disposed. The cache, alive for hours or days, holds graph references into disposed scoped infrastructure. The first request after a deploy looks fine. Request 50,000 explodes with <code>ObjectDisposedException</code>. Or â€” worse â€” silently corrupts a downstream record.</p>
 
         <h2>Why AI assistants ship this constantly</h2>
-        <p>The patterns in AI training data — short tutorials, Stack Overflow answers, micro-snippets — almost always omit the DI registration block. A typical "<em>caching with IMemoryCache</em>" example is ten lines, with no mention of <em>where</em> the consumer is registered or with what lifetime. The model learned the surface pattern without the constraint that makes it safe. When you ask it to add caching to <em>your</em> codebase, it pattern-matches against the surface form and confidently ships the bug.</p>
-        <p>This is not a "the AI is dumb" critique. <strong>Most senior .NET engineers shipped this bug at least once before they learned to look for it.</strong> The patterns in the wild teach the wrong lesson — AI just industrialises that gap.</p>
+        <p>The patterns in AI training data â€” short tutorials, Stack Overflow answers, micro-snippets â€” almost always omit the DI registration block. A typical "<em>caching with IMemoryCache</em>" example is ten lines, with no mention of <em>where</em> the consumer is registered or with what lifetime. The model learned the surface pattern without the constraint that makes it safe. When you ask it to add caching to <em>your</em> codebase, it pattern-matches against the surface form and confidently ships the bug.</p>
+        <p>This is not a "the AI is dumb" critique. <strong>Most senior .NET engineers shipped this bug at least once before they learned to look for it.</strong> The patterns in the wild teach the wrong lesson â€” AI just industrialises that gap.</p>
 
         <h2>The fix in 60 seconds</h2>
         <p>Add a single <code>.cursor/rules/dotnet-di.mdc</code> rule that activates whenever Cursor edits a file containing <code>AddSingleton</code>, <code>AddScoped</code>, or a class constructor. The rule's job:</p>
@@ -102,7 +102,7 @@
           <li>If a <code>BackgroundService</code> needs scoped work, suggest <code>IServiceScopeFactory</code> + <code>CreateScope()</code> instead of direct injection.</li>
           <li>If a long-lived cache is set up, ensure cached values are either projected DTOs or <code>AsNoTracking()</code>'d.</li>
         </ol>
-        <p>The trick is scoping the rule to files where DI actually happens — not loading it on every prompt. Your token budget stays sane. The AI stays sharp on the file you're in.</p>
+        <p>The trick is scoping the rule to files where DI actually happens â€” not loading it on every prompt. Your token budget stays sane. The AI stays sharp on the file you're in.</p>
 
         <h2>Want the full picture?</h2>
         <p>The long-form essay walks the example end-to-end with code, covers the other four lifetime traps (HttpClient, hosted services, captured tracked entities, static helpers reaching scoped infrastructure), and shows the exact rule pattern.</p>
@@ -112,14 +112,14 @@
 
         <div class="post-cta">
           <h2>Try the boundary rule for free</h2>
-          <p>The <code>arch-core-lite.mdc</code> rule is the boundary-guardian preview from the kit — a single drop-in Cursor rule that refuses cross-layer DI violations. No signup, no email.</p>
+          <p>The <code>arch-core-lite.mdc</code> rule is the boundary-guardian preview from the kit â€” a single drop-in Cursor rule that refuses cross-layer DI violations. No signup, no email.</p>
           <a class="btn btn-primary btn-lg" href="https://github.com/agenticstandardcontact-byte/agentic-architect/blob/main/arch-core-lite.mdc?utm_source=site&utm_medium=learn_page&utm_campaign=free_sample" target="_blank" rel="noopener">Download arch-core-lite.mdc ?</a>
         </div>
 
         <div class="post-cta post-cta-paid">
           <h3>Or get the full DI auditor (and the other three rules).</h3>
-          <p>The complete Agentic Architect kit — 4 specialist rules including the full <code>dotnet-di.mdc</code> auditor + the persistence engine — is £9.00 one-time. Lifetime updates. MIT-licensed. 14-day refund.</p>
-          <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_page&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect — £9.00 ?</a>
+          <p>The complete Agentic Architect kit â€” 4 specialist rules including the full <code>dotnet-di.mdc</code> auditor + the persistence engine â€” is Â£9.00 one-time. Lifetime updates. MIT-licensed. 14-day refund.</p>
+          <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_page&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect â€” Â£9.00 ?</a>
         </div>
 
       </div>
@@ -136,12 +136,12 @@
         <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
         <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a><a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">GitHub</a></div>
         <div><h4>Legal</h4><a href="../privacy-policy.html">Privacy Policy</a><a href="../terms-of-service.html">Terms of Service</a><a href="../affiliate-disclosure.html">Affiliate Disclosure</a></div>
-        <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit — £9.00</a></div>
+        <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=learn_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit â€” Â£9.00</a></div>
       </div>
     </div>
     <div class="container foot-bottom">
-      <span>© <span id="year">2026</span> Agentic Architect.</span>
-      <span>MIT-licensed rules · One-time payment</span>
+      <span>Â© <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules Â· One-time payment</span>
     </div>
   </footer>
 
