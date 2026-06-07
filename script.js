@@ -366,25 +366,47 @@
 
     const box = section.querySelector('.ml-capture-box');
     const successPanel = section.querySelector('#ml-capture-success');
-    const emailEl = section.querySelector('#ml-capture-success-email');
-    if (!box || !successPanel) return;
+    const successBody = section.querySelector('#ml-capture-success-body');
+    if (!box || !successPanel || !successBody) return;
 
-    const SESSION_KEY = 'aa_free_kit_signup_v1';
+    const SESSION_KEY = 'aa_free_kit_signup_v2';
 
     const getEmail = () => {
       const input = box.querySelector('input[type="email"]');
       return input?.value?.trim() || '';
     };
 
-    const showSuccess = (email) => {
+    const captureMailerLiteMessage = () => {
+      const selectors = [
+        '.ml-form-successBody',
+        '.ml-form-embedSuccess .ml-form-successContent',
+        '.ml-form-embedSuccess',
+        '.row-success',
+      ];
+      for (const sel of selectors) {
+        const el = box.querySelector(sel);
+        if (el?.textContent?.trim()) {
+          return el.innerHTML.trim();
+        }
+      }
+      return '';
+    };
+
+    const showSuccess = (email, messageHtml) => {
+      const html =
+        messageHtml ||
+        captureMailerLiteMessage() ||
+        `<p><strong>Check your inbox!</strong></p><p>We sent a confirmation link to <strong>${email || 'your email address'}</strong>. Open that message to verify your address.</p>`;
+
       box.classList.remove('is-submitting');
       box.classList.add('is-submitted');
+      successBody.innerHTML = html;
       successPanel.hidden = false;
-      if (emailEl) {
-        emailEl.textContent = email || 'your email address';
-      }
       try {
-        sessionStorage.setItem(SESSION_KEY, JSON.stringify({ email: email || '', at: Date.now() }));
+        sessionStorage.setItem(
+          SESSION_KEY,
+          JSON.stringify({ email: email || '', messageHtml: html, at: Date.now() })
+        );
       } catch (_) { /* private mode */ }
     };
 
@@ -422,8 +444,8 @@
     try {
       const saved = sessionStorage.getItem(SESSION_KEY);
       if (saved) {
-        const { email } = JSON.parse(saved);
-        showSuccess(email);
+        const { email, messageHtml } = JSON.parse(saved);
+        showSuccess(email, messageHtml);
         return;
       }
     } catch (_) { /* ignore */ }

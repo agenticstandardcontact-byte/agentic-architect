@@ -1482,30 +1482,26 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 .ml-capture-box.is-submitted .ml-capture-success {
   display: block;
 }
-.ml-capture-success-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text);
-  margin: 0 0 10px;
-}
-.ml-capture-success-body,
-.ml-capture-success-hint {
+.ml-capture-success-body {
   font-size: 0.9rem;
   color: var(--text-dim);
   line-height: 1.55;
-  margin: 0 0 10px;
-  max-width: 36ch;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  max-width: 42ch;
+  text-align: center;
 }
-.ml-capture-success-body strong,
-.ml-capture-success-hint strong {
+.ml-capture-success-body p {
+  margin: 0 0 10px;
+  max-width: none;
+}
+.ml-capture-success-body p:last-child {
+  margin-bottom: 0;
+}
+.ml-capture-success-body strong {
   color: var(--text);
 }
-.ml-capture-success-hint {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-bottom: 0;
+.ml-capture-success-body a {
+  color: var(--accent);
 }
 .ml-capture-box .ml-form-embedContainer button[type="submit"].is-loading,
 .ml-capture-box .ml-form-embedContainer button.primary.is-loading {
