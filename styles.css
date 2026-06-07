@@ -1209,7 +1209,15 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   border-radius: var(--radius);
   padding: 20px 22px;
   box-shadow: var(--shadow-2);
-  text-align: left;
+  text-align: center;
+}
+/* Beat MailerLite inline #mlb2-*.ml-form-embedContainer { width: 100% } */
+#free-kit-signup .ml-capture-box [id^="mlb2-"].ml-form-embedContainer {
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  display: block !important;
+  margin: 0 auto !important;
 }
 .ml-capture-box .ml-embedded,
 .ml-capture-box .ml-form-embedContainer {
@@ -1217,6 +1225,8 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   max-width: none !important;
   min-width: 0 !important;
   display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 .ml-capture-box .ml-form-embedContainer .ml-form-embedWrapper,
 .ml-capture-box .ml-form-embedContainer .ml-form-embedBody,
@@ -1248,7 +1258,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--text);
-  text-align: left;
+  text-align: center;
   margin: 0 0 16px;
   line-height: 1.45;
   max-width: none;
@@ -1263,6 +1273,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   font-weight: 600 !important;
   margin: 0 0 8px !important;
   line-height: 1.3 !important;
+  text-align: center !important;
 }
 .ml-capture-box .ml-form-embedContainer .ml-form-embedContent h2 { font-size: 1.08rem !important; }
 .ml-capture-box .ml-form-embedContainer .ml-form-embedContent h3,
@@ -1274,11 +1285,16 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   font-size: 0.86rem !important;
   margin: 0 0 8px !important;
   line-height: 1.5 !important;
+  text-align: center !important;
 }
 .ml-capture-box .ml-form-embedContainer .ml-form-embedContent p strong { color: var(--text) !important; }
 
 .ml-capture-box .ml-form-embedContainer .ml-form-embedContent ul {
-  list-style: none !important; padding: 0 !important; margin: 0 0 10px !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 auto 10px !important;
+  display: inline-block !important;
+  text-align: left !important;
 }
 .ml-capture-box .ml-form-embedContainer .ml-form-embedContent ul li {
   color: var(--text-dim) !important;
@@ -1306,10 +1322,12 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   border-top: 1px solid var(--line) !important;
   margin-top: 10px !important;
   padding-top: 10px !important;
+  text-align: center !important;
 }
 .ml-capture-box .ml-form-embedContainer .ml-form-fieldRow {
   padding: 0 !important;
-  margin: 0 0 8px !important;
+  margin: 0 auto 8px !important;
+  text-align: center !important;
 }
 .ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsContent h4 {
   color: var(--text) !important;
@@ -1317,6 +1335,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   font-size: 0.8rem !important;
   font-weight: 600 !important;
   margin: 0 0 4px !important;
+  text-align: center !important;
 }
 .ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsContent p,
 .ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox .description,
@@ -1325,6 +1344,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   font-family: var(--font) !important;
   font-size: 0.72rem !important;
   line-height: 1.45 !important;
+  text-align: center !important;
 }
 .ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox label,
 .ml-capture-box .ml-form-embedContainer .ml-form-embedPermissionsOptionsCheckbox .label-description {
@@ -1383,8 +1403,8 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 .ml-capture-fine {
   font-size: 0.74rem;
   color: var(--text-muted);
-  margin: 10px 0 0;
-  text-align: left;
+  margin: 10px auto 0;
+  text-align: center;
   max-width: none;
   line-height: 1.5;
 }
