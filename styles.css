@@ -1228,8 +1228,8 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   text-align: center !important;
   box-sizing: border-box !important;
 }
-/* Do NOT force display on .row-form / .ml-form-embedBody — MailerLite toggles form vs success */
-#free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-form-embedBody.row-form,
+/* Do NOT force display on .row-form — MailerLite toggles form vs success */
+#free-kit-signup .ml-capture-box:not(.is-submitted) [id^="mlb2-"] .ml-form-embedBody.row-form,
 #free-kit-signup .ml-capture-box [id^="mlb2-"] .ml-form-embedContent {
   display: block !important;
 }
@@ -1436,7 +1436,9 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   margin: 0 0 8px !important;
 }
 .ml-capture-box.is-submitted.ml-native-success .row-form,
-.ml-capture-box.is-submitted.ml-native-success .ml-form-embedBody.row-form {
+.ml-capture-box.is-submitted.ml-native-success .ml-form-embedBody.row-form,
+.ml-capture-box.is-submitted.ml-native-success .ml-form-embedSubmit,
+.ml-capture-box.is-submitted.ml-native-success .ml-form-fieldRow {
   display: none !important;
 }
 .ml-capture-box.is-submitted.ml-native-success .ml-form-successBody,
@@ -1553,10 +1555,6 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   opacity: 0.85;
   cursor: wait !important;
   transform: none !important;
-}
-.ml-capture-box.is-submitting .ml-form-embedContainer button[type="submit"],
-.ml-capture-box.is-submitting .ml-form-embedContainer button.primary {
-  pointer-events: none;
 }
 
 /* =========================================================

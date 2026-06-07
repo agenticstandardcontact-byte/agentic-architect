@@ -369,9 +369,10 @@
     const successBody = section.querySelector('#ml-capture-success-body');
     if (!box || !successPanel || !successBody) return;
 
-    const SESSION_KEY = 'aa_free_kit_signup_v3';
+    const SESSION_KEY = 'aa_free_kit_signup_v4';
     let submitAttempted = false;
     let pollTimer = null;
+    let resetTimer = null;
 
     const isVisible = (el) => {
       if (!el) return false;
@@ -407,14 +408,27 @@
       return isVisible(successEl);
     };
 
+    const mailerLiteFailed = () => {
+      if (!submitAttempted) return false;
+      return !!box.querySelector('.ml-form-fieldRow .ml-error, .ml-form-fieldRow .invalid-feedback, .ml-form-embedContainer .error');
+    };
+
     const fallbackMessage = (email) =>
       `<p><strong>Check your inbox!</strong></p><p>We sent a confirmation link to <strong>${email || 'your email address'}</strong>. Open that message to verify your address.</p>`;
 
-    const showSuccess = (email, messageHtml, fromSession = false) => {
+    const clearPoll = () => {
       if (pollTimer) {
         window.clearInterval(pollTimer);
         pollTimer = null;
       }
+      if (resetTimer) {
+        window.clearTimeout(resetTimer);
+        resetTimer = null;
+      }
+    };
+
+    const showSuccess = (email, messageHtml, fromSession = false) => {
+      clearPoll();
 
       box.classList.remove('is-submitting');
       box.classList.add('is-submitted');
@@ -425,6 +439,12 @@
 
       box.classList.toggle('ml-native-success', useNative);
       box.classList.toggle('use-custom-success', !useNative);
+
+      const btn = box.querySelector('button[type="submit"], button.primary');
+      if (btn) {
+        btn.classList.remove('is-loading');
+        btn.removeAttribute('aria-busy');
+      }
 
       if (useNative) {
         successPanel.hidden = true;
@@ -439,7 +459,7 @@
           JSON.stringify({
             email: email || '',
             messageHtml: html,
-            useNative: useNative,
+            useNative,
             at: Date.now(),
           })
         );
@@ -454,39 +474,47 @@
         if (!btn.dataset.aaOriginalLabel) {
           btn.dataset.aaOriginalLabel = btn.textContent.trim();
         }
-        btn.disabled = true;
         btn.textContent = 'Sending…';
         btn.classList.add('is-loading');
         btn.setAttribute('aria-busy', 'true');
       } else if (!box.classList.contains('is-submitted')) {
-        btn.disabled = false;
         btn.textContent = btn.dataset.aaOriginalLabel || 'Submit';
         btn.classList.remove('is-loading');
         btn.removeAttribute('aria-busy');
       }
     };
 
-    const beginSubmit = () => {
-      if (box.classList.contains('is-submitted')) return;
-      submitAttempted = true;
-      setSubmitting(true);
-
-      if (pollTimer) window.clearInterval(pollTimer);
+    const watchForOutcome = () => {
+      clearPoll();
       pollTimer = window.setInterval(() => {
         if (mailerLiteSucceeded()) {
           showSuccess(getEmail());
+          return;
         }
-      }, 250);
+        if (mailerLiteFailed()) {
+          submitAttempted = false;
+          setSubmitting(false);
+          clearPoll();
+        }
+      }, 200);
 
-      window.setTimeout(() => {
-        if (pollTimer) {
-          window.clearInterval(pollTimer);
-          pollTimer = null;
-        }
+      resetTimer = window.setTimeout(() => {
         if (!box.classList.contains('is-submitted')) {
+          submitAttempted = false;
           setSubmitting(false);
         }
-      }, 20000);
+        clearPoll();
+      }, 30000);
+    };
+
+    const markSubmitStarted = () => {
+      if (box.classList.contains('is-submitted') || box.classList.contains('is-submitting')) {
+        return false;
+      }
+      submitAttempted = true;
+      setSubmitting(true);
+      watchForOutcome();
+      return true;
     };
 
     try {
@@ -495,37 +523,20 @@
         const { email, messageHtml, useNative } = JSON.parse(saved);
         submitAttempted = true;
         showSuccess(email, messageHtml, true);
-        if (useNative) {
-          box.classList.remove('use-custom-success');
-          box.classList.add('ml-native-success');
-        }
+        box.classList.toggle('ml-native-success', !!useNative);
+        box.classList.toggle('use-custom-success', !useNative);
         return;
       }
     } catch (_) { /* ignore */ }
 
-    box.addEventListener(
-      'submit',
-      (e) => {
-        if (box.classList.contains('is-submitted')) {
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-        beginSubmit();
-      },
-      true
-    );
-
-    box.addEventListener(
-      'click',
-      (e) => {
-        const btn = e.target.closest('button[type="submit"], button.primary');
-        if (!btn || !box.contains(btn) || box.classList.contains('is-submitted')) return;
-        if (box.classList.contains('is-submitting')) return;
-        beginSubmit();
-      },
-      true
-    );
+    /* Bubble phase only — never block MailerLite's own click/submit handlers */
+    box.addEventListener('submit', (e) => {
+      if (box.classList.contains('is-submitted')) {
+        e.preventDefault();
+        return;
+      }
+      markSubmitStarted();
+    });
 
     const observer = new MutationObserver(() => {
       if (box.classList.contains('is-submitted')) return;
