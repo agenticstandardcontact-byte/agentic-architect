@@ -146,6 +146,103 @@
 }
 .post-related-hub a { font-weight: 600; }
 
+/* ---------- Comparison tables (posts 05–08) ---------- */
+
+.post .post-table-wrap {
+  margin: 24px 0 28px;
+  max-width: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.post-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.94rem;
+}
+
+.post-table thead {
+  background: var(--bg-3);
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.post-table th {
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: bottom;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  line-height: 1.35;
+}
+
+.post-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-dim);
+  line-height: 1.55;
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.post-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.post-table tbody tr:nth-child(even) td {
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.post-table td strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* 3-column matrices (pricing, task picks) */
+.post-table:has(thead tr > th:nth-child(3):last-child) th:nth-child(1),
+.post-table:has(thead tr > th:nth-child(3):last-child) td:nth-child(1) {
+  width: 24%;
+}
+
+.post-table:has(thead tr > th:nth-child(3):last-child) th:nth-child(2),
+.post-table:has(thead tr > th:nth-child(3):last-child) td:nth-child(2) {
+  width: 22%;
+}
+
+.post-table:has(thead tr > th:nth-child(3):last-child) th:nth-child(3),
+.post-table:has(thead tr > th:nth-child(3):last-child) td:nth-child(3) {
+  width: 54%;
+}
+
+/* 4-column spec tables */
+.post-table:has(thead tr > th:nth-child(4)) th:nth-child(1),
+.post-table:has(thead tr > th:nth-child(4)) td:nth-child(1) {
+  width: 14%;
+}
+
+.post-table:has(thead tr > th:nth-child(4)) th:nth-child(2),
+.post-table:has(thead tr > th:nth-child(4)) td:nth-child(2) {
+  width: 14%;
+}
+
+.post-table:has(thead tr > th:nth-child(4)) th:nth-child(3),
+.post-table:has(thead tr > th:nth-child(4)) td:nth-child(3) {
+  width: 18%;
+}
+
+.post-table:has(thead tr > th:nth-child(4)) th:nth-child(4),
+.post-table:has(thead tr > th:nth-child(4)) td:nth-child(4) {
+  width: 54%;
+}
+
 /* ---------- Mobile (Astra-style) ---------- */
 @media (max-width: 768px) {
   .blog-hero {
@@ -190,6 +287,22 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     word-break: break-word;
+  }
+
+  .post-table-wrap {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: var(--radius-sm);
+  }
+
+  .post-table {
+    min-width: 480px;
+    font-size: 0.88rem;
+  }
+
+  .post-table th,
+  .post-table td {
+    padding: 10px 12px;
   }
 }
 
