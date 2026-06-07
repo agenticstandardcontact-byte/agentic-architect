@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
-  <title>Blog — Daily Senior Rule Updates | Agentic Architect</title>
+  <title>Blog â€” Daily Senior Rule Updates | Agentic Architect</title>
   <meta name="description" content="The Daily Senior Rule: one practical Cursor + C#/.NET pattern per day. Build your AI's architectural taste, one rule at a time." />
   <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/" />
-  <meta property="og:title" content="Agentic Architect Blog — Daily Senior Rule Updates" />
+  <meta property="og:title" content="Agentic Architect Blog â€” Daily Senior Rule Updates" />
   <meta property="og:description" content="One practical Cursor + .NET pattern per day. Train your AI's architectural taste." />
   <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
   <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
-  <link rel="alternate" type="application/rss+xml" title="Agentic Architect — Daily Senior Rule" href="../feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Architect â€” Daily Senior Rule" href="../feed.xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -90,7 +90,7 @@
       <span class="post-tag">Daily Rule</span>
     </div>
     <h2>Rule 22: BackgroundService Over Task.Run</h2>
-    <p>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</p>
+    <p>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" â€” your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</p>
   </div>
 </li>
 
@@ -124,7 +124,7 @@
       <span class="post-tag">Daily Rule</span>
     </div>
     <h2>Rule 20: Source-Generated JSON Serialisation</h2>
-    <p>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own — add a rule that flags new DTO classes and asks whether they should be source-generated.</p>
+    <p>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own â€” add a rule that flags new DTO classes and asks whether they should be source-generated.</p>
   </div>
 </li>
 
@@ -146,7 +146,7 @@
       <span class="post-tag">Daily Rule</span>
     </div>
     <h2>Rule 18: WebApplicationFactory for Integration Tests</h2>
-    <p>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</p>
+    <p>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase â€” it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</p>
   </div>
 </li>
 
@@ -192,7 +192,7 @@
       <span class="post-tag">Daily Rule</span>
     </div>
     <h2>Rule 16: async void Outside Event Handlers</h2>
-    <p>async void is a deadlock and unhandled-exception trap everywhere except UI event handlers. The AI uses it routinely for "fire and forget" — wrong answer every time. Flag it on sight.</p>
+    <p>async void is a deadlock and unhandled-exception trap everywhere except UI event handlers. The AI uses it routinely for "fire and forget" â€” wrong answer every time. Flag it on sight.</p>
   </div>
 </li>
 
@@ -237,7 +237,7 @@
       <span class="post-tag">Daily Rule</span>
     </div>
     <h2>Rule 12: IOptionsSnapshot Over Raw Config</h2>
-    <p>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</p>
+    <p>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" â€” refuse it and force a settings class with validation attributes.</p>
   </div>
 </li>
 
@@ -270,7 +270,7 @@
       <span class="post-tag">Daily Rule</span>
     </div>
     <h2>Rule 9: Scoped Capture in Singleton</h2>
-    <p>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</p>
+    <p>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton â€” if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</p>
   </div>
 </li>
 
@@ -304,7 +304,7 @@
                 <span class="post-tag">Cursor rules</span>
               </div>
               <h2>Seven words that stop Cursor hallucination loops</h2>
-              <p>The correction spiral — and the circuit-breaker rule that ends it before you type the stop phrase.</p>
+              <p>The correction spiral â€” and the circuit-breaker rule that ends it before you type the stop phrase.</p>
               <span class="post-read">Read post ?</span>
             </a>
           </li>
@@ -327,7 +327,7 @@
                 <span class="post-tag">.NET DI</span>
               </div>
               <h2>The Scoped?Singleton DI bug your AI just suggested (and how to catch it)</h2>
-              <p>The .NET lifetime bug that ships to production silently — and the one Cursor rule that catches it before merge.</p>
+              <p>The .NET lifetime bug that ships to production silently â€” and the one Cursor rule that catches it before merge.</p>
               <span class="post-read">Read post ?</span>
             </a>
           </li>
@@ -339,7 +339,7 @@
                 <span class="post-tag">Architecture</span>
               </div>
               <h2>The Context Tax: Why every Cursor session costs you 15 minutes</h2>
-              <p>The hidden cost senior engineers pay every morning — and a four-rule architecture for eliminating it.</p>
+              <p>The hidden cost senior engineers pay every morning â€” and a four-rule architecture for eliminating it.</p>
               <span class="post-read">Read post ?</span>
             </a>
           </li>
@@ -354,7 +354,7 @@
 
         <div class="blog-cta">
           <h3>Don't want to wait for the next post?</h3>
-          <p>The full kit — 9 specialist rules + the persistence engine — is £9.00 one-time.</p>
+          <p>The full kit â€” 9 specialist rules + the persistence engine â€” is Â£9.00 one-time.</p>
           <a class="btn btn-primary btn-lg" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=blog_index_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Get Agentic Architect ?</a>
         </div>
       </div>
@@ -371,12 +371,12 @@
         <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
         <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a><a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">GitHub</a></div>
         <div><h4>Legal</h4><a href="../privacy-policy.html">Privacy Policy</a><a href="../terms-of-service.html">Terms of Service</a><a href="../affiliate-disclosure.html">Affiliate Disclosure</a></div>
-        <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=blog_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit — £9.00</a></div>
+        <div><h4>Buy</h4><a href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=blog_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit â€” Â£9.00</a></div>
       </div>
     </div>
     <div class="container foot-bottom">
-      <span>© <span id="year">2026</span> Agentic Architect.</span>
-      <span>MIT-licensed rules · One-time payment</span>
+      <span>Â© <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules Â· One-time payment</span>
     </div>
   </footer>
 
