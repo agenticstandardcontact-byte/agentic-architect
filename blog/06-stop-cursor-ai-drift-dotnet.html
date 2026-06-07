@@ -11,13 +11,13 @@
 
   <meta property="og:title" content="How to stop Cursor AI forgetting your .NET architecture (the $9 fix)" />
   <meta property="og:description" content="Cursor AI forgets your DI patterns, Clean Architecture boundaries, and EF Core conventions every session. Here's a 4-rule persistence framework that locks your architecture into the AI's long-term memory — install in 60 seconds." />
-  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+  <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg?v=3" />
   <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/06-stop-cursor-ai-drift-dotnet.html" />
   <meta property="og:type" content="article" />
   <meta property="article:published_time" content="2026-05-30T08:00:00Z" />
   <meta property="article:author" content="Agentic Architect" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg" />
+  <meta name="twitter:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg?v=3" />
 
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -46,7 +46,7 @@
             "url": "https://agenticstandardcontact-byte.github.io/agentic-architect/favicon.svg"
         }
     },
-    "image": "https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg",
+    "image": "https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg?v=3",
     "mainEntityOfPage": "https://agenticstandardcontact-byte.github.io/agentic-architect/blog/06-stop-cursor-ai-drift-dotnet.html",
     "keywords": "Cursor AI persistence, .NET architecture, Cursor rules, AI context drift, C#"
 }
@@ -63,18 +63,15 @@
         </svg>
         <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
       </a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">Menu</button>
       <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
-        <a href="../#problem">The Problem</a>
         <a href="../#kit">What's Inside</a>
-        <a href="../#proof">Proof</a>
         <a href="../#pricing">Pricing</a>
-        <a href="../#faq">FAQ</a>
         <a href="./" aria-current="page">Blog</a>
         <a href="../hardware/">Hardware</a>
         <a href="../learn/">Quick Fixes</a>
-        <a href="../#resources">Guides</a>
       </nav>
-<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu"><span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
+      <a class="btn btn-primary btn-sm nav-cta" href="https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=essay_nav&utm_campaign=paid_kit" target="_blank" rel="noopener">Buy now</a>
     </div>
   </header>
 
@@ -214,6 +211,17 @@
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="../script.js" defer></script>
+  <script>
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var menu = document.querySelector('.nav-links-panel');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open', !open);
+    });
+  })();
+  </script>
 </body>
 </html>
