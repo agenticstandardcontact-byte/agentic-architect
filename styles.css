@@ -1466,6 +1466,58 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 }
 .ml-capture-fine a { color: var(--text-dim); text-decoration: underline; }
 
+/* Free kit signup — loading, success, session lock */
+.ml-capture-box.is-submitted .ml-embedded,
+.ml-capture-box.is-submitted [id^="mlb2-"] {
+  display: none !important;
+}
+.ml-capture-box.is-submitted .ml-capture-fine {
+  display: none;
+}
+.ml-capture-success {
+  display: none;
+  text-align: center;
+  padding: 8px 4px 4px;
+}
+.ml-capture-box.is-submitted .ml-capture-success {
+  display: block;
+}
+.ml-capture-success-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+.ml-capture-success-body,
+.ml-capture-success-hint {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+  margin: 0 0 10px;
+  max-width: 36ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ml-capture-success-body strong,
+.ml-capture-success-hint strong {
+  color: var(--text);
+}
+.ml-capture-success-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+.ml-capture-box .ml-form-embedContainer button[type="submit"].is-loading,
+.ml-capture-box .ml-form-embedContainer button.primary.is-loading {
+  opacity: 0.85;
+  cursor: wait !important;
+  transform: none !important;
+}
+.ml-capture-box.is-submitting .ml-form-embedContainer button[type="submit"],
+.ml-capture-box.is-submitting .ml-form-embedContainer button.primary {
+  pointer-events: none;
+}
+
 /* =========================================================
    PRICING (light)
    ========================================================= */

@@ -358,4 +358,120 @@
       window.addEventListener('scroll', onScroll, { passive: true });
     }
   }
+
+  /* ---------- Free kit signup UX (MailerLite embed) ---------- */
+  const mountFreeKitSignup = () => {
+    const section = document.getElementById('free-kit-signup');
+    if (!section) return;
+
+    const box = section.querySelector('.ml-capture-box');
+    const successPanel = section.querySelector('#ml-capture-success');
+    const emailEl = section.querySelector('#ml-capture-success-email');
+    if (!box || !successPanel) return;
+
+    const SESSION_KEY = 'aa_free_kit_signup_v1';
+
+    const getEmail = () => {
+      const input = box.querySelector('input[type="email"]');
+      return input?.value?.trim() || '';
+    };
+
+    const showSuccess = (email) => {
+      box.classList.remove('is-submitting');
+      box.classList.add('is-submitted');
+      successPanel.hidden = false;
+      if (emailEl) {
+        emailEl.textContent = email || 'your email address';
+      }
+      try {
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify({ email: email || '', at: Date.now() }));
+      } catch (_) { /* private mode */ }
+    };
+
+    const setSubmitting = (on) => {
+      box.classList.toggle('is-submitting', on);
+      const btn = box.querySelector('button[type="submit"], button.primary');
+      if (!btn) return;
+      if (on) {
+        if (!btn.dataset.aaOriginalLabel) {
+          btn.dataset.aaOriginalLabel = btn.textContent.trim();
+        }
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        btn.classList.add('is-loading');
+        btn.setAttribute('aria-busy', 'true');
+      } else if (!box.classList.contains('is-submitted')) {
+        btn.disabled = false;
+        btn.textContent = btn.dataset.aaOriginalLabel || 'Get the free kit';
+        btn.classList.remove('is-loading');
+        btn.removeAttribute('aria-busy');
+      }
+    };
+
+    const mailerLiteSucceeded = () => {
+      if (box.querySelector('.ml-form-successBody, .ml-form-embedSuccess, .row-success')) {
+        return true;
+      }
+      const formBody = box.querySelector('.ml-form-embedBody');
+      const successWrap = box.querySelector('.ml-form-successContent, .ml-form-successBody');
+      if (successWrap && successWrap.offsetParent !== null) return true;
+      if (formBody && formBody.style.display === 'none') return true;
+      return false;
+    };
+
+    try {
+      const saved = sessionStorage.getItem(SESSION_KEY);
+      if (saved) {
+        const { email } = JSON.parse(saved);
+        showSuccess(email);
+        return;
+      }
+    } catch (_) { /* ignore */ }
+
+    box.addEventListener(
+      'submit',
+      (e) => {
+        if (box.classList.contains('is-submitted')) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        setSubmitting(true);
+        window.setTimeout(() => {
+          if (!box.classList.contains('is-submitted')) setSubmitting(false);
+        }, 15000);
+      },
+      true
+    );
+
+    box.addEventListener(
+      'click',
+      (e) => {
+        const btn = e.target.closest('button[type="submit"], button.primary');
+        if (!btn || !box.contains(btn) || box.classList.contains('is-submitted')) return;
+        if (box.classList.contains('is-submitting')) return;
+        setSubmitting(true);
+        window.setTimeout(() => {
+          if (!box.classList.contains('is-submitted')) setSubmitting(false);
+        }, 15000);
+      },
+      true
+    );
+
+    const observer = new MutationObserver(() => {
+      if (box.classList.contains('is-submitted')) return;
+      if (mailerLiteSucceeded()) {
+        showSuccess(getEmail());
+        observer.disconnect();
+      }
+    });
+    observer.observe(box, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class'],
+    });
+  };
+
+  mountFreeKitSignup();
 })();
