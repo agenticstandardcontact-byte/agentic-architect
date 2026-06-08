@@ -183,5 +183,13 @@
       <description>Logs alone won't debug a distributed system. Add a static readonly ActivitySource per project and wrap every external call (DB, HTTP, queue) in StartActivity. Cursor never adds OTEL spans on its own — give it a rule that recognises external-call patterns and proposes the trace.</description>
     </item>
 
+      <item>
+      <title>Rule 1: The Result Pattern</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-08</link>
+      <guid isPermaLink="false">daily-rule-2026-06-08</guid>
+      <pubDate>Mon, 08 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This prevents 90% of AI-generated logic errors in Web APIs.</description>
+    </item>
+
   </channel>
 </rss>
