@@ -191,5 +191,13 @@
       <description>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This prevents 90% of AI-generated logic errors in Web APIs.</description>
     </item>
 
+      <item>
+      <title>Rule 2: Persistence Boundaries</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-09</link>
+      <guid isPermaLink="false">daily-rule-2026-06-09</guid>
+      <pubDate>Tue, 09 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</description>
+    </item>
+
   </channel>
 </rss>
