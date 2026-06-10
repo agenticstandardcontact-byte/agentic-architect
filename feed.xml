@@ -199,5 +199,13 @@
       <description>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</description>
     </item>
 
+      <item>
+      <title>Rule 3: Structured Logging</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-10</link>
+      <guid isPermaLink="false">daily-rule-2026-06-10</guid>
+      <pubDate>Wed, 10 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Enforce ILogger with structured templates. Never use string interpolation in logs. This ensures that when you feed logs back into Cursor for debugging, the AI recognizes the patterns immediately.</description>
+    </item>
+
   </channel>
 </rss>
