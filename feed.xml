@@ -207,5 +207,13 @@
       <description>Enforce ILogger with structured templates. Never use string interpolation in logs. This ensures that when you feed logs back into Cursor for debugging, the AI recognizes the patterns immediately.</description>
     </item>
 
+      <item>
+      <title>Rule 4: Validator Enforcement</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-11</link>
+      <guid isPermaLink="false">daily-rule-2026-06-11</guid>
+      <pubDate>Thu, 11 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Every MediatR Request must have a FluentValidation rule. Force the AI to check the validator before writing handler logic. This prevents "context rot" where the AI forgets your business constraints.</description>
+    </item>
+
   </channel>
 </rss>
