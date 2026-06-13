@@ -223,5 +223,13 @@
       <description>Use MapGroup and EndPoints for .NET 9 services. It keeps the context window lean and focused, helping the AI provide more accurate code suggestions than it can with massive, bloated Controllers.</description>
     </item>
 
+      <item>
+      <title>Rule 6: TimeProvider Injection</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-13</link>
+      <guid isPermaLink="false">daily-rule-2026-06-13</guid>
+      <pubDate>Sat, 13 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Never let Cursor hardcode DateTime.Now or DateTime.UtcNow in business logic. Inject TimeProvider (or your own IClock) instead. This makes time deterministic for tests and stops the AI reaching for static APIs whenever it generates time-aware code.</description>
+    </item>
+
   </channel>
 </rss>
