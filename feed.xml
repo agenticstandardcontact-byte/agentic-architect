@@ -231,5 +231,13 @@
       <description>Never let Cursor hardcode DateTime.Now or DateTime.UtcNow in business logic. Inject TimeProvider (or your own IClock) instead. This makes time deterministic for tests and stops the AI reaching for static APIs whenever it generates time-aware code.</description>
     </item>
 
+      <item>
+      <title>Rule 7: IHttpClientFactory Discipline</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-14</link>
+      <guid isPermaLink="false">daily-rule-2026-06-14</guid>
+      <pubDate>Sun, 14 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Refuse new HttpClient() in any generated code. Force Cursor to inject IHttpClientFactory or a typed client. The classic socket-exhaustion bug is exactly the kind of footgun an AI hands you without realising.</description>
+    </item>
+
   </channel>
 </rss>
