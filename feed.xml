@@ -239,5 +239,13 @@
       <description>Refuse new HttpClient() in any generated code. Force Cursor to inject IHttpClientFactory or a typed client. The classic socket-exhaustion bug is exactly the kind of footgun an AI hands you without realising.</description>
     </item>
 
+      <item>
+      <title>Rule 8: CancellationToken Propagation</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-15</link>
+      <guid isPermaLink="false">daily-rule-2026-06-15</guid>
+      <pubDate>Mon, 15 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</description>
+    </item>
+
   </channel>
 </rss>
