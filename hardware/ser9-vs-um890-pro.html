@@ -70,7 +70,7 @@
       <header class="hw-hero">
         <div class="container">
           <h1>Beelink SER9 vs Minisforum UM890 Pro: <em>AMD AI Mini PCs at Two Price Points</em></h1>
-          <p class="hw-lede">Two AMD Mini PCs, two very different value propositions. The <strong>Beelink SER9</strong> packs AMD's latest Ryzen AI 9 HX 370 with a dedicated 50 TOPS NPU — hardware AI acceleration built into the silicon. The <strong>Minisforum UM890 Pro</strong> is the budget workhorse: Ryzen 9 8945HS, dual NVMe slots, and an OCulink port that lets you bolt on a desktop GPU later. Both run Windows 11 and Linux bare-metal. Both run Ollama. But one costs ~£300 more and the difference isn't just the processor. Here's which one earns its keep for AI-curious .NET developers.</p>
+          <p class="hw-lede">Two AMD Mini PCs, two very different value propositions. The <strong>Beelink SER9</strong> packs AMD's latest Ryzen AI 9 HX 370 with a dedicated 50 TOPS NPU — hardware AI acceleration built into the silicon. The <strong>Minisforum UM890 Pro</strong> is the budget workhorse: Ryzen 9 8945HS, dual NVMe slots, and an OCulink port that lets you bolt on a desktop GPU later. Both run Windows 11 and Linux bare-metal. Both run Ollama. But one sits at a higher price tier and the difference isn't just the processor. Here's which one earns its keep for AI-curious .NET developers.</p>
           <div class="hw-amazon-notice">
             <p><strong>As an Amazon Associate I earn from qualifying purchases.</strong> Links below go directly to Amazon.co.uk (tag <code>agenticstanda-21</code>), added manually via SiteStripe. We do not display live Amazon prices — check current price on Amazon.</p>
           </div>
@@ -93,9 +93,9 @@
 <li>Single M.2 NVMe slot — storage expansion limited</li>
 <li>No OCulink / eGPU port — stuck with the iGPU forever</li>
 <li>LPDDR5x not user-replaceable — if RAM fails, whole unit is dead</li>
-<li>Price premium over UM890 for the NPU — £200-300 gap</li></ul>
+<li>Price premium over UM890 for the NPU</li></ul>
   </div>
-  <a class="btn btn-primary btn-lg hw-buy-btn" href="https://www.amazon.co.uk/s?k=Beelink+SER9&tag=agenticstanda-21" target="_blank" rel="noopener sponsored" data-goatcounter-click="amazon-ser9">
+  <a class="btn btn-primary btn-lg hw-buy-btn" href="https://amzn.to/4edciBw" target="_blank" rel="noopener sponsored" data-goatcounter-click="amazon-ser9">
     Check current price on Amazon &rarr;
   </a>
   <span class="hw-card-disclosure">As an Amazon Associate I earn from qualifying purchases.</span>
@@ -110,7 +110,7 @@
 <li>Dual M.2 NVMe Gen4 slots — separate OS and model storage drives</li>
 <li>2.5GbE + dual USB4 (40Gbps) — better networking and peripheral bandwidth than SER9</li>
 <li>User-upgradable DDR5 SODIMM — start with 32GB, go to 64GB+ later</li>
-<li>£200-300 cheaper — that pays for a 2TB NVMe and 32GB RAM kit</li></ul>
+<li>Typically lower upfront cost — budget left over for a 2TB NVMe and 32GB RAM kit</li></ul>
   </div>
   <div class="hw-card-cons">
     <h4>Watch For</h4>
@@ -120,7 +120,7 @@
 <li>Higher TDP under load (54W vs 35W on SER9) — more fan noise</li>
 <li>Wi-Fi 6E (not 7) — fine today, not tomorrow-proof</li></ul>
   </div>
-  <a class="btn btn-primary btn-lg hw-buy-btn" href="https://www.amazon.co.uk/s?k=Minisforum+UM890+Pro&tag=agenticstanda-21" target="_blank" rel="noopener sponsored" data-goatcounter-click="amazon-um890-pro">
+  <a class="btn btn-primary btn-lg hw-buy-btn" href="https://amzn.to/4edCjRd" target="_blank" rel="noopener sponsored" data-goatcounter-click="amazon-um890-pro">
     Check current price on Amazon &rarr;
   </a>
   <span class="hw-card-disclosure">As an Amazon Associate I earn from qualifying purchases.</span>
@@ -261,7 +261,7 @@
   </div>
 <div class="hw-use-case">
     <h4>Budget AI Dev Box — Maximum Capability Per Pound</h4>
-    <p><strong>Winner: Minisforum UM890 Pro</strong> — At £550-700 barebone vs £750-950, the UM890 saves £200-300. That buys a 2TB NVMe and a 32GB DDR5 kit. You can add a desktop GPU later via OCulink when you need real TFLOPS — the SER9 locks you into its iGPU forever. If you're spending your own money and might want a GPU later, the UM890's upgrade path is compelling.</p>
+    <p><strong>Winner: Minisforum UM890 Pro</strong> — The UM890 typically costs less upfront at common barebone configs. That leaves budget for a 2TB NVMe and a 32GB DDR5 kit. You can add a desktop GPU later via OCulink when you need real TFLOPS — the SER9 locks you into its iGPU forever. If you're spending your own money and might want a GPU later, the UM890's upgrade path is compelling.</p>
   </div>
 <div class="hw-use-case">
     <h4>ONNX Runtime / DirectML Development</h4>
@@ -284,20 +284,20 @@
 
         <section class="hw-section">
   <h2>Ecosystem Lock-In: What Else Are You Buying?</h2>
-  <p>Both machines run the same OSes and the same x86 software. The trade-offs are hardware-only:</p><ul><li><strong>SER9 path:</strong> You're paying £200-300 extra for the NPU and Zen 5 cores. That's worth it if you use ONNX/DirectML today, or if single-threaded .NET build speed matters. But you can never add a dGPU — the iGPU is your ceiling. Consider whether 64GB LPDDR5x is enough for your 3-year horizon.</li><li><strong>UM890 path:</strong> You're trading the NPU and 15% single-thread perf for OCulink, dual NVMe, and socketed RAM. This is the tinkerer's box. Add a 2TB drive now, a GPU later, and upgrade RAM when DDR5 prices drop. The 8945HS is no slouch — it was AMD's flagship mobile APU 12 months ago and still outperforms most laptops.</li></ul><p><strong>Total cost of ownership over 3 years</strong> (hardware + essential upgrades): SER9 (64GB, from-scratch) ≈ £850-1,000. UM890 Pro (32GB+1TB config, option to add GPU later) ≈ £700-850 today, rising to £1,200-1,400 if you add an RTX 4060 via OCulink in year 2. The UM890 costs less today but potentially more later — the SER9 costs more today but needs nothing added.</p>
+  <p>Both machines run the same OSes and the same x86 software. The trade-offs are hardware-only:</p><ul><li><strong>SER9 path:</strong> You're paying extra for the NPU and Zen 5 cores. That's worth it if you use ONNX/DirectML today, or if single-threaded .NET build speed matters. But you can never add a dGPU — the iGPU is your ceiling. Consider whether 64GB LPDDR5x is enough for your 3-year horizon.</li><li><strong>UM890 path:</strong> You're trading the NPU and 15% single-thread perf for OCulink, dual NVMe, and socketed RAM. This is the tinkerer's box. Add a 2TB drive now, a GPU later, and upgrade RAM when DDR5 prices drop. The 8945HS is no slouch — it was AMD's flagship mobile APU 12 months ago and still outperforms most laptops.</li></ul><p><strong>Total cost of ownership over 3 years</strong> (hardware + essential upgrades): the UM890 often costs less today but can rise if you add an eGPU later; the SER9 costs more upfront but needs fewer add-ons. Check manufacturer MSRP on vendor sites — we do not display live Amazon prices on this page.</p>
 </section>
 
         <section class="hw-verdict">
   <h2>Verdict: Buy the SER9 for the NPU and Zen 5 speed; buy the UM890 Pro for OCulink flexibility and upgradability</h2>
   <div class="hw-verdict-body">
-    <p>If you're a <strong>.NET developer who runs ONNX models, uses Windows Studio Effects, or wants the fastest possible compile times</strong>, the Beelink SER9 is the right call. The 50 TOPS NPU isn't a gimmick — it genuinely accelerates Whisper, Phi, and DirectML workloads while keeping the CPU free for Rider, Docker, and SQL Server. The 64GB of LPDDR5x-7500 is fast enough that you won't miss socketed RAM for years.</p><p>If you're <strong>building a budget AI lab and might want a real GPU later</strong>, the Minisforum UM890 Pro is the smarter buy. The OCulink port is future-proofing that the SER9 simply doesn't offer. You save £200-300 today, enough for storage and RAM, and you keep the option to bolt on an RTX 4070 when you need real TFLOPS. The 8945HS is still a beast — it just lacks the NPU and the latest-gen cores.</p><p><strong>My recommendation for most AI-curious .NET devs in 2026:</strong> buy the Beelink SER9 (64GB config, ~£900) if you can stretch the budget. The NPU + Zen 5 combo is the direction AMD is going, and you'll benefit from NPU acceleration more than you think (Whisper transcription alone is a daily-use feature for coding notes and meeting transcripts). But if £900 is too rich or you know you'll want a dGPU within 12 months, the UM890 Pro at ~£700 with an OCulink GPU in your future plans is the smarter long game.</p>
+    <p>If you're a <strong>.NET developer who runs ONNX models, uses Windows Studio Effects, or wants the fastest possible compile times</strong>, the Beelink SER9 is the right call. The 50 TOPS NPU isn't a gimmick — it genuinely accelerates Whisper, Phi, and DirectML workloads while keeping the CPU free for Rider, Docker, and SQL Server. The 64GB of LPDDR5x-7500 is fast enough that you won't miss socketed RAM for years.</p><p>If you're <strong>building a budget AI lab and might want a real GPU later</strong>, the Minisforum UM890 Pro is the smarter buy. The OCulink port is future-proofing that the SER9 simply doesn't offer. You save on upfront cost, enough for storage and RAM, and you keep the option to bolt on an RTX 4070 when you need real TFLOPS. The 8945HS is still a beast — it just lacks the NPU and the latest-gen cores.</p><p><strong>My recommendation for most AI-curious .NET devs in 2026:</strong> buy the Beelink SER9 (64GB config) if you can stretch the budget. The NPU + Zen 5 combo is the direction AMD is going, and you'll benefit from NPU acceleration more than you think (Whisper transcription alone is a daily-use feature for coding notes and meeting transcripts). But if the SER9 is too rich or you know you'll want a dGPU within 12 months, the UM890 Pro with an OCulink GPU in your future plans is the smarter long game.</p>
   </div>
   
   <div class="hw-verdict-buttons">
-    <a class="btn btn-accent btn-lg" href="https://www.amazon.co.uk/s?k=Beelink+SER9&tag=agenticstanda-21" target="_blank" rel="noopener sponsored" data-goatcounter-click="amazon-ser9">
+    <a class="btn btn-accent btn-lg" href="https://amzn.to/4edciBw" target="_blank" rel="noopener sponsored" data-goatcounter-click="amazon-ser9">
       Beelink SER9 on Amazon &rarr;
     </a>
-    <a class="btn btn-outline btn-lg" href="https://www.amazon.co.uk/s?k=Minisforum+UM890+Pro&tag=agenticstanda-21" target="_blank" rel="noopener sponsored" data-goatcounter-click="amazon-um890-pro">
+    <a class="btn btn-outline btn-lg" href="https://amzn.to/4edCjRd" target="_blank" rel="noopener sponsored" data-goatcounter-click="amazon-um890-pro">
       Minisforum UM890 Pro on Amazon &rarr;
     </a>
   </div>
