@@ -247,5 +247,13 @@
       <description>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</description>
     </item>
 
+      <item>
+      <title>Rule 9: Scoped Capture in Singleton</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-16</link>
+      <guid isPermaLink="false">daily-rule-2026-06-16</guid>
+      <pubDate>Tue, 16 Jun 2026 09:00:00 +0000</pubDate>
+      <description>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</description>
+    </item>
+
   </channel>
 </rss>
