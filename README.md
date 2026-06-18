@@ -7,9 +7,9 @@
 ### The Persistence Framework for Cursor — built for senior C#/.NET engineers
 
 [![Try the free sample first — arch-core-lite.mdc](https://img.shields.io/badge/Try_the_free_sample_first-arch--core--lite.mdc-6ee7ff?style=for-the-badge&logo=github&logoColor=white)](arch-core-lite.mdc?utm_source=github_readme&utm_medium=badge&utm_campaign=free_sample)
-[![Get the Kit — £9.00](https://img.shields.io/badge/Get_the_Kit-%C2%A39.00-ff8a3d?style=for-the-badge&logo=gumroad&logoColor=white)](https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=github_readme&utm_medium=badge&utm_campaign=paid_kit)
+[![Get the Kit — £9.00](https://img.shields.io/badge/Get_the_Kit-%C2%A39.00-ff8a3d?style=for-the-badge&logo=gumroad&logoColor=white)](https://payhip.com/b/98aSq?utm_source=github_readme&utm_medium=badge&utm_campaign=paid_kit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-4ade80?style=for-the-badge)](LICENSE)
-[![Lifetime Updates](https://img.shields.io/badge/Lifetime-Updates-ffb547?style=for-the-badge)](https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=github_readme&utm_medium=badge&utm_campaign=paid_kit)
+[![Lifetime Updates](https://img.shields.io/badge/Lifetime-Updates-ffb547?style=for-the-badge)](https://payhip.com/b/98aSq?utm_source=github_readme&utm_medium=badge&utm_campaign=paid_kit)
 
 #### 🌐 **[Visit the website →](https://agenticstandardcontact-byte.github.io/agentic-architect/)**
 
@@ -68,7 +68,7 @@ your-dotnet-project/
 
 ```bash
 # 1. Get the kit from Gumroad
-#    → https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01
+#    → https://payhip.com/b/98aSq
 
 # 2. Drop the rules into your project
 mkdir -p .cursor/rules
@@ -99,7 +99,7 @@ That's it. Next session, the AI starts hydrated.
 | Licence | MIT |
 | Guarantee | 14-day no-questions refund |
 
-**[👉 Get the kit — £9.00](https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01)**
+**[👉 Get the kit — £9.00](https://payhip.com/b/98aSq)**
 
 ## ❓ FAQ
 
@@ -157,7 +157,7 @@ GitHub Pages serves this repo under `/agentic-architect/`. Submit this sitemap U
 
 ### Stop paying the Context Tax.
 
-**[Get Agentic Architect — £9.00 →](https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01)**
+**[Get Agentic Architect — £9.00 →](https://payhip.com/b/98aSq)**
 
 One-time payment · Lifetime updates · 14-day guarantee · MIT-licensed
 
