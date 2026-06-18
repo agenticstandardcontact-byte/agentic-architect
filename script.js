@@ -413,8 +413,15 @@
       return !!box.querySelector('.ml-form-fieldRow .ml-error, .ml-form-fieldRow .invalid-feedback, .ml-form-embedContainer .error');
     };
 
-    const fallbackMessage = (email) =>
-      `<p><strong>Check your inbox!</strong></p><p>We sent a confirmation link to <strong>${email || 'your email address'}</strong>. Open that message to verify your address.</p>`;
+    const kitReadyMessage = (email) =>
+      `<p><strong>You're in — grab the kit now.</strong></p>` +
+      `<p>Three Cursor rules, LEARNING_LOG template, 3-minute install. No need to wait for email.</p>` +
+      `<p style="margin:16px 0 0"><a class="btn btn-accent btn-lg" href="thank-you-free.html?utm_source=site&utm_medium=signup_success&utm_campaign=free_kit">Download free starter kit</a></p>` +
+      (email
+        ? `<p style="font-size:0.85rem;color:var(--text-muted);margin:12px 0 0">We also emailed <strong>${email}</strong> a backup link.</p>`
+        : '');
+
+    const fallbackMessage = (email) => kitReadyMessage(email);
 
     const clearPoll = () => {
       if (pollTimer) {
@@ -434,8 +441,10 @@
       box.classList.add('is-submitted');
 
       const nativeHtml = captureMailerLiteMessage();
-      const html = messageHtml || nativeHtml || fallbackMessage(email);
-      const useNative = !fromSession && !!nativeHtml;
+      const html = messageHtml || kitReadyMessage(email) || nativeHtml;
+
+      /* Prefer our download CTA over MailerLite's generic "check your inbox" copy */
+      const useNative = false;
 
       box.classList.toggle('ml-native-success', useNative);
       box.classList.toggle('use-custom-success', !useNative);
