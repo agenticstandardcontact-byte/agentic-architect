@@ -263,5 +263,13 @@
       <description>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</description>
     </item>
 
+      <item>
+      <title>Rule 11: Rethrow, Don't throw ex</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-18</link>
+      <guid isPermaLink="false">daily-rule-2026-06-18</guid>
+      <pubDate>Thu, 18 Jun 2026 09:00:00 +0000</pubDate>
+      <description>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</description>
+    </item>
+
   </channel>
 </rss>
