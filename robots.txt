@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Paid product — not crawlable; delivery is email/Stripe fulfillment only
+# Paid kit delivery is email/Payhip only
 Disallow: /downloads/agentic-architect-kit.zip
 Disallow: /thank-you-paid.html
 

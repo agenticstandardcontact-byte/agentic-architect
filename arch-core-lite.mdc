@@ -1,5 +1,5 @@
 ﻿---
-description: "Agentic Architect — arch-core-lite. A free, single-rule preview of the Persistence Framework for Cursor (C#/.NET edition). Enforces a small but high-value subset of architectural guardrails: layer boundaries, anti-Big-Ball-of-Mud heuristics, and a lightweight 'pause and ask' protocol when context is missing. For the full 4-rule kit + Learning Log engine, see https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01"
+description: "Agentic Architect — arch-core-lite. A free, single-rule preview of the Persistence Framework for Cursor (C#/.NET edition). Enforces a small but high-value subset of architectural guardrails: layer boundaries, anti-Big-Ball-of-Mud heuristics, and a lightweight 'pause and ask' protocol when context is missing. For the full 4-rule kit + Learning Log engine, see https://payhip.com/b/98aSq"
 globs:
   - "**/*.cs"
   - "**/*.csproj"
@@ -11,7 +11,7 @@ alwaysApply: false
 
 > **This is a free single-rule preview of [Agentic Architect](https://agenticstandardcontact-byte.github.io/agentic-architect/).**
 > The full kit ships four scoped rules plus the **`persistence.mdc`** engine that maintains your project's `LEARNING_LOG.md` across sessions.
-> 👉 **Get the full framework — £9.00 one-time: https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01**
+> 👉 **Get the full framework — £9.00 one-time: https://payhip.com/b/98aSq**
 
 ---
 
@@ -103,6 +103,6 @@ This file is a **single rule** from the Agentic Architect kit. The full framewor
 
 ### Get the full kit — £9.00 one-time, lifetime updates, MIT-licensed
 
-👉 **https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01**
+👉 **https://payhip.com/b/98aSq**
 
 14-day no-questions refund. Stop paying the Context Tax.

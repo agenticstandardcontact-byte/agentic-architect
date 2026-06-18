@@ -184,7 +184,7 @@
     ? '../#free-kit-signup'
     : '#free-kit-signup';
   const STRIPE_BUY =
-    'https://buy.stripe.com/9B68wP8XE3I5dZ4aKmcIE01?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit';
+    'https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit';
 
   const mountNavCtas = () => {
     const navInner = document.querySelector('.nav-inner');
