@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Paid product — not crawlable; delivery is email/Stripe fulfillment only
+Disallow: /downloads/agentic-architect-kit.zip
+Disallow: /thank-you-paid.html
+
 Sitemap: https://agenticstandardcontact-byte.github.io/agentic-architect/sitemap.xml
