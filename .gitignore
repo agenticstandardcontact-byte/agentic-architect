@@ -73,3 +73,6 @@ node_modules/
 commands.txt
 COMMANDS.txt
 **/agentic-marketing/
+
+# Paid kit ZIP — never host on public GitHub Pages (leaked = free product)
+downloads/agentic-architect-kit.zip
