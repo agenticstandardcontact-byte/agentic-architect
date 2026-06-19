@@ -271,5 +271,13 @@
       <description>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</description>
     </item>
 
+      <item>
+      <title>Rule 12: IOptionsSnapshot Over Raw Config</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-19</link>
+      <guid isPermaLink="false">daily-rule-2026-06-19</guid>
+      <pubDate>Fri, 19 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</description>
+    </item>
+
   </channel>
 </rss>
