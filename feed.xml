@@ -279,5 +279,13 @@
       <description>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</description>
     </item>
 
+      <item>
+      <title>Rule 13: Strongly-Typed IDs</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-20</link>
+      <guid isPermaLink="false">daily-rule-2026-06-20</guid>
+      <pubDate>Sat, 20 Jun 2026 09:00:00 +0000</pubDate>
+      <description>OrderId as record struct OrderId(Guid Value) beats raw Guid everywhere. Stops the AI passing a CustomerId where an OrderId was expected — a bug the compiler can't catch with primitive obsession but catches instantly with domain primitives.</description>
+    </item>
+
   </channel>
 </rss>
