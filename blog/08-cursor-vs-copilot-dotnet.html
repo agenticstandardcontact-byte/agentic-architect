@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
-  <title>Cursor vs Copilot for .NET (2026): When the Second Seat Pays Off</title>
-  <meta name="description" content="Cursor vs GitHub Copilot for C#/.NET — 2026 pricing, multi-file agent edits vs inline completion, and when a second subscription earns its keep." />
-  <meta name="keywords" content="Cursor vs Copilot, cursor vs copilot dotnet, GitHub Copilot C#, Cursor AI .NET, best AI coding tool .NET 2026, Copilot pricing, Cursor pricing, agentic coding C#, AI pair programming .NET" />
+  <title>Cursor vs GitHub Copilot for C#/.NET in 2026: which to pay for</title>
+  <meta name="description" content="Cursor vs GitHub Copilot for C#/.NET in 2026: real pricing, agentic multi-file edits vs inline complete, and a straight verdict for senior teams." />
+  <meta name="keywords" content="Cursor vs Copilot, GitHub Copilot C#, Cursor AI .NET, best AI coding tool .NET 2026, Copilot pricing, Cursor pricing, agentic coding C#, AI pair programming .NET" />
   <link rel="canonical" href="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/08-cursor-vs-copilot-dotnet.html" />
 
-  <meta property="og:title" content="Cursor vs Copilot for .NET (2026): When the Second Seat Pays Off" />
-  <meta property="og:description" content="Cursor vs GitHub Copilot for C#/.NET — 2026 pricing, multi-file agent edits vs inline completion, and when a second subscription earns its keep." />
+  <meta property="og:title" content="Cursor vs GitHub Copilot for C#/.NET in 2026: which to pay for" />
+  <meta property="og:description" content="Cursor vs GitHub Copilot for C#/.NET in 2026: real pricing, agentic multi-file edits vs inline complete, and a straight verdict for senior teams." />
   <meta property="og:image" content="https://agenticstandardcontact-byte.github.io/agentic-architect/og-image.jpg?v=3" />
   <meta property="og:url" content="https://agenticstandardcontact-byte.github.io/agentic-architect/blog/08-cursor-vs-copilot-dotnet.html" />
   <meta property="og:type" content="article" />
@@ -31,9 +31,9 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Cursor vs Copilot for .NET (2026): When the Second Seat Pays Off",
+    "headline": "Cursor vs GitHub Copilot for C#/.NET in 2026: which to pay for",
     "datePublished": "2026-06-02T08:00:00Z",
-    "dateModified": "2026-06-14T12:00:00Z",
+    "dateModified": "2026-06-02T08:00:00Z",
     "author": {
         "@type": "Organization",
         "name": "Agentic Architect"
@@ -155,20 +155,127 @@
 
         <hr class="post-divider" />
 
-        <div class="post-cta">
-          <h2>Free starter: 3 rules for .NET regressions</h2>
-          <p><code>result-pattern.mdc</code>, <code>di-scoping.mdc</code>, and <code>ef-core-reads.mdc</code>. Drop them into <code>.cursor/rules/</code> in about 3 minutes. Email capture on the homepage, no card.</p>
-          <a class="btn btn-accent btn-lg" href="../#free-kit-signup">Get the free kit &mdash; &pound;0 &rarr;</a>
-        </div>
-
-        <div class="post-cta post-cta-paid">
-          <h3>Lock your architecture into the AI's memory</h3>
-          <p>9 directory-scoped <code>.mdc</code> rules, ADR templates, and the Learning Log protocol. One Scoped-in-Singleton or missing <code>AsNoTracking()</code> in review usually costs more than &pound;9. One-time purchase, lifetime updates, <strong>30-day refund</strong>.</p>
-          <a class="btn btn-primary btn-lg" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the full kit &mdash; &pound;9.00 &rarr;</a>
+        <div class="post-cta post-cta-sample">
+          <h2>Try one rule free — no email</h2>
+          <p>Copy <code>arch-core-lite.mdc</code> into <code>.cursor/rules/</code>. It stops Cursor (or Copilot in VS) from crossing layer boundaries and shipping EF Core in your Domain layer.</p>
+          <pre class="post-sample-mdc"><code>### 1. Respect layer boundaries
+- Domain never references Microsoft.EntityFrameworkCore, HttpClient, IConfiguration...
+- Application orchestrates via abstractions only. No direct DbContext use.
+- Infrastructure implements interfaces declared higher up.</code></pre>
+          <div class="post-cta-actions">
+            <a class="btn btn-accent btn-lg" href="https://github.com/agenticstandardcontact-byte/agentic-architect/raw/main/arch-core-lite.mdc?utm_source=site&utm_medium=essay_post_cta&utm_campaign=free_sample" download="arch-core-lite.mdc">Download free .mdc &rarr;</a>
+            <a class="btn btn-primary btn-lg" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Full kit &mdash; &pound;9.00 (9 rules + LEARNING_LOG)</a>
+          </div>
+          <p class="post-cta-footnote">One-time purchase &middot; 30-day refund &middot; or grab the <a href="../#free-kit-signup">3-rule email starter</a> if you want more free files.</p>
         </div>
 
       </div>
-    </article>
+    
+<!-- ml-capture-injected -->
+<script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+  .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+  n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,
+  document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2387970');
+</script>
+
+<!-- Embed block — paste inside any post's <article> or <main> -->
+<aside class="ml-capture" aria-label="Free starter kit signup">
+  <style>
+    .ml-capture {
+      background: #1a1f2e;
+      border: 1px solid #2d3748;
+      border-left: 3px solid #38bdf8;
+      border-radius: 6px;
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0;
+      font-family: inherit;
+    }
+    .ml-capture__eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin: 0 0 0.5rem;
+    }
+    .ml-capture__headline {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin: 0 0 0.4rem;
+      line-height: 1.3;
+    }
+    .ml-capture__sub {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      margin: 0 0 1.25rem;
+      line-height: 1.5;
+    }
+    /* MailerLite injects its own form markup inside .ml-form-embedContainer.
+       These rules make it match our dark theme. */
+    .ml-capture .ml-form-embedContainer .ml-form-embedWrapper {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    .ml-capture .ml-form-embedContainer .ml-form-fieldRow input {
+      background: #0f1117 !important;
+      border: 1px solid #2d3748 !important;
+      border-radius: 4px !important;
+      color: #e2e8f0 !important;
+      font-size: 0.9rem !important;
+      padding: 0.6rem 0.75rem !important;
+    }
+    .ml-capture .ml-form-embedContainer .ml-form-fieldRow input::placeholder {
+      color: #64748b !important;
+    }
+    .ml-capture .ml-form-embedContainer button[type="submit"] {
+      background: #38bdf8 !important;
+      color: #0f1117 !important;
+      font-weight: 700 !important;
+      border: none !important;
+      border-radius: 4px !important;
+      padding: 0.6rem 1.25rem !important;
+      cursor: pointer !important;
+      font-size: 0.9rem !important;
+    }
+    .ml-capture .ml-form-embedContainer button[type="submit"]:hover {
+      background: #7dd3fc !important;
+    }
+    .ml-capture__disclaimer {
+      font-size: 0.72rem;
+      color: #475569;
+      margin: 0.75rem 0 0;
+    }
+    .ml-capture__disclaimer a {
+      color: #64748b;
+    }
+  </style>
+
+  <div class="ml-capture__copy">
+    <p class="ml-capture__eyebrow">Free download</p>
+    <h3 class="ml-capture__headline">
+      Stop Cursor's 3 most common .NET regressions — free
+    </h3>
+    <p class="ml-capture__sub">
+      Get the Agentic Architect Starter Kit: 3 Cursor rules that prevent
+      <code>throw</code> instead of <code>Result&lt;T&gt;</code>, captive DI
+      dependencies, and missing <code>AsNoTracking()</code>. Installs in 3 minutes.
+    </p>
+  </div>
+
+  <!-- MailerLite embedded form — replace REPLACE_WITH_MAILERLITE_FORM_ID -->
+  <div class="ml-embedded" data-form="w50Wv4"></div>
+
+  <p class="ml-capture__disclaimer">
+    Free. No spam. Unsubscribe any time. By subscribing you agree to the
+    <a href="../privacy-policy.html">Privacy Policy</a> and
+    <a href="../terms-of-service.html">Terms of Service</a>.
+  </p>
+</aside>
+</article>
   </main>
 
   <footer class="footer">

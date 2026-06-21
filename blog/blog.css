@@ -122,6 +122,32 @@
   background: linear-gradient(135deg, rgba(255,181,71,0.18), rgba(255,138,61,0.08));
   border-color: rgba(255,181,71,0.45);
 }
+.post-cta-sample {
+  text-align: left;
+}
+.post-cta-sample .post-sample-mdc {
+  margin: 16px 0 20px;
+  padding: 16px 18px;
+  background: var(--bg-3, #0f1117);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  text-align: left;
+}
+.post-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.post-cta-footnote {
+  margin: 16px 0 0;
+  font-size: 0.85rem;
+  text-align: center;
+}
 
 .post-related {
   margin: 40px 0 8px;
