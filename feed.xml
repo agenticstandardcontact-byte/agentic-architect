@@ -287,5 +287,13 @@
       <description>OrderId as record struct OrderId(Guid Value) beats raw Guid everywhere. Stops the AI passing a CustomerId where an OrderId was expected — a bug the compiler can't catch with primitive obsession but catches instantly with domain primitives.</description>
     </item>
 
+      <item>
+      <title>Rule 14: Sealed By Default</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-21</link>
+      <guid isPermaLink="false">daily-rule-2026-06-21</guid>
+      <pubDate>Sun, 21 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</description>
+    </item>
+
   </channel>
 </rss>
