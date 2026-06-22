@@ -76,3 +76,6 @@ COMMANDS.txt
 
 # Paid kit ZIP — never host on public GitHub Pages (leaked = free product)
 downloads/agentic-architect-kit.zip
+
+# Internal kit-construction draft - leaked once, purged from history; never re-commit
+rules/persistence-kit.md
