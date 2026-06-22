@@ -295,5 +295,13 @@
       <description>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</description>
     </item>
 
+      <item>
+      <title>Rule 15: Records for Value Objects, Classes for Entities</title>
+      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-22</link>
+      <guid isPermaLink="false">daily-rule-2026-06-22</guid>
+      <pubDate>Mon, 22 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</description>
+    </item>
+
   </channel>
 </rss>
