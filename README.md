@@ -11,7 +11,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-4ade80?style=for-the-badge)](LICENSE)
 [![Lifetime Updates](https://img.shields.io/badge/Lifetime-Updates-ffb547?style=for-the-badge)](https://payhip.com/b/98aSq?utm_source=github_readme&utm_medium=badge&utm_campaign=paid_kit)
 
-#### 🌐 **[Visit the website →](https://agenticstandardcontact-byte.github.io/agentic-architect/)**
+#### 🌐 **[Visit the website →](https://agentic-architect.dev/)**
 
 **Stop re-explaining your architecture to your AI every single morning.**
 
@@ -55,7 +55,7 @@ your-dotnet-project/
 
 - 📘 **Quickstart PDF** — zero to hydrated in 60 seconds
 - 🧩 **`LEARNING_LOG.md` template** — pre-seeded for a typical .NET solution
-- 🛠 **Daily Senior Rule updates** — new patterns dropped via [the blog](https://agenticstandardcontact-byte.github.io/agentic-architect/blog/)
+- 🛠 **Daily Senior Rule updates** — new patterns dropped via [the blog](https://agentic-architect.dev/blog/)
 - ♾ **Lifetime updates** — future rules and protocol upgrades free
 
 ## 🆓 Try one rule, free
@@ -143,13 +143,13 @@ Most public rules are monolithic — a single rule dumped on every prompt, blowi
 
 - **Email:** [agenticstandardcontact@gmail.com](mailto:agenticstandardcontact@gmail.com)
 - **GitHub Issues:** [Open one →](https://github.com/agenticstandardcontact-byte/agentic-architect/issues)
-- **Website:** [agenticstandardcontact-byte.github.io/agentic-architect](https://agenticstandardcontact-byte.github.io/agentic-architect/)
+- **Website:** [agentic-architect.dev](https://agentic-architect.dev/)
 
 ### Search Console (project site)
 
 GitHub Pages serves this repo under `/agentic-architect/`. Submit this sitemap URL in Google Search Console (URL-prefix property on the site root above), not `/sitemap.xml` at the domain root:
 
-`https://agenticstandardcontact-byte.github.io/agentic-architect/sitemap.xml`
+`https://agentic-architect.dev/sitemap.xml`
 
 ---
 
