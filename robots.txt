@@ -5,4 +5,4 @@ Allow: /
 Disallow: /downloads/agentic-architect-kit.zip
 Disallow: /thank-you-paid.html
 
-Sitemap: https://agenticstandardcontact-byte.github.io/agentic-architect/sitemap.xml
+Sitemap: https://agentic-architect.dev/sitemap.xml

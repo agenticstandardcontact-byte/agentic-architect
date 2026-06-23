@@ -1,6 +1,6 @@
 import { chromium } from 'playwright';
 
-const URL = process.argv[2] || 'https://agenticstandardcontact-byte.github.io/agentic-architect/#free-kit-signup';
+const URL = process.argv[2] || 'https://agentic-architect.dev/#free-kit-signup';
 
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();

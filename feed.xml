@@ -2,46 +2,46 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Agentic Architect — Daily Senior Rule</title>
-    <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/</link>
+    <link>https://agentic-architect.dev/blog/</link>
     <description>One practical Cursor + C#/.NET pattern per day. Field notes from building a stateful AI partner for production .NET codebases.</description>
     <language>en-gb</language>
-    <atom:link href="https://agenticstandardcontact-byte.github.io/agentic-architect/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://agentic-architect.dev/feed.xml" rel="self" type="application/rss+xml" />
 
     <item>
       <title>Teach Cursor Result&lt;T&gt; instead of throwing</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/04-cursor-result-not-throw.html</link>
-      <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/04-cursor-result-not-throw.html</guid>
+      <link>https://agentic-architect.dev/blog/04-cursor-result-not-throw.html</link>
+      <guid isPermaLink="true">https://agentic-architect.dev/blog/04-cursor-result-not-throw.html</guid>
       <pubDate>Thu, 21 May 2026 20:00:00 +0000</pubDate>
       <description>Keep Cursor on Result/ErrorOr when your team already rejected throw-based control flow.</description>
     </item>
 
     <item>
       <title>Seven words that stop Cursor hallucination loops</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html</link>
-      <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/03-cursor-hallucination-loop-breaker.html</guid>
+      <link>https://agentic-architect.dev/blog/03-cursor-hallucination-loop-breaker.html</link>
+      <guid isPermaLink="true">https://agentic-architect.dev/blog/03-cursor-hallucination-loop-breaker.html</guid>
       <pubDate>Wed, 20 May 2026 08:00:00 +0000</pubDate>
       <description>Break the correction spiral — seven words, or a circuit-breaker .mdc rule.</description>
     </item>
 
     <item>
       <title>The Scoped→Singleton DI bug your AI just suggested (and how to catch it)</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html</link>
-      <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/02-scoped-singleton-di-bug.html</guid>
+      <link>https://agentic-architect.dev/blog/02-scoped-singleton-di-bug.html</link>
+      <guid isPermaLink="true">https://agentic-architect.dev/blog/02-scoped-singleton-di-bug.html</guid>
       <pubDate>Tue, 19 May 2026 08:00:00 +0000</pubDate>
       <description>The .NET lifetime bug that ships silently — and the Cursor rule that catches it before merge.</description>
     </item>
 
     <item>
       <title>The Context Tax: Why every Cursor session costs you 15 minutes</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html</link>
-      <guid isPermaLink="true">https://agenticstandardcontact-byte.github.io/agentic-architect/blog/01-the-context-tax.html</guid>
+      <link>https://agentic-architect.dev/blog/01-the-context-tax.html</link>
+      <guid isPermaLink="true">https://agentic-architect.dev/blog/01-the-context-tax.html</guid>
       <pubDate>Mon, 18 May 2026 08:00:00 +0000</pubDate>
       <description>The hidden cost senior engineers pay every morning — and a four-rule architecture for eliminating it.</description>
     </item>
 
       <item>
       <title>Rule 2: Persistence Boundaries</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-20</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-20</link>
       <guid isPermaLink="false">daily-rule-2026-05-20</guid>
       <pubDate>Wed, 20 May 2026 09:00:00 +0000</pubDate>
       <description>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</description>
@@ -49,7 +49,7 @@
 
       <item>
       <title>Rule 8: CancellationToken Propagation</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-21</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-21</link>
       <guid isPermaLink="false">daily-rule-2026-05-21</guid>
       <pubDate>Thu, 21 May 2026 09:00:00 +0000</pubDate>
       <description>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</description>
@@ -57,7 +57,7 @@
 
       <item>
       <title>Rule 9: Scoped Capture in Singleton</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-22</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-22</link>
       <guid isPermaLink="false">daily-rule-2026-05-22</guid>
       <pubDate>Fri, 22 May 2026 09:00:00 +0000</pubDate>
       <description>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</description>
@@ -65,7 +65,7 @@
 
       <item>
       <title>Rule 10: AsNoTracking for Reads</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-23</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-23</link>
       <guid isPermaLink="false">daily-rule-2026-05-23</guid>
       <pubDate>Sat, 23 May 2026 09:00:00 +0000</pubDate>
       <description>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</description>
@@ -73,7 +73,7 @@
 
       <item>
       <title>Rule 11: Rethrow, Don't throw ex</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-24</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-24</link>
       <guid isPermaLink="false">daily-rule-2026-05-24</guid>
       <pubDate>Sun, 24 May 2026 09:00:00 +0000</pubDate>
       <description>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</description>
@@ -81,7 +81,7 @@
 
       <item>
       <title>Rule 12: IOptionsSnapshot Over Raw Config</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-25</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-25</link>
       <guid isPermaLink="false">daily-rule-2026-05-25</guid>
       <pubDate>Mon, 25 May 2026 09:00:00 +0000</pubDate>
       <description>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</description>
@@ -89,7 +89,7 @@
 
       <item>
       <title>Rule 14: Sealed By Default</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-27</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-27</link>
       <guid isPermaLink="false">daily-rule-2026-05-27</guid>
       <pubDate>Wed, 27 May 2026 09:00:00 +0000</pubDate>
       <description>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</description>
@@ -97,7 +97,7 @@
 
       <item>
       <title>Rule 15: Records for Value Objects, Classes for Entities</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-28</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-28</link>
       <guid isPermaLink="false">daily-rule-2026-05-28</guid>
       <pubDate>Thu, 28 May 2026 09:00:00 +0000</pubDate>
       <description>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</description>
@@ -105,7 +105,7 @@
 
       <item>
       <title>Rule 16: async void Outside Event Handlers</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-29</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-29</link>
       <guid isPermaLink="false">daily-rule-2026-05-29</guid>
       <pubDate>Fri, 29 May 2026 09:00:00 +0000</pubDate>
       <description>async void is a deadlock and unhandled-exception trap everywhere except UI event handlers. The AI uses it routinely for "fire and forget" — wrong answer every time. Flag it on sight.</description>
@@ -113,7 +113,7 @@
 
       <item>
       <title>Rule 17: ConfigureAwait false in Libraries</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-30</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-30</link>
       <guid isPermaLink="false">daily-rule-2026-05-30</guid>
       <pubDate>Sat, 30 May 2026 09:00:00 +0000</pubDate>
       <description>Library code (non-ASP.NET) should ConfigureAwait false on every awaited Task. ASP.NET Core code should not. Cursor mixes the two contexts in the same solution. Detect the project type and enforce the right default.</description>
@@ -121,7 +121,7 @@
 
       <item>
       <title>Rule 18: WebApplicationFactory for Integration Tests</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-05-31</link>
+      <link>https://agentic-architect.dev/blog/#2026-05-31</link>
       <guid isPermaLink="false">daily-rule-2026-05-31</guid>
       <pubDate>Sun, 31 May 2026 09:00:00 +0000</pubDate>
       <description>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</description>
@@ -129,7 +129,7 @@
 
       <item>
       <title>Rule 19: NetArchTest for Boundaries</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-01</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-01</link>
       <guid isPermaLink="false">daily-rule-2026-06-01</guid>
       <pubDate>Mon, 01 Jun 2026 09:00:00 +0000</pubDate>
       <description>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</description>
@@ -137,7 +137,7 @@
 
       <item>
       <title>Rule 20: Source-Generated JSON Serialisation</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-02</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-02</link>
       <guid isPermaLink="false">daily-rule-2026-06-02</guid>
       <pubDate>Tue, 02 Jun 2026 09:00:00 +0000</pubDate>
       <description>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own — add a rule that flags new DTO classes and asks whether they should be source-generated.</description>
@@ -145,7 +145,7 @@
 
       <item>
       <title>Rule 21: Channels for Producer Consumer</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-03</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-03</link>
       <guid isPermaLink="false">daily-rule-2026-06-03</guid>
       <pubDate>Wed, 03 Jun 2026 09:00:00 +0000</pubDate>
       <description>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</description>
@@ -153,7 +153,7 @@
 
       <item>
       <title>Rule 22: BackgroundService Over Task.Run</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-04</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-04</link>
       <guid isPermaLink="false">daily-rule-2026-06-04</guid>
       <pubDate>Thu, 04 Jun 2026 09:00:00 +0000</pubDate>
       <description>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</description>
@@ -161,7 +161,7 @@
 
       <item>
       <title>Rule 23: No Bool Flag Parameters</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-05</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-05</link>
       <guid isPermaLink="false">daily-rule-2026-06-05</guid>
       <pubDate>Fri, 05 Jun 2026 09:00:00 +0000</pubDate>
       <description>SendEmail(string to, bool isHtml) should be SendHtmlEmail and SendPlainEmail. Bool flags hide branching that belongs in the type system. Flag any method signature with two or more bool parameters as a refactor candidate.</description>
@@ -169,7 +169,7 @@
 
       <item>
       <title>Rule 24: ValueTask Only When Justified</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-06</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-06</link>
       <guid isPermaLink="false">daily-rule-2026-06-06</guid>
       <pubDate>Sat, 06 Jun 2026 09:00:00 +0000</pubDate>
       <description>ValueTask is a perf optimisation for hot paths that often return synchronously. It is not a drop-in for Task. Cursor swaps them around without thinking. Flag ValueTask returns and ask whether the method is actually mostly synchronous. If not, revert to Task.</description>
@@ -177,7 +177,7 @@
 
       <item>
       <title>Rule 25: ActivitySource for OpenTelemetry</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-07</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-07</link>
       <guid isPermaLink="false">daily-rule-2026-06-07</guid>
       <pubDate>Sun, 07 Jun 2026 09:00:00 +0000</pubDate>
       <description>Logs alone won't debug a distributed system. Add a static readonly ActivitySource per project and wrap every external call (DB, HTTP, queue) in StartActivity. Cursor never adds OTEL spans on its own — give it a rule that recognises external-call patterns and proposes the trace.</description>
@@ -185,7 +185,7 @@
 
       <item>
       <title>Rule 1: The Result Pattern</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-08</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-08</link>
       <guid isPermaLink="false">daily-rule-2026-06-08</guid>
       <pubDate>Mon, 08 Jun 2026 09:00:00 +0000</pubDate>
       <description>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This prevents 90% of AI-generated logic errors in Web APIs.</description>
@@ -193,7 +193,7 @@
 
       <item>
       <title>Rule 2: Persistence Boundaries</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-09</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-09</link>
       <guid isPermaLink="false">daily-rule-2026-06-09</guid>
       <pubDate>Tue, 09 Jun 2026 09:00:00 +0000</pubDate>
       <description>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</description>
@@ -201,7 +201,7 @@
 
       <item>
       <title>Rule 3: Structured Logging</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-10</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-10</link>
       <guid isPermaLink="false">daily-rule-2026-06-10</guid>
       <pubDate>Wed, 10 Jun 2026 09:00:00 +0000</pubDate>
       <description>Enforce ILogger with structured templates. Never use string interpolation in logs. This ensures that when you feed logs back into Cursor for debugging, the AI recognizes the patterns immediately.</description>
@@ -209,7 +209,7 @@
 
       <item>
       <title>Rule 4: Validator Enforcement</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-11</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-11</link>
       <guid isPermaLink="false">daily-rule-2026-06-11</guid>
       <pubDate>Thu, 11 Jun 2026 09:00:00 +0000</pubDate>
       <description>Every MediatR Request must have a FluentValidation rule. Force the AI to check the validator before writing handler logic. This prevents "context rot" where the AI forgets your business constraints.</description>
@@ -217,7 +217,7 @@
 
       <item>
       <title>Rule 5: Minimal API Groups</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-12</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-12</link>
       <guid isPermaLink="false">daily-rule-2026-06-12</guid>
       <pubDate>Fri, 12 Jun 2026 09:00:00 +0000</pubDate>
       <description>Use MapGroup and EndPoints for .NET 9 services. It keeps the context window lean and focused, helping the AI provide more accurate code suggestions than it can with massive, bloated Controllers.</description>
@@ -225,7 +225,7 @@
 
       <item>
       <title>Rule 6: TimeProvider Injection</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-13</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-13</link>
       <guid isPermaLink="false">daily-rule-2026-06-13</guid>
       <pubDate>Sat, 13 Jun 2026 09:00:00 +0000</pubDate>
       <description>Never let Cursor hardcode DateTime.Now or DateTime.UtcNow in business logic. Inject TimeProvider (or your own IClock) instead. This makes time deterministic for tests and stops the AI reaching for static APIs whenever it generates time-aware code.</description>
@@ -233,7 +233,7 @@
 
       <item>
       <title>Rule 7: IHttpClientFactory Discipline</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-14</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-14</link>
       <guid isPermaLink="false">daily-rule-2026-06-14</guid>
       <pubDate>Sun, 14 Jun 2026 09:00:00 +0000</pubDate>
       <description>Refuse new HttpClient() in any generated code. Force Cursor to inject IHttpClientFactory or a typed client. The classic socket-exhaustion bug is exactly the kind of footgun an AI hands you without realising.</description>
@@ -241,7 +241,7 @@
 
       <item>
       <title>Rule 8: CancellationToken Propagation</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-15</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-15</link>
       <guid isPermaLink="false">daily-rule-2026-06-15</guid>
       <pubDate>Mon, 15 Jun 2026 09:00:00 +0000</pubDate>
       <description>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</description>
@@ -249,7 +249,7 @@
 
       <item>
       <title>Rule 9: Scoped Capture in Singleton</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-16</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-16</link>
       <guid isPermaLink="false">daily-rule-2026-06-16</guid>
       <pubDate>Tue, 16 Jun 2026 09:00:00 +0000</pubDate>
       <description>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</description>
@@ -257,7 +257,7 @@
 
       <item>
       <title>Rule 10: AsNoTracking for Reads</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-17</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-17</link>
       <guid isPermaLink="false">daily-rule-2026-06-17</guid>
       <pubDate>Wed, 17 Jun 2026 09:00:00 +0000</pubDate>
       <description>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</description>
@@ -265,7 +265,7 @@
 
       <item>
       <title>Rule 11: Rethrow, Don't throw ex</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-18</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-18</link>
       <guid isPermaLink="false">daily-rule-2026-06-18</guid>
       <pubDate>Thu, 18 Jun 2026 09:00:00 +0000</pubDate>
       <description>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</description>
@@ -273,7 +273,7 @@
 
       <item>
       <title>Rule 12: IOptionsSnapshot Over Raw Config</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-19</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-19</link>
       <guid isPermaLink="false">daily-rule-2026-06-19</guid>
       <pubDate>Fri, 19 Jun 2026 09:00:00 +0000</pubDate>
       <description>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</description>
@@ -281,7 +281,7 @@
 
       <item>
       <title>Rule 13: Strongly-Typed IDs</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-20</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-20</link>
       <guid isPermaLink="false">daily-rule-2026-06-20</guid>
       <pubDate>Sat, 20 Jun 2026 09:00:00 +0000</pubDate>
       <description>OrderId as record struct OrderId(Guid Value) beats raw Guid everywhere. Stops the AI passing a CustomerId where an OrderId was expected — a bug the compiler can't catch with primitive obsession but catches instantly with domain primitives.</description>
@@ -289,7 +289,7 @@
 
       <item>
       <title>Rule 14: Sealed By Default</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-21</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-21</link>
       <guid isPermaLink="false">daily-rule-2026-06-21</guid>
       <pubDate>Sun, 21 Jun 2026 09:00:00 +0000</pubDate>
       <description>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</description>
@@ -297,7 +297,7 @@
 
       <item>
       <title>Rule 15: Records for Value Objects, Classes for Entities</title>
-      <link>https://agenticstandardcontact-byte.github.io/agentic-architect/blog/#2026-06-22</link>
+      <link>https://agentic-architect.dev/blog/#2026-06-22</link>
       <guid isPermaLink="false">daily-rule-2026-06-22</guid>
       <pubDate>Mon, 22 Jun 2026 09:00:00 +0000</pubDate>
       <description>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</description>
