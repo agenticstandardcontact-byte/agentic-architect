@@ -179,53 +179,86 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Shared nav CTAs (Get the free kit + Buy now) ---------- */
-  const freeKitHref = /\/(blog|hardware|learn)\//.test(window.location.pathname)
-    ? '../#free-kit-signup'
-    : '#free-kit-signup';
+  /* ---------- Shared site nav (links + CTAs + hamburger) ---------- */
   const STRIPE_BUY =
     'https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit';
 
-  const mountNavCtas = () => {
-    const navInner = document.querySelector('.nav-inner');
-    const navPanel = document.querySelector('.nav-links-panel');
-    const navToggle = document.querySelector('.nav-toggle');
-    if (!navInner || !navPanel) return;
+  const BRAND_MARK =
+    '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">' +
+    '<path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
+    '</svg>';
 
-    navInner.querySelectorAll('.nav-cta').forEach((el) => el.remove());
-    navPanel.querySelectorAll('.nav-menu-cta').forEach((el) => el.remove());
+  const getNavContext = () => {
+    const path = window.location.pathname.replace(/\\/g, '/');
+    const inBlog = /\/blog(\/|$)/.test(path);
+    const inHardware = /\/hardware(\/|$)/.test(path);
+    const inLearn = /\/learn(\/|$)/.test(path);
+    const inSubdir = inBlog || inHardware || inLearn;
+    const prefix = inSubdir ? '../' : '';
 
-    const makeBtn = (href, label, extraClass, external = false) => {
-      const a = document.createElement('a');
-      a.href = href;
-      a.className = extraClass;
-      a.textContent = label;
-      if (external) {
-        a.target = '_blank';
-        a.rel = 'noopener';
-      }
-      return a;
+    let section = 'root';
+    if (inBlog) section = 'blog';
+    else if (inHardware) section = 'hardware';
+    else if (inLearn) section = 'learn';
+
+    const hash = (id) => (inSubdir ? `${prefix}#${id}` : `#${id}`);
+
+    return {
+      section,
+      prefix,
+      brandHref: inSubdir ? '../' : '#top',
+      freeKitHref: inSubdir ? '../#free-kit-signup' : '#free-kit-signup',
+      blogHref: section === 'root' ? 'blog/' : './',
+      hardwareHref: section === 'root' ? 'hardware/' : inHardware ? './' : `${prefix}hardware/`,
+      learnHref: section === 'root' ? 'learn/' : inLearn ? './' : `${prefix}learn/`,
+      hash,
     };
-
-    if (!navInner.querySelector('.nav-ctas')) {
-      const desktop = document.createElement('div');
-      desktop.className = 'nav-ctas';
-      desktop.appendChild(makeBtn(freeKitHref, 'Get the free kit', 'btn btn-ghost btn-sm nav-cta-free'));
-      desktop.appendChild(makeBtn(STRIPE_BUY, 'Buy now', 'btn btn-primary btn-sm nav-cta-buy', true));
-      if (navToggle) navInner.insertBefore(desktop, navToggle);
-      else navInner.appendChild(desktop);
-    }
-
-    if (!navPanel.querySelector('.nav-menu-ctas')) {
-      const mobile = document.createElement('div');
-      mobile.className = 'nav-menu-ctas';
-      mobile.appendChild(makeBtn(freeKitHref, 'Get the free kit', 'btn btn-ghost btn-sm'));
-      mobile.appendChild(makeBtn(STRIPE_BUY, 'Buy now', 'btn btn-primary btn-sm', true));
-      navPanel.appendChild(mobile);
-    }
   };
 
-  mountNavCtas();
+  const mountSiteNav = () => {
+    const header = document.querySelector('header.nav');
+    if (!header || header.classList.contains('nav-skip-inject')) return;
+
+    const mount = header.querySelector('[data-site-nav]') || header.querySelector('.nav-inner');
+    if (!mount) return;
+
+    const ctx = getNavContext();
+    const link = (href, label, current) =>
+      `<a href="${href}"${current ? ' aria-current="page"' : ''}>${label}</a>`;
+
+    const links = [
+      link(ctx.hash('problem'), 'The Problem', false),
+      link(ctx.hash('kit'), "What's Inside", false),
+      link(ctx.hash('proof'), 'Proof', false),
+      link(ctx.hash('pricing'), 'Pricing', false),
+      link(ctx.hash('faq'), 'FAQ', false),
+      link(ctx.blogHref, 'Blog', ctx.section === 'blog'),
+      link(ctx.hardwareHref, 'Hardware', ctx.section === 'hardware'),
+      link(ctx.learnHref, 'Quick Fixes', ctx.section === 'learn'),
+      link(ctx.hash('resources'), 'Guides', false),
+    ].join('\n        ');
+
+    mount.innerHTML =
+      `<a href="${ctx.brandHref}" class="brand" aria-label="Agentic Architect home">` +
+      BRAND_MARK +
+      '<span class="brand-text">Agentic<span class="brand-accent">Architect</span></span></a>' +
+      `<nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
+        ${links}
+        <div class="nav-menu-ctas">
+          <a href="${ctx.freeKitHref}" class="btn btn-ghost btn-sm">Get the free kit</a>
+          <a href="${STRIPE_BUY}" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Buy now</a>
+        </div>
+      </nav>` +
+      `<div class="nav-ctas">
+        <a href="${ctx.freeKitHref}" class="btn btn-ghost btn-sm nav-cta-free">Get the free kit</a>
+        <a href="${STRIPE_BUY}" class="btn btn-primary btn-sm nav-cta-buy" target="_blank" rel="noopener">Buy now</a>
+      </div>` +
+      '<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">' +
+      '<span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>';
+  };
+
+  mountSiteNav();
 
   /* ---------- Mobile nav (overlay panel + auto-close) ---------- */
   const navToggle = document.querySelector('.nav-toggle');
