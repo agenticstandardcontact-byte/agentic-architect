@@ -303,5 +303,13 @@
       <description>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</description>
     </item>
 
+      <item>
+      <title>Rule 17: ConfigureAwait false in Libraries</title>
+      <link>https://agentic-architect.dev/blog/#2026-06-24</link>
+      <guid isPermaLink="false">daily-rule-2026-06-24</guid>
+      <pubDate>Wed, 24 Jun 2026 09:00:00 +0000</pubDate>
+      <description>Library code (non-ASP.NET) should ConfigureAwait false on every awaited Task. ASP.NET Core code should not. Cursor mixes the two contexts in the same solution. Detect the project type and enforce the right default.</description>
+    </item>
+
   </channel>
 </rss>
