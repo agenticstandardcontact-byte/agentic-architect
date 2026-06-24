@@ -143,6 +143,11 @@
   text-decoration: underline;
 }
 
+.hw-index-card .hw-card-disclosure {
+  margin-top: 8px;
+  text-align: left;
+}
+
 /* ----- Coming Next List ----- */
 .hw-coming-list {
   list-style: none;
