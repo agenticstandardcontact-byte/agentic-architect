@@ -180,6 +180,10 @@
   margin: 0 0 8px;
 }
 
+.section:has(.hw-index-grid) .section-title {
+  text-align: center;
+}
+
 /* =========================================================
    Comparison Page Specific Styles
    ========================================================= */
@@ -563,6 +567,10 @@
     font-size: 1.3rem;
     text-align: left;
     margin-bottom: 16px;
+  }
+
+  .section:has(.hw-index-grid) .section-title {
+    text-align: center;
   }
 
   .hw-benchmark-note {
