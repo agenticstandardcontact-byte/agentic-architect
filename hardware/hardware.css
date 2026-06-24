@@ -487,12 +487,13 @@
 
 /* ----- Affiliate Disclosure Aside ----- */
 .hw-disclosure {
+  box-sizing: border-box;
+  width: 100%;
   background: var(--bg-3);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 20px 24px;
-  margin: 0 auto 60px;
-  max-width: 780px;
+  padding: 20px 28px;
+  margin: 0 0 60px;
   text-align: center;
 }
 
@@ -502,14 +503,18 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
+  text-align: center;
 }
 
 .hw-disclosure p {
+  width: 100%;
+  max-width: none;
   font-size: 0.82rem;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0;
+  text-align: center;
 }
 
 .hw-disclosure a {
