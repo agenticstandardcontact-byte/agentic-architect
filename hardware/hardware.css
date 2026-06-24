@@ -45,10 +45,6 @@
   line-height: 1.6;
 }
 
-.hw-index-hero .hw-amazon-notice {
-  margin-top: 24px;
-}
-
 /* ----- Hardware Index Grid ----- */
 .hw-index-grid {
   display: grid;
@@ -625,11 +621,5 @@
     margin-left: 0;
     margin-right: 0;
     padding: 16px 18px;
-  }
-
-  .hw-amazon-notice {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
