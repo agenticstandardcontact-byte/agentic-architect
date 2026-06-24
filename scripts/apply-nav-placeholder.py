@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Replace duplicated header.nav HTML with a shared JS-injected placeholder."""
+"""Replace duplicated header.nav HTML with the shared nav shell."""
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-
-NAV_PLACEHOLDER = """<header class="nav">
-  <div class="container nav-inner" data-site-nav></div>
-</header>"""
+sys.path.insert(0, str(ROOT / "scripts"))
+from nav_template import render_nav_shell
 
 NAV_RE = re.compile(r"<header class=\"nav\">.*?</header>", re.DOTALL)
 
@@ -23,6 +22,17 @@ SCRIPT_JS = '  <script src="../script.js" defer></script>'
 SCRIPT_JS_ROOT = '  <script src="script.js" defer></script>'
 
 
+def section_for(path: Path) -> str:
+    rel = path.relative_to(ROOT).as_posix()
+    if rel.startswith("blog/"):
+        return "blog"
+    if rel.startswith("hardware/"):
+        return "hardware"
+    if rel.startswith("learn/"):
+        return "learn"
+    return "root"
+
+
 def script_tag_for(path: Path) -> str:
     rel = path.relative_to(ROOT)
     depth = len(rel.parts) - 1
@@ -31,10 +41,9 @@ def script_tag_for(path: Path) -> str:
 
 def ensure_script_js(text: str, path: Path) -> str:
     tag = script_tag_for(path)
-    if "script.js" in text:
-        text = INLINE_NAV_SCRIPT.sub("", text)
-        return text
     text = INLINE_NAV_SCRIPT.sub("", text)
+    if "script.js" in text:
+        return text
     if "</body>" in text:
         return text.replace("</body>", f"{tag}\n</body>", 1)
     return text
@@ -51,7 +60,8 @@ def main() -> None:
         if "nav-skip-inject" in text or 'class="nav-brand"' in text:
             continue
 
-        updated = NAV_RE.sub(NAV_PLACEHOLDER, text, count=1)
+        placeholder = render_nav_shell(section=section_for(path))
+        updated = NAV_RE.sub(placeholder, text, count=1)
         updated = ensure_script_js(updated, path)
         if updated != text:
             path.write_text(updated, encoding="utf-8")
