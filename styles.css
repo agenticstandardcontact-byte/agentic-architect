@@ -1592,9 +1592,11 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 }
 .pricing-card h3 { font-size: 1.3rem; margin-bottom: 6px; color: var(--text); }
 .pricing-sub { color: var(--text-dim); margin-bottom: 16px; font-size: 0.94rem; }
-/* Beat global p { max-width: 62ch } — center subtitle + anchor box in the card */
+/* Beat global p { max-width: 62ch } — center card copy blocks */
 .pricing-card .pricing-sub,
-.pricing-card .price-anchor {
+.pricing-card .price-anchor,
+.pricing-card .pricing-fine,
+.pricing-card .pricing-reminder {
   max-width: none;
   margin-left: auto;
   margin-right: auto;
