@@ -29,6 +29,8 @@
 .post-card:hover { border-color: rgba(255,181,71,0.3); transform: translateY(-2px); }
 .post-link {
   display: block;
+  width: 100%;
+  box-sizing: border-box;
   padding: 28px;
   color: inherit;
 }
@@ -46,10 +48,15 @@
   letter-spacing: 0.04em;
 }
 .post-read-time { color: var(--text-muted); }
+/* Beat global p { max-width: 62ch } — card copy uses full card width */
 .post-card h2 {
   font-size: 1.4rem; color: var(--text); margin-bottom: 8px;
+  max-width: none;
 }
-.post-card p { color: var(--text-dim); margin-bottom: 12px; }
+.post-card p {
+  color: var(--text-dim); margin-bottom: 12px;
+  max-width: none;
+}
 .post-read {
   font-family: var(--mono); font-size: 0.86rem; color: var(--brand); font-weight: 600;
 }
