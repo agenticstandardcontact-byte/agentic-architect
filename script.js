@@ -209,7 +209,7 @@
       prefix,
       brandHref: inSubdir ? '../' : '#top',
       freeKitHref: inSubdir ? '../#free-kit-signup' : '#free-kit-signup',
-      blogHref: section === 'root' ? 'blog/' : './',
+      blogHref: section === 'root' ? 'blog/' : inBlog ? './' : `${prefix}blog/`,
       hardwareHref: section === 'root' ? 'hardware/' : inHardware ? './' : `${prefix}hardware/`,
       learnHref: section === 'root' ? 'learn/' : inLearn ? './' : `${prefix}learn/`,
       hash,
