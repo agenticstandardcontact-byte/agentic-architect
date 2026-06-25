@@ -21,7 +21,7 @@ def render_nav_shell(*, section: str = "root") -> str:
     prefix = "../" if in_subdir else ""
     brand_href = "../" if in_subdir else "#top"
     free_kit = f"{prefix}#free-kit-signup"
-    blog_href = "blog/" if section == "root" else "./"
+    blog_href = "blog/" if section == "root" else ("./" if section == "blog" else f"{prefix}blog/")
     hardware_href = "hardware/" if section == "root" else ("./" if section == "hardware" else f"{prefix}hardware/")
     learn_href = "learn/" if section == "root" else ("./" if section == "learn" else f"{prefix}learn/")
 
