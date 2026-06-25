@@ -1582,6 +1582,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   border-radius: var(--radius-lg);
   padding: 40px 36px;
   box-shadow: var(--shadow-2);
+  text-align: center;
 }
 .ribbon {
   position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
@@ -1592,7 +1593,7 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 .pricing-card h3 { font-size: 1.3rem; margin-bottom: 6px; color: var(--text); }
 .pricing-sub { color: var(--text-dim); margin-bottom: 16px; font-size: 0.94rem; }
 .price-row {
-  display: flex; align-items: baseline; gap: 10px;
+  display: flex; align-items: baseline; justify-content: center; gap: 10px;
   margin: 12px 0 20px;
   flex-wrap: wrap;
 }
@@ -1600,7 +1601,12 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 .price-now { font-size: 2.8rem; font-weight: 700; color: var(--brand); letter-spacing: -0.02em; }
 .price-once { color: var(--text-dim); font-size: 0.9rem; }
 .price-list { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 8px; }
-.price-list li { color: var(--text-dim); font-size: 0.92rem; line-height: 1.5; }
+.price-list li {
+  color: var(--text-dim); font-size: 0.92rem; line-height: 1.5;
+  display: flex; justify-content: center; align-items: flex-start; gap: 6px;
+  text-align: left;
+}
+.price-list .ok { margin-right: 0; flex-shrink: 0; }
 .price-list b { color: var(--text); font-weight: 600; }
 
 .pricing-trust {
@@ -2009,28 +2015,26 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   .pricing-card .btn-accent { margin-top: 12px !important; }
   .price-now { font-size: 2.25rem; }
   .price-anchor {
-    text-align: left;
     font-size: 0.9rem;
     line-height: 1.65;
     padding: 14px 16px;
   }
   .price-list li { font-size: 0.9rem; line-height: 1.6; }
   .pricing-trust {
-    justify-content: flex-start;
+    justify-content: center;
     font-size: 0.82rem;
     gap: 6px 14px;
   }
   .guarantee {
     flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
     padding: 16px 14px;
     font-size: 0.9rem;
     line-height: 1.65;
   }
-  .guarantee-badge { align-self: flex-start; }
+  .guarantee-badge { align-self: center; }
   .pricing-fine {
-    text-align: left;
     font-size: 0.8rem;
     line-height: 1.6;
     overflow-wrap: anywhere;
