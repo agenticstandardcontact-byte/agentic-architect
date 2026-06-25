@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f8f7f4" />
 
   <title>Cursor Rules for .NET Engineers | Agentic Architect</title>
-  <meta name="description" content="Cursor keeps forgetting your C# architecture between sessions. Agentic Architect ships 9 scoped .mdc rules plus a LEARNING_LOG protocol so DI, EF, and layer boundaries stick. One-time £9.00, lifetime updates, 30-day refund." />
+  <meta name="description" content="Nine directory-scoped Cursor rules plus a LEARNING_LOG.md workflow for senior C#/.NET engineers. Cursor loads the right guardrails per file and picks up decisions you already logged. One-time £9.00, lifetime updates, 30-day refund." />
   <meta name="keywords" content="Cursor rules for .NET, Cursor rules C#, AI coding rules, architectural persistence for Cursor, Cursor .mdc rules, .NET AI pair programming" />
   <meta name="author" content="Agentic Architect" />
   <link rel="canonical" href="https://agentic-architect.dev/" />
@@ -14,7 +14,7 @@
   <!-- Open Graph -->
   <meta property="og:site_name" content="Agentic Architect" />
   <meta property="og:title" content="Cursor Rules for .NET Engineers | Agentic Architect" />
-  <meta property="og:description" content="Stop re-explaining your C# stack every morning. Scoped Cursor rules + LEARNING_LOG persistence for senior .NET teams. £9.00 one-time." />
+  <meta property="og:description" content="Scoped Cursor rules and a LEARNING_LOG workflow for senior .NET teams. Cursor loads the right guardrails per file. £9.00 one-time." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://agentic-architect.dev/" />
   <meta property="og:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
@@ -26,7 +26,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cursor Rules for .NET Engineers | Agentic Architect" />
-  <meta name="twitter:description" content="Scoped .mdc rules + LEARNING_LOG so Cursor stops drifting on DI, EF Core, and Clean Architecture. £9.00 one-time." />
+  <meta name="twitter:description" content="Nine scoped .mdc rules + LEARNING_LOG so Cursor keeps your C# architecture context across sessions. £9.00 one-time." />
   <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
   <meta name="twitter:image:alt" content="Cursor rules for .NET engineers — Agentic Architect kit." />
 
@@ -123,7 +123,7 @@
         "name": "Isn't this just a few prompt files I could write myself?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You could, but the framework isn't the prompts — it's the directory-level loading strategy, the circuit-breaker pattern, and the Learning Log protocol that gives Cursor true statefulness. Writing it yourself is a weekend project; maintaining it is a second job."
+          "text": "You could. We did, over a long time, across production .NET repos. The value is directory-scoped loading, the LEARNING_LOG.md protocol, and bug-breaker.mdc for retry loops. Writing a first draft is a weekend. Keeping it aligned with Cursor updates and your stack is ongoing work."
         }
       },
       {
@@ -131,7 +131,7 @@
         "name": "Will this work with Cursor's built-in rules feature?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. The .mdc files plug directly into Cursor's native rules system."
+          "text": "Yes. That is what it is built for. The .mdc files plug into Cursor's native rules system."
         }
       },
       {
@@ -139,7 +139,7 @@
         "name": "Does it work for non-.NET languages?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The persistence.mdc engine and bug-breaker.mdc are language-agnostic. Seven of the nine .mdc rules are tuned for C#/.NET (DI, EF Core, Result<T>, API, testing, and related guardrails). Non-.NET users still get value from the persistence and circuit-breaker rules."
+          "text": "persistence.mdc and bug-breaker.mdc are language-agnostic. Seven of the nine rules are tuned for C#/.NET (DI, EF Core, Result<T>, API, testing, and related guardrails). Non-.NET users get value from the persistence and circuit-breaker rules."
         }
       },
       {
@@ -155,7 +155,7 @@
         "name": "How is this different from generic Cursor rules repos on GitHub?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Most public rules are monolithic — a single rule dumped on every prompt. Agentic Architect uses scoped, directory-aware loading so only relevant rules activate per file. Plus, none of them solve persistence — the actual root cause of AI drift."
+          "text": "Most public rules are one big file loaded on every prompt. Agentic Architect scopes rules by directory so only relevant guardrails activate. Most repos also skip persistence — no LEARNING_LOG.md workflow to carry decisions forward."
         }
       },
       {
@@ -163,7 +163,7 @@
         "name": "What if it doesn't work for me?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "30-day no-questions refund. Email agenticstandardcontact@gmail.com."
+          "text": "30-day refund. Email agenticstandardcontact@gmail.com."
         }
       }
     ]
@@ -242,15 +242,15 @@
           <p class="hero-product">Agentic Architect</p>
 
           <h1 class="hero-title">
-            The persistence framework for Cursor
+            Scoped Cursor rules for .NET teams
           </h1>
 
           <p class="hero-value">
-            Cursor rules for .NET engineers who are tired of re-explaining the same architecture every morning.
+            Nine directory-scoped <code>.mdc</code> rules plus a <code>LEARNING_LOG.md</code> workflow. Cursor loads the right guardrails per file and picks up decisions you already logged.
           </p>
 
           <p class="hero-audience">
-            Staff-level .NET teams protecting Clean Architecture, MediatR, Result&lt;T&gt;, and EF Core boundaries.
+            Built for teams running Clean Architecture, MediatR, Result&lt;T&gt;, and EF Core with real layer boundaries.
           </p>
 
           <div class="hero-cta-row">
@@ -318,13 +318,13 @@
       <div class="container hero-details-inner">
         <p class="hero-sub">
           <span class="fact-label">What it is:</span> nine scoped <code>.mdc</code> files and a <code>LEARNING_LOG.md</code> protocol you commit beside your code.
-          <span class="fact-label">Who it's for:</span> staff-level .NET teams protecting Clean Architecture, MediatR, Result&lt;T&gt;, and EF Core boundaries.
-          <span class="fact-label">Why it matters:</span> Cursor has no memory between chats; this is the persistence layer that stops Wednesday drift.
+          <span class="fact-label">Who it's for:</span> senior .NET engineers who use Cursor daily and care about DI, EF, and layer boundaries.
+          <span class="fact-label">Why it matters:</span> Cursor starts fresh every chat. The log and scoped rules carry your stack context forward.
         </p>
         <ul class="hero-bullets hero-bullets-compact">
           <li><span class="check">✓</span> <span class="price-em">£9.00</span> one-time (Payhip checkout, instant ZIP)</li>
           <li><span class="check">✓</span> 9 production <code>.mdc</code> rules, directory-scoped</li>
-          <li><span class="check">✓</span> Stateful log + hallucination circuit breaker</li>
+          <li><span class="check">✓</span> Stateful log + retry circuit breaker (<code>bug-breaker.mdc</code>)</li>
           <li><span class="check">✓</span> MIT license — safe for team repos</li>
         </ul>
       </div>
@@ -337,35 +337,35 @@
           <span class="kicker">The Hidden Cost</span>
           <h2>Cursor has no memory between sessions.</h2>
           <p class="lede">
-            The first 15 minutes of every Cursor session, you're not coding — you're re-explaining your codebase from scratch.
+            The first chunk of every session goes to re-explaining your stack. MediatR, Result&lt;T&gt;, where EF belongs, what you decided last sprint. That is repeatable work, not coding.
           </p>
         </div>
 
         <div class="pain-grid">
           <div class="pain-card">
             <div class="pain-icon">⏱</div>
-            <h3>15 mins/day, lost to re-context</h3>
-            <p>That's 62 hours a year typing the same "we use Mediator and Result&lt;T&gt; in this project…" preamble. Your senior salary deserves better.</p>
+            <h3>15 mins/day on the same preamble</h3>
+            <p>You type the same project conventions again. Mediator in the application layer, no throws in controllers, EF stays in infrastructure. At senior rates, that adds up fast.</p>
           </div>
           <div class="pain-card">
             <div class="pain-icon">🧠</div>
-            <h3>The AI "drifts" by Wednesday</h3>
-            <p>By mid-week it's suggesting <code>HttpClient</code> instantiations in your repository layer. Generic prompts can't enforce your SOLID boundaries.</p>
+            <h3>Generic prompts do not hold boundaries</h3>
+            <p>Without persisted rules, Cursor starts suggesting <code>HttpClient</code> in repositories or DbContext in controllers. Your SOLID layout erodes one suggestion at a time.</p>
           </div>
           <div class="pain-card">
             <div class="pain-icon">🌀</div>
-            <h3>Hallucination loops cost hours</h3>
-            <p>The AI invents methods, doubles down when corrected, and burns tokens. There's no circuit breaker. So you become one.</p>
+            <h3>Three wrong fixes, same file</h3>
+            <p>The model invents APIs that do not exist, tries again, tries again. You end up as the circuit breaker manually.</p>
           </div>
           <div class="pain-card">
             <div class="pain-icon">📉</div>
-            <h3>"Big Ball of Mud" by sprint 3</h3>
-            <p>Without persisted architectural rules, every PR slowly drags your clean architecture back into the swamp. You feel it. You can't stop it.</p>
+            <h3>Clean structure needs enforcement, not hope</h3>
+            <p>Without rules committed to the repo, each PR nudges the codebase toward shortcuts. You notice it in review. The kit is meant to catch that before merge.</p>
           </div>
         </div>
 
         <div class="pain-cta">
-          <p>This isn't a Cursor problem. It's a persistence problem.</p>
+          <p>This is not a Cursor bug. It is a persistence gap.</p>
           <a class="btn btn-primary" href="#solution">Show me the fix ↓</a>
         </div>
 
@@ -412,7 +412,7 @@ Ask user which lookup method exists.</code></pre>
               <li><span class="x">✕</span> Re-context every session</li>
               <li><span class="x">✕</span> AI forgets last week's refactor</li>
               <li><span class="x">✕</span> Suggests anti-patterns confidently</li>
-              <li><span class="x">✕</span> Loops on the same hallucination</li>
+              <li><span class="x">✕</span> Loops on the same failed edit</li>
               <li><span class="x">✕</span> Token bloat — entire rules dumped every prompt</li>
               <li><span class="x">✕</span> Architecture decays sprint after sprint</li>
             </ul>
@@ -423,9 +423,9 @@ Ask user which lookup method exists.</code></pre>
             <h3>Cursor with Agentic Architect</h3>
             <ul>
               <li><span class="ok">✓</span> Sessions start hydrated — log auto-loads</li>
-              <li><span class="ok">✓</span> Knows every architectural decision you've made</li>
+              <li><span class="ok">✓</span> Loads prior decisions from the log</li>
               <li><span class="ok">✓</span> Refuses patterns that violate your boundaries</li>
-              <li><span class="ok">✓</span> Circuit breaker halts hallucination loops</li>
+              <li><span class="ok">✓</span> Circuit breaker halts repeated failed edits</li>
               <li><span class="ok">✓</span> Scoped loading — only relevant rules per file</li>
               <li><span class="ok">✓</span> Architecture compounds over time</li>
             </ul>
@@ -443,15 +443,15 @@ Ask user which lookup method exists.</code></pre>
     <section id="kit" class="section">
       <div class="container">
         <div class="section-head center">
-          <span class="kicker">What's Inside the Kit</span>
+          <span class="kicker">What's inside the kit</span>
           <h2 id="cursor-rules-dotnet">Cursor rules for .NET — nine specialists, one log</h2>
-          <p class="lede">Four core engines below plus five more (<code>result-pattern</code>, <code>ef-core-reads</code>, <code>api-conventions</code>, testing, performance). Each loads only when relevant.</p>
+          <p class="lede">Four core engines below, plus five more (<code>result-pattern</code>, <code>ef-core-reads</code>, <code>api-conventions</code>, testing, performance). Each loads only when the file path matches.</p>
         </div>
 
         <ul class="proof-deliverables" aria-label="What you install">
           <li><strong><code>.cursor/rules/</code></strong> — nine scoped <code>.mdc</code> files; Cursor loads only what matches the file you are editing.</li>
           <li><strong><code>LEARNING_LOG.md</code></strong> — one-line ADRs and pitfalls; <code>persistence.mdc</code> tells Cursor to read it at session start.</li>
-          <li><strong>Hydrate prompt</strong> — seed the log from your repo once; you edit the result, not a generic internet-average template.</li>
+          <li><strong>Hydrate prompt</strong> — seed the log from your repo once; you edit the result, not a generic template.</li>
         </ul>
 
         <div class="kit-grid">
@@ -460,12 +460,12 @@ Ask user which lookup method exists.</code></pre>
               <code class="kit-file">arch-core.mdc</code>
               <span class="kit-tag tag-blue">Architecture</span>
             </div>
-            <h3>The Boundary Guardian</h3>
-            <p>Enforces SOLID boundaries and prevents "Big Ball of Mud" suggestions. Stops the AI from crossing layer lines — no DbContext in controllers, no business logic in repositories, ever.</p>
+            <h3>Layer boundary enforcement</h3>
+            <p>Keeps suggestions inside your layers. No DbContext in controllers, no business logic in repositories.</p>
             <ul class="kit-points">
-              <li>SOLID compliance audits on every suggestion</li>
-              <li>Layered architecture boundary enforcement</li>
-              <li>Anti-pattern early-warning system</li>
+              <li>SOLID checks on generated code</li>
+              <li>Layer boundary rules per directory</li>
+              <li>Flags common anti-patterns early</li>
             </ul>
           </article>
 
@@ -474,12 +474,12 @@ Ask user which lookup method exists.</code></pre>
               <code class="kit-file">dotnet-di.mdc</code>
               <span class="kit-tag tag-violet">.NET DI</span>
             </div>
-            <h3>The DI Auditor</h3>
-            <p>A specialized auditor for constructor injections and service lifetimes. Catches <code>Scoped → Singleton</code> capture bugs before they ship. Knows <code>IServiceCollection</code>, Scrutor, Autofac patterns by heart.</p>
+            <h3>DI and lifetime checks</h3>
+            <p>Catches <code>Scoped → Singleton</code> capture bugs before runtime. Covers <code>IServiceCollection</code>, Scrutor, and common Autofac patterns.</p>
             <ul class="kit-points">
               <li>Lifetime conflict detection</li>
-              <li>Constructor-injection best practices</li>
-              <li>Module registration discipline</li>
+              <li>Constructor injection conventions</li>
+              <li>Registration module discipline</li>
             </ul>
           </article>
 
@@ -488,12 +488,12 @@ Ask user which lookup method exists.</code></pre>
               <code class="kit-file">bug-breaker.mdc</code>
               <span class="kit-tag tag-amber">Circuit Breaker</span>
             </div>
-            <h3>The Hallucination Killer</h3>
-            <p>A circuit-breaker that stops the AI when it enters a hallucination loop. Detects repeated failed solutions, forces it to step back, re-read the file, and ask — instead of doubling down.</p>
+            <h3>Stops repeated failed edits</h3>
+            <p>After several failed attempts on the same file, generation halts. Cursor re-reads the real source and asks instead of inventing another fix.</p>
             <ul class="kit-points">
-              <li>Loop-detection on failed attempts</li>
-              <li>Forced context re-read protocol</li>
-              <li>Token waste prevention</li>
+              <li>Loop detection on failed attempts</li>
+              <li>Forced re-read of source files</li>
+              <li>Less token burn on dead ends</li>
             </ul>
           </article>
 
@@ -502,12 +502,12 @@ Ask user which lookup method exists.</code></pre>
               <code class="kit-file">persistence.mdc</code>
               <span class="kit-tag tag-green">★ The Engine</span>
             </div>
-            <h3>The Project's Long-Term Memory</h3>
-            <p>The engine that maintains your <code>LEARNING_LOG.md</code> — the persistent "brain" of your project. Every architectural decision, refactor reason, and "we tried that, don't do it again" lesson gets logged and re-hydrated automatically.</p>
+            <h3>Cross-session memory via LEARNING_LOG.md</h3>
+            <p>Appends architectural decisions, refactor notes, and "we tried that" lessons. The hydrate prompt loads them at session start.</p>
             <ul class="kit-points">
-              <li>Auto-append architectural decisions (ADR-style)</li>
+              <li>ADR-style log entries</li>
               <li>Session-start hydration protocol</li>
-              <li>Cross-session continuity — true statefulness</li>
+              <li>Decisions carry across chats</li>
             </ul>
           </article>
         </div>
@@ -576,14 +576,14 @@ Ask user which lookup method exists.</code></pre>
       <div class="container">
         <div class="section-head center">
           <span class="kicker">What engineers use it for</span>
-          <h2>Real drift patterns from the blog series</h2>
-          <p class="lede">Early adopters are mostly solo staff engineers and small .NET teams. Below is what the kit is built to catch (from our published essays, not invented quotes).</p>
+          <h2>Problems the kit was built to catch</h2>
+          <p class="lede">Early buyers are mostly solo staff engineers and small .NET teams. Below is what the rules target, drawn from our published essays (not invented testimonials).</p>
         </div>
 
         <ul class="use-case-list">
-          <li>Context Tax — stop the 15-minute morning re-brief. <a href="blog/01-the-context-tax.html">Read the essay</a></li>
+          <li>Context tax — cut the morning re-brief. <a href="blog/01-the-context-tax.html">Read the essay</a></li>
           <li>Scoped → Singleton DI — catch captive dependencies before runtime. <a href="blog/02-scoped-singleton-di-bug.html">DI bug write-up</a></li>
-          <li>Hallucination loops — circuit breaker after repeated failed edits. <a href="blog/03-cursor-hallucination-loop-breaker.html">Loop breaker</a></li>
+          <li>Hallucination loops — circuit breaker after repeated bad attempts. <a href="blog/03-cursor-hallucination-loop-breaker.html">Loop breaker</a></li>
           <li>Result&lt;T&gt; regression — block <code>throw</code> in controllers. <a href="blog/04-cursor-result-not-throw.html">Result pattern</a></li>
           <li>Cursor vs Rider — same rules on both tools. <a href="blog/05-cursor-vs-rider-dotnet.html">Comparison</a></li>
           <li>EF Core guardrails — AsNoTracking, Include depth, N+1. <a href="blog/07-cursor-efcore-patterns.html">EF patterns</a></li>
@@ -681,9 +681,9 @@ Ask user which lookup method exists.</code></pre>
           <div class="pricing-card">
             <div class="ribbon">FOUNDER'S EDITION</div>
             <h3>The Persistence Kit</h3>
-            <p class="pricing-sub">Everything you need to turn Cursor into a stateful architectural partner.</p>
+            <p class="pricing-sub">Scoped <code>.mdc</code> rules, a committed learning log, and a hydrate prompt. Copy into your repo, run once, done.</p>
 
-            <p class="price-anchor">Senior .NET time is roughly £60–120/hr. This kit targets 2+ hours of Cursor re-regressions saved per sprint. Launch price: £9.00 (rises when the video walkthrough ships).</p>
+            <p class="price-anchor">Senior .NET time runs roughly £60–120/hr. If the kit saves you one avoided DI bug or one less re-brief per sprint, it pays for itself. Launch price: £9.00 (rises when the video walkthrough ships).</p>
 
             <div class="price-row">
               <span class="price-old">£49</span>
@@ -694,7 +694,7 @@ Ask user which lookup method exists.</code></pre>
             <ul class="price-list">
               <li><span class="ok">✓</span> 9 × .mdc rules — arch, DI, EF, Result, API, testing, domain, logging, perf</li>
               <li><span class="ok">✓</span> persistence.mdc + LEARNING_LOG.md template</li>
-              <li><span class="ok">✓</span> bug-breaker.mdc — hallucination circuit breaker</li>
+              <li><span class="ok">✓</span> bug-breaker.mdc — retry circuit breaker</li>
               <li><span class="ok">✓</span> Hydrate prompt — seed log from your repo</li>
               <li><span class="ok">✓</span> Quickstart PDF — ~5 min install</li>
               <li><span class="ok">✓</span> Lifetime updates — pay once, own forever</li>
@@ -718,8 +718,8 @@ Ask user which lookup method exists.</code></pre>
             <div class="guarantee">
               <div class="guarantee-badge">🛡</div>
               <div>
-                <strong>30-day "Reclaim Your Mornings" guarantee.</strong><br/>
-                Install it. Use it. If it doesn't save you the first 15 minutes of every session, email <a href="mailto:agenticstandardcontact@gmail.com">agenticstandardcontact@gmail.com</a> for a full refund. No interrogation.
+                <strong>30-day refund.</strong><br/>
+                Install it. Use it for a few sessions. If it is not useful, email <a href="mailto:agenticstandardcontact@gmail.com">agenticstandardcontact@gmail.com</a> for a full refund. No questionnaire.
               </div>
             </div>
 
@@ -771,27 +771,35 @@ Ask user which lookup method exists.</code></pre>
         <div class="faq">
           <details>
             <summary>Isn't this just a few prompt files I could write myself?</summary>
-            <p>You could — and we did, over hundreds of hours, across real production .NET codebases. The framework isn't the prompts; it's the directory-level loading strategy, the circuit-breaker pattern, and the Learning Log protocol that gives Cursor true statefulness. Writing it yourself is a weekend project. Maintaining it is a second job.</p>
+            <p>You could. We did, over a long time, across production .NET repos. The value is not one mega-prompt. It is directory-scoped loading (only relevant rules per file), the <code>LEARNING_LOG.md</code> protocol, and <code>bug-breaker.mdc</code> for retry loops. Writing a first draft is a weekend. Keeping it aligned with Cursor updates and your stack is ongoing work.</p>
+          </details>
+          <details>
+            <summary>Prompts vs rules — what's the difference here?</summary>
+            <p>Prompts live in chat and vanish when the thread closes. <code>.mdc</code> rules live in <code>.cursor/rules/</code> and load automatically based on file path. The hydrate prompt runs once to seed <code>LEARNING_LOG.md</code>; after that, <code>persistence.mdc</code> maintains the log across sessions. Rules enforce. Prompts inform.</p>
           </details>
           <details>
             <summary>Will this work with Cursor's built-in rules feature?</summary>
-            <p>Yes — that's exactly what it's built for. The <code>.mdc</code> files plug directly into Cursor's native rules system. We just use it with discipline.</p>
+            <p>Yes. That is what it is built for. The <code>.mdc</code> files plug into Cursor's native rules system.</p>
           </details>
           <details>
             <summary>Does it work for non-.NET languages?</summary>
-            <p>The <code>persistence.mdc</code> engine and <code>bug-breaker.mdc</code> are language-agnostic. <code>arch-core.mdc</code> and <code>dotnet-di.mdc</code> are tuned for C#/.NET. If you're not in the .NET world, you'll get value from 2 of the 4 rules — your call whether £9.00 is worth that.</p>
+            <p><code>persistence.mdc</code> and <code>bug-breaker.mdc</code> are language-agnostic. Seven of the nine rules are tuned for C#/.NET (DI, EF Core, Result&lt;T&gt;, API, testing, and related guardrails). Non-.NET users get value from the persistence and circuit-breaker rules. Whether £9.00 is worth two of nine is your call.</p>
+          </details>
+          <details>
+            <summary>I'm a solo dev, not a team. Is this overkill?</summary>
+            <p>No. Solo staff engineers were the first buyers. You still re-brief Cursor every session and still need boundaries enforced when you are the only reviewer. The free starter kit (3 rules) is enough to test the workflow before paying.</p>
           </details>
           <details>
             <summary>Is it a subscription?</summary>
-            <p>No. One-time £9.00. Lifetime updates. MIT-licensed. We hate subscriptions as much as you do.</p>
+            <p>No. One-time £9.00. Lifetime updates. MIT-licensed.</p>
           </details>
           <details>
             <summary>How is this different from generic "Cursor rules" repos on GitHub?</summary>
-            <p>Most public rules are monolithic — a single rule dumped on every prompt, blowing your token budget. Agentic Architect uses scoped, directory-aware loading so only relevant rules activate for the file you're in. Plus, none of them solve persistence — the actual root cause of AI drift.</p>
+            <p>Most public rules are one big file loaded on every prompt. Agentic Architect scopes rules by directory so only relevant guardrails activate. Most repos also skip persistence — no <code>LEARNING_LOG.md</code> workflow to carry decisions forward.</p>
           </details>
           <details>
             <summary>What if my team doesn't want to adopt it?</summary>
-            <p>They don't have to. The rules live in <code>.cursor/rules/</code> and the Learning Log is just a markdown file. Both can be in <code>.gitignore</code> or committed for the team — your call.</p>
+            <p>They do not have to. Rules sit in <code>.cursor/rules/</code> and the log is a markdown file. Keep them personal in <code>.gitignore</code>, or commit them for the team. One purchase covers internal use under MIT.</p>
           </details>
           <details>
             <summary>How do I get the files after checkout?</summary>
@@ -803,7 +811,7 @@ Ask user which lookup method exists.</code></pre>
           </details>
           <details>
             <summary>What if it doesn't work for me?</summary>
-            <p>30-day no-questions refund. Email <a href="mailto:agenticstandardcontact@gmail.com">agenticstandardcontact@gmail.com</a>. We'd rather refund you than have an unhappy senior engineer telling their network.</p>
+            <p>30-day refund. Email <a href="mailto:agenticstandardcontact@gmail.com">agenticstandardcontact@gmail.com</a>.</p>
           </details>
           <details>
             <summary>Why is it £9.00 and not £99?</summary>
@@ -822,7 +830,7 @@ Ask user which lookup method exists.</code></pre>
       <div class="container">
         <div class="final-cta">
           <h2>Install the kit. Hydrate the log.</h2>
-          <p>Drop the <code>.cursor/rules/</code> folder in. Run the hydrate prompt once. Cursor picks up your architectural decisions on the next session.</p>
+          <p>Copy <code>.cursor/rules/</code> into your repo. Run the hydrate prompt once. Your next Cursor session loads the log and scoped rules automatically.</p>
           <a class="btn btn-primary btn-xl" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=final_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">
             Buy now — £9.00 →
           </a>
@@ -869,7 +877,7 @@ Ask user which lookup method exists.</code></pre>
       </div>
     </div>
     <div class="container foot-bottom">
-      <span>© <span id="year">2026</span> Agentic Architect. Built for engineers who refuse context rot.</span>
+      <span>© <span id="year">2026</span> Agentic Architect. MIT-licensed rules · One-time payment</span>
       <span>MIT-licensed rules · One-time payment · No subscription</span>
     </div>
   </footer>
@@ -885,17 +893,17 @@ Ask user which lookup method exists.</code></pre>
     <div class="modal-backdrop" data-close></div>
     <div class="modal-card">
       <button class="modal-close" data-close aria-label="Close">×</button>
-      <div class="modal-eyebrow">⚡ Wait — before you go</div>
-      <h3 id="exitTitle">Reclaim your mornings for less than a takeaway.</h3>
-      <p>You've read this far. The Founder's price is £9.00 — and it goes up at the next cohort.</p>
+      <div class="modal-eyebrow">Before you go</div>
+      <h3 id="exitTitle">£9.00 for scoped rules and a log that stays in your repo.</h3>
+      <p>Founder's price is £9.00. It goes up when the walkthrough video ships.</p>
       <ul class="modal-list">
         <li>✓ 9 specialist <code>.mdc</code> rules</li>
-        <li>✓ Stateful Learning Log protocol</li>
-        <li>✓ 30-day no-questions refund</li>
+        <li>✓ <code>LEARNING_LOG.md</code> protocol</li>
+        <li>✓ 30-day refund</li>
         <li>✓ Lifetime updates</li>
       </ul>
       <a class="btn btn-primary btn-lg modal-cta" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=exit_modal&utm_campaign=paid_kit" target="_blank" rel="noopener">Buy now — £9.00 →</a>
-      <button class="modal-dismiss" data-close>No thanks, I'll keep paying the Context Tax</button>
+      <button class="modal-dismiss" data-close>No thanks</button>
     </div>
   </div>
 
