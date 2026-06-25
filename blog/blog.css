@@ -5,9 +5,16 @@
   background:
     radial-gradient(ellipse at 50% 0%, rgba(255,181,71,0.08), transparent 60%),
     var(--bg);
+  text-align: center;
 }
 .blog-hero h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
-.blog-hero .lede { max-width: 700px; }
+/* Beat global p { max-width: 62ch } — center hero intro on learn/ and blog/ */
+.blog-hero .lede {
+  max-width: min(700px, 62ch);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
 .post-list {
   list-style: none; padding: 0; margin: 0;
