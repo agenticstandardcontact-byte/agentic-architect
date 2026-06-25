@@ -311,5 +311,13 @@
       <description>Library code (non-ASP.NET) should ConfigureAwait false on every awaited Task. ASP.NET Core code should not. Cursor mixes the two contexts in the same solution. Detect the project type and enforce the right default.</description>
     </item>
 
+      <item>
+      <title>Rule 18: WebApplicationFactory for Integration Tests</title>
+      <link>https://agentic-architect.dev/blog/#2026-06-25</link>
+      <guid isPermaLink="false">daily-rule-2026-06-25</guid>
+      <pubDate>Thu, 25 Jun 2026 09:00:00 +0000</pubDate>
+      <description>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</description>
+    </item>
+
   </channel>
 </rss>
