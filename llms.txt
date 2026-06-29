@@ -1,0 +1,42 @@
+# Agentic Architect
+
+> Directory-scoped Cursor rules and a LEARNING_LOG.md workflow for senior C#/.NET engineers who use Cursor or Copilot daily.
+
+Important notes:
+
+- Product: £9 one-time Payhip download — 9 `.mdc` rules, templates, hydrate prompt, MIT license.
+- Free sample: `arch-core-lite.mdc` on GitHub (no email required).
+- Audience: production .NET (Clean Architecture, MediatR, Result, EF Core).
+- Hardware pages include Amazon affiliate links with on-page disclosure; prices are not stated on-site.
+
+## Start here
+
+- [Homepage](https://agentic-architect.dev/): product overview, pricing, FAQ
+- [Cursor rules for .NET (learn hub)](https://agentic-architect.dev/learn/cursor-rules-dotnet.html): scoped rules overview
+- [Free arch-core-lite.mdc](https://github.com/agenticstandardcontact-byte/agentic-architect/raw/main/arch-core-lite.mdc): layer-boundary rule sample
+- [RSS feed](https://agentic-architect.dev/feed.xml): daily rules and new essays
+
+## Best essays (citation-ready)
+
+- [The context tax](https://agentic-architect.dev/blog/01-the-context-tax.html.md): why Cursor forgets your stack every session
+- [Scoped→Singleton DI bug](https://agentic-architect.dev/blog/02-scoped-singleton-di-bug.html.md): DI lifetime traps Cursor introduces
+- [Hallucination loop breaker](https://agentic-architect.dev/blog/03-cursor-hallucination-loop-breaker.html.md): circuit-breaker pattern for repeated bad edits
+- [Result instead of throw](https://agentic-architect.dev/blog/04-cursor-result-not-throw.html.md): keep Result<T> in controllers
+- [Cursor vs Rider](https://agentic-architect.dev/blog/05-cursor-vs-rider-dotnet.html.md): IDE comparison for .NET
+- [Stop Cursor drift](https://agentic-architect.dev/blog/06-stop-cursor-ai-drift-dotnet.html.md): architecture regression guardrails
+- [EF Core patterns](https://agentic-architect.dev/blog/07-cursor-efcore-patterns.html.md): AsNoTracking, Include depth, N+1
+- [Cursor vs Copilot](https://agentic-architect.dev/blog/08-cursor-vs-copilot-dotnet.html.md): which to pay for in 2026
+
+## Hardware (local LLM / mini PC picks)
+
+- [Hardware hub](https://agentic-architect.dev/hardware/): mini PCs for running local models alongside .NET work
+- [HX99G vs Mac Mini M4](https://agentic-architect.dev/hardware/hx99g-vs-mac-mini-m4.html): Windows/Linux mini PC vs Apple
+- [SER9 vs UM890 Pro](https://agentic-architect.dev/hardware/ser9-vs-um890-pro.html): AMD mini PC comparison
+
+## Optional
+
+- [Blog index + daily rules](https://agentic-architect.dev/blog/): HTML index; prefer essay `.html.md` links above for LLM fetch
+- [Quick fixes hub](https://agentic-architect.dev/learn/): short learn pages from blog series
+- [Privacy Policy](https://agentic-architect.dev/privacy-policy.html)
+- [Affiliate Disclosure](https://agentic-architect.dev/affiliate-disclosure.html)
+- [GitHub repo](https://github.com/agenticstandardcontact-byte/agentic-architect): free starter files only (paid kit not in repo)
