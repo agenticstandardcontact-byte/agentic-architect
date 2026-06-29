@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 
+# LLM/agent index: https://agentic-architect.dev/llms.txt
+
 # Paid kit delivery is email/Payhip only
 Disallow: /downloads/agentic-architect-kit.zip
 Disallow: /thank-you-paid.html
