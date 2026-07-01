@@ -66,6 +66,17 @@
       <div class="container">
         <ul class="post-list">
           <!-- DAILY-RULE-INSERTION-POINT -->
+          <li class="post-card" data-date="2026-07-01">
+  <div class="post-link" style="cursor:default;">
+    <div class="post-meta">
+      <time datetime="2026-07-01">July 01, 2026</time>
+      <span class="post-tag">Daily Rule</span>
+    </div>
+    <h2>Rule 24: ValueTask Only When Justified</h2>
+    <p>ValueTask is a perf optimisation for hot paths that often return synchronously. It is not a drop-in for Task. Cursor swaps them around without thinking. Flag ValueTask returns and ask whether the method is actually mostly synchronous. If not, revert to Task.</p>
+  </div>
+</li>
+
           <li class="post-card" data-date="2026-06-30">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
