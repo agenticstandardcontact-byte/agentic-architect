@@ -13,6 +13,15 @@
   const COOKIE_KEY = 'aa_cookie_consent_v1';
   const PREFS_KEY = 'aa_cookie_prefs_v1';
 
+  const pushUetConsent = (granted) => {
+    window.uetq = window.uetq || [];
+    window.uetq.push('consent', 'update', { ad_storage: granted ? 'granted' : 'denied' });
+  };
+
+  const syncUetConsent = (prefs) => {
+    pushUetConsent(!!prefs.marketing);
+  };
+
   const sitePrefix = () => {
     const path = window.location.pathname;
     const marker = '/agentic-architect/';
@@ -36,9 +45,11 @@
 
   const applyConsent = (choice, prefs) => {
     localStorage.setItem(COOKIE_KEY, choice);
+    const resolved = prefs || readPrefs();
     if (prefs) writePrefs(prefs);
     document.documentElement.classList.add('cookie-consent-set');
-    document.dispatchEvent(new CustomEvent('aa:cookie-consent', { detail: { choice, prefs: prefs || readPrefs() } }));
+    syncUetConsent(resolved);
+    document.dispatchEvent(new CustomEvent('aa:cookie-consent', { detail: { choice, prefs: resolved } }));
   };
 
   const hideBar = (bar) => {
@@ -98,7 +109,7 @@
             <div class="cookie-pref-row">
               <div class="cookie-pref-info">
                 <strong>Marketing</strong>
-                <span>MailerLite signup forms and optional newsletter features.</span>
+                <span>MailerLite signup forms and Microsoft Ads conversion tracking.</span>
               </div>
               <label class="cookie-pref-toggle" aria-label="Marketing cookies">
                 <input type="checkbox" id="cookie-pref-marketing" checked>
@@ -171,6 +182,7 @@
   const storedConsent = localStorage.getItem(COOKIE_KEY);
   if (storedConsent) {
     document.documentElement.classList.add('cookie-consent-set');
+    syncUetConsent(readPrefs());
   } else {
     mountCookieConsent();
   }
