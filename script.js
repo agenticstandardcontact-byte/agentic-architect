@@ -13,6 +13,8 @@
   const COOKIE_KEY = 'aa_cookie_consent_v1';
   const PREFS_KEY = 'aa_cookie_prefs_v1';
 
+  const GOOGLE_ADS_ID = 'AW-18295180192';
+
   const pushUetConsent = (granted) => {
     window.uetq = window.uetq || [];
     window.uetq.push('consent', 'update', { ad_storage: granted ? 'granted' : 'denied' });
@@ -20,6 +22,37 @@
 
   const syncUetConsent = (prefs) => {
     pushUetConsent(!!prefs.marketing);
+  };
+
+  const loadGoogleAdsTag = () => {
+    if (window.__aaGoogleAdsLoaded) return;
+    window.__aaGoogleAdsLoaded = true;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`;
+    s.onload = () => {
+      gtag('js', new Date());
+      gtag('config', GOOGLE_ADS_ID);
+      document.dispatchEvent(new CustomEvent('aa:google-ads-ready'));
+    };
+    document.head.appendChild(s);
+  };
+
+  const pushGoogleAdsConsent = (granted) => {
+    window.gtag = window.gtag || function gtagStub() {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(arguments);
+    };
+    gtag('consent', 'update', {
+      ad_storage: granted ? 'granted' : 'denied',
+      ad_user_data: granted ? 'granted' : 'denied',
+      ad_personalization: granted ? 'granted' : 'denied',
+    });
+    if (granted) loadGoogleAdsTag();
+  };
+
+  const syncGoogleAdsConsent = (prefs) => {
+    pushGoogleAdsConsent(!!prefs.marketing);
   };
 
   const sitePrefix = () => {
@@ -49,6 +82,7 @@
     if (prefs) writePrefs(prefs);
     document.documentElement.classList.add('cookie-consent-set');
     syncUetConsent(resolved);
+    syncGoogleAdsConsent(resolved);
     document.dispatchEvent(new CustomEvent('aa:cookie-consent', { detail: { choice, prefs: resolved } }));
   };
 
@@ -109,7 +143,7 @@
             <div class="cookie-pref-row">
               <div class="cookie-pref-info">
                 <strong>Marketing</strong>
-                <span>MailerLite signup forms and Microsoft Ads conversion tracking.</span>
+                <span>MailerLite signup forms, Microsoft Ads, and Google Ads conversion tracking.</span>
               </div>
               <label class="cookie-pref-toggle" aria-label="Marketing cookies">
                 <input type="checkbox" id="cookie-pref-marketing" checked>
@@ -182,7 +216,9 @@
   const storedConsent = localStorage.getItem(COOKIE_KEY);
   if (storedConsent) {
     document.documentElement.classList.add('cookie-consent-set');
-    syncUetConsent(readPrefs());
+    const prefs = readPrefs();
+    syncUetConsent(prefs);
+    syncGoogleAdsConsent(prefs);
   } else {
     mountCookieConsent();
   }
