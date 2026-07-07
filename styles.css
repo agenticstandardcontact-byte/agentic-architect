@@ -2162,13 +2162,13 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 .hero-copy-center .hero-value {
   margin: 0 auto 4px;
   font-size: 0.96rem;
-  max-width: 64ch;
+  max-width: 110ch;
   line-height: 1.5;
 }
 .hero-copy-center .hero-audience {
   margin: 0 auto;
   font-size: 0.88rem;
-  max-width: 60ch;
+  max-width: 110ch;
 }
 .hero-visual-center { width: 100%; }
 
@@ -2443,4 +2443,5 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   .scenario-chips { gap: 6px; }
   .scenario-chip { font-size: 0.74rem; padding: 6px 12px; }
   .chat-window { height: 380px; padding: 12px; }
-}
+}
+
