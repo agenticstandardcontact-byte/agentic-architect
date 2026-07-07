@@ -26,6 +26,7 @@ Important notes:
 - [Stop Cursor drift](https://agentic-architect.dev/blog/06-stop-cursor-ai-drift-dotnet.html.md): architecture regression guardrails
 - [EF Core patterns](https://agentic-architect.dev/blog/07-cursor-efcore-patterns.html.md): AsNoTracking, Include depth, N+1
 - [Cursor vs Copilot](https://agentic-architect.dev/blog/08-cursor-vs-copilot-dotnet.html.md): which to pay for in 2026
+- [GLM 5.2 vs Claude Fable 5](https://agentic-architect.dev/blog/09-glm-5-2-vs-claude-fable-5.html.md): agentic coding cost math on open weights
 
 ## Hardware (local LLM / mini PC picks)
 
