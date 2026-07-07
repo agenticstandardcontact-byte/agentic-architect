@@ -1,20 +1,20 @@
 /* =========================================================
-   Agentic Architect — Homepage dual-terminal comparison demo (B5)
+   Agentic Architect — Homepage dual-terminal comparison demo (B5 v2)
    Scripted preview: Plain Cursor vs Agentic Architect kit.
-   No live LLM, no API, no backend. Static scenarios only.
+   Renders Cursor-style chat messages (avatars, code blocks,
+   rule callouts, status lines). No live LLM, no API, no backend.
    ========================================================= */
 
 (function () {
   'use strict';
 
-  /** @typedef {'system'|'user'|'ai'|'dim'|'ok'|'warn'|'bad'|'rule'} LineType */
-  /** @typedef {{ type: LineType, text: string, delayMs?: number, cls?: string }} Line */
+  /** @typedef {'system'|'user'|'ai'|'code'|'rule'|'ok'|'warn'|'bad'} LineType */
+  /** @typedef {{ type: LineType, text: string, delayMs?: number }} Line */
 
   /**
    * @typedef {Object} Scenario
    * @property {string} id
    * @property {string} label
-   * @property {string} prompt
    * @property {Line[]} plain
    * @property {Line[]} kit
    */
@@ -24,101 +24,91 @@
     {
       id: 'di-singleton',
       label: 'DI lifetime bug',
-      prompt: 'Register OrderRepository with DbContext in DI for the API.',
       plain: [
-        { type: 'system', text: 'cursor agent — no rules loaded' },
+        { type: 'system', text: 'No rules loaded' },
         { type: 'user', text: 'Register OrderRepository with DbContext in DI for the API.' },
         { type: 'ai', text: 'Sure. In Program.cs:', delayMs: 500 },
-        { type: 'ai', text: 'builder.Services.AddSingleton<OrderRepository>();', cls: 'code' },
-        { type: 'ai', text: 'builder.Services.AddDbContext<AppDbContext>();', cls: 'code' },
-        { type: 'dim', text: '// compiles clean ✓', delayMs: 400 },
-        { type: 'warn', text: '⚠ Runtime: Cannot resolve scoped service AppDbContext from singleton OrderRepository.', delayMs: 700 },
+        { type: 'code', text: 'builder.Services.AddSingleton<OrderRepository>();' },
+        { type: 'code', text: 'builder.Services.AddDbContext<AppDbContext>();' },
+        { type: 'ok', text: 'Compiles clean.', delayMs: 400 },
+        { type: 'warn', text: 'Runtime: Cannot resolve scoped AppDbContext from singleton OrderRepository.', delayMs: 700 },
         { type: 'bad', text: 'Captive dependency — fails under load, not in dev.', delayMs: 300 }
       ],
       kit: [
-        { type: 'system', text: '✓ Loaded di-scoping.mdc · LEARNING_LOG #2' },
+        { type: 'system', text: 'Loaded di-scoping.mdc · LEARNING_LOG #2' },
         { type: 'user', text: 'Register OrderRepository with DbContext in DI for the API.' },
         { type: 'rule', text: 'di-scoping.mdc: DbContext is Scoped. Never inject into a Singleton.', delayMs: 500 },
-        { type: 'ai', text: 'Refusing AddSingleton<OrderRepository> — captive dependency.', cls: 'code' },
-        { type: 'ai', text: 'Use AddScoped<IOrderRepository, OrderRepository>()', cls: 'code' },
-        { type: 'ai', text: 'Interface lives in Application/, impl in Infrastructure/.', cls: 'code' },
-        { type: 'ok', text: '✓ No lifetime conflict. Compiles + runs.', delayMs: 400 }
+        { type: 'ai', text: 'Refusing AddSingleton<OrderRepository> — captive dependency.' },
+        { type: 'code', text: 'builder.Services.AddScoped<IOrderRepository, OrderRepository>();' },
+        { type: 'ai', text: 'Interface in Application/, impl in Infrastructure/.' },
+        { type: 'ok', text: 'No lifetime conflict. Compiles + runs.', delayMs: 400 }
       ]
     },
     {
       id: 'result-pattern',
       label: 'Result<T> vs throw',
-      prompt: 'Add GET /orders/{id} — return 404 when missing.',
       plain: [
-        { type: 'system', text: 'cursor agent — no rules loaded' },
+        { type: 'system', text: 'No rules loaded' },
         { type: 'user', text: 'Add GET /orders/{id} — return 404 when missing.' },
         { type: 'ai', text: 'In OrdersController.cs:', delayMs: 500 },
-        { type: 'ai', text: 'var order = await _repo.GetByIdAsync(id);', cls: 'code' },
-        { type: 'ai', text: 'if (order is null) throw new NotFoundException(id);', cls: 'code' },
-        { type: 'ai', text: 'return Ok(order);', cls: 'code' },
-        { type: 'warn', text: '⚠ Throw in controller — exception-driven control flow.', delayMs: 600 },
+        { type: 'code', text: 'var order = await _repo.GetByIdAsync(id);\nif (order is null)\n    throw new NotFoundException(id);\nreturn Ok(order);' },
+        { type: 'warn', text: 'Throw in controller — exception-driven control flow.', delayMs: 600 },
         { type: 'bad', text: 'No Result<T>. Stack trace on every missing order.', delayMs: 300 }
       ],
       kit: [
-        { type: 'system', text: '✓ Loaded result-pattern.mdc · LEARNING_LOG #14' },
+        { type: 'system', text: 'Loaded result-pattern.mdc · LEARNING_LOG #14' },
         { type: 'user', text: 'Add GET /orders/{id} — return 404 when missing.' },
         { type: 'rule', text: 'result-pattern.mdc: Controllers return Result<T>. No throw for business failures.', delayMs: 500 },
-        { type: 'ai', text: 'var result = await _repo.GetByIdAsync(id);', cls: 'code' },
-        { type: 'ai', text: 'return result.IsSuccess ? Ok(result.Value) : NotFound(result.Error);', cls: 'code' },
-        { type: 'ok', text: '✓ Thin controller. No exception path for expected 404.', delayMs: 400 }
+        { type: 'code', text: 'var result = await _repo.GetByIdAsync(id);\nreturn result.IsSuccess\n    ? Ok(result.Value)\n    : NotFound(result.Error);' },
+        { type: 'ok', text: 'Thin controller. No exception path for expected 404.', delayMs: 400 }
       ]
     },
     {
       id: 'ef-read',
       label: 'EF read tracking',
-      prompt: 'Add a read-only list endpoint for orders with customer names.',
       plain: [
-        { type: 'system', text: 'cursor agent — no rules loaded' },
+        { type: 'system', text: 'No rules loaded' },
         { type: 'user', text: 'Add a read-only list endpoint for orders with customer names.' },
         { type: 'ai', text: 'In OrderRepository.cs:', delayMs: 500 },
-        { type: 'ai', text: 'return await _db.Orders', cls: 'code' },
-        { type: 'ai', text: '  .Include(o => o.Customer)', cls: 'code' },
-        { type: 'ai', text: '  .ToListAsync();', cls: 'code' },
-        { type: 'warn', text: '⚠ Tracked query on a read path — change tracker fills up.', delayMs: 600 },
+        { type: 'code', text: 'return await _db.Orders\n    .Include(o => o.Customer)\n    .ToListAsync();' },
+        { type: 'warn', text: 'Tracked query on a read path — change tracker fills up.', delayMs: 600 },
         { type: 'bad', text: 'N+1 risk + memory bloat on large lists.', delayMs: 300 }
       ],
       kit: [
-        { type: 'system', text: '✓ Loaded ef-core-reads.mdc · LEARNING_LOG #21' },
+        { type: 'system', text: 'Loaded ef-core-reads.mdc · LEARNING_LOG #21' },
         { type: 'user', text: 'Add a read-only list endpoint for orders with customer names.' },
         { type: 'rule', text: 'ef-core-reads.mdc: Read-only queries use AsNoTracking() + projection to DTO.', delayMs: 500 },
-        { type: 'ai', text: 'return await _db.Orders.AsNoTracking()', cls: 'code' },
-        { type: 'ai', text: '  .Select(o => new OrderListDto(o.Id, o.Customer.Name, o.Total))', cls: 'code' },
-        { type: 'ai', text: '  .ToListAsync();', cls: 'code' },
-        { type: 'ok', text: '✓ No tracking. Single query. DTO projection.', delayMs: 400 }
+        { type: 'code', text: 'return await _db.Orders.AsNoTracking()\n    .Select(o => new OrderListDto(\n        o.Id, o.Customer.Name, o.Total))\n    .ToListAsync();' },
+        { type: 'ok', text: 'No tracking. Single query. DTO projection.', delayMs: 400 }
       ]
     }
   ];
 
   const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const TYPE_SPEED = REDUCED_MOTION ? 0 : 14;   // ms per char
-  const LINE_GAP = REDUCED_MOTION ? 0 : 120;     // ms between lines
-  const SIDE_OFFSET = REDUCED_MOTION ? 0 : 450; // kit lags plain slightly
+  const TYPE_SPEED = REDUCED_MOTION ? 0 : 12;   // ms per char
+  const LINE_GAP = REDUCED_MOTION ? 0 : 110;     // ms between lines
+  const SIDE_OFFSET = REDUCED_MOTION ? 0 : 420; // kit lags plain slightly
 
-  const CLASS_MAP = {
-    system: 't-dim',
-    user: 't-prompt',
-    ai: 't-ai',
-    dim: 't-dim',
-    ok: 't-ok',
-    warn: 't-warn',
-    bad: 't-bad',
-    rule: 't-rule'
+  // Avatar config per line type
+  const AVATAR = {
+    system: { cls: 'chat-avatar-sys', glyph: '·' },
+    user: { cls: 'chat-avatar-user', glyph: 'U' },
+    ai: { cls: 'chat-avatar-ai', glyph: 'AI' },
+    code: { cls: 'chat-avatar-ai', glyph: 'AI' },
+    rule: { cls: 'chat-avatar-rule', glyph: '§' },
+    ok: { cls: 'chat-avatar-sys', glyph: '✓' },
+    warn: { cls: 'chat-avatar-sys', glyph: '!' },
+    bad: { cls: 'chat-avatar-sys', glyph: '✕' }
   };
-
-  const LABEL_MAP = {
-    system: '',
+  const ROLE = {
+    system: 'system',
     user: 'You',
-    ai: 'AI',
-    dim: '',
-    ok: '',
-    warn: '',
-    bad: '',
-    rule: 'rule'
+    ai: 'Cursor',
+    code: 'Cursor',
+    rule: 'rule',
+    ok: 'status',
+    warn: 'status',
+    bad: 'status'
   };
 
   function track(name, props) {
@@ -140,18 +130,37 @@
     return node;
   }
 
-  function buildLine(line) {
-    const p = el('p', 'term-line');
-    const cls = CLASS_MAP[line.type] || '';
-    const label = LABEL_MAP[line.type] || '';
-    if (label) {
-      const lab = el('span', 't-label ' + cls, label);
-      p.appendChild(lab);
-      p.appendChild(document.createTextNode(' '));
+  // Build a chat message block for a line.
+  function buildMessage(line) {
+    const av = AVATAR[line.type] || AVATAR.ai;
+    const msg = el('div', 'chat-msg');
+
+    const avatar = el('div', 'chat-avatar ' + av.cls, av.glyph);
+    msg.appendChild(avatar);
+
+    const content = el('div', 'chat-content');
+    const role = el('div', 'chat-role', ROLE[line.type] || 'Cursor');
+    content.appendChild(role);
+
+    if (line.type === 'code') {
+      const code = el('pre', 'chat-code');
+      content.appendChild(code);
+      return { msg: msg, body: code };
     }
-    const body = el('span', (line.cls === 'code' ? 't-code ' : '') + cls);
-    p.appendChild(body);
-    return { p: p, body: body };
+    if (line.type === 'rule') {
+      const rule = el('div', 'chat-rule');
+      content.appendChild(rule);
+      return { msg: msg, body: rule };
+    }
+    if (line.type === 'ok' || line.type === 'warn' || line.type === 'bad') {
+      const status = el('div', 'chat-status chat-status-' + line.type);
+      content.appendChild(status);
+      return { msg: msg, body: status };
+    }
+    // system / user / ai -> plain text
+    const text = el('div', 'chat-text');
+    content.appendChild(text);
+    return { msg: msg, body: text };
   }
 
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
@@ -162,7 +171,6 @@
       let i = 0;
       function step() {
         if (i >= text.length) { resolve(); return; }
-        // type a few chars per frame for snappy feel on long lines
         const chunk = Math.max(1, Math.round(text.length / 90));
         i = Math.min(text.length, i + chunk);
         body.textContent = text.slice(0, i);
@@ -176,9 +184,8 @@
     container.innerHTML = '';
     for (const line of lines) {
       if (line.delayMs) await sleep(REDUCED_MOTION ? 0 : line.delayMs);
-      const built = buildLine(line);
-      container.appendChild(built.p);
-      // scroll the active terminal to bottom as it grows
+      const built = buildMessage(line);
+      container.appendChild(built.msg);
       container.scrollTop = container.scrollHeight;
       await typewriter(built.body, line.text, TYPE_SPEED);
       await sleep(LINE_GAP);
@@ -196,17 +203,17 @@
     // idle preview: show first 2 lines without animation
     container.innerHTML = '';
     lines.slice(0, 2).forEach(function (line) {
-      const built = buildLine(line);
+      const built = buildMessage(line);
       built.body.textContent = line.text;
-      container.appendChild(built.p);
+      container.appendChild(built.msg);
     });
   }
 
   function initComparisonDemo(root) {
     if (!root) return;
     const chipsWrap = root.querySelector('.scenario-chips');
-    const plainBody = root.querySelector('[data-terminal="plain"] .terminal-body');
-    const kitBody = root.querySelector('[data-terminal="kit"] .terminal-body');
+    const plainBody = root.querySelector('[data-terminal="plain"] .chat-window');
+    const kitBody = root.querySelector('[data-terminal="kit"] .chat-window');
     const runBtn = root.querySelector('.demo-run');
     const tabs = root.querySelectorAll('.comparison-tabs button');
     const panels = root.querySelectorAll('.comparison-panel');
@@ -250,11 +257,9 @@
       track('demo-run', { label: s.id });
       track('demo-scenario-' + s.id);
 
-      // reset
       plainBody.innerHTML = '';
       kitBody.innerHTML = '';
 
-      // both start the user prompt simultaneously
       const plainTask = renderLines(plainBody, s.plain);
       const kitTask = sleep(SIDE_OFFSET).then(function () { return renderLines(kitBody, s.kit); });
 
