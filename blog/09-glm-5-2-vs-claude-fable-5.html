@@ -149,20 +149,20 @@
         <h2>Where Fable 5 wins</h2>
         <p>On benchmarks, Fable 5 is ahead and it's not subtle. Anthropic puts it state-of-the-art on CursorBench and FrontierBench, and it's the first to break 90 percent on their core analytics benchmark. The independent numbers agree:</p>
         <ul>
-          <li><strong>SWE-bench Verified: 95.0%</strong> for Fable 5. GLM 5.2 doesn't publish a comparable Verified number.</li>
-          <li><strong>SWE-bench Pro: 80.0%</strong> for Fable 5 vs 62.1 for GLM 5.2. Same suite, Fable 5 clearly ahead.</li>
-          <li><strong>FrontierCode / FrontierBench:</strong> Fable 5 takes the #1 spot. GLM 5.2 scores 74.4 on FrontierSWE, which is strong for an open model but behind Fable 5.</li>
-          <li><strong>Speed.</strong> In my run, Fable 5 finished in roughly half the wall-clock time.</li>
+          <li>SWE-bench Verified: 95.0% for Fable 5. GLM 5.2 doesn't publish a comparable Verified number.</li>
+          <li>SWE-bench Pro: 80.0% for Fable 5 vs 62.1 for GLM 5.2. Same suite, Fable 5 clearly ahead.</li>
+          <li>FrontierCode / FrontierBench: Fable 5 takes the #1 spot. GLM 5.2 scores 74.4 on FrontierSWE, which is strong for an open model but behind Fable 5.</li>
+          <li>Speed. In my run, Fable 5 finished in roughly half the wall-clock time.</li>
         </ul>
         <p>If you're doing the hardest long-horizon refactors, the ones where a model has to hold a plan together across many steps and a wrong turn costs you an hour of cleanup, Fable 5 is the safer pick. The gap on SWE-bench Pro is real.</p>
         <h2>Where GLM 5.2 wins</h2>
         <p>Price is the obvious one, but it's not the only one. GLM 5.2 is the top open-weight model on the Artificial Analysis Intelligence Index (51, fifth overall, with Fable 5, Opus 4.8, and GPT-5.5 ahead of it). For an open model that's a serious showing.</p>
         <ul>
-          <li><strong>SWE-bench Pro 62.1</strong> beats GPT-5.5's 58.6 on the same suite. That's the headline number Z.ai published, and it holds up.</li>
-          <li><strong>Terminal-Bench 2.1: 81.0</strong>, up from GLM 5.1's 62.0. Big jump on shell-and-tool work.</li>
-          <li><strong>1M context, usable.</strong> Z.ai trained for long context specifically, and the 1M window isn't just a spec-sheet number.</li>
-          <li><strong>MIT weights.</strong> You can self-host. No per-token bill at all if you have the GPUs, and no vendor lock-in.</li>
-          <li><strong>Cost.</strong> My run came in at roughly a quarter of Fable 5's price for output-equivalent work.</li>
+          <li>SWE-bench Pro 62.1 beats GPT-5.5's 58.6 on the same suite. That's the headline number Z.ai published, and it holds up.</li>
+          <li>Terminal-Bench 2.1: 81.0, up from GLM 5.1's 62.0. Big jump on shell-and-tool work.</li>
+          <li>1M context, usable. Z.ai trained for long context specifically, and the 1M window isn't just a spec-sheet number.</li>
+          <li>MIT weights. You can self-host. No per-token bill at all if you have the GPUs, and no vendor lock-in.</li>
+          <li>Cost. My run came in at roughly a quarter of Fable 5's price for output-equivalent work.</li>
         </ul>
         <p>The GLM Coding Plan subscription is reportedly about a tenth of Anthropic's Claude Code and Claude Max tiers, if you'd rather pay a flat fee than meter tokens. For someone running agents all day, that alone changes the economics.</p>
         <h2>The honest verdict</h2>
