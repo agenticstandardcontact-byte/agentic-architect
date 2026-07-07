@@ -141,6 +141,7 @@
     const content = el('div', 'chat-content');
     const role = el('div', 'chat-role', ROLE[line.type] || 'Cursor');
     content.appendChild(role);
+    msg.appendChild(content);
 
     if (line.type === 'code') {
       const code = el('pre', 'chat-code');
