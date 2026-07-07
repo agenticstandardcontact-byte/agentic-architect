@@ -275,29 +275,54 @@
           </div>
         </div>
 
-        <!-- Terminal mock -->
-        <div class="hero-visual" aria-hidden="true">
-          <div class="terminal">
-            <div class="terminal-bar">
-              <span class="dot dot-r"></span>
-              <span class="dot dot-y"></span>
-              <span class="dot dot-g"></span>
-              <span class="terminal-title">cursor — agentic-architect</span>
+        <!-- B5 — Dual-terminal comparison demo (scripted preview) -->
+        <div class="hero-visual">
+          <div class="comparison-demo" role="region" aria-label="Cursor comparison demo — Plain Cursor vs Agentic Architect kit">
+            <div class="scenario-chips" role="radiogroup" aria-label="Pick a scenario"></div>
+
+            <button type="button" class="demo-run">
+              <span class="play-icon" aria-hidden="true">▶</span> Run comparison
+            </button>
+
+            <div class="comparison-tabs" role="tablist" aria-label="Switch terminal">
+              <button type="button" role="tab" data-tab="plain" aria-selected="true">Plain Cursor</button>
+              <button type="button" role="tab" data-tab="kit" aria-selected="false">With kit</button>
             </div>
-            <div class="terminal-body">
-              <p><span class="t-dim">~/api/Services$</span> <span class="t-cmd">cursor agent</span></p>
-              <p><span class="t-ok">✓</span> Loaded <span class="t-acc">arch-core.mdc</span></p>
-              <p><span class="t-ok">✓</span> Loaded <span class="t-acc">dotnet-di.mdc</span></p>
-              <p><span class="t-ok">✓</span> Loaded <span class="t-acc">bug-breaker.mdc</span></p>
-              <p><span class="t-ok">✓</span> Hydrated <span class="t-acc">LEARNING_LOG.md</span> <span class="t-dim">(42 entries)</span></p>
-              <p>&nbsp;</p>
-              <p><span class="t-prompt">You</span> Add caching to OrderService</p>
-              <p>&nbsp;</p>
-              <p><span class="t-prompt t-ai">AI</span> Detected <span class="t-acc">Scoped</span> lifetime conflict with <span class="t-acc">IMemoryCache</span> (Singleton).<br/>
-                 Following <span class="t-acc">Log Entry #27</span>: "Prefer <span class="t-acc">IDistributedCache</span> abstraction in <span class="t-acc">/Infrastructure/Caching</span>."<br/>
-                 Applying decorator pattern via <span class="t-acc">Scrutor</span> per <span class="t-acc">arch-core.mdc §3</span>...</p>
-              <p>&nbsp;</p>
-              <p class="t-blink">▍</p>
+
+            <div class="comparison-terminals">
+              <div class="comparison-panel is-active" data-panel="plain" data-terminal="plain">
+                <div class="terminal">
+                  <div class="terminal-bar">
+                    <span class="dot dot-r"></span>
+                    <span class="dot dot-y"></span>
+                    <span class="dot dot-g"></span>
+                    <span class="terminal-title">cursor — plain</span>
+                    <span class="terminal-label terminal-label-plain">Plain Cursor</span>
+                  </div>
+                  <div class="terminal-body" aria-live="polite"></div>
+                </div>
+              </div>
+              <div class="comparison-panel" data-panel="kit" data-terminal="kit">
+                <div class="terminal">
+                  <div class="terminal-bar">
+                    <span class="dot dot-r"></span>
+                    <span class="dot dot-y"></span>
+                    <span class="dot dot-g"></span>
+                    <span class="terminal-title">cursor — agentic-architect</span>
+                    <span class="terminal-label terminal-label-kit">With kit</span>
+                  </div>
+                  <div class="terminal-body" aria-live="polite"></div>
+                </div>
+              </div>
+            </div>
+
+            <p class="demo-disclaimer">
+              Interactive preview — illustrated scenarios based on real .NET/Cursor patterns. Install the kit in your repo for this behaviour in Cursor.
+            </p>
+
+            <div class="demo-ctas">
+              <a class="btn btn-primary" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=demo_cta&utm_campaign=paid_kit" target="_blank" rel="noopener" data-demo-cta="demo-cta-buy">Buy the kit — £9.00</a>
+              <a class="btn btn-ghost" href="#free-kit-signup" data-demo-cta="demo-cta-free">Try the free starter</a>
             </div>
           </div>
         </div>
@@ -912,6 +937,7 @@ Ask user which lookup method exists.</code></pre>
     </div>
   </div>
 
+  <script src="comparison-demo.js" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>
