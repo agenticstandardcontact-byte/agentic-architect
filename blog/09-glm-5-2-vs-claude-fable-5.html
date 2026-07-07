@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f17" />
+  <title>GLM 5.2 vs Claude Fable 5: agentic coding at a fraction of the cost</title>
+  <meta name="description" content="I ran the same real agent task on GLM 5.2 and Claude Fable 5. Fable 5 is faster and stronger on benchmarks, but GLM 5.2 finished for $2.76 vs over $10. The honest cost math for agentic coding on open weights." />
+  <meta name="keywords" content="GLM 5.2, Claude Fable 5, Z.ai, Zhipu, Anthropic, open source LLM, agentic coding, SWE-bench, LLM pricing, coding agent, open weights" />
+  <link rel="canonical" href="https://agentic-architect.dev/blog/09-glm-5-2-vs-claude-fable-5.html" />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Architect" href="https://agentic-architect.dev/feed.xml" />
+  <link rel="alternate" type="text/html" href="https://dev.to/agentic_architect/glm-52-vs-claude-fable-5-agentic-coding-at-a-fraction-of-the-cost-562l" title="Also published on dev.to" />
+
+  <meta property="og:title" content="GLM 5.2 vs Claude Fable 5: agentic coding at a fraction of the cost" />
+  <meta property="og:description" content="I ran the same real agent task on GLM 5.2 and Claude Fable 5. Fable 5 is faster and stronger on benchmarks, but GLM 5.2 finished for $2.76 vs over $10. The honest cost math for agentic coding on open weights." />
+  <meta property="og:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
+  <meta property="og:url" content="https://agentic-architect.dev/blog/09-glm-5-2-vs-claude-fable-5.html" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-07-07T20:00:00Z" />
+  <meta property="article:author" content="Agentic Architect" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
+
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="blog.css" />
+  <script src="../uet-head.js"></script>
+  <script src="../google-ads-head.js"></script>
+  <script data-goatcounter="https://agentic-architect.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "GLM 5.2 vs Claude Fable 5: agentic coding at a fraction of the cost",
+    "datePublished": "2026-07-07T20:00:00Z",
+    "dateModified": "2026-07-07T20:00:00Z",
+    "author": {
+        "@type": "Organization",
+        "name": "Agentic Architect"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Agentic Architect",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://agentic-architect.dev/favicon.svg"
+        }
+    },
+    "image": "https://agentic-architect.dev/og-image.jpg?v=3",
+    "mainEntityOfPage": "https://agentic-architect.dev/blog/09-glm-5-2-vs-claude-fable-5.html",
+    "keywords": "GLM 5.2, Claude Fable 5, Z.ai, Anthropic, agentic coding, LLM benchmarks, open weights"
+}
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+  <div class="container nav-inner" data-site-nav>
+      <a href="../" class="brand" aria-label="Agentic Architect home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+      </a>
+      <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
+        <a href="../#problem">The Problem</a>
+        <a href="../#kit">What's Inside</a>
+        <a href="../#proof">Proof</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../#faq">FAQ</a>
+        <a href="./" aria-current="page">Blog</a>
+        <a href="../hardware/">Hardware</a>
+        <a href="../learn/">Quick Fixes</a>
+        <a href="../#resources">Guides</a>
+        <div class="nav-menu-ctas">
+          <a href="../#free-kit-signup" class="btn btn-ghost btn-sm">Get the free kit</a>
+          <a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Buy now</a>
+        </div>
+      </nav>
+      <div class="nav-ctas">
+        <a href="../#free-kit-signup" class="btn btn-ghost btn-sm nav-cta-free">Get the free kit</a>
+        <a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit" class="btn btn-primary btn-sm nav-cta-buy" target="_blank" rel="noopener">Buy now</a>
+      </div>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu"><span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
+  </div>
+</header>
+
+  <main>
+    <article class="post">
+      <div class="container post-narrow">
+        <div class="post-meta">
+          <time datetime="2026-07-07">July 7, 2026</time>
+          <span class="post-tag">AI models</span>
+          <span class="post-read-time">6 min read</span>
+          <a class="post-tag" href="https://dev.to/agentic_architect/glm-52-vs-claude-fable-5-agentic-coding-at-a-fraction-of-the-cost-562l" target="_blank" rel="noopener" style="text-decoration:none;">Also on dev.to &rarr;</a>
+        </div>
+
+        <h1>GLM 5.2 vs Claude Fable 5: <em>agentic coding at a fraction of the cost</em></h1>
+        <p class="post-lede">I gave GLM 5.2 and Claude Fable 5 the same real job: redesign a project plan and start implementing it. Fable 5 finished in about 9 minutes and cost me a little over $10. GLM 5.2 took about 17 minutes and cost $2.76. The open model was slower, no question. But the output was just as good for this task, and it cost roughly a quarter as much. That math has me excited about running agents on open weights this year.</p>
+
+        <h2>The task and the numbers</h2>
+        <p>Same prompt on both, same repo context, same agent harness. The job wasn't a toy benchmark. It was the kind of thing I actually do in a working week: take a half-formed project plan, restructure it, and start writing the code. Here's what each run looked like.</p>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th>Model</th><th>Time</th><th>API cost</th><th>Output quality</th></tr></thead>
+          <tbody>
+          <tr><td>Claude Fable 5</td><td>about 9 min</td><td>over $10.00</td><td>Clean plan, usable first pass at the code</td></tr>
+          <tr><td>GLM 5.2</td><td>about 17 min</td><td>$2.76</td><td>Equally good plan and first pass for this task</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>Fable 5 is clearly the faster model, and on raw benchmarks it's the stronger one too. What surprised me was how little that mattered for this task. GLM 5.2's plan was just as workable, and the code it produced was fine. I went in expecting to pay the Fable 5 tax for quality and came out thinking I'd overpaid.</p>
+        <h2>What each model actually is</h2>
+        <p>Two different labs, two different bets. Fable 5 is Anthropic's top generally available model, a new tier above Opus they're calling Mythos-class. GLM 5.2 is Z.ai's (formerly Zhipu) open-weight coding flagship, with the weights out under MIT.</p>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th></th><th>Claude Fable 5</th><th>GLM 5.2</th></tr></thead>
+          <tbody>
+          <tr><td>Maker</td><td>Anthropic</td><td>Z.ai (Zhipu)</td></tr>
+          <tr><td>Released</td><td>June 9, 2026</td><td>June 13, 2026</td></tr>
+          <tr><td>Tier</td><td>Mythos-class (above Opus)</td><td>Open weights, MIT licence</td></tr>
+          <tr><td>Architecture</td><td>Closed</td><td>Sparse MoE, about 40B active / 753B total</td></tr>
+          <tr><td>Context window</td><td>1M tokens</td><td>1M tokens</td></tr>
+          <tr><td>Max output</td><td>128K tokens</td><td>128K tokens</td></tr>
+          <tr><td>Model ID</td><td>claude-fable-5</td><td>GLM-5.2 (Z.ai API / HF weights)</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <h2>The pricing, per million tokens</h2>
+        <p>This is where the story changes. Fable 5 is $10 in and $50 out per million tokens. GLM 5.2 is $1.40 in and $4.40 out. Cached input is where Fable 5 claws some back, but it's still several times more expensive.</p>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th>Per 1M tokens</th><th>Claude Fable 5</th><th>GLM 5.2</th><th>Ratio</th></tr></thead>
+          <tbody>
+          <tr><td>Input</td><td>$10.00</td><td>$1.40</td><td>about 7x</td></tr>
+          <tr><td>Output</td><td>$50.00</td><td>$4.40</td><td>about 11x</td></tr>
+          <tr><td>Cached input</td><td>$1.00</td><td>$0.26</td><td>about 4x</td></tr>
+          <tr><td>Batch input</td><td>$5.00</td><td>(vendor batch)</td><td>n/a</td></tr>
+          <tr><td>Batch output</td><td>$25.00</td><td>(vendor batch)</td><td>n/a</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>Agentic loops are output-heavy. The model reads your files, thinks, edits, reads again. Most of the token spend is output, which is exactly where Fable 5 is most expensive. That's why my $10+ run vs $2.76 run lined up so closely with the output-price ratio.</p>
+        <h2>Where Fable 5 wins</h2>
+        <p>On benchmarks, Fable 5 is ahead and it's not subtle. Anthropic puts it state-of-the-art on CursorBench and FrontierBench, and it's the first to break 90 percent on their core analytics benchmark. The independent numbers agree:</p>
+        <ul>
+          <li><strong>SWE-bench Verified: 95.0%</strong> for Fable 5. GLM 5.2 doesn't publish a comparable Verified number.</li>
+          <li><strong>SWE-bench Pro: 80.0%</strong> for Fable 5 vs 62.1 for GLM 5.2. Same suite, Fable 5 clearly ahead.</li>
+          <li><strong>FrontierCode / FrontierBench:</strong> Fable 5 takes the #1 spot. GLM 5.2 scores 74.4 on FrontierSWE, which is strong for an open model but behind Fable 5.</li>
+          <li><strong>Speed.</strong> In my run, Fable 5 finished in roughly half the wall-clock time.</li>
+        </ul>
+        <p>If you're doing the hardest long-horizon refactors, the ones where a model has to hold a plan together across many steps and a wrong turn costs you an hour of cleanup, Fable 5 is the safer pick. The gap on SWE-bench Pro is real.</p>
+        <h2>Where GLM 5.2 wins</h2>
+        <p>Price is the obvious one, but it's not the only one. GLM 5.2 is the top open-weight model on the Artificial Analysis Intelligence Index (51, fifth overall, with Fable 5, Opus 4.8, and GPT-5.5 ahead of it). For an open model that's a serious showing.</p>
+        <ul>
+          <li><strong>SWE-bench Pro 62.1</strong> beats GPT-5.5's 58.6 on the same suite. That's the headline number Z.ai published, and it holds up.</li>
+          <li><strong>Terminal-Bench 2.1: 81.0</strong>, up from GLM 5.1's 62.0. Big jump on shell-and-tool work.</li>
+          <li><strong>1M context, usable.</strong> Z.ai trained for long context specifically, and the 1M window isn't just a spec-sheet number.</li>
+          <li><strong>MIT weights.</strong> You can self-host. No per-token bill at all if you have the GPUs, and no vendor lock-in.</li>
+          <li><strong>Cost.</strong> My run came in at roughly a quarter of Fable 5's price for output-equivalent work.</li>
+        </ul>
+        <p>The GLM Coding Plan subscription is reportedly about a tenth of Anthropic's Claude Code and Claude Max tiers, if you'd rather pay a flat fee than meter tokens. For someone running agents all day, that alone changes the economics.</p>
+        <h2>The honest verdict</h2>
+        <p>Fable 5 is the better model. The benchmarks say so and my run felt that way too, faster and a touch more confident on the hard parts. If the task is hard and a wrong step is expensive, pay for Fable 5.</p>
+        <p>But most of my agent runs aren't that. They're plan-and-implement, refactor-and-test, the bread and butter where good-enough plus cheap wins on volume. For those, GLM 5.2 is now my default. $2.76 instead of $10-plus per run means I can let the agent loop without watching the meter, and that changes how I work. An open model that's this close, this much cheaper, and self-hostable is the thing I've been waiting for open weights to deliver.</p>
+        <p>If you're running agents on closed frontier models and wincing at the bill, give GLM 5.2 a real task this week and compare. I'd guess you keep Fable 5 for the hard ones and switch the rest.</p>
+
+        <hr class="post-divider" />
+
+        <div class="post-cta post-cta-sample">
+          <h2>Try one rule free — no email</h2>
+          <p>Copy <code>arch-core-lite.mdc</code> into <code>.cursor/rules/</code>. It stops Cursor (or Copilot in VS) from crossing layer boundaries and shipping EF Core in your Domain layer.</p>
+          <pre class="post-sample-mdc"><code>### 1. Respect layer boundaries
+- Domain never references Microsoft.EntityFrameworkCore, HttpClient, IConfiguration...
+- Application orchestrates via abstractions only. No direct DbContext use.
+- Infrastructure implements interfaces declared higher up.</code></pre>
+          <div class="post-cta-actions">
+            <a class="btn btn-accent btn-lg" href="https://github.com/agenticstandardcontact-byte/agentic-architect/raw/main/arch-core-lite.mdc?utm_source=site&utm_medium=essay_post_cta&utm_campaign=free_sample" download="arch-core-lite.mdc">Download free .mdc &rarr;</a>
+            <a class="btn btn-primary btn-lg" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Full kit &mdash; &pound;9.00 (9 rules + LEARNING_LOG)</a>
+          </div>
+          <p class="post-cta-footnote">One-time purchase &middot; 30-day refund &middot; or grab the <a href="../#free-kit-signup">3-rule email starter</a> if you want more free files.</p>
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand">
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <p>The persistence framework for serious Cursor users in C#/.NET environments.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
+        <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a><a href="https://github.com/agenticstandardcontact-byte/agentic-architect" target="_blank" rel="noopener">GitHub</a></div>
+        <div><h4>Legal</h4><a href="../privacy-policy.html">Privacy Policy</a><a href="../terms-of-service.html">Terms of Service</a><a href="../affiliate-disclosure.html">Affiliate Disclosure</a></div>
+        <div><h4>Buy</h4><a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=essay_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit &mdash; &pound;9.00</a></div>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>&copy; <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules &middot; One-time payment</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="../script.js" defer></script>
+</body>
+</html>
