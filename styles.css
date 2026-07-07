@@ -2162,13 +2162,14 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 .hero-copy-center .hero-value {
   margin: 0 auto 4px;
   font-size: 0.96rem;
-  max-width: 110ch;
+  max-width: none;
   line-height: 1.5;
+  white-space: nowrap;
 }
 .hero-copy-center .hero-audience {
   margin: 0 auto;
   font-size: 0.88rem;
-  max-width: 110ch;
+  max-width: 120ch;
 }
 .hero-visual-center { width: 100%; }
 
