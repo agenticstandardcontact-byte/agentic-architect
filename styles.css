@@ -2124,3 +2124,163 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* =========================================================
+   B5 — Homepage dual-terminal comparison demo
+   Scripted preview: Plain Cursor vs Agentic Architect kit.
+   ========================================================= */
+.comparison-demo {
+  position: relative;
+  width: 100%;
+}
+
+/* Scenario chips */
+.scenario-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.scenario-chip {
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--dark-text-dim);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--dark-line-strong);
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.scenario-chip:hover { background: rgba(255, 255, 255, 0.1); color: var(--dark-text); }
+.scenario-chip.is-active {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+.scenario-chip:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Run button */
+.demo-run {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background .15s ease, transform .1s ease;
+}
+.demo-run:hover { background: #1d4ed8; }
+.demo-run:active { transform: translateY(1px); }
+.demo-run:disabled { opacity: 0.6; cursor: not-allowed; }
+.demo-run .play-icon { font-size: 0.8rem; }
+
+/* Dual terminals */
+.comparison-terminals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(12px, 1.6vw, 20px);
+}
+.comparison-panel { min-width: 0; }
+.comparison-panel .terminal { height: 100%; }
+.comparison-panel .terminal-bar { justify-content: flex-start; }
+.terminal-label {
+  margin-left: auto;
+  font-family: var(--font);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.terminal-label-plain { color: #fca5a5; background: rgba(185, 28, 28, 0.16); }
+.terminal-label-kit { color: #fbbf24; background: rgba(251, 191, 36, 0.14); }
+
+/* Terminal body for demo (scrollable, fixed height) */
+.comparison-demo .terminal-body {
+  height: 320px;
+  overflow-y: auto;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  padding: 16px 16px 18px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dark-line-strong) transparent;
+}
+.comparison-demo .terminal-body::-webkit-scrollbar { width: 6px; }
+.comparison-demo .terminal-body::-webkit-scrollbar-thumb { background: var(--dark-line-strong); border-radius: 3px; }
+.comparison-demo .term-line { margin: 0 0 6px; word-break: break-word; white-space: pre-wrap; }
+.comparison-demo .t-label { display: inline; }
+.comparison-demo .t-code { font-family: var(--mono); }
+.comparison-demo .t-warn { color: #fbbf24; }
+.comparison-demo .t-bad { color: #f87171; font-weight: 600; }
+.comparison-demo .t-rule {
+  color: #93c5fd;
+  background: rgba(37, 99, 235, 0.1);
+  border-left: 2px solid var(--accent);
+  padding: 2px 8px;
+  display: inline-block;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Disclaimer + demo CTAs */
+.demo-disclaimer {
+  margin-top: 12px;
+  font-size: 0.76rem;
+  color: var(--dark-text-muted);
+  line-height: 1.5;
+}
+.demo-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+.demo-ctas .btn { font-size: 0.86rem; }
+
+/* Mobile tabs (hidden on desktop) */
+.comparison-tabs { display: none; }
+@media (max-width: 820px) {
+  .comparison-terminals { grid-template-columns: 1fr; }
+  .comparison-panel { display: none; }
+  .comparison-panel.is-active { display: block; }
+  .comparison-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--dark-line-strong);
+    border-radius: var(--radius-sm);
+    padding: 4px;
+  }
+  .comparison-tabs button {
+    flex: 1;
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--dark-text-dim);
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .comparison-tabs button[aria-selected="true"] {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--dark-text);
+  }
+  .comparison-demo .terminal-body { height: 280px; font-size: 0.74rem; }
+}
+@media (max-width: 380px) {
+  .scenario-chips { gap: 6px; }
+  .scenario-chip { font-size: 0.74rem; padding: 5px 11px; }
+}
