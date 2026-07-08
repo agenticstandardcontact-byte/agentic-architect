@@ -357,3 +357,156 @@
   .post-meta { font-size: 0.8rem; gap: 8px; }
   .blog-cta { padding: 24px 16px; }
 }
+
+/* ---------- Comparison page (GLM 5.2 vs Fable 5) ---------- */
+
+.cmp-verdict-banner {
+  margin: 28px 0 8px;
+  padding: 22px 26px;
+  background: linear-gradient(135deg, rgba(255,181,71,0.10), rgba(110,231,255,0.05));
+  border: 1px solid rgba(255,181,71,0.30);
+  border-left: 4px solid var(--brand);
+  border-radius: var(--radius);
+}
+.cmp-verdict-banner h2 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand);
+}
+.cmp-verdict-banner p {
+  margin: 0;
+  font-size: 1.04rem;
+  line-height: 1.7;
+  color: var(--text);
+  max-width: none;
+}
+
+.cmp-card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 24px 0 32px;
+}
+.cmp-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.cmp-card-a { border-top: 3px solid var(--brand); }
+.cmp-card-b { border-top: 3px solid var(--accent); }
+.cmp-card-tag {
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgba(110,231,255,0.08);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.cmp-card-name {
+  font-size: 1.5rem;
+  margin: 0 0 4px;
+  color: var(--text);
+}
+.cmp-card-maker {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+.cmp-card-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  background: var(--bg-3, #0f1117);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  margin-bottom: 18px;
+}
+.cmp-stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.cmp-stat-value {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.cmp-stat-value small {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: block;
+}
+.cmp-card-pros, .cmp-card-cons { margin-bottom: 14px; }
+.cmp-card-pros h4, .cmp-card-cons h4 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 8px;
+}
+.cmp-card-pros h4 { color: #6ee7ff; }
+.cmp-card-cons h4 { color: var(--text-muted); }
+.cmp-card-pros ul, .cmp-card-cons ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+.cmp-card-pros li, .cmp-card-cons li {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin-bottom: 6px;
+  color: var(--text-dim);
+}
+.cmp-card-best {
+  margin: auto 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+  color: var(--text);
+  font-style: italic;
+}
+
+.cmp-sources {
+  margin: 32px 0 0;
+  padding: 16px 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.cmp-sources summary {
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+.cmp-sources ul {
+  margin: 14px 0 0;
+  padding-left: 1.2rem;
+}
+.cmp-sources li {
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+@media (max-width: 768px) {
+  .cmp-card-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .cmp-verdict-banner { padding: 18px 16px; }
+}
