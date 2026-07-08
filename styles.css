@@ -2406,10 +2406,13 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 
 /* Mobile tabs (hidden on desktop) */
 .comparison-tabs { display: none; }
+.comparison-demo { overflow-x: hidden; }
 @media (max-width: 820px) {
   .comparison-terminals { grid-template-columns: 1fr; }
   .comparison-panel { display: none; }
   .comparison-panel.is-active { display: flex; }
+  /* [hidden] must win even if is-active lingers, so inactive tab truly hides */
+  .comparison-panel[hidden] { display: none !important; }
   .comparison-tabs {
     display: flex;
     gap: 6px;

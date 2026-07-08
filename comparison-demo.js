@@ -272,14 +272,32 @@
 
     runBtn.addEventListener('click', run);
 
-    // mobile tabs
+    // mobile tabs — toggle .is-active (CSS shows/hides via .is-active on <=820px).
+    // Only swap visibility on mobile; on desktop both panels stay side-by-side.
+    var mobileMQ = window.matchMedia('(max-width: 820px)');
+    function isMobile() { return mobileMQ.matches; }
+    // keep both panels visible on desktop regardless of tab state
+    function syncDesktop() {
+      if (!isMobile()) {
+        panels.forEach(function (p) {
+          p.classList.add('is-active');
+          p.hidden = false;
+        });
+      }
+    }
+    mobileMQ.addEventListener('change', syncDesktop);
+    syncDesktop();
+
     tabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
-        const target = tab.getAttribute('data-tab');
+        var target = tab.getAttribute('data-tab');
         tabs.forEach(function (t) { t.setAttribute('aria-selected', 'false'); });
         tab.setAttribute('aria-selected', 'true');
+        if (!isMobile()) { syncDesktop(); return; }
         panels.forEach(function (p) {
-          p.hidden = p.getAttribute('data-panel') !== target;
+          var match = p.getAttribute('data-panel') === target;
+          p.classList.toggle('is-active', match);
+          p.hidden = !match; // a11y; CSS .is-active overrides [hidden] on mobile
         });
       });
     });
