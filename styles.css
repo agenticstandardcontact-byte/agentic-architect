@@ -2431,6 +2431,11 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
     width: 100%;
     box-sizing: border-box;
   }
+  /* let the hero subtitle wrap on mobile (desktop keeps it on one line) */
+  .hero-copy-center .hero-value {
+    white-space: normal;
+    max-width: 100%;
+  }
   /* clamp the whole demo to the viewport so headings + windows are not 1180px wide */
   .hero-visual-center,
   .comparison-demo,
