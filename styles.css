@@ -2171,7 +2171,8 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   font-size: 0.88rem;
   max-width: 120ch;
 }
-.hero-visual-center { width: 100%; }
+.hero-visual-center { width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; }
+.hero-copy-center { min-width: 0; max-width: 100%; }
 
 /* Demo container */
 .comparison-demo {
@@ -2251,8 +2252,11 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
   gap: clamp(14px, 1.6vw, 20px);
   text-align: left;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
-.comparison-panel { min-width: 0; display: flex; }
+.comparison-panel { min-width: 0; display: flex; max-width: 100%; }
 
 /* Card-style label above each window (matches site card design) */
 .chat-card {
@@ -2406,8 +2410,43 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
 
 /* Mobile tabs (hidden on desktop) */
 .comparison-tabs { display: none; }
-.comparison-demo { overflow-x: hidden; }
+.comparison-demo {
+  overflow-x: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.comparison-terminals,
+.comparison-panel,
+.chat-card,
+.chat-window {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
 @media (max-width: 820px) {
+  /* clamp the hero column to the viewport so the demo is not 1180px wide */
+  .hero-inner-center,
+  .hero-inner {
+    max-width: 100% !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  /* clamp the whole demo to the viewport so headings + windows are not 1180px wide */
+  .hero-visual-center,
+  .comparison-demo,
+  .demo-heading,
+  .demo-subheading,
+  .scenario-chips,
+  .comparison-terminals,
+  .comparison-panel,
+  .chat-card,
+  .chat-window {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .demo-subheading { max-width: 100%; margin-left: 0; margin-right: 0; }
   .comparison-terminals { grid-template-columns: 1fr; }
   .comparison-panel { display: none; }
   .comparison-panel.is-active { display: flex; }
@@ -2440,12 +2479,12 @@ p  { margin: 0 0 1em; color: var(--text-dim); max-width: 62ch; }
     background: rgba(255, 255, 255, 0.1);
     color: var(--dark-text);
   }
-  .chat-window { height: 440px; max-height: 60vh; font-size: 0.78rem; padding: 14px; }
+  .chat-window { height: 360px; max-height: 52vh; font-size: 0.78rem; padding: 14px; }
   .chat-avatar { width: 24px; height: 24px; font-size: 0.64rem; }
 }
 @media (max-width: 380px) {
   .scenario-chips { gap: 6px; }
   .scenario-chip { font-size: 0.74rem; padding: 6px 12px; }
-  .chat-window { height: 380px; padding: 12px; }
+  .chat-window { height: 320px; padding: 12px; }
 }
 
