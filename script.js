@@ -232,10 +232,12 @@
     'https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit';
 
   const BRAND_MARK =
-    '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">' +
-    '<path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>' +
-    '<path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
-    '</svg>';
+    '<span class="brand-mono" aria-hidden="true">' +
+    '<span class="brand-bracket">[</span>' +
+    '<span class="brand-name brand-full">agentic-architect</span>' +
+    '<span class="brand-name brand-short">aa</span>' +
+    '<span class="brand-bracket">]</span>' +
+    '</span>';
 
   const getNavContext = () => {
     const path = window.location.pathname.replace(/\\/g, '/');
@@ -289,8 +291,7 @@
 
     mount.innerHTML =
       `<a href="${ctx.brandHref}" class="brand" aria-label="Agentic Architect home">` +
-      BRAND_MARK +
-      '<span class="brand-text">Agentic<span class="brand-accent">Architect</span></span></a>' +
+      BRAND_MARK + '</a>' +
       `<nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
         ${links}
         <div class="nav-menu-ctas">
@@ -355,6 +356,105 @@
     const onDesktop = (e) => { if (e.matches) closeNav(); };
     if (desktopMQ.addEventListener) desktopMQ.addEventListener('change', onDesktop);
     else desktopMQ.addListener(onDesktop);
+  }
+
+  /* ---------- Hash scroll: align section title just under sticky nav ---------- */
+  const ANCHOR_GAP_PX = 12;
+
+  const prefersReducedMotion = () =>
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const samePageHash = (anchor) => {
+    if (!anchor || !anchor.getAttribute) return null;
+    const href = anchor.getAttribute('href');
+    if (!href || href.indexOf('#') === -1) return null;
+    let url;
+    try {
+      url = new URL(anchor.href, window.location.href);
+    } catch (_) {
+      return null;
+    }
+    const norm = (p) => {
+      let s = (p || '/').replace(/\\/g, '/');
+      if (s.endsWith('/index.html')) s = s.slice(0, -10) || '/';
+      if (s.length > 1 && s.endsWith('/')) s = s.slice(0, -1);
+      return s || '/';
+    };
+    if (norm(url.pathname) !== norm(window.location.pathname)) return null;
+    if (!url.hash || url.hash === '#') return null;
+    return url.hash;
+  };
+
+  const headingForHash = (hash) => {
+    const id = (hash || '').replace(/^#/, '');
+    if (!id) return null;
+    const section = document.getElementById(id);
+    if (!section) return null;
+    return (
+      section.querySelector('.section-head h2') ||
+      section.querySelector('h2') ||
+      section.querySelector('.section-head') ||
+      section
+    );
+  };
+
+  const scrollToHash = (hash, behavior) => {
+    const heading = headingForHash(hash);
+    if (!heading) return false;
+    // Settle reveal transforms before measuring. .reveal uses translateY(14px)
+    // with a 0.5s transition — disable transition so layout is final immediately.
+    const settleReveal = (el) => {
+      if (!el || !el.classList.contains('reveal')) return;
+      el.style.transition = 'none';
+      el.classList.add('in');
+      void el.offsetWidth;
+    };
+    const section = document.getElementById((hash || '').replace(/^#/, ''));
+    if (section) settleReveal(section.querySelector('.section-head'));
+    settleReveal(heading.classList && heading.classList.contains('section-head') ? heading : null);
+    settleReveal(heading.closest && heading.closest('.section-head'));
+
+    const nav = document.querySelector('header.nav');
+    const navH = nav ? nav.getBoundingClientRect().height : 0;
+    const top = Math.max(
+      0,
+      heading.getBoundingClientRect().top + window.scrollY - navH - ANCHOR_GAP_PX
+    );
+    const b = behavior || (prefersReducedMotion() ? 'auto' : 'smooth');
+    window.scrollTo({ top, behavior: b });
+    return true;
+  };
+
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest && e.target.closest('a[href*="#"]');
+    if (!anchor) return;
+    const hash = samePageHash(anchor);
+    if (!hash) return;
+    if (hash === '#top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+      if (history.pushState) history.pushState(null, '', '#top');
+      else window.location.hash = 'top';
+      return;
+    }
+    if (!headingForHash(hash)) return;
+    e.preventDefault();
+    if (history.pushState) history.pushState(null, '', hash);
+    else window.location.hash = hash.slice(1);
+    scrollToHash(hash);
+  });
+
+  window.addEventListener('hashchange', () => {
+    if (location.hash && headingForHash(location.hash)) {
+      scrollToHash(location.hash);
+    }
+  });
+
+  if (location.hash && headingForHash(location.hash)) {
+    // Override the browser's un-offset jump after layout settles
+    const apply = () => scrollToHash(location.hash, 'auto');
+    requestAnimationFrame(() => requestAnimationFrame(apply));
+    window.addEventListener('load', apply, { once: true });
   }
 
   /* ---------- Sticky CTA visibility ---------- */

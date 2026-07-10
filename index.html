@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f8f7f4" />
+  <meta name="theme-color" content="#09090b" />
 
   <title>Cursor Rules for .NET Engineers | Agentic Architect</title>
   <meta name="description" content="Nine directory-scoped Cursor rules plus a LEARNING_LOG.md workflow for senior C#/.NET engineers. Cursor loads the right guardrails per file and picks up decisions you already logged. One-time £9.00, lifetime updates, 30-day refund." />
@@ -32,9 +32,12 @@
   <meta name="twitter:image:alt" content="Cursor rules for .NET engineers — Agentic Architect kit." />
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5.2.5/index.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5.2.5/index.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 
   <!-- Schema.org SoftwareApplication (digital kit — no on-page reviews, so not Product + aggregateRating) -->
@@ -201,8 +204,7 @@
   <header class="nav">
   <div class="container nav-inner" data-site-nav>
       <a href="#top" class="brand" aria-label="Agentic Architect home">
-        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <span class="brand-mono" aria-hidden="true"><span class="brand-bracket">[</span><span class="brand-name brand-full">agentic-architect</span><span class="brand-name brand-short">aa</span><span class="brand-bracket">]</span></span>
       </a>
       <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
         <a href="#problem">The Problem</a>
@@ -239,16 +241,11 @@
 
       <div class="container hero-inner hero-inner-center">
         <div class="hero-copy hero-copy-center">
-          <div class="eyebrow">
-            <span class="badge-dot"></span>
-            For senior C#/.NET engineers who use Cursor daily
-          </div>
+          <h1 class="hero-brand">Agentic Architect</h1>
 
-          <p class="hero-product">Agentic Architect</p>
-
-          <h1 class="hero-title">
+          <p class="hero-title">
             Scoped Cursor rules for .NET teams
-          </h1>
+          </p>
 
           <p class="hero-value">
             Nine directory-scoped <code>.mdc</code> rules plus a <code>LEARNING_LOG.md</code> workflow. Cursor loads the right guardrails per file and picks up decisions you already logged.
@@ -258,58 +255,63 @@
             Built for teams running Clean Architecture, MediatR, Result&lt;T&gt;, and EF Core with real layer boundaries.
           </p>
 
-        </div>
-
-        <!-- B5 — Dual-terminal comparison demo (scripted preview) -->
-        <div class="hero-visual hero-visual-center">
-          <div class="comparison-demo" role="region" aria-label="Cursor comparison demo — Plain Cursor vs Agentic Architect kit">
-            <h2 class="demo-heading">See the kit in action</h2>
-            <p class="demo-subheading">Pick a real .NET scenario and watch Plain Cursor vs the kit-loaded Cursor respond.</p>
-
-            <div class="scenario-chips" role="radiogroup" aria-label="Pick a scenario"></div>
-
-            <button type="button" class="demo-run">
-              <span class="play-icon" aria-hidden="true">▶</span> Run comparison
-            </button>
-
-            <div class="comparison-tabs" role="tablist" aria-label="Switch terminal">
-              <button type="button" role="tab" data-tab="plain" aria-selected="true">Plain Cursor</button>
-              <button type="button" role="tab" data-tab="kit" aria-selected="false">With kit</button>
-            </div>
-
-            <div class="comparison-terminals">
-              <div class="comparison-panel is-active" data-panel="plain" data-terminal="plain">
-                <div class="chat-card chat-card-plain">
-                  <div class="chat-card-label">
-                    <span class="chat-card-dot"></span>
-                    Plain Cursor
-                  </div>
-                  <div class="chat-window" aria-live="polite"></div>
-                </div>
-              </div>
-              <div class="comparison-panel" data-panel="kit" data-terminal="kit">
-                <div class="chat-card chat-card-kit">
-                  <div class="chat-card-label">
-                    <span class="chat-card-dot"></span>
-                    With Agentic Architect kit
-                  </div>
-                  <div class="chat-window" aria-live="polite"></div>
-                </div>
-              </div>
-            </div>
-
-            <p class="demo-disclaimer">
-              Interactive preview — illustrated scenarios based on real .NET/Cursor patterns. Install the kit in your repo for this behaviour in Cursor.
-            </p>
-
-            <div class="demo-ctas">
-              <a class="btn btn-primary btn-lg" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=demo_cta&utm_campaign=paid_kit" target="_blank" rel="noopener" data-demo-cta="demo-cta-buy">Buy the kit — £9.00</a>
-              <a class="btn btn-ghost btn-lg" href="#free-kit-signup" data-demo-cta="demo-cta-free">Try the free starter</a>
-            </div>
+          <div class="hero-cta-row hero-cta-row-center">
+            <a class="btn btn-primary btn-lg" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=hero_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Buy now £9.00</a>
+            <a class="btn btn-ghost btn-lg" href="#free-kit-signup">Get the free kit</a>
           </div>
         </div>
       </div>
+    </section>
 
+    <!-- ========== DEMO (own viewport below hero) ========== -->
+    <section id="demo" class="demo-section" aria-label="Kit comparison demo">
+      <div class="container demo-section-inner">
+        <div class="comparison-demo" role="region" aria-label="Cursor comparison demo: Plain Cursor vs Agentic Architect kit">
+          <h2 class="demo-heading">See the kit in action</h2>
+          <p class="demo-subheading">Pick a real .NET scenario and watch Plain Cursor vs the kit-loaded Cursor respond.</p>
+
+          <div class="scenario-chips" role="radiogroup" aria-label="Pick a scenario"></div>
+
+          <button type="button" class="demo-run">
+            <span class="play-icon" aria-hidden="true">▶</span> Run comparison
+          </button>
+
+          <div class="comparison-tabs" role="tablist" aria-label="Switch terminal">
+            <button type="button" role="tab" data-tab="plain" aria-selected="true">Plain Cursor</button>
+            <button type="button" role="tab" data-tab="kit" aria-selected="false">With kit</button>
+          </div>
+
+          <div class="comparison-terminals">
+            <div class="comparison-panel is-active" data-panel="plain" data-terminal="plain">
+              <div class="chat-card chat-card-plain">
+                <div class="chat-card-label">
+                  <span class="chat-card-dot"></span>
+                  Plain Cursor
+                </div>
+                <div class="chat-window" aria-live="polite"></div>
+              </div>
+            </div>
+            <div class="comparison-panel" data-panel="kit" data-terminal="kit">
+              <div class="chat-card chat-card-kit">
+                <div class="chat-card-label">
+                  <span class="chat-card-dot"></span>
+                  With Agentic Architect kit
+                </div>
+                <div class="chat-window" aria-live="polite"></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="demo-disclaimer">
+            Interactive preview. Illustrated scenarios based on real .NET/Cursor patterns. Install the kit in your repo for this behaviour in Cursor.
+          </p>
+
+          <div class="demo-ctas">
+            <a class="btn btn-primary btn-lg" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=demo_cta&utm_campaign=paid_kit" target="_blank" rel="noopener" data-demo-cta="demo-cta-buy">Buy the kit £9.00</a>
+            <a class="btn btn-ghost btn-lg" href="#free-kit-signup" data-demo-cta="demo-cta-free">Try the free starter</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ========== METRICS / SOCIAL PROOF ========== -->
@@ -860,7 +862,7 @@ Ask user which lookup method exists.</code></pre>
   <footer class="footer">
     <div class="container footer-inner">
       <div class="foot-brand">
-        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <span class="brand-mono" aria-hidden="true"><span class="brand-bracket">[</span><span class="brand-name">agentic-architect</span><span class="brand-bracket">]</span></span>
         <p>The persistence framework for serious Cursor users in C#/.NET environments.</p>
       </div>
       <div class="foot-cols">
