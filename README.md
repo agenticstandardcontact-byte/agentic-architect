@@ -147,7 +147,7 @@ Most public rules are monolithic — a single rule dumped on every prompt, blowi
 
 ### Search Console (project site)
 
-GitHub Pages serves this repo under `/agentic-architect/`. Submit this sitemap URL in Google Search Console (URL-prefix property on the site root above), not `/sitemap.xml` at the domain root:
+The site is hosted on **Azure Static Web Apps** at `https://agentic-architect.dev/` (deploys on push via GitHub Actions). Submit this sitemap in Google Search Console (URL-prefix property on the site root above):
 
 `https://agentic-architect.dev/sitemap.xml`
 
