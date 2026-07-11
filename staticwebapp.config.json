@@ -1,0 +1,25 @@
+{
+  "routes": [
+    {
+      "route": "/404.html",
+      "statusCode": 404
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/404.html",
+    "exclude": [
+      "/assets/*",
+      "/*.{css,js,svg,png,jpg,jpeg,gif,webp,ico,xml,txt,md,html,woff,woff2}"
+    ]
+  },
+  "mimeTypes": {
+    ".xml": "application/xml",
+    ".md": "text/markdown"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html",
+      "statusCode": 404
+    }
+  }
+}
