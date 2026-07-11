@@ -9,12 +9,14 @@
     "rewrite": "/404.html",
     "exclude": [
       "/assets/*",
-      "/*.{css,js,svg,png,jpg,jpeg,gif,webp,ico,xml,txt,md,html,woff,woff2}"
+      "/*.{css,js,svg,png,jpg,jpeg,gif,webp,ico,xml,txt,md,mdc,zip,html,woff,woff2}"
     ]
   },
   "mimeTypes": {
     ".xml": "application/xml",
-    ".md": "text/markdown"
+    ".md": "text/markdown",
+    ".mdc": "text/plain",
+    ".zip": "application/zip"
   },
   "responseOverrides": {
     "404": {

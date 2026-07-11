@@ -100,7 +100,7 @@ cd MyDotnetSolution.sln
 
 # 2. Add scoped Cursor rules (or grab arch-core-lite.mdc free)
 mkdir -p .cursor/rules
-curl -L https://github.com/agenticstandardcontact-byte/agentic-architect/raw/main/arch-core-lite.mdc \
+curl -L https://agentic-architect.dev/arch-core-lite.mdc \
   -o .cursor/rules/arch-core.mdc
 
 # 3. Seed a Learning Log Cursor will re-read on session start

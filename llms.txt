@@ -5,7 +5,7 @@
 Important notes:
 
 - Product: £9 one-time Payhip download — 9 `.mdc` rules, templates, hydrate prompt, MIT license.
-- Free sample: `arch-core-lite.mdc` on GitHub (no email required).
+- Free sample: `arch-core-lite.mdc` on the site (no email required).
 - Audience: production .NET (Clean Architecture, MediatR, Result, EF Core).
 - Hardware pages include Amazon affiliate links with on-page disclosure; prices are not stated on-site.
 
@@ -13,11 +13,10 @@ Important notes:
 
 - [Homepage](https://agentic-architect.dev/): product overview, pricing, FAQ
 - [Cursor rules for .NET (learn hub)](https://agentic-architect.dev/learn/cursor-rules-dotnet.html): scoped rules overview
-- [Free arch-core-lite.mdc](https://github.com/agenticstandardcontact-byte/agentic-architect/raw/main/arch-core-lite.mdc): layer-boundary rule sample
+- [Free arch-core-lite.mdc](https://agentic-architect.dev/arch-core-lite.mdc): layer-boundary rule sample
 - [RSS feed](https://agentic-architect.dev/feed.xml): daily rules and new essays
 
 ## Best essays (citation-ready)
-
 - [The context tax](https://agentic-architect.dev/blog/01-the-context-tax.html.md): why Cursor forgets your stack every session
 - [Scoped→Singleton DI bug](https://agentic-architect.dev/blog/02-scoped-singleton-di-bug.html.md): DI lifetime traps Cursor introduces
 - [Hallucination loop breaker](https://agentic-architect.dev/blog/03-cursor-hallucination-loop-breaker.html.md): circuit-breaker pattern for repeated bad edits
@@ -26,7 +25,6 @@ Important notes:
 - [Stop Cursor drift](https://agentic-architect.dev/blog/06-stop-cursor-ai-drift-dotnet.html.md): architecture regression guardrails
 - [EF Core patterns](https://agentic-architect.dev/blog/07-cursor-efcore-patterns.html.md): AsNoTracking, Include depth, N+1
 - [Cursor vs Copilot](https://agentic-architect.dev/blog/08-cursor-vs-copilot-dotnet.html.md): which to pay for in 2026
-- [GLM 5.2 vs Claude Fable 5](https://agentic-architect.dev/blog/09-glm-5-2-vs-claude-fable-5.html.md): agentic coding cost math on open weights
 
 ## Hardware (local LLM / mini PC picks)
 
@@ -41,4 +39,4 @@ Important notes:
 - Essay markdown mirrors (`blog/*.html.md`) are blocked in `robots.txt` for search crawlers; fetch them directly for agent ingestion. Canonical HTML lives at the matching `.html` URL.
 - [Privacy Policy](https://agentic-architect.dev/privacy-policy.html)
 - [Affiliate Disclosure](https://agentic-architect.dev/affiliate-disclosure.html) (noindex legal page; not in sitemap)
-- [GitHub repo](https://github.com/agenticstandardcontact-byte/agentic-architect): free starter files only (paid kit not in repo)
+- [Free starter download](https://agentic-architect.dev/downloads/agentic-architect-starter.zip): email-gated ZIP on the site (paid kit not included)
