@@ -107,7 +107,7 @@
         <p>That's the Context Tax.</p>
 
         <h2>Why it happens</h2>
-        <p>Cursor, like every other AI coding tool right now, has no persistent memory between sessions. Each new chat starts fresh. Every architectural decision your team has ever made, every refactor your codebase has ever absorbed, every "we tried that, it doesn't work for us", gone the moment you close the window.</p>
+        <p>Cursor, like every other AI coding tool right now, has no persistent memory between sessions. Each new chat starts fresh. Every architectural decision your team has ever made, every refactor your codebase has ever absorbed, every "we tried that, it doesn't work for us", gone the moment you close the window. That amnesia shows up whether Cursor is your only seat or you also keep a Copilot licence; the tooling trade-offs are a separate question (I wrote a <a href="08-cursor-vs-copilot-dotnet.html">Cursor vs Copilot for .NET</a> comparison if you're stuck on that).</p>
         <p>The AI isn't stupid. It's amnesiac.</p>
         <p>Worse: even <em>within</em> a session, the AI's understanding of your architecture is a fragile probability cloud. By Wednesday afternoon it has "forgotten" the convention it followed on Monday. It starts suggesting patterns that violate your boundaries. You correct it. It double-downs. You correct it again. It loops on the same hallucination, burning tokens, burning your time.</p>
         <p>This is what I call <strong>AI drift</strong>, and on a long project it's the single biggest reason senior engineers go from "Cursor is incredible" to "I've turned the autocomplete off."</p>
@@ -157,13 +157,18 @@
         <blockquote>"Detected Scoped lifetime conflict with <code>IMemoryCache</code> (Singleton). Following Log Entry #27: 'Prefer <code>IDistributedCache</code> abstraction in <code>/Infrastructure/Caching</code>.' Applying decorator pattern via Scrutor per <code>arch-core.mdc §3</code>..."</blockquote>
         <p>No preamble. No correction loop. The AI already knows.</p>
 
+        <nav class="post-nav" aria-label="Previous and next essay">
+          <span class="post-nav-prev post-nav-disabled"></span>
+          <a class="post-nav-next" href="02-scoped-singleton-di-bug.html"><span class="post-nav-label">Next</span> Scoped&rarr;Singleton DI bug</a>
+        </nav>
+
         <nav class="post-related" aria-label="Keep reading">
           <h2>Keep reading</h2>
           <ul>
-          <li><a href="02-scoped-singleton-di-bug.html">Scoped?Singleton DI bug</a></li>
+          <li><a href="02-scoped-singleton-di-bug.html">Scoped&rarr;Singleton DI bug</a></li>
           <li><a href="06-stop-cursor-ai-drift-dotnet.html">Stop Cursor drift on .NET</a></li>
           </ul>
-          <p class="post-related-hub">Kit: <a href="../">Agentic Architect</a> &middot; Local models: <a href="../hardware/">Hardware hub</a></p>
+          <p class="post-related-hub">More essays: <a href="./">Blog index</a> &middot; Kit: <a href="../">Agentic Architect</a> &middot; Local models: <a href="../hardware/">Hardware hub</a></p>
         </nav>
 
         <hr class="post-divider" />
