@@ -1,17 +1,26 @@
 {
   "routes": [
     {
+      "route": "/blog/09-glm-5-2-vs-claude-fable-5.html",
+      "redirect": "/blog/glm-5-2-vs-claude-fable-5-comparison.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/09-glm-5-2-vs-claude-fable-5.html.md",
+      "redirect": "/blog/glm-5-2-vs-claude-fable-5-comparison.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/blog/*.md",
+      "headers": {
+        "X-Robots-Tag": "noindex"
+      }
+    },
+    {
       "route": "/404.html",
       "statusCode": 404
     }
   ],
-  "navigationFallback": {
-    "rewrite": "/404.html",
-    "exclude": [
-      "/assets/*",
-      "/*.{css,js,svg,png,jpg,jpeg,gif,webp,ico,xml,txt,md,mdc,zip,html,woff,woff2}"
-    ]
-  },
   "mimeTypes": {
     ".xml": "application/xml",
     ".md": "text/markdown",

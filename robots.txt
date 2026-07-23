@@ -2,8 +2,8 @@ User-agent: *
 Allow: /
 
 # LLM/agent index: https://agentic-architect.dev/llms.txt
-# Markdown mirrors (blog/*.html.md) duplicate essay HTML — fetch via llms.txt, not search.
-Disallow: /blog/*.html.md
+# Markdown mirrors (blog/*.html.md) are crawlable but carry X-Robots-Tag: noindex.
+# Canonical content is the matching .html URL.
 
 # Paid kit delivery is email/Payhip only
 Disallow: /downloads/agentic-architect-kit.zip

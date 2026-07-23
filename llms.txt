@@ -36,7 +36,7 @@ Important notes:
 
 - [Blog index + daily rules](https://agentic-architect.dev/blog/): HTML index; prefer essay `.html.md` links above for LLM fetch
 - [Quick fixes hub](https://agentic-architect.dev/learn/): short learn pages from blog series
-- Essay markdown mirrors (`blog/*.html.md`) are blocked in `robots.txt` for search crawlers; fetch them directly for agent ingestion. Canonical HTML lives at the matching `.html` URL.
+- Essay markdown mirrors (`blog/*.html.md`) are served with an `X-Robots-Tag: noindex` header (crawlable, not indexed); fetch them directly for agent ingestion. Canonical HTML lives at the matching `.html` URL.
 - [Privacy Policy](https://agentic-architect.dev/privacy-policy.html)
 - [Affiliate Disclosure](https://agentic-architect.dev/affiliate-disclosure.html)
 - [Free starter download](https://agentic-architect.dev/downloads/agentic-architect-starter.zip): email-gated ZIP on the site (paid kit not included)
