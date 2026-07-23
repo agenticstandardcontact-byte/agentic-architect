@@ -527,5 +527,13 @@
       <description>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</description>
     </item>
 
+      <item>
+      <title>Rule 21: Channels for Producer Consumer</title>
+      <link>https://agentic-architect.dev/blog/#2026-07-23</link>
+      <guid isPermaLink="false">daily-rule-2026-07-23</guid>
+      <pubDate>Thu, 23 Jul 2026 09:00:00 +0000</pubDate>
+      <description>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</description>
+    </item>
+
   </channel>
 </rss>
