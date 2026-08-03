@@ -1,7 +1,7 @@
 # GitHub Actions
 
-**Allowed here:** Azure Static Web Apps deploy only (`azure-static-web-apps-*.yml`) so `agentic-architect.dev` stays published.
+This public repo hosts **site files only**.
 
-**Not here:** marketing automation (dev.to, Bluesky, digests, IndexNow, MailerLite). Those run in the private repo `agenticstandardcontact-byte/affiliate-engine` — see `docs/private-github-actions.md` there.
+**Allowed:** Azure Static Web Apps deploy (`azure-static-web-apps-*.yml`).
 
-Do not add syndication / auto-post workflows or their secrets to this repository.
+**Not here:** marketing automation, syndication, secret sync, or maintainer Python scripts. Those live in private `agenticstandardcontact-byte/affiliate-engine`.

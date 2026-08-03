@@ -21,3 +21,14 @@ MANUAL_TASKS.md
 MASTER_PLAN*.md
 **/LEARNING_LOG.md
 **/TOKEN_EFFICIENCY_RULES.md
+
+# Local tooling — not part of the published site
+scripts/
+.cursor/
+.env.example
+.mailmap
+package.json
+package-lock.json
+playwright*.config.*
+*.mjs
+!comparison-demo.js
