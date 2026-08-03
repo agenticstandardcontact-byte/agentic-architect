@@ -1,8 +1,11 @@
 # --------------------------------------------------------------------
 # LOCAL-ONLY DEV NOTES, DRAFTS, AND MARKETING WORKING FILES
 # Anything matching these patterns stays on disk and never gets pushed.
-# README.md, LICENSE, and rules/persistence-kit.md
 scripts/__pycache__/
+node_modules/
+.env
+.env.*
+!.env.example
 
 # Apollo / cold-outreach exports (PII — never commit)
 apollo-contacts-export.csv

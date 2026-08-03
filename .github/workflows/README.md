@@ -1,7 +1,7 @@
 # GitHub Actions
 
-CI and marketing automation for this site run in the private repository **affiliate-engine** (`agenticstandardcontact-byte/affiliate-engine`), not here.
+**Allowed here:** Azure Static Web Apps deploy only (`azure-static-web-apps-*.yml`) so `agentic-architect.dev` stays published.
 
-See `docs/private-github-actions.md` in that repo for secrets, schedules, and `gh workflow run` examples.
+**Not here:** marketing automation (dev.to, Bluesky, digests, IndexNow, MailerLite). Those run in the private repo `agenticstandardcontact-byte/affiliate-engine` — see `docs/private-github-actions.md` there.
 
-No workflow files or Action secrets are stored on this public repository.
+Do not add syndication / auto-post workflows or their secrets to this repository.

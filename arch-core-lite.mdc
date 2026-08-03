@@ -1,5 +1,5 @@
 ﻿---
-description: "Agentic Architect — arch-core-lite. A free, single-rule preview of the Persistence Framework for Cursor (C#/.NET edition). Enforces a small but high-value subset of architectural guardrails: layer boundaries, anti-Big-Ball-of-Mud heuristics, and a lightweight 'pause and ask' protocol when context is missing. For the full 4-rule kit + Learning Log engine, see https://payhip.com/b/98aSq"
+description: "Agentic Architect — arch-core-lite. A free, single-rule preview of the Persistence Framework for Cursor (C#/.NET edition). Enforces a small but high-value subset of architectural guardrails: layer boundaries, anti-Big-Ball-of-Mud heuristics, and a lightweight 'pause and ask' protocol when context is missing. For the full 4-rule kit + Learning Log engine, see https://payhip.com/b/98aSq?utm_source=starter&utm_medium=arch_core_lite&utm_campaign=paid_kit"
 globs:
   - "**/*.cs"
   - "**/*.csproj"
@@ -11,7 +11,7 @@ alwaysApply: false
 
 > **This is a free single-rule preview of [Agentic Architect](https://agentic-architect.dev/).**
 > The full kit ships four scoped rules plus the **`persistence.mdc`** engine that maintains your project's `LEARNING_LOG.md` across sessions.
-> 👉 **Get the full framework — £9.00 one-time: https://payhip.com/b/98aSq**
+> 👉 **Get the full framework — £9.00 one-time: https://payhip.com/b/98aSq?utm_source=starter&utm_medium=arch_core_lite&utm_campaign=paid_kit**
 
 **Companion docs (this repo):** `LEARNING_LOG.md` (session memory + FILE-PURPOSE MAP) · `TOKEN_EFFICIENCY_RULES.md` (read budget before exploring). Read both before non-trivial work.
 
@@ -105,6 +105,6 @@ This file is a **single rule** from the Agentic Architect kit. The full framewor
 
 ### Get the full kit — £9.00 one-time, lifetime updates, MIT-licensed
 
-👉 **https://payhip.com/b/98aSq**
+👉 **https://payhip.com/b/98aSq?utm_source=starter&utm_medium=arch_core_lite&utm_campaign=paid_kit**
 
 14-day no-questions refund. Stop paying the Context Tax.

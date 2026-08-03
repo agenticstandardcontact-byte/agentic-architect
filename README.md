@@ -99,7 +99,7 @@ That's it. Next session, the AI starts hydrated.
 | Licence | MIT |
 | Guarantee | 14-day no-questions refund |
 
-**[👉 Get the kit — £9.00](https://payhip.com/b/98aSq)**
+**[👉 Get the kit — £9.00](https://payhip.com/b/98aSq?utm_source=github_readme&utm_medium=cta&utm_campaign=paid_kit)**
 
 ## ❓ FAQ
 
@@ -157,7 +157,7 @@ The site is hosted on **Azure Static Web Apps** at `https://agentic-architect.de
 
 ### Stop paying the Context Tax.
 
-**[Get Agentic Architect — £9.00 →](https://payhip.com/b/98aSq)**
+**[Get Agentic Architect — £9.00 →](https://payhip.com/b/98aSq?utm_source=github_readme&utm_medium=cta&utm_campaign=paid_kit)**
 
 One-time payment · Lifetime updates · 14-day guarantee · MIT-licensed
 
