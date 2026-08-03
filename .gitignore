@@ -11,3 +11,13 @@ node_modules/
 apollo-contacts-export.csv
 apollo-*.csv
 apollo-outbox/
+
+# Operator / agent session notes — local only (never public)
+LEARNING_LOG.md
+TOKEN_EFFICIENCY_RULES.md
+SESSION_HISTORY.md
+HANDOFF*.md
+MANUAL_TASKS.md
+MASTER_PLAN*.md
+**/LEARNING_LOG.md
+**/TOKEN_EFFICIENCY_RULES.md
