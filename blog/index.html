@@ -133,1568 +133,6 @@
             </a>
           </li>
 
-          <li class="post-card" data-date="2026-11-27">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-27">November 27, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 23: No Bool Flag Parameters</h2>
-    <p>SendEmail(string to, bool isHtml) should be SendHtmlEmail and SendPlainEmail. Bool flags hide branching that belongs in the type system. Flag any method signature with two or more bool parameters as a refactor candidate.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-26">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-26">November 26, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 22: BackgroundService Over Task.Run</h2>
-    <p>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-25">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-25">November 25, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 21: Channels for Producer Consumer</h2>
-    <p>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-24">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-24">November 24, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 20: Source-Generated JSON Serialisation</h2>
-    <p>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own — add a rule that flags new DTO classes and asks whether they should be source-generated.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-23">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-23">November 23, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 19: NetArchTest for Boundaries</h2>
-    <p>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-22">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-22">November 22, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 18: WebApplicationFactory for Integration Tests</h2>
-    <p>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-21">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-21">November 21, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 17: ConfigureAwait false in Libraries</h2>
-    <p>Library code (non-ASP.NET) should ConfigureAwait false on every awaited Task. ASP.NET Core code should not. Cursor mixes the two contexts in the same solution. Detect the project type and enforce the right default.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-20">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-20">November 20, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 16: async void Outside Event Handlers</h2>
-    <p>async void is a deadlock and unhandled-exception trap everywhere except UI event handlers. The AI uses it routinely for "fire and forget" — wrong answer every time. Flag it on sight.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-19">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-19">November 19, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 15: Records for Value Objects, Classes for Entities</h2>
-    <p>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-18">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-18">November 18, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 14: Sealed By Default</h2>
-    <p>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-17">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-17">November 17, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 13: Strongly-Typed IDs</h2>
-    <p>OrderId as record struct OrderId(Guid Value) beats raw Guid everywhere. Stops the AI passing a CustomerId where an OrderId was expected — a bug the compiler can't catch with primitive obsession but catches instantly with domain primitives.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-16">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-16">November 16, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 12: IOptionsSnapshot Over Raw Config</h2>
-    <p>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-15">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-15">November 15, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 11: Rethrow, Don't throw ex</h2>
-    <p>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-14">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-14">November 14, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 10: AsNoTracking for Reads</h2>
-    <p>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-13">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-13">November 13, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 9: Scoped Capture in Singleton</h2>
-    <p>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-12">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-12">November 12, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 8: CancellationToken Propagation</h2>
-    <p>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-11">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-11">November 11, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 7: IHttpClientFactory Discipline</h2>
-    <p>Refuse new HttpClient() in any generated code. Force Cursor to inject IHttpClientFactory or a typed client. The classic socket-exhaustion bug is exactly the kind of footgun an AI hands you without realising.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-10">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-10">November 10, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 6: TimeProvider Injection</h2>
-    <p>Never let Cursor hardcode DateTime.Now or DateTime.UtcNow in business logic. Inject TimeProvider (or your own IClock) instead. This makes time deterministic for tests and stops the AI reaching for static APIs whenever it generates time-aware code.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-09">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-09">November 09, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 5: Minimal API Groups</h2>
-    <p>Use MapGroup and EndPoints for .NET 9 services. It keeps the context window lean and focused, helping the AI provide more accurate code suggestions than it can with massive, bloated Controllers.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-08">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-08">November 08, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 4: Validator Enforcement</h2>
-    <p>Every MediatR Request must have a FluentValidation rule. Force the AI to check the validator before writing handler logic. This prevents "context rot" where the AI forgets your business constraints.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-07">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-07">November 07, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 3: Structured Logging</h2>
-    <p>Enforce ILogger with structured templates. Never use string interpolation in logs. This ensures that when you feed logs back into Cursor for debugging, the AI recognizes the patterns immediately.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-06">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-06">November 06, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 2: Persistence Boundaries</h2>
-    <p>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-05">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-05">November 05, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 1: The Result Pattern</h2>
-    <p>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This prevents 90% of AI-generated logic errors in Web APIs.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-04">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-04">November 04, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 25: ActivitySource for OpenTelemetry</h2>
-    <p>Logs alone won't debug a distributed system. Add a static readonly ActivitySource per project and wrap every external call (DB, HTTP, queue) in StartActivity. Cursor never adds OTEL spans on its own — give it a rule that recognises external-call patterns and proposes the trace.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-03">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-03">November 03, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 24: ValueTask Only When Justified</h2>
-    <p>ValueTask is a perf optimisation for hot paths that often return synchronously. It is not a drop-in for Task. Cursor swaps them around without thinking. Flag ValueTask returns and ask whether the method is actually mostly synchronous. If not, revert to Task.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-02">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-02">November 02, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 23: No Bool Flag Parameters</h2>
-    <p>SendEmail(string to, bool isHtml) should be SendHtmlEmail and SendPlainEmail. Bool flags hide branching that belongs in the type system. Flag any method signature with two or more bool parameters as a refactor candidate.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-11-01">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-11-01">November 01, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 22: BackgroundService Over Task.Run</h2>
-    <p>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-31">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-31">October 31, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 21: Channels for Producer Consumer</h2>
-    <p>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-30">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-30">October 30, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 20: Source-Generated JSON Serialisation</h2>
-    <p>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own — add a rule that flags new DTO classes and asks whether they should be source-generated.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-29">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-29">October 29, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 19: NetArchTest for Boundaries</h2>
-    <p>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-28">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-28">October 28, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 18: WebApplicationFactory for Integration Tests</h2>
-    <p>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-27">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-27">October 27, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 17: ConfigureAwait false in Libraries</h2>
-    <p>Library code (non-ASP.NET) should ConfigureAwait false on every awaited Task. ASP.NET Core code should not. Cursor mixes the two contexts in the same solution. Detect the project type and enforce the right default.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-26">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-26">October 26, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 16: async void Outside Event Handlers</h2>
-    <p>async void is a deadlock and unhandled-exception trap everywhere except UI event handlers. The AI uses it routinely for "fire and forget" — wrong answer every time. Flag it on sight.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-25">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-25">October 25, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 15: Records for Value Objects, Classes for Entities</h2>
-    <p>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-24">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-24">October 24, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 14: Sealed By Default</h2>
-    <p>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-23">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-23">October 23, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 13: Strongly-Typed IDs</h2>
-    <p>OrderId as record struct OrderId(Guid Value) beats raw Guid everywhere. Stops the AI passing a CustomerId where an OrderId was expected — a bug the compiler can't catch with primitive obsession but catches instantly with domain primitives.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-22">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-22">October 22, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 12: IOptionsSnapshot Over Raw Config</h2>
-    <p>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-21">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-21">October 21, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 11: Rethrow, Don't throw ex</h2>
-    <p>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-20">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-20">October 20, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 10: AsNoTracking for Reads</h2>
-    <p>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-19">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-19">October 19, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 9: Scoped Capture in Singleton</h2>
-    <p>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-18">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-18">October 18, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 8: CancellationToken Propagation</h2>
-    <p>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-17">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-17">October 17, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 7: IHttpClientFactory Discipline</h2>
-    <p>Refuse new HttpClient() in any generated code. Force Cursor to inject IHttpClientFactory or a typed client. The classic socket-exhaustion bug is exactly the kind of footgun an AI hands you without realising.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-16">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-16">October 16, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 6: TimeProvider Injection</h2>
-    <p>Never let Cursor hardcode DateTime.Now or DateTime.UtcNow in business logic. Inject TimeProvider (or your own IClock) instead. This makes time deterministic for tests and stops the AI reaching for static APIs whenever it generates time-aware code.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-15">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-15">October 15, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 5: Minimal API Groups</h2>
-    <p>Use MapGroup and EndPoints for .NET 9 services. It keeps the context window lean and focused, helping the AI provide more accurate code suggestions than it can with massive, bloated Controllers.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-14">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-14">October 14, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 4: Validator Enforcement</h2>
-    <p>Every MediatR Request must have a FluentValidation rule. Force the AI to check the validator before writing handler logic. This prevents "context rot" where the AI forgets your business constraints.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-13">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-13">October 13, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 3: Structured Logging</h2>
-    <p>Enforce ILogger with structured templates. Never use string interpolation in logs. This ensures that when you feed logs back into Cursor for debugging, the AI recognizes the patterns immediately.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-12">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-12">October 12, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 2: Persistence Boundaries</h2>
-    <p>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-11">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-11">October 11, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 1: The Result Pattern</h2>
-    <p>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This prevents 90% of AI-generated logic errors in Web APIs.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-10">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-10">October 10, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 25: ActivitySource for OpenTelemetry</h2>
-    <p>Logs alone won't debug a distributed system. Add a static readonly ActivitySource per project and wrap every external call (DB, HTTP, queue) in StartActivity. Cursor never adds OTEL spans on its own — give it a rule that recognises external-call patterns and proposes the trace.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-09">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-09">October 09, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 24: ValueTask Only When Justified</h2>
-    <p>ValueTask is a perf optimisation for hot paths that often return synchronously. It is not a drop-in for Task. Cursor swaps them around without thinking. Flag ValueTask returns and ask whether the method is actually mostly synchronous. If not, revert to Task.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-08">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-08">October 08, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 23: No Bool Flag Parameters</h2>
-    <p>SendEmail(string to, bool isHtml) should be SendHtmlEmail and SendPlainEmail. Bool flags hide branching that belongs in the type system. Flag any method signature with two or more bool parameters as a refactor candidate.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-07">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-07">October 07, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 22: BackgroundService Over Task.Run</h2>
-    <p>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-06">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-06">October 06, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 21: Channels for Producer Consumer</h2>
-    <p>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-05">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-05">October 05, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 20: Source-Generated JSON Serialisation</h2>
-    <p>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own — add a rule that flags new DTO classes and asks whether they should be source-generated.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-04">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-04">October 04, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 19: NetArchTest for Boundaries</h2>
-    <p>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-03">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-03">October 03, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 18: WebApplicationFactory for Integration Tests</h2>
-    <p>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-02">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-02">October 02, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 17: ConfigureAwait false in Libraries</h2>
-    <p>Library code (non-ASP.NET) should ConfigureAwait false on every awaited Task. ASP.NET Core code should not. Cursor mixes the two contexts in the same solution. Detect the project type and enforce the right default.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-10-01">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-10-01">October 01, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 16: async void Outside Event Handlers</h2>
-    <p>async void is a deadlock and unhandled-exception trap everywhere except UI event handlers. The AI uses it routinely for "fire and forget" — wrong answer every time. Flag it on sight.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-30">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-30">September 30, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 15: Records for Value Objects, Classes for Entities</h2>
-    <p>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-29">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-29">September 29, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 14: Sealed By Default</h2>
-    <p>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-28">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-28">September 28, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 13: Strongly-Typed IDs</h2>
-    <p>OrderId as record struct OrderId(Guid Value) beats raw Guid everywhere. Stops the AI passing a CustomerId where an OrderId was expected — a bug the compiler can't catch with primitive obsession but catches instantly with domain primitives.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-27">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-27">September 27, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 12: IOptionsSnapshot Over Raw Config</h2>
-    <p>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-26">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-26">September 26, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 11: Rethrow, Don't throw ex</h2>
-    <p>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-25">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-25">September 25, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 10: AsNoTracking for Reads</h2>
-    <p>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-24">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-24">September 24, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 9: Scoped Capture in Singleton</h2>
-    <p>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-23">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-23">September 23, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 8: CancellationToken Propagation</h2>
-    <p>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-22">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-22">September 22, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 7: IHttpClientFactory Discipline</h2>
-    <p>Refuse new HttpClient() in any generated code. Force Cursor to inject IHttpClientFactory or a typed client. The classic socket-exhaustion bug is exactly the kind of footgun an AI hands you without realising.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-21">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-21">September 21, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 6: TimeProvider Injection</h2>
-    <p>Never let Cursor hardcode DateTime.Now or DateTime.UtcNow in business logic. Inject TimeProvider (or your own IClock) instead. This makes time deterministic for tests and stops the AI reaching for static APIs whenever it generates time-aware code.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-20">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-20">September 20, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 5: Minimal API Groups</h2>
-    <p>Use MapGroup and EndPoints for .NET 9 services. It keeps the context window lean and focused, helping the AI provide more accurate code suggestions than it can with massive, bloated Controllers.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-19">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-19">September 19, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 4: Validator Enforcement</h2>
-    <p>Every MediatR Request must have a FluentValidation rule. Force the AI to check the validator before writing handler logic. This prevents "context rot" where the AI forgets your business constraints.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-18">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-18">September 18, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 3: Structured Logging</h2>
-    <p>Enforce ILogger with structured templates. Never use string interpolation in logs. This ensures that when you feed logs back into Cursor for debugging, the AI recognizes the patterns immediately.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-17">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-17">September 17, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 2: Persistence Boundaries</h2>
-    <p>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-16">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-16">September 16, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 1: The Result Pattern</h2>
-    <p>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This prevents 90% of AI-generated logic errors in Web APIs.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-15">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-15">September 15, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 25: ActivitySource for OpenTelemetry</h2>
-    <p>Logs alone won't debug a distributed system. Add a static readonly ActivitySource per project and wrap every external call (DB, HTTP, queue) in StartActivity. Cursor never adds OTEL spans on its own — give it a rule that recognises external-call patterns and proposes the trace.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-14">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-14">September 14, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 24: ValueTask Only When Justified</h2>
-    <p>ValueTask is a perf optimisation for hot paths that often return synchronously. It is not a drop-in for Task. Cursor swaps them around without thinking. Flag ValueTask returns and ask whether the method is actually mostly synchronous. If not, revert to Task.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-13">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-13">September 13, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 23: No Bool Flag Parameters</h2>
-    <p>SendEmail(string to, bool isHtml) should be SendHtmlEmail and SendPlainEmail. Bool flags hide branching that belongs in the type system. Flag any method signature with two or more bool parameters as a refactor candidate.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-12">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-12">September 12, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 22: BackgroundService Over Task.Run</h2>
-    <p>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-11">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-11">September 11, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 21: Channels for Producer Consumer</h2>
-    <p>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-10">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-10">September 10, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 20: Source-Generated JSON Serialisation</h2>
-    <p>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own — add a rule that flags new DTO classes and asks whether they should be source-generated.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-09">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-09">September 09, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 19: NetArchTest for Boundaries</h2>
-    <p>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-08">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-08">September 08, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 18: WebApplicationFactory for Integration Tests</h2>
-    <p>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-07">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-07">September 07, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 17: ConfigureAwait false in Libraries</h2>
-    <p>Library code (non-ASP.NET) should ConfigureAwait false on every awaited Task. ASP.NET Core code should not. Cursor mixes the two contexts in the same solution. Detect the project type and enforce the right default.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-06">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-06">September 06, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 16: async void Outside Event Handlers</h2>
-    <p>async void is a deadlock and unhandled-exception trap everywhere except UI event handlers. The AI uses it routinely for "fire and forget" — wrong answer every time. Flag it on sight.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-05">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-05">September 05, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 15: Records for Value Objects, Classes for Entities</h2>
-    <p>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-04">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-04">September 04, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 14: Sealed By Default</h2>
-    <p>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-03">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-03">September 03, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 13: Strongly-Typed IDs</h2>
-    <p>OrderId as record struct OrderId(Guid Value) beats raw Guid everywhere. Stops the AI passing a CustomerId where an OrderId was expected — a bug the compiler can't catch with primitive obsession but catches instantly with domain primitives.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-02">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-02">September 02, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 12: IOptionsSnapshot Over Raw Config</h2>
-    <p>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-09-01">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-09-01">September 01, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 11: Rethrow, Don't throw ex</h2>
-    <p>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-31">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-31">August 31, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 10: AsNoTracking for Reads</h2>
-    <p>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-30">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-30">August 30, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 9: Scoped Capture in Singleton</h2>
-    <p>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-29">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-29">August 29, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 8: CancellationToken Propagation</h2>
-    <p>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-28">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-28">August 28, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 7: IHttpClientFactory Discipline</h2>
-    <p>Refuse new HttpClient() in any generated code. Force Cursor to inject IHttpClientFactory or a typed client. The classic socket-exhaustion bug is exactly the kind of footgun an AI hands you without realising.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-27">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-27">August 27, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 6: TimeProvider Injection</h2>
-    <p>Never let Cursor hardcode DateTime.Now or DateTime.UtcNow in business logic. Inject TimeProvider (or your own IClock) instead. This makes time deterministic for tests and stops the AI reaching for static APIs whenever it generates time-aware code.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-26">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-26">August 26, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 5: Minimal API Groups</h2>
-    <p>Use MapGroup and EndPoints for .NET 9 services. It keeps the context window lean and focused, helping the AI provide more accurate code suggestions than it can with massive, bloated Controllers.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-25">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-25">August 25, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 4: Validator Enforcement</h2>
-    <p>Every MediatR Request must have a FluentValidation rule. Force the AI to check the validator before writing handler logic. This prevents "context rot" where the AI forgets your business constraints.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-24">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-24">August 24, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 3: Structured Logging</h2>
-    <p>Enforce ILogger with structured templates. Never use string interpolation in logs. This ensures that when you feed logs back into Cursor for debugging, the AI recognizes the patterns immediately.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-23">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-23">August 23, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 2: Persistence Boundaries</h2>
-    <p>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-22">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-22">August 22, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 1: The Result Pattern</h2>
-    <p>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This prevents 90% of AI-generated logic errors in Web APIs.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-21">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-21">August 21, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 25: ActivitySource for OpenTelemetry</h2>
-    <p>Logs alone won't debug a distributed system. Add a static readonly ActivitySource per project and wrap every external call (DB, HTTP, queue) in StartActivity. Cursor never adds OTEL spans on its own — give it a rule that recognises external-call patterns and proposes the trace.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-20">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-20">August 20, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 24: ValueTask Only When Justified</h2>
-    <p>ValueTask is a perf optimisation for hot paths that often return synchronously. It is not a drop-in for Task. Cursor swaps them around without thinking. Flag ValueTask returns and ask whether the method is actually mostly synchronous. If not, revert to Task.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-19">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-19">August 19, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 23: No Bool Flag Parameters</h2>
-    <p>SendEmail(string to, bool isHtml) should be SendHtmlEmail and SendPlainEmail. Bool flags hide branching that belongs in the type system. Flag any method signature with two or more bool parameters as a refactor candidate.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-18">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-18">August 18, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 22: BackgroundService Over Task.Run</h2>
-    <p>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-17">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-17">August 17, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 21: Channels for Producer Consumer</h2>
-    <p>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-16">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-16">August 16, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 20: Source-Generated JSON Serialisation</h2>
-    <p>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own — add a rule that flags new DTO classes and asks whether they should be source-generated.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-15">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-15">August 15, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 19: NetArchTest for Boundaries</h2>
-    <p>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-14">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-14">August 14, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 18: WebApplicationFactory for Integration Tests</h2>
-    <p>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-13">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-13">August 13, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 17: ConfigureAwait false in Libraries</h2>
-    <p>Library code (non-ASP.NET) should ConfigureAwait false on every awaited Task. ASP.NET Core code should not. Cursor mixes the two contexts in the same solution. Detect the project type and enforce the right default.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-12">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-12">August 12, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 16: async void Outside Event Handlers</h2>
-    <p>async void is a deadlock and unhandled-exception trap everywhere except UI event handlers. The AI uses it routinely for "fire and forget" — wrong answer every time. Flag it on sight.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-11">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-11">August 11, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 15: Records for Value Objects, Classes for Entities</h2>
-    <p>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-10">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-10">August 10, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 14: Sealed By Default</h2>
-    <p>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-09">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-09">August 09, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 13: Strongly-Typed IDs</h2>
-    <p>OrderId as record struct OrderId(Guid Value) beats raw Guid everywhere. Stops the AI passing a CustomerId where an OrderId was expected — a bug the compiler can't catch with primitive obsession but catches instantly with domain primitives.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-08">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-08">August 08, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 12: IOptionsSnapshot Over Raw Config</h2>
-    <p>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-07">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-07">August 07, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 11: Rethrow, Don't throw ex</h2>
-    <p>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-06">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-06">August 06, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 10: AsNoTracking for Reads</h2>
-    <p>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-05">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-05">August 05, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 9: Scoped Capture in Singleton</h2>
-    <p>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-04">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-04">August 04, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 8: CancellationToken Propagation</h2>
-    <p>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-03">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-03">August 03, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 7: IHttpClientFactory Discipline</h2>
-    <p>Refuse new HttpClient() in any generated code. Force Cursor to inject IHttpClientFactory or a typed client. The classic socket-exhaustion bug is exactly the kind of footgun an AI hands you without realising.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-02">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-02">August 02, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 6: TimeProvider Injection</h2>
-    <p>Never let Cursor hardcode DateTime.Now or DateTime.UtcNow in business logic. Inject TimeProvider (or your own IClock) instead. This makes time deterministic for tests and stops the AI reaching for static APIs whenever it generates time-aware code.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-08-01">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-08-01">August 01, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 5: Minimal API Groups</h2>
-    <p>Use MapGroup and EndPoints for .NET 9 services. It keeps the context window lean and focused, helping the AI provide more accurate code suggestions than it can with massive, bloated Controllers.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-31">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-31">July 31, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 4: Validator Enforcement</h2>
-    <p>Every MediatR Request must have a FluentValidation rule. Force the AI to check the validator before writing handler logic. This prevents "context rot" where the AI forgets your business constraints.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-30">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-30">July 30, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 3: Structured Logging</h2>
-    <p>Enforce ILogger with structured templates. Never use string interpolation in logs. This ensures that when you feed logs back into Cursor for debugging, the AI recognizes the patterns immediately.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-29">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-29">July 29, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 2: Persistence Boundaries</h2>
-    <p>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-28">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-28">July 28, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 1: The Result Pattern</h2>
-    <p>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This prevents 90% of AI-generated logic errors in Web APIs.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-27">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-27">July 27, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 25: ActivitySource for OpenTelemetry</h2>
-    <p>Logs alone won't debug a distributed system. Add a static readonly ActivitySource per project and wrap every external call (DB, HTTP, queue) in StartActivity. Cursor never adds OTEL spans on its own — give it a rule that recognises external-call patterns and proposes the trace.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-26">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-26">July 26, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 24: ValueTask Only When Justified</h2>
-    <p>ValueTask is a perf optimisation for hot paths that often return synchronously. It is not a drop-in for Task. Cursor swaps them around without thinking. Flag ValueTask returns and ask whether the method is actually mostly synchronous. If not, revert to Task.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-25">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-25">July 25, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 23: No Bool Flag Parameters</h2>
-    <p>SendEmail(string to, bool isHtml) should be SendHtmlEmail and SendPlainEmail. Bool flags hide branching that belongs in the type system. Flag any method signature with two or more bool parameters as a refactor candidate.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-24">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-24">July 24, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 22: BackgroundService Over Task.Run</h2>
-    <p>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-23">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-23">July 23, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 21: Channels for Producer Consumer</h2>
-    <p>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-21">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-21">July 21, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 19: NetArchTest for Boundaries</h2>
-    <p>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-20">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-20">July 20, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 18: WebApplicationFactory for Integration Tests</h2>
-    <p>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-19">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-19">July 19, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 17: ConfigureAwait false in Libraries</h2>
-    <p>Library code (non-ASP.NET) should ConfigureAwait false on every awaited Task. ASP.NET Core code should not. Cursor mixes the two contexts in the same solution. Detect the project type and enforce the right default.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-18">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-18">July 18, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 16: async void Outside Event Handlers</h2>
-    <p>async void is a deadlock and unhandled-exception trap everywhere except UI event handlers. The AI uses it routinely for "fire and forget" — wrong answer every time. Flag it on sight.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-17">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-17">July 17, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 15: Records for Value Objects, Classes for Entities</h2>
-    <p>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-16">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-16">July 16, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 14: Sealed By Default</h2>
-    <p>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-15">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-15">July 15, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 13: Strongly-Typed IDs</h2>
-    <p>OrderId as record struct OrderId(Guid Value) beats raw Guid everywhere. Stops the AI passing a CustomerId where an OrderId was expected — a bug the compiler can't catch with primitive obsession but catches instantly with domain primitives.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-14">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-14">July 14, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 12: IOptionsSnapshot Over Raw Config</h2>
-    <p>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-13">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-13">July 13, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 11: Rethrow, Don't throw ex</h2>
-    <p>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-12">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-12">July 12, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 10: AsNoTracking for Reads</h2>
-    <p>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-11">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-11">July 11, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 9: Scoped Capture in Singleton</h2>
-    <p>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-10">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-10">July 10, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 8: CancellationToken Propagation</h2>
-    <p>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-09">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-09">July 09, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 7: IHttpClientFactory Discipline</h2>
-    <p>Refuse new HttpClient() in any generated code. Force Cursor to inject IHttpClientFactory or a typed client. The classic socket-exhaustion bug is exactly the kind of footgun an AI hands you without realising.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-08">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-08">July 08, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 6: TimeProvider Injection</h2>
-    <p>Never let Cursor hardcode DateTime.Now or DateTime.UtcNow in business logic. Inject TimeProvider (or your own IClock) instead. This makes time deterministic for tests and stops the AI reaching for static APIs whenever it generates time-aware code.</p>
-  </div>
-</li>
-
           <li class="post-card">
             <a href="glm-5-2-vs-claude-fable-5-comparison.html" class="post-link">
               <div class="post-meta">
@@ -1707,183 +145,7 @@
             </a>
           </li>
 
-          <li class="post-card" data-date="2026-07-07">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-07">July 07, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 5: Minimal API Groups</h2>
-    <p>Use MapGroup and EndPoints for .NET 9 services. It keeps the context window lean and focused, helping the AI provide more accurate code suggestions than it can with massive, bloated Controllers.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-06">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-06">July 06, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 4: Validator Enforcement</h2>
-    <p>Every MediatR Request must have a FluentValidation rule. Force the AI to check the validator before writing handler logic. This prevents "context rot" where the AI forgets your business constraints.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-05">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-05">July 05, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 3: Structured Logging</h2>
-    <p>Enforce ILogger with structured templates. Never use string interpolation in logs. This ensures that when you feed logs back into Cursor for debugging, the AI recognizes the patterns immediately.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-04">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-04">July 04, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 2: Persistence Boundaries</h2>
-    <p>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-03">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-03">July 03, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 1: The Result Pattern</h2>
-    <p>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This prevents 90% of AI-generated logic errors in Web APIs.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-02">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-02">July 02, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 25: ActivitySource for OpenTelemetry</h2>
-    <p>Logs alone won't debug a distributed system. Add a static readonly ActivitySource per project and wrap every external call (DB, HTTP, queue) in StartActivity. Cursor never adds OTEL spans on its own — give it a rule that recognises external-call patterns and proposes the trace.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-07-01">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-07-01">July 01, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 24: ValueTask Only When Justified</h2>
-    <p>ValueTask is a perf optimisation for hot paths that often return synchronously. It is not a drop-in for Task. Cursor swaps them around without thinking. Flag ValueTask returns and ask whether the method is actually mostly synchronous. If not, revert to Task.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-30">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-30">June 30, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 23: No Bool Flag Parameters</h2>
-    <p>SendEmail(string to, bool isHtml) should be SendHtmlEmail and SendPlainEmail. Bool flags hide branching that belongs in the type system. Flag any method signature with two or more bool parameters as a refactor candidate.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-29">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-29">June 29, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 22: BackgroundService Over Task.Run</h2>
-    <p>Long-running work in ASP.NET Core goes in a BackgroundService, not Task.Run inside a controller. Cursor will happily fire Task.Run and call it "async work" — your request thread will die mid-execution and you'll never know why. Catch Task.Run outside test code and propose a hosted service.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-28">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-28">June 28, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 21: Channels for Producer Consumer</h2>
-    <p>System.Threading.Channels beats BlockingCollection and beats roll-your-own queue plus SemaphoreSlim. The AI reaches for ConcurrentQueue every time and stitches it together by hand. A rule that detects producer/consumer patterns and proposes Channel will save you a class.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-27">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-27">June 27, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 20: Source-Generated JSON Serialisation</h2>
-    <p>Reflection-based System.Text.Json is fine for prototypes. For hot paths and AOT, use JsonSerializable source generation. Cursor never thinks of this on its own — add a rule that flags new DTO classes and asks whether they should be source-generated.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-26">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-26">June 26, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 19: NetArchTest for Boundaries</h2>
-    <p>Architectural rules belong in tests, not in code review. Encode them as NetArchTest assertions ("no class in Domain references EntityFrameworkCore") and they fail your build instead of your standup. Add the corresponding test whenever a new layer or project is introduced.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-25">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-25">June 25, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 18: WebApplicationFactory for Integration Tests</h2>
-    <p>In-memory EF Core providers lie. Use WebApplicationFactory with Testcontainers (SQL Server, Postgres) for real integration coverage. Cursor defaults to UseInMemoryDatabase — it passes locally and ships the bug to production. Flag the in-memory provider in test projects.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-24">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-24">June 24, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 17: ConfigureAwait false in Libraries</h2>
-    <p>Library code (non-ASP.NET) should ConfigureAwait false on every awaited Task. ASP.NET Core code should not. Cursor mixes the two contexts in the same solution. Detect the project type and enforce the right default.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-22">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-22">June 22, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 15: Records for Value Objects, Classes for Entities</h2>
-    <p>Value objects (Money, Address, Coordinates) should be records. Entities with identity (Order, Customer) should be classes with an Id. Cursor mixes these constantly. A rule that classifies based on the presence or absence of an identity property keeps the distinction honest.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-21">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-21">June 21, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 14: Sealed By Default</h2>
-    <p>Mark every class sealed unless inheritance is explicitly planned. Stops Cursor inventing accidental inheritance hierarchies "for flexibility." Small but measurable virtual-call perf wins too.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-20">
+          <li class="post-card" id="2026-06-20" data-date="2026-06-20">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-20">June 20, 2026</time>
@@ -1894,62 +156,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-19">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-19">June 19, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 12: IOptionsSnapshot Over Raw Config</h2>
-    <p>Business code should never call IConfiguration directly. Strongly-typed IOptions or IOptionsSnapshot bindings only. The AI loves to "just grab the config value" — refuse it and force a settings class with validation attributes.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-18">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-18">June 18, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 11: Rethrow, Don't throw ex</h2>
-    <p>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-17">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-17">June 17, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 10: AsNoTracking for Reads</h2>
-    <p>Every read-only EF Core query should call AsNoTracking. Add a rule that recognises query methods returning DTOs (not entities) and inserts the call. Cursor never does this by default and your read perf degrades silently across releases.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-16">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-16">June 16, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 9: Scoped Capture in Singleton</h2>
-    <p>The single most expensive .NET runtime bug: a Singleton holding a Scoped service. Cursor cheerfully writes this without warning. Audit constructor parameters of any class registered as Singleton — if any are typically Scoped (DbContext, repositories, MediatR sender), flag it before merge.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-15">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-15">June 15, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 8: CancellationToken Propagation</h2>
-    <p>Every async method in your codebase should accept and forward a CancellationToken. Make it a rule that any new async signature without one is flagged. Stops the AI from quietly losing cancellation half-way down a call chain.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-14">
+          <li class="post-card" id="2026-06-14" data-date="2026-06-14">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-14">June 14, 2026</time>
@@ -1960,7 +167,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-13">
+          <li class="post-card" id="2026-06-13" data-date="2026-06-13">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-13">June 13, 2026</time>
@@ -1971,7 +178,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-12">
+          <li class="post-card" id="2026-06-12" data-date="2026-06-12">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-12">June 12, 2026</time>
@@ -1982,7 +189,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-11">
+          <li class="post-card" id="2026-06-11" data-date="2026-06-11">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-11">June 11, 2026</time>
@@ -1993,7 +200,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-10">
+          <li class="post-card" id="2026-06-10" data-date="2026-06-10">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-10">June 10, 2026</time>
@@ -2004,29 +211,18 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-09">
-  <div class="post-link" style="cursor:default;">
-    <div class="post-meta">
-      <time datetime="2026-06-09">June 09, 2026</time>
-      <span class="post-tag">Daily Rule</span>
-    </div>
-    <h2>Rule 2: Persistence Boundaries</h2>
-    <p>Never let the AI write database logic in your Controllers. Enforce a strict boundary where all IQueryable access stays in the Infrastructure layer. This keeps your business logic "pure" and readable for the LLM.</p>
-  </div>
-</li>
-
-          <li class="post-card" data-date="2026-06-08">
+          <li class="post-card" id="2026-06-08" data-date="2026-06-08">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-08">June 08, 2026</time>
       <span class="post-tag">Daily Rule</span>
     </div>
     <h2>Rule 1: The Result Pattern</h2>
-    <p>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This prevents 90% of AI-generated logic errors in Web APIs.</p>
+    <p>Stop using nulls for flow control. Use a Result object to force Cursor to handle success and failure cases explicitly. This removes a whole class of AI-generated logic errors in Web APIs, where a forgotten null check becomes a 500.</p>
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-07">
+          <li class="post-card" id="2026-06-07" data-date="2026-06-07">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-07">June 07, 2026</time>
@@ -2037,7 +233,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-06">
+          <li class="post-card" id="2026-06-06" data-date="2026-06-06">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-06">June 06, 2026</time>
@@ -2048,7 +244,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-05">
+          <li class="post-card" id="2026-06-05" data-date="2026-06-05">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-05">June 05, 2026</time>
@@ -2059,7 +255,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-04">
+          <li class="post-card" id="2026-06-04" data-date="2026-06-04">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-04">June 04, 2026</time>
@@ -2070,7 +266,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-03">
+          <li class="post-card" id="2026-06-03" data-date="2026-06-03">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-03">June 03, 2026</time>
@@ -2093,7 +289,7 @@
             </a>
           </li>
 
-          <li class="post-card" data-date="2026-06-02">
+          <li class="post-card" id="2026-06-02" data-date="2026-06-02">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-02">June 02, 2026</time>
@@ -2104,7 +300,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-06-01">
+          <li class="post-card" id="2026-06-01" data-date="2026-06-01">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-06-01">June 01, 2026</time>
@@ -2115,7 +311,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-05-31">
+          <li class="post-card" id="2026-05-31" data-date="2026-05-31">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-05-31">May 31, 2026</time>
@@ -2145,12 +341,12 @@
                 <span class="post-tag">.NET tooling</span>
               </div>
               <h2>How to use Cursor AI with Entity Framework Core (without blowing up your database)</h2>
-              <p>Cursor AI generates N+1 queries, eager-loads entire databases, and skips AsNoTracking. Here's a rule-based guardrail system that catches 90% of EF Core mistakes before production.</p>
+              <p>Cursor AI generates N+1 queries, eager-loads entire databases, and skips AsNoTracking. Here's a rule-based guardrail system that catches the common EF Core mistakes before production.</p>
               <span class="post-read">Read post ?</span>
             </a>
           </li>
 
-          <li class="post-card" data-date="2026-05-30">
+          <li class="post-card" id="2026-05-30" data-date="2026-05-30">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-05-30">May 30, 2026</time>
@@ -2161,7 +357,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-05-29">
+          <li class="post-card" id="2026-05-29" data-date="2026-05-29">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-05-29">May 29, 2026</time>
@@ -2172,7 +368,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-05-28">
+          <li class="post-card" id="2026-05-28" data-date="2026-05-28">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-05-28">May 28, 2026</time>
@@ -2183,7 +379,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-05-27">
+          <li class="post-card" id="2026-05-27" data-date="2026-05-27">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-05-27">May 27, 2026</time>
@@ -2206,7 +402,7 @@
             </a>
           </li>
 
-          <li class="post-card" data-date="2026-05-25">
+          <li class="post-card" id="2026-05-25" data-date="2026-05-25">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-05-25">May 25, 2026</time>
@@ -2217,18 +413,18 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-05-24">
+          <li class="post-card" id="2026-05-24" data-date="2026-05-24">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-05-24">May 24, 2026</time>
       <span class="post-tag">Daily Rule</span>
     </div>
     <h2>Rule 11: Rethrow, Don't throw ex</h2>
-    <p>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong about 40 percent of the time when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</p>
+    <p>throw ex resets the stack trace. throw preserves it. Cursor gets this wrong surprisingly often when generating catch blocks. Rewrite any naked throw ex to throw unless the exception has been explicitly wrapped.</p>
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-05-23">
+          <li class="post-card" id="2026-05-23" data-date="2026-05-23">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-05-23">May 23, 2026</time>
@@ -2239,7 +435,7 @@
   </div>
 </li>
 
-          <li class="post-card" data-date="2026-05-22">
+          <li class="post-card" id="2026-05-22" data-date="2026-05-22">
   <div class="post-link" style="cursor:default;">
     <div class="post-meta">
       <time datetime="2026-05-22">May 22, 2026</time>
@@ -2262,7 +458,7 @@
             </a>
           </li>
 
-          <li class="post-card" data-date="2026-05-21">
+          <li class="post-card" id="2026-05-21" data-date="2026-05-21">
             <div class="post-link" style="cursor:default;">
               <div class="post-meta">
                 <time datetime="2026-05-21">May 21, 2026</time>
@@ -2285,7 +481,7 @@
             </a>
           </li>
 
-          <li class="post-card" data-date="2026-05-20">
+          <li class="post-card" id="2026-05-20" data-date="2026-05-20">
             <div class="post-link" style="cursor:default;">
               <div class="post-meta">
                 <time datetime="2026-05-20">May 20, 2026</time>
