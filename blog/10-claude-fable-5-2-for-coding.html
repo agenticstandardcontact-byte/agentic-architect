@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f17" />
+  <title>Claude Fable 5.2 for Coding: Price, Effort Levels, When to Use</title>
+  <meta name="description" content="Claude Fable 5.2 and Mythos 5.2 for coding: $8/$40 pricing, AA Index 65, effort levels, Cursor setup gotchas, and when it beats Opus 5.5 on .NET work." />
+  <meta name="keywords" content="Claude Fable 5.2, Claude Mythos 5.2, Fable 5.2 pricing, Fable 5.2 AA index, Fable 5 vs Fable 5.2, Claude Fable 5.2 Cursor, Fable 5.2 effort levels, agentic coding, .NET" />
+  <link rel="canonical" href="https://agentic-architect.dev/blog/10-claude-fable-5-2-for-coding.html" />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Architect" href="https://agentic-architect.dev/feed.xml" />
+
+  <meta property="og:title" content="Claude Fable 5.2 for Coding: Price, Effort Levels, When to Use" />
+  <meta property="og:description" content="Claude Fable 5.2 and Mythos 5.2 for coding: $8/$40 pricing, AA Index 65, effort levels, Cursor setup gotchas, and when it beats Opus 5.5 on .NET work." />
+  <meta property="og:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
+  <meta property="og:url" content="https://agentic-architect.dev/blog/10-claude-fable-5-2-for-coding.html" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-27T21:00:00Z" />
+  <meta property="article:author" content="Agentic Architect" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
+  <link rel="icon" href="https://agentic-architect.dev/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="https://agentic-architect.dev/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://agentic-architect.dev/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="https://agentic-architect.dev/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://agentic-architect.dev/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="blog.css" />
+  <script src="../uet-head.js"></script>
+  <script src="../google-ads-head.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7251307599469890"
+       crossorigin="anonymous"></script>
+  <script data-goatcounter="https://agentic-architect.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Claude Fable 5.2 for coding: price, effort levels, and when to use it",
+    "datePublished": "2026-11-27T21:00:00Z",
+    "dateModified": "2026-11-27T21:00:00Z",
+    "author": {
+        "@type": "Organization",
+        "name": "Agentic Architect"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Agentic Architect",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://agentic-architect.dev/favicon.svg"
+        }
+    },
+    "image": "https://agentic-architect.dev/og-image.jpg?v=3",
+    "mainEntityOfPage": "https://agentic-architect.dev/blog/10-claude-fable-5-2-for-coding.html",
+    "keywords": "Claude Fable 5.2, Claude Mythos 5.2, Anthropic, agentic coding, Cursor, .NET"
+}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What is the difference between Claude Fable 5.2 and Claude Mythos 5.2?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They are the same underlying model with the same specifications and pricing. Fable 5.2 is generally available and has stronger cybersecurity and biology safeguards; Mythos 5.2 is restricted to organisations verified through Anthropic's Cyber and Life Sciences Verification Programs."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How much does Claude Fable 5.2 cost?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "$8 per million input tokens and $40 per million output tokens, 20% less than Fable 5.1. Prompt-cache reads cost $0.20 per million tokens. Optional fast mode costs $16 / $80 per million tokens."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What is Fable 5.2's Artificial Analysis Intelligence Index score?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "65 at max effort, the top score on the index as of late November 2026. It scores 62 at high and extra high, 56 at medium and 54 at low, with cost per index task ranging from $3.10 at low to $26.54 at max."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is Claude Fable 5.2 available in Cursor?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, since 9 November 2026. It is on by default for personal accounts without Privacy Mode. Teams with Privacy Mode and Enterprise accounts need an admin to approve Anthropic's data-retention policy first. It is billed as a third-party model on top of Cursor's included usage."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Fable 5 vs Fable 5.2: what's the difference?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Fable 5.2 is cheaper ($8/$40 versus $10/$50 per million tokens), faster, and scores substantially higher on coding benchmarks such as FrontierCode 2.0 and CursorBench. Both have a 1M-token context window and 128K-token output limit."
+            }
+        }
+    ]
+}
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+  <div class="container nav-inner" data-site-nav>
+      <a href="../" class="brand" aria-label="Agentic Architect home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+      </a>
+      <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
+        <a href="../#problem">The Problem</a>
+        <a href="../#kit">What's Inside</a>
+        <a href="../#proof">Proof</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../#faq">FAQ</a>
+        <a href="./" aria-current="page">Blog</a>
+        <a href="../hardware/">Hardware</a>
+        <a href="../learn/">Quick Fixes</a>
+        <a href="../#resources">Guides</a>
+        <div class="nav-menu-ctas">
+          <a href="../#free-kit-signup" class="btn btn-ghost btn-sm">Get the free kit</a>
+          <a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Buy now</a>
+        </div>
+      </nav>
+      <div class="nav-ctas">
+        <a href="../#free-kit-signup" class="btn btn-ghost btn-sm nav-cta-free">Get the free kit</a>
+        <a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit" class="btn btn-primary btn-sm nav-cta-buy" target="_blank" rel="noopener">Buy now</a>
+      </div>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu"><span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
+  </div>
+</header>
+
+  <main>
+    <article class="post">
+      <div class="container post-narrow">
+        <div class="post-meta">
+          <time datetime="2026-11-27">November 27, 2026</time>
+          <span class="post-tag">AI models</span>
+          <span class="post-read-time">10 min read</span>
+        </div>
+
+        <h1>Claude Fable 5.2 for coding: <em>price, effort levels, and when to use it</em></h1>
+        <p class="post-lede">Anthropic shipped <strong>Claude Fable 5.2</strong> and <strong>Claude Mythos 5.2</strong> on 9 November 2026, and Cursor put Fable 5.2 in its model picker the same day. It is the top model on the Artificial Analysis Intelligence Index, it's 20% cheaper per token than Fable 5.1, and it can still burn through a budget faster than anything else you can select. This is the practical version for people who write production code: the verified numbers, what an agent run really costs at each effort level, and when it's worth reaching for on a .NET codebase.</p>
+
+        <h2>Fable 5.2 vs Mythos 5.2: one model, two doors</h2>
+        <p>The naming confuses people, so start here. Anthropic says Fable 5.2 and Mythos 5.2 are <strong>the same underlying model</strong>. Fable is the generally available version with strong cybersecurity and biology safeguards. Mythos has more permissive safeguards in those domains and is only available to organisations verified through Anthropic's Cyber and Life Sciences Verification Programs. Both share the same specifications and the same price.</p>
+        <p>For everyday software work, the distinction rarely matters: you will be using Fable. The one place you might notice it is security-adjacent work, where Fable's safeguards block most cybersecurity tasks. More on what Cursor does when that happens below.</p>
+        <h2>The facts at a glance</h2>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th></th><th>Claude Fable 5.2</th></tr></thead>
+          <tbody>
+          <tr><td>Released</td><td>9 November 2026 (Mythos 5.2 the same day)</td></tr>
+          <tr><td>API model ID</td><td><code>claude-fable-5-2</code></td></tr>
+          <tr><td>Context window / max output</td><td>1M tokens / 128K tokens</td></tr>
+          <tr><td>Price per 1M tokens</td><td>$8 input / $40 output (Fable 5.1 was $10 / $50)</td></tr>
+          <tr><td>Prompt cache</td><td>Reads $0.20 per 1M tokens; writes $10 per 1M (Cursor's published rates)</td></tr>
+          <tr><td>Fast mode</td><td>Up to 2.5x faster generation at $16 / $80 per 1M tokens</td></tr>
+          <tr><td>Effort levels</td><td>Low, medium, high, extra high (xhigh), max</td></tr>
+          <tr><td>Where</td><td>Claude apps and API, Amazon Bedrock, Google Cloud, Microsoft Foundry, and Cursor</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <h2>What changed from Fable 5.1 (and from Fable 5)</h2>
+        <p>If you last looked at this line when Fable 5 launched in June, three things moved:</p>
+        <ul>
+          <li><strong>Price.</strong> $8 in / $40 out per million tokens, down 20% from the $10 / $50 that Fable 5 and Fable 5.1 charged.</li>
+          <li><strong>Speed.</strong> Anthropic says outputs arrive up to 30% faster than Fable 5.1, and its safeguards produce fewer unnecessary blocks.</li>
+          <li><strong>Coding results.</strong> On Anthropic's own table, FrontierCode 2.0 (would maintainers merge the change?) went from 32.4% on Fable 5.1 to 49.1% at xhigh effort, ahead of Opus 5.5's 45.5%. FrontierSWE v2 went from 56.3% to 69.9%. On CursorBench, Cursor's own benchmark of real coding tasks, Fable 5.2 scored 60.0% at max effort and 56.9% at default, up from 49.2% for Fable 5.1.</li>
+        </ul>
+        <p>Two caveats keep that honest. The headline tables are vendor-reported and use each model's best effort setting. And leadership is fragile: one day after launch, Cursor reported Gemini 4 Carbon at high effort edging past Fable 5.2 on CursorBench with 60.4%. Treat any "#1" as a snapshot.</p>
+        <h2>The Artificial Analysis index, and why effort is the real price dial</h2>
+        <p>The independent number people search for is the <strong>Artificial Analysis Intelligence Index</strong>. Fable 5.2 at max effort scores <strong>65</strong>, first on the leaderboard as of late November 2026. But the index also shows what each effort level costs per task, and that's the table worth pinning above your desk:</p>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th>Fable 5.2 effort</th><th>AA Intelligence Index</th><th>Cost per index task</th><th>Reading</th></tr></thead>
+          <tbody>
+          <tr><td>Low</td><td>54</td><td>$3.10</td><td>Cheap, still competitive with mid-tier frontier models</td></tr>
+          <tr><td>Medium</td><td>56</td><td>$3.80</td><td>Anthropic's default in Claude apps and Claude Code</td></tr>
+          <tr><td>High</td><td>62</td><td>$9.08</td><td>Cursor's recommended starting point; beats Opus 5.5 at max (59)</td></tr>
+          <tr><td>Extra high</td><td>62</td><td>$14.83</td><td>Same score as high for about 63% more money</td></tr>
+          <tr><td>Max</td><td>65</td><td>$26.54</td><td>Top of the index, roughly 2.9x the cost of high</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>Three things fall out of that. First, <strong>high is the sweet spot</strong>: it scores above Opus 5.5 at its maximum setting (59 at $10.04 per task) for slightly less money. Second, <strong>extra high buys nothing on this index</strong>, so don't make it your default. Third, the model is <strong>verbose</strong>: Artificial Analysis counted 275M output tokens across the index at max effort, against a median of roughly 65M for comparable models. In agent loops, output is where the money goes, and output is the expensive side of the price sheet.</p>
+        <p>Cursor's docs add a practical note: Fable 5.2 always thinks before answering and decides how long on its own, so there is no thinking toggle, only the effort setting. Its effort levels behave differently from Fable 5.1's, so don't carry an old setting over. Start at high.</p>
+        <h2>What a real agent run costs: the arithmetic</h2>
+        <p>Per-token prices are abstract until you run the numbers on a session shape you recognise. Take a medium-sized .NET task: the agent reads a handful of handlers, a DbContext configuration and a test project, then iterates for about 20 turns. Assume each turn re-sends roughly 50K tokens of context (1M input tokens in total) and the model writes 80K output tokens across the session, including its thinking. This is illustrative arithmetic, not a measurement:</p>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th>Scenario</th><th>Input cost</th><th>Output cost</th><th>Total</th></tr></thead>
+          <tbody>
+          <tr><td>No prompt caching</td><td>1M x $8 = $8.00</td><td>80K x $40 = $3.20</td><td><strong>$11.20</strong></td></tr>
+          <tr><td>90% of input served from cache (100K written, 900K read)</td><td>$1.00 + $0.18 = $1.18</td><td>$3.20</td><td><strong>about $4.40</strong></td></tr>
+          <tr><td>Same session at max effort (output roughly triples)</td><td>$1.18</td><td>about $9.60</td><td><strong>about $10.80</strong></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>The lessons generalise. Caching does most of the work on input; Cursor manages it for you, but a stable prefix (the same rules, the same instructions, at the start of every request) is what makes caching effective. On output, the effort setting is the multiplier. And whatever plan you're on, Fable 5.2 is a third-party model in Cursor: on The X Subscription it bills at these rates from prepaid credit, and on legacy plans it draws from the Other Models pool. Set a spending cap before you leave it running overnight.</p>
+        <h2>When Fable 5.2 earns its place over Opus 5.5 on .NET work</h2>
+        <p>Anthropic's own advice is to start most coding with <strong>Claude Opus 5.5</strong>, its "strongest daily driver", and move up to Fable for the most ambitious, open-ended work. Cursor puts Fable 5.2's per-token rates at roughly twice Opus 5.5's. That framing maps well onto a senior .NET workload:</p>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th>Task</th><th>Reach for</th><th>Why</th></tr></thead>
+          <tbody>
+          <tr><td>New endpoint, handler, validator and tests following existing patterns</td><td>Opus 5.5 or Sonnet 5.5</td><td>Pattern-following work; Fable's extra judgment is wasted</td></tr>
+          <tr><td>Hunting a captive dependency or lifetime bug across 30 projects</td><td><strong>Fable 5.2 (high)</strong></td><td>Long-horizon reasoning over a messy dependency graph</td></tr>
+          <tr><td>Migrating a legacy module to a new architecture or framework</td><td><strong>Fable 5.2 (high or xhigh)</strong></td><td>The "otherwise-infeasible migration" class Anthropic designed it for</td></tr>
+          <tr><td>Ambiguous spec: "make the order pipeline idempotent"</td><td><strong>Fable 5.2</strong></td><td>It asks better questions and plans before touching files</td></tr>
+          <tr><td>Bulk mechanical edits (rename, add CancellationToken everywhere)</td><td>A cheaper model</td><td>Correctness comes from the compiler and tests, not the model</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>There's also a middle path Anthropic calls <strong>Advisor</strong> and <strong>Orchestrator</strong>: Fable 5.2 plans and reviews while cheaper models do the typing. In practice that means using Fable for the plan and the final review of a large change, and a cheaper model for the implementation in between.</p>
+        <h2>Using Fable 5.2 in Cursor: three gotchas</h2>
+        <ol>
+          <li><strong>Privacy Mode and Enterprise accounts don't see it by default.</strong> Because Anthropic retains Fable inputs and outputs for up to 30 days for harm-prevention review (not for training), the model is off for teams with Privacy Mode and for all Enterprise customers until an admin approves the data-retention policy. The approval applies team-wide. Personal accounts without Privacy Mode have it on by default.</li>
+          <li><strong>Requests can fall back to Opus.</strong> When a request trips Fable's security guardrails, Cursor routes it to Claude Opus automatically instead of erroring. Useful, but if you're comparing model output on security-adjacent code (auth, crypto, input validation), know that you might not be looking at Fable.</li>
+          <li><strong>It's metered on top of your plan.</strong> As above: Fable 5.2 isn't part of Cursor's included usage on The X Subscription. Check the usage page after your first serious session, not after the month closes.</li>
+        </ol>
+        <h2>A smarter model still doesn't remember your architecture</h2>
+        <p>Here's the part the benchmark tables don't cover. Fable 5.2 exercises noticeably better judgment, and testers report it says "I don't know" instead of inventing an answer. But every session still starts empty. It doesn't know that your Domain project must never reference <code>Microsoft.EntityFrameworkCore</code>, that business failures return <code>Result&lt;T&gt;</code> instead of throwing, or that you rejected MediatR pipelines for logging three months ago, unless that knowledge is in the context it receives.</p>
+        <p>Better judgment applied to missing context just produces more confident drift. The fix is the same for every model: committed, scoped rules plus a decision log the agent reads at the start of the session. A rule like this behaves identically whether the picker says Fable, Opus or GLM:</p>
+        <pre><code>---
+description: Layer boundaries for the Domain project
+globs: src/Domain/**/*.cs
+alwaysApply: false
+---
+- Domain has no references to EF Core, HttpClient, IConfiguration or ASP.NET Core.
+- Business rule violations return Result&lt;T&gt;; never throw for expected failures.
+- Read LEARNING_LOG.md before proposing a new pattern; cite the ADR you are following.</code></pre>
+        <p>That's the problem described in <a href="01-the-context-tax.html">The Context Tax</a> and the framework in <a href="06-stop-cursor-ai-drift-dotnet.html">How to stop Cursor forgetting your .NET architecture</a>. A stable rule set has a second benefit with an expensive model: it's a stable prefix, which is exactly what makes prompt caching pay.</p>
+        <h2>Fable 5.2 or an open-weight model for cost-sensitive runs?</h2>
+        <p>If most of your agent runs are plan-and-implement work rather than hard migrations, the cost gap to open-weight models is large: GLM 5.2 lists at $1.40 in / $4.40 out, so Fable 5.2's output tokens cost about nine times as much. Our <a href="glm-5-2-vs-claude-fable-5-comparison.html">GLM 5.2 vs Claude Fable 5 comparison</a> walks through a real run on both. The conclusion holds with 5.2: pay for Fable where a wrong step is expensive, and default to something cheaper where it isn't.</p>
+        <h2>Sources</h2>
+        <ul>
+          <li>Anthropic, <em>Introducing Claude Fable 5.2 and Claude Mythos 5.2</em> (9 Nov 2026) and the Fable 5.2 model overview: release date, model ID, context, pricing, fast mode, benchmark table, Opus 5.5 guidance.</li>
+          <li>Cursor docs, <em>Claude Fable 5.2</em>: effort guidance, Privacy Mode and Enterprise opt-in, data retention, automatic fallback to Opus, cache rates, billing on X Subscription and legacy plans.</li>
+          <li>Cursor launch post (9 Nov 2026): CursorBench 60.0% at max, 56.9% at default, 49.2% for Fable 5.1. Gemini 4 Carbon 60.4% reported 10 Nov 2026.</li>
+          <li>Artificial Analysis, Claude Fable 5.2 model page and leaderboard (checked 27 Nov 2026): Intelligence Index by effort level, cost per task, output-token totals.</li>
+        </ul>
+        <section class="post-faq" aria-label="Frequently asked questions">
+          <h2>FAQ</h2>
+          <h3>What is the difference between Claude Fable 5.2 and Claude Mythos 5.2?</h3>
+          <p>They are the same underlying model with the same specifications and pricing. Fable 5.2 is generally available and has stronger cybersecurity and biology safeguards; Mythos 5.2 is restricted to organisations verified through Anthropic's Cyber and Life Sciences Verification Programs.</p>
+          <h3>How much does Claude Fable 5.2 cost?</h3>
+          <p>$8 per million input tokens and $40 per million output tokens, 20% less than Fable 5.1. Prompt-cache reads cost $0.20 per million tokens. Optional fast mode costs $16 / $80 per million tokens.</p>
+          <h3>What is Fable 5.2's Artificial Analysis Intelligence Index score?</h3>
+          <p>65 at max effort, the top score on the index as of late November 2026. It scores 62 at high and extra high, 56 at medium and 54 at low, with cost per index task ranging from $3.10 at low to $26.54 at max.</p>
+          <h3>Is Claude Fable 5.2 available in Cursor?</h3>
+          <p>Yes, since 9 November 2026. It is on by default for personal accounts without Privacy Mode. Teams with Privacy Mode and Enterprise accounts need an admin to approve Anthropic's data-retention policy first. It is billed as a third-party model on top of Cursor's included usage.</p>
+          <h3>Fable 5 vs Fable 5.2: what's the difference?</h3>
+          <p>Fable 5.2 is cheaper ($8/$40 versus $10/$50 per million tokens), faster, and scores substantially higher on coding benchmarks such as FrontierCode 2.0 and CursorBench. Both have a 1M-token context window and 128K-token output limit.</p>
+        </section>
+
+        <nav class="post-nav" aria-label="Previous and next essay">
+          <a class="post-nav-prev" href="glm-5-2-vs-claude-fable-5-comparison.html"><span class="post-nav-label">Previous</span> GLM 5.2 vs Fable 5 comparison</a>
+          <a class="post-nav-next" href="11-cursor-csharp-dotnet-setup.html"><span class="post-nav-label">Next</span> Cursor for C# and .NET setup</a>
+        </nav>
+
+        <nav class="post-related" aria-label="Keep reading">
+          <h2>Keep reading</h2>
+          <ul>
+          <li><a href="glm-5-2-vs-claude-fable-5-comparison.html">GLM 5.2 vs Claude Fable 5</a></li>
+          <li><a href="06-stop-cursor-ai-drift-dotnet.html">Stop Cursor drift on .NET</a></li>
+          </ul>
+          <p class="post-related-hub">More essays: <a href="./">Blog index</a> &middot; Kit: <a href="../">Agentic Architect</a> &middot; Local models: <a href="../hardware/">Hardware hub</a></p>
+        </nav>
+
+        <hr class="post-divider" />
+
+        <div class="post-cta post-cta-sample">
+          <h2>Try one rule free — no email</h2>
+          <p>Copy <code>arch-core-lite.mdc</code> into <code>.cursor/rules/</code>. It stops Cursor (or Copilot in VS) from crossing layer boundaries and shipping EF Core in your Domain layer.</p>
+          <pre class="post-sample-mdc"><code>### 1. Respect layer boundaries
+- Domain never references Microsoft.EntityFrameworkCore, HttpClient, IConfiguration...
+- Application orchestrates via abstractions only. No direct DbContext use.
+- Infrastructure implements interfaces declared higher up.</code></pre>
+          <div class="post-cta-actions">
+            <a class="btn btn-accent btn-lg" href="https://agentic-architect.dev/arch-core-lite.mdc?utm_source=site&utm_medium=essay_post_cta&utm_campaign=free_sample" download="arch-core-lite.mdc">Download free .mdc &rarr;</a>
+            <a class="btn btn-primary btn-lg" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Full kit &mdash; &pound;9.00 (9 rules + LEARNING_LOG)</a>
+          </div>
+          <p class="post-cta-footnote">One-time purchase &middot; 30-day refund &middot; or grab the <a href="../#free-kit-signup">3-rule email starter</a> if you want more free files.</p>
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand">
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <p>The persistence framework for serious Cursor users in C#/.NET environments.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
+        <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a></div>
+        <div><h4>Legal</h4><a href="../privacy-policy.html">Privacy Policy</a><a href="../terms-of-service.html">Terms of Service</a><a href="../affiliate-disclosure.html">Affiliate Disclosure</a></div>
+        <div><h4>Buy</h4><a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=essay_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit &mdash; &pound;9.00</a></div>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>&copy; <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules &middot; One-time payment</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="../script.js" defer></script>
+</body>
+</html>

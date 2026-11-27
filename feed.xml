@@ -8,6 +8,30 @@
     <atom:link href="https://agentic-architect.dev/feed.xml" rel="self" type="application/rss+xml" />
 
     <item>
+      <title>How to stop Cursor forgetting your database schema (and your project rules)</title>
+      <link>https://agentic-architect.dev/blog/12-cursor-database-schema-efcore.html</link>
+      <guid isPermaLink="true">https://agentic-architect.dev/blog/12-cursor-database-schema-efcore.html</guid>
+      <pubDate>Fri, 27 Nov 2026 22:00:00 +0000</pubDate>
+      <description>A committed EF Core schema digest, a glob-scoped rule for data-access code, and a drift test that keeps it honest.</description>
+    </item>
+
+    <item>
+      <title>Cursor for C# and .NET in 2026: extensions, debugging and Unity</title>
+      <link>https://agentic-architect.dev/blog/11-cursor-csharp-dotnet-setup.html</link>
+      <guid isPermaLink="true">https://agentic-architect.dev/blog/11-cursor-csharp-dotnet-setup.html</guid>
+      <pubDate>Fri, 27 Nov 2026 21:30:00 +0000</pubDate>
+      <description>Why the C# Dev Kit won't run in Cursor, which C# extension to use instead, netcoredbg debugging, and the Unity setup.</description>
+    </item>
+
+    <item>
+      <title>Claude Fable 5.2 for coding: price, effort levels, and when to use it</title>
+      <link>https://agentic-architect.dev/blog/10-claude-fable-5-2-for-coding.html</link>
+      <guid isPermaLink="true">https://agentic-architect.dev/blog/10-claude-fable-5-2-for-coding.html</guid>
+      <pubDate>Fri, 27 Nov 2026 21:00:00 +0000</pubDate>
+      <description>Fable 5.2 vs Mythos 5.2, what changed from Fable 5.1, cost per task at each effort level, and when it beats Opus 5.5.</description>
+    </item>
+
+    <item>
       <title>Teach Cursor Result&lt;T&gt; instead of throwing</title>
       <link>https://agentic-architect.dev/blog/04-cursor-result-not-throw.html</link>
       <guid isPermaLink="true">https://agentic-architect.dev/blog/04-cursor-result-not-throw.html</guid>

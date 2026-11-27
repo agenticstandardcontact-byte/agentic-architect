@@ -12,7 +12,7 @@ Important notes:
 ## Start here
 
 - [Homepage](https://agentic-architect.dev/): product overview, pricing, FAQ
-- [Cursor rules for .NET (learn hub)](https://agentic-architect.dev/learn/cursor-rules-dotnet.html): scoped rules overview
+- [Cursor rules for .NET (learn hub)](https://agentic-architect.dev/learn/cursor-rules-dotnet.html): .mdc rule types, AGENTS.md, migrating .cursorrules
 - [Free arch-core-lite.mdc](https://agentic-architect.dev/arch-core-lite.mdc): layer-boundary rule sample
 - [RSS feed](https://agentic-architect.dev/feed.xml): daily rules and new essays
 
@@ -25,10 +25,13 @@ Important notes:
 - [Stop Cursor drift](https://agentic-architect.dev/blog/06-stop-cursor-ai-drift-dotnet.html.md): architecture regression guardrails
 - [EF Core patterns](https://agentic-architect.dev/blog/07-cursor-efcore-patterns.html.md): AsNoTracking, Include depth, N+1
 - [Cursor vs Copilot](https://agentic-architect.dev/blog/08-cursor-vs-copilot-dotnet.html.md): which to pay for in 2026
+- [Claude Fable 5.2 for coding](https://agentic-architect.dev/blog/10-claude-fable-5-2-for-coding.html.md): pricing, effort levels, AA index, Cursor setup
+- [Cursor for C# and .NET](https://agentic-architect.dev/blog/11-cursor-csharp-dotnet-setup.html.md): C# extensions, netcoredbg debugging, Unity
+- [Cursor + your database schema](https://agentic-architect.dev/blog/12-cursor-database-schema-efcore.html.md): EF Core schema digest, scoped rules, drift test
 
 ## Hardware (local LLM / mini PC picks)
 
-- [Hardware hub](https://agentic-architect.dev/hardware/): mini PCs for running local models alongside .NET work
+- [Hardware hub](https://agentic-architect.dev/hardware/): how to choose a mini PC for local LLMs (memory, bandwidth), plus comparisons
 - [HX99G vs Mac Mini M4](https://agentic-architect.dev/hardware/hx99g-vs-mac-mini-m4.html): Windows/Linux mini PC vs Apple
 - [SER9 vs UM890 Pro](https://agentic-architect.dev/hardware/ser9-vs-um890-pro.html): AMD mini PC comparison
 

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f17" />
+  <title>Stop Cursor Forgetting Your Database Schema (EF Core Guide)</title>
+  <meta name="description" content="Cursor guesses column names and invents navigation properties because it never sees your schema. Give it a schema digest, scoped rules and a drift test." />
+  <meta name="keywords" content="Cursor database schema, stop Cursor forgetting schema, Cursor project rules, Cursor EF Core, EF Core model snapshot, dotnet ef dbcontext script, Cursor rules database, AGENTS.md" />
+  <link rel="canonical" href="https://agentic-architect.dev/blog/12-cursor-database-schema-efcore.html" />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Architect" href="https://agentic-architect.dev/feed.xml" />
+
+  <meta property="og:title" content="Stop Cursor Forgetting Your Database Schema (EF Core Guide)" />
+  <meta property="og:description" content="Cursor guesses column names and invents navigation properties because it never sees your schema. Give it a schema digest, scoped rules and a drift test." />
+  <meta property="og:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
+  <meta property="og:url" content="https://agentic-architect.dev/blog/12-cursor-database-schema-efcore.html" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-27T22:00:00Z" />
+  <meta property="article:author" content="Agentic Architect" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
+  <link rel="icon" href="https://agentic-architect.dev/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="https://agentic-architect.dev/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://agentic-architect.dev/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="https://agentic-architect.dev/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://agentic-architect.dev/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="blog.css" />
+  <script src="../uet-head.js"></script>
+  <script src="../google-ads-head.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7251307599469890"
+       crossorigin="anonymous"></script>
+  <script data-goatcounter="https://agentic-architect.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How to stop Cursor forgetting your database schema and project rules",
+    "datePublished": "2026-11-27T22:00:00Z",
+    "dateModified": "2026-11-27T22:00:00Z",
+    "author": {
+        "@type": "Organization",
+        "name": "Agentic Architect"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Agentic Architect",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://agentic-architect.dev/favicon.svg"
+        }
+    },
+    "image": "https://agentic-architect.dev/og-image.jpg?v=3",
+    "mainEntityOfPage": "https://agentic-architect.dev/blog/12-cursor-database-schema-efcore.html",
+    "keywords": "Cursor, database schema, EF Core, project rules, AGENTS.md, .NET"
+}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Why does Cursor keep forgetting my database schema?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Because every chat starts without memory, and on an EF Core project the schema is spread across entity classes, fluent configuration, conventions and migrations. The agent usually reads only part of that and guesses the rest. A committed schema digest plus a rule telling the agent to read it fixes most errors."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Should I paste my whole schema into a Cursor rule?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Rule bodies are included in the prompt, so a large schema there costs tokens on every request and dilutes other instructions. Keep the schema in a committed file such as docs/schema/schema.sql and reference it from a glob-scoped rule; the agent reads it when it works on data-access code."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I generate a SQL schema from an EF Core DbContext?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Run dotnet ef dbcontext script with your project and startup project, which generates CREATE statements from the current model without using migrations. In code, Database.GenerateCreateScript() produces the same script, which makes a simple drift test possible."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is it safe to connect Cursor to my database?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Only with limits: use a read-only user on a local or development database, keep credentials out of the repository, and leave tool approval on for anything that runs SQL. Never connect an agent to production with write access."
+            }
+        }
+    ]
+}
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+  <div class="container nav-inner" data-site-nav>
+      <a href="../" class="brand" aria-label="Agentic Architect home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+      </a>
+      <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
+        <a href="../#problem">The Problem</a>
+        <a href="../#kit">What's Inside</a>
+        <a href="../#proof">Proof</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../#faq">FAQ</a>
+        <a href="./" aria-current="page">Blog</a>
+        <a href="../hardware/">Hardware</a>
+        <a href="../learn/">Quick Fixes</a>
+        <a href="../#resources">Guides</a>
+        <div class="nav-menu-ctas">
+          <a href="../#free-kit-signup" class="btn btn-ghost btn-sm">Get the free kit</a>
+          <a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Buy now</a>
+        </div>
+      </nav>
+      <div class="nav-ctas">
+        <a href="../#free-kit-signup" class="btn btn-ghost btn-sm nav-cta-free">Get the free kit</a>
+        <a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit" class="btn btn-primary btn-sm nav-cta-buy" target="_blank" rel="noopener">Buy now</a>
+      </div>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu"><span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
+  </div>
+</header>
+
+  <main>
+    <article class="post">
+      <div class="container post-narrow">
+        <div class="post-meta">
+          <time datetime="2026-11-27">November 27, 2026</time>
+          <span class="post-tag">.NET tooling</span>
+          <span class="post-read-time">10 min read</span>
+        </div>
+
+        <h1>How to stop Cursor forgetting your <em>database schema</em> (and your project rules)</h1>
+        <p class="post-lede">Ask Cursor for a query against a table it touched yesterday and it may still guess the column name, invent a navigation property, or write a migration for a column that already exists. It looks like forgetting. It's actually something simpler: the agent never had your schema in the first place, and every new chat starts empty. This guide shows how to put an accurate, compact version of your EF Core schema where the agent will read it, keep it from going stale, and make your project rules stick at the same time.</p>
+
+        <h2>Why Cursor gets your schema wrong</h2>
+        <p>Language models don't retain memory between sessions; Cursor's own docs say so plainly, and that's why rules exist. Within a session, the agent only knows what it has read. On an EF Core codebase, the schema is spread across places it rarely reads together:</p>
+        <ul>
+          <li><strong>Entity classes</strong> give property names, which are not necessarily column names.</li>
+          <li><strong>Fluent configuration</strong> (<code>IEntityTypeConfiguration&lt;T&gt;</code>, <code>OnModelCreating</code>) renames tables and columns, sets keys, owned types, value conversions and query filters.</li>
+          <li><strong>Conventions</strong> decide everything nobody configured explicitly, and they're invisible in the code.</li>
+          <li><strong>Migrations</strong> record how the schema got here, across dozens of files the agent has no reason to open.</li>
+        </ul>
+        <p>Semantic search retrieves a <em>slice</em> of that, usually the entity class, and the model fills in the rest from the statistical average of every EF Core sample it was trained on. That's where <code>CustomerId</code> becomes <code>customer_id</code>, or an <code>Orders</code> collection appears on an entity that only has a foreign key. The cure is not a bigger model. It's giving the agent a single, accurate, compact source of truth, and telling it when to read it.</p>
+        <h2>EF Core already writes a source of truth: the model snapshot</h2>
+        <p>If you use migrations, you have a file that describes the current model as EF Core sees it: <code>Migrations/&lt;YourContext&gt;ModelSnapshot.cs</code>. Every table, column, type, key, index and relationship is there, with the real column names after configuration and conventions have been applied. It's regenerated by <code>dotnet ef migrations add</code>, so it's never hand-maintained.</p>
+        <p>Two problems: it's long (thousands of lines on a mature model), and it's C# builder code rather than something you'd want to scan quickly. It's a good reference for the agent to open deliberately, not something to paste into every prompt.</p>
+        <h2>Generate a compact schema digest the agent can read</h2>
+        <p>The most readable digest is the SQL your model would create. EF Core's tools generate it from the <code>DbContext</code> directly, bypassing migrations:</p>
+        <pre><code>dotnet ef dbcontext script \
+  --project src/Infrastructure \
+  --startup-project src/Api \
+  --output docs/schema/schema.sql</code></pre>
+        <p>Commit <code>docs/schema/schema.sql</code>. It's plain <code>CREATE TABLE</code> statements with real names, types, nullability, keys, indexes and foreign keys: exactly what a model needs to write a correct query or migration, in a fraction of the snapshot's size. For <strong>database-first</strong> projects, the database is the truth instead: regenerate entities with <code>dotnet ef dbcontext scaffold</code> and script the schema from the database with your usual tooling. Either way, the point is one committed file that describes the schema as it is now.</p>
+        <h2>Keep the digest honest with a drift test</h2>
+        <p>A digest that goes stale is worse than none, because the agent will trust it. Make CI enforce it. <code>Database.GenerateCreateScript()</code> produces the same SQL from code, and it only needs a relational provider configured; it never opens a connection:</p>
+        <pre><code>using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
+using Xunit;
+
+public class SchemaDigestTests
+{
+    [Fact]
+    public void Committed_schema_digest_matches_the_current_model()
+    {
+        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
+            .UseSqlServer(&quot;Server=.;Database=SchemaDigestOnly&quot;) // model only, no connection opened
+            .Options;
+
+        using var db = new AppDbContext(options);
+        var current = db.Database.GenerateCreateScript().ReplaceLineEndings(&quot;\n&quot;);
+
+        var path = Path.Combine(RepoRoot(), &quot;docs&quot;, &quot;schema&quot;, &quot;schema.sql&quot;);
+        if (Environment.GetEnvironmentVariable(&quot;UPDATE_SCHEMA_DIGEST&quot;) == &quot;1&quot;)
+        {
+            File.WriteAllText(path, current);
+            return;
+        }
+
+        var committed = File.ReadAllText(path).ReplaceLineEndings(&quot;\n&quot;);
+        Assert.True(committed == current,
+            &quot;docs/schema/schema.sql is stale. Re-run with UPDATE_SCHEMA_DIGEST=1 and commit it.&quot;);
+    }
+
+    private static string RepoRoot([CallerFilePath] string thisFile = &quot;&quot;) =&gt;
+        Path.GetFullPath(Path.Combine(Path.GetDirectoryName(thisFile)!, &quot;..&quot;, &quot;..&quot;));
+}</code></pre>
+        <p>Swap <code>UseSqlServer</code> for <code>UseNpgsql</code> or your provider, and adjust <code>RepoRoot()</code> to your test project's depth. If you generate the committed file with the test itself (<code>UPDATE_SCHEMA_DIGEST=1 dotnet test --filter SchemaDigest</code>) rather than the CLI, the two can never disagree on formatting. Now the digest is guaranteed current, and "update the schema digest" becomes part of every migration the agent writes.</p>
+        <h2>A schema rule that loads only for data-access work</h2>
+        <p>Next, tell Cursor when to read the digest. A project rule in <code>.cursor/rules/</code> with <code>globs</code> is attached automatically when a matching file is in context, so it costs nothing on API-layer or UI prompts:</p>
+        <pre><code>---
+description: EF Core schema source of truth for queries, entities and migrations
+globs: src/Infrastructure/**/*.cs, **/Migrations/*.cs
+alwaysApply: false
+---
+# Database schema
+- Before writing a query, entity change or migration, read docs/schema/schema.sql.
+  Never guess table names, column names, types or relationships.
+- LINQ uses entity property names; raw SQL uses the column names in schema.sql.
+- A new column = entity property + IEntityTypeConfiguration change + `dotnet ef migrations add`
+  + regenerate the digest (UPDATE_SCHEMA_DIGEST=1 dotnet test --filter SchemaDigest).
+- Never edit *ModelSnapshot.cs or an already-applied migration by hand.
+- If schema.sql and the code disagree, stop and say so instead of picking one.</code></pre>
+        <p>Why reference the file instead of pasting the schema into the rule? Cursor's docs are explicit that a file mention inside a rule tells the agent <em>where to look</em>; the agent reads the file with its tools when it needs it, and the contents aren't inlined into the prompt. That's what you want for a large file. Anything that must always be in context belongs in the rule body, which is why the rule itself stays short.</p>
+        <h2>The "project rules" half: what should be always-on</h2>
+        <p>The same mechanism answers the other half of the question, rules that seem to be forgotten. Usually they aren't forgotten; they were never loaded, or they're buried. Cursor's rule types decide when a rule is included:</p>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th>Rule type</th><th>Frontmatter</th><th>Use it for</th></tr></thead>
+          <tbody>
+          <tr><td>Always Apply</td><td><code>alwaysApply: true</code></td><td>A handful of non-negotiables: build/test expectations, layer boundaries, where the decision log lives</td></tr>
+          <tr><td>Apply to Specific Files</td><td><code>globs</code> set, <code>alwaysApply: false</code></td><td>Schema, EF Core, DI and API conventions that only matter in certain folders</td></tr>
+          <tr><td>Apply Intelligently</td><td><code>description</code> only</td><td>Situational guidance the agent pulls in when the description matches the task</td></tr>
+          <tr><td>Apply Manually</td><td>neither</td><td>Playbooks you invoke with <code>@rule-name</code>, such as a migration checklist</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>Three checks fix most "Cursor ignores my rules" reports. Rules must be <code>.mdc</code> files in <code>.cursor/rules/</code>; a plain <code>.md</code> file there is ignored. The legacy <code>.cursorrules</code> file is being deprecated, and <code>.mdc</code> rules take precedence where they overlap, so migrate it into an Always Apply rule. And keep always-on rules short: every line is in every request, so a 400-line always-on rule dilutes the instructions that matter. For simple always-on instructions, an <code>AGENTS.md</code> at the repo root is a fine alternative. The full breakdown is in <a href="../learn/cursor-rules-dotnet.html">Cursor rules for .NET engineers</a>.</p>
+        <h2>Optional: let the agent query a dev database over MCP</h2>
+        <p>Cursor can use MCP servers, configured per project in <code>.cursor/mcp.json</code>, and there are MCP servers for SQL Server, PostgreSQL and most other databases. Letting the agent inspect a real database is useful for data questions ("how many orders have a null ShippedAt?") and for database-first projects. Treat it as an addition to the digest, not a replacement, and lock it down:</p>
+        <ul>
+          <li>A <strong>read-only</strong> database user, created for the agent, with access to a local or dev database only.</li>
+          <li>Never production credentials, and never a connection string committed to the repo; use environment variables.</li>
+          <li>Keep tool approval on for anything that executes SQL, so you see each query before it runs.</li>
+        </ul>
+        <h2>Persist the decisions, not just the schema</h2>
+        <p>A schema digest tells the agent what exists. It doesn't tell it <em>why</em>, and the why is what stops it undoing your decisions. Soft delete through a global query filter, a ban on lazy loading, a reporting context that bypasses tenant filters: those belong in a committed decision log the agent reads at the start of a session:</p>
+        <pre><code>## ADR-014: Soft delete via global query filter
+- Orders, Customers: HasQueryFilter(e =&gt; !e.IsDeleted).
+- Admin reports call IgnoreQueryFilters() explicitly; nothing else may.
+
+## ADR-015: No lazy loading
+- UseLazyLoadingProxies is banned. Load related data with Include or a projection.</code></pre>
+        <p>Combined with the query guardrails in <a href="07-cursor-efcore-patterns.html">How to use Cursor AI with EF Core</a> (<code>AsNoTracking</code> on reads, no N+1, bounded <code>Include</code> depth), that's the whole data layer covered: what the schema is, how to query it, and which decisions are settled. The underlying problem, paying to re-explain your system every session, is the one described in <a href="01-the-context-tax.html">The Context Tax</a>.</p>
+        <h2>Checklist</h2>
+        <ol>
+          <li>Generate <code>docs/schema/schema.sql</code> with <code>dotnet ef dbcontext script</code> (or from the database, if database-first) and commit it.</li>
+          <li>Add the drift test so CI fails when the digest is stale.</li>
+          <li>Add a glob-scoped schema rule for <code>Infrastructure</code> and <code>Migrations</code> that points at the digest.</li>
+          <li>Move any <code>.cursorrules</code> content into a short Always Apply <code>.mdc</code> rule or <code>AGENTS.md</code>.</li>
+          <li>Record schema-level decisions (filters, loading strategy, naming) as ADRs in a committed log.</li>
+          <li>Optionally, add a read-only MCP connection to a dev database.</li>
+        </ol>
+        <section class="post-faq" aria-label="Frequently asked questions">
+          <h2>FAQ</h2>
+          <h3>Why does Cursor keep forgetting my database schema?</h3>
+          <p>Because every chat starts without memory, and on an EF Core project the schema is spread across entity classes, fluent configuration, conventions and migrations. The agent usually reads only part of that and guesses the rest. A committed schema digest plus a rule telling the agent to read it fixes most errors.</p>
+          <h3>Should I paste my whole schema into a Cursor rule?</h3>
+          <p>No. Rule bodies are included in the prompt, so a large schema there costs tokens on every request and dilutes other instructions. Keep the schema in a committed file such as docs/schema/schema.sql and reference it from a glob-scoped rule; the agent reads it when it works on data-access code.</p>
+          <h3>How do I generate a SQL schema from an EF Core DbContext?</h3>
+          <p>Run dotnet ef dbcontext script with your project and startup project, which generates CREATE statements from the current model without using migrations. In code, Database.GenerateCreateScript() produces the same script, which makes a simple drift test possible.</p>
+          <h3>Is it safe to connect Cursor to my database?</h3>
+          <p>Only with limits: use a read-only user on a local or development database, keep credentials out of the repository, and leave tool approval on for anything that runs SQL. Never connect an agent to production with write access.</p>
+        </section>
+
+        <nav class="post-nav" aria-label="Previous and next essay">
+          <a class="post-nav-prev" href="11-cursor-csharp-dotnet-setup.html"><span class="post-nav-label">Previous</span> Cursor for C# and .NET setup</a>
+          <span class="post-nav-next post-nav-disabled"></span>
+        </nav>
+
+        <nav class="post-related" aria-label="Keep reading">
+          <h2>Keep reading</h2>
+          <ul>
+          <li><a href="07-cursor-efcore-patterns.html">EF Core patterns</a></li>
+          <li><a href="01-the-context-tax.html">The context tax</a></li>
+          </ul>
+          <p class="post-related-hub">More essays: <a href="./">Blog index</a> &middot; Kit: <a href="../">Agentic Architect</a> &middot; Local models: <a href="../hardware/">Hardware hub</a></p>
+        </nav>
+
+        <hr class="post-divider" />
+
+        <div class="post-cta post-cta-sample">
+          <h2>Try one rule free — no email</h2>
+          <p>Copy <code>arch-core-lite.mdc</code> into <code>.cursor/rules/</code>. It stops Cursor (or Copilot in VS) from crossing layer boundaries and shipping EF Core in your Domain layer.</p>
+          <pre class="post-sample-mdc"><code>### 1. Respect layer boundaries
+- Domain never references Microsoft.EntityFrameworkCore, HttpClient, IConfiguration...
+- Application orchestrates via abstractions only. No direct DbContext use.
+- Infrastructure implements interfaces declared higher up.</code></pre>
+          <div class="post-cta-actions">
+            <a class="btn btn-accent btn-lg" href="https://agentic-architect.dev/arch-core-lite.mdc?utm_source=site&utm_medium=essay_post_cta&utm_campaign=free_sample" download="arch-core-lite.mdc">Download free .mdc &rarr;</a>
+            <a class="btn btn-primary btn-lg" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Full kit &mdash; &pound;9.00 (9 rules + LEARNING_LOG)</a>
+          </div>
+          <p class="post-cta-footnote">One-time purchase &middot; 30-day refund &middot; or grab the <a href="../#free-kit-signup">3-rule email starter</a> if you want more free files.</p>
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand">
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <p>The persistence framework for serious Cursor users in C#/.NET environments.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
+        <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a></div>
+        <div><h4>Legal</h4><a href="../privacy-policy.html">Privacy Policy</a><a href="../terms-of-service.html">Terms of Service</a><a href="../affiliate-disclosure.html">Affiliate Disclosure</a></div>
+        <div><h4>Buy</h4><a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=essay_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit &mdash; &pound;9.00</a></div>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>&copy; <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules &middot; One-time payment</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="../script.js" defer></script>
+</body>
+</html>

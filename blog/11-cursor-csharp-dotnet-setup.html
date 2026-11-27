@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f17" />
+  <title>Cursor for C# and .NET in 2026: Extensions, Debugging, Unity</title>
+  <meta name="description" content="Set up Cursor for C#: why C# Dev Kit won't run, Anysphere C# vs ReSharper vs DotRush, netcoredbg debugging, tests, Unity, and rules for .NET." />
+  <meta name="keywords" content="Cursor C#, C# in Cursor, Cursor .NET setup, C# Dev Kit Cursor, Cursor C# extension, DotRush, ReSharper for Cursor, netcoredbg, Cursor Unity, Cursor debugging .NET" />
+  <link rel="canonical" href="https://agentic-architect.dev/blog/11-cursor-csharp-dotnet-setup.html" />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Architect" href="https://agentic-architect.dev/feed.xml" />
+
+  <meta property="og:title" content="Cursor for C# and .NET in 2026: Extensions, Debugging, Unity" />
+  <meta property="og:description" content="Set up Cursor for C#: why C# Dev Kit won't run, Anysphere C# vs ReSharper vs DotRush, netcoredbg debugging, tests, Unity, and rules for .NET." />
+  <meta property="og:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
+  <meta property="og:url" content="https://agentic-architect.dev/blog/11-cursor-csharp-dotnet-setup.html" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-27T21:30:00Z" />
+  <meta property="article:author" content="Agentic Architect" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
+  <link rel="icon" href="https://agentic-architect.dev/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="https://agentic-architect.dev/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://agentic-architect.dev/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="https://agentic-architect.dev/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://agentic-architect.dev/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="blog.css" />
+  <script src="../uet-head.js"></script>
+  <script src="../google-ads-head.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7251307599469890"
+       crossorigin="anonymous"></script>
+  <script data-goatcounter="https://agentic-architect.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Cursor for C# and .NET in 2026: extensions, debugging and Unity",
+    "datePublished": "2026-11-27T21:30:00Z",
+    "dateModified": "2026-11-27T21:30:00Z",
+    "author": {
+        "@type": "Organization",
+        "name": "Agentic Architect"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Agentic Architect",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://agentic-architect.dev/favicon.svg"
+        }
+    },
+    "image": "https://agentic-architect.dev/og-image.jpg?v=3",
+    "mainEntityOfPage": "https://agentic-architect.dev/blog/11-cursor-csharp-dotnet-setup.html",
+    "keywords": "Cursor C#, .NET, C# Dev Kit, DotRush, ReSharper, netcoredbg, Unity"
+}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Can I use Microsoft's C# Dev Kit in Cursor?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. The C# Dev Kit, the vsdbg debugger and the Unity extension are licensed only for Microsoft products such as VS Code and Visual Studio. In Cursor, use the Anysphere C# extension, ReSharper for Cursor or DotRush instead."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Which C# extension should I use in Cursor?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Install one language extension. The Anysphere C# extension is the default for ASP.NET Core and library work. ReSharper for Cursor suits Blazor and Razor work or teams that want ReSharper's tooling. DotRush is the lightest option and includes a Unity debugger, but it doesn't support Razor, XAML or Blazor."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Cursor support .NET debugging?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Cursor's C# extension debugs with the open-source netcoredbg debugger, so breakpoints, stepping and watches work. One known limitation: it ignores the console setting in launch.json, so interactive console apps can't read stdin under the debugger."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I use Cursor with Unity?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, with community tools. Install the com.boxqkrtm.ide.cursor package from its git URL, set Cursor as Unity's External Script Editor, and use DotRush's Unity debugger with userAssemblies pointing at your script assemblies. This setup is outside Unity's official support."
+            }
+        }
+    ]
+}
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+  <div class="container nav-inner" data-site-nav>
+      <a href="../" class="brand" aria-label="Agentic Architect home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2L3 9v14l13 7 13-7V9L16 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M10 14h12M10 18h12M10 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+      </a>
+      <nav id="navMenu" class="nav-links nav-links-panel" aria-label="Primary">
+        <a href="../#problem">The Problem</a>
+        <a href="../#kit">What's Inside</a>
+        <a href="../#proof">Proof</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../#faq">FAQ</a>
+        <a href="./" aria-current="page">Blog</a>
+        <a href="../hardware/">Hardware</a>
+        <a href="../learn/">Quick Fixes</a>
+        <a href="../#resources">Guides</a>
+        <div class="nav-menu-ctas">
+          <a href="../#free-kit-signup" class="btn btn-ghost btn-sm">Get the free kit</a>
+          <a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Buy now</a>
+        </div>
+      </nav>
+      <div class="nav-ctas">
+        <a href="../#free-kit-signup" class="btn btn-ghost btn-sm nav-cta-free">Get the free kit</a>
+        <a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=nav_buy&utm_campaign=paid_kit" class="btn btn-primary btn-sm nav-cta-buy" target="_blank" rel="noopener">Buy now</a>
+      </div>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu"><span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
+  </div>
+</header>
+
+  <main>
+    <article class="post">
+      <div class="container post-narrow">
+        <div class="post-meta">
+          <time datetime="2026-11-27">November 27, 2026</time>
+          <span class="post-tag">.NET tooling</span>
+          <span class="post-read-time">11 min read</span>
+        </div>
+
+        <h1>Cursor for C# and .NET in 2026: <em>extensions, debugging and Unity</em></h1>
+        <p class="post-lede">The first hour of C# in Cursor is more confusing than it should be. You open a solution, Cursor offers extensions you've never heard of, the one you use in VS Code isn't there, and the debugger behaves slightly differently. None of it is hard once you know why. This guide covers the licensing reason behind it, the three C# extensions that do work, a debugging setup that holds up on real solutions, Unity projects, and the rules that make Cursor write C# the way your team does.</p>
+
+        <h2>Why Microsoft's C# Dev Kit doesn't work in Cursor</h2>
+        <p>Cursor is built on the open-source VS Code codebase, but several of Microsoft's most popular extensions are not open source. The <strong>C# Dev Kit</strong>, the official C# extension's proprietary pieces and the <code>vsdbg</code> debugger are licensed for use only in Microsoft products: Visual Studio, VS Code and their hosted variants. Since Microsoft tightened enforcement in April 2025, opening a C# project in a fork showed a message that the extension may be used only with Microsoft Visual Studio Code.</p>
+        <p>Cursor's response was to rebuild the affected extensions on open alternatives. In May 2025 it published its own C# extension (publisher: Anysphere), with one notable swap: debugging uses Samsung's open-source <code>netcoredbg</code> instead of <code>vsdbg</code>. Cursor staff confirmed again in August 2026 that the C# Dev Kit can't be used in Cursor, so don't spend an afternoon trying to side-load it.</p>
+        <h2>Your C# extension options in Cursor</h2>
+        <p>There are three realistic choices. Cursor's own C# guide recommends installing <em>one</em> language extension rather than stacking them, plus the .NET Install Tool to manage SDKs.</p>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th>Extension</th><th>Who maintains it</th><th>Strengths</th><th>Watch for</th></tr></thead>
+          <tbody>
+          <tr><td><strong>C# (Anysphere)</strong></td><td>Cursor</td><td>Built for Cursor, debugging via netcoredbg, the default most people end up with</td><td>The <code>console</code> option in launch.json is ignored, so interactive console apps can't read stdin under the debugger</td></tr>
+          <tr><td><strong>ReSharper for Cursor</strong></td><td>JetBrains</td><td>Solution Explorer, NuGet management, unit-test runner, navigation and refactoring from the ReSharper engine</td><td>Commercial licence for work (free for non-commercial use, 30-day trial)</td></tr>
+          <tr><td><strong>DotRush</strong></td><td>Community (MIT)</td><td>Lightweight, Roslyn-based IntelliSense, built-in debugger, test runner, Unity debugging</td><td>No Razor, XAML or Blazor support</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>A sensible default: start with the Anysphere C# extension for plain ASP.NET Core and library work, choose ReSharper for Cursor if you do Blazor or Razor-heavy work or want the ReSharper toolset, and choose DotRush if you want the lightest option or work in Unity.</p>
+        <h2>Setup in five steps</h2>
+        <ol>
+          <li><strong>Install the .NET SDK</strong> (Cursor doesn't ship a compiler) and confirm with <code>dotnet --version</code>.</li>
+          <li><strong>Install one C# extension</strong> from the table above, plus the <em>.NET Install Tool</em>. Uninstall any older OmniSharp-era extension so two language servers don't fight over the same files.</li>
+          <li><strong>Open the folder that contains your <code>.sln</code></strong>, not an individual project folder. The language server needs the solution to resolve project references.</li>
+          <li><strong>Build once from the terminal</strong> with <code>dotnet build</code>. Restore problems surface here more clearly than in the editor, and the agent will use the same command later.</li>
+          <li><strong>If Cursor can't find the SDK</strong> (common with per-user installs or several SDKs side by side), point it there explicitly in <code>settings.json</code> and restart:</li>
+        </ol>
+        <pre><code>{
+  &quot;dotnet.dotnetPath&quot;: &quot;C:/Program Files/dotnet/dotnet.exe&quot;
+}</code></pre>
+        <p>Pin the SDK per repository with a <code>global.json</code> as well. It costs one file and it means Cursor's agent, CI and every developer build with the same SDK, which removes a whole category of "works on my machine" answers from the agent's suggestions.</p>
+        <h2>Debugging: what works, and the one known gap</h2>
+        <p>Breakpoints, stepping, watches and the call stack work with netcoredbg. For an ASP.NET Core API, a <code>.vscode/launch.json</code> along these lines is all you need. If your extension generates its own launch configuration, prefer that and compare:</p>
+        <pre><code>{
+  &quot;version&quot;: &quot;0.2.0&quot;,
+  &quot;configurations&quot;: [
+    {
+      &quot;name&quot;: &quot;.NET Core Launch (web)&quot;,
+      &quot;type&quot;: &quot;coreclr&quot;,
+      &quot;request&quot;: &quot;launch&quot;,
+      &quot;preLaunchTask&quot;: &quot;build&quot;,
+      &quot;program&quot;: &quot;${workspaceFolder}/src/Api/bin/Debug/net10.0/Api.dll&quot;,
+      &quot;cwd&quot;: &quot;${workspaceFolder}/src/Api&quot;,
+      &quot;env&quot;: { &quot;ASPNETCORE_ENVIRONMENT&quot;: &quot;Development&quot; }
+    }
+  ]
+}</code></pre>
+        <p>And the matching <code>.vscode/tasks.json</code> for the <code>build</code> pre-launch task:</p>
+        <pre><code>{
+  &quot;version&quot;: &quot;2.0.0&quot;,
+  &quot;tasks&quot;: [
+    {
+      &quot;label&quot;: &quot;build&quot;,
+      &quot;type&quot;: &quot;process&quot;,
+      &quot;command&quot;: &quot;dotnet&quot;,
+      &quot;args&quot;: [&quot;build&quot;, &quot;${workspaceFolder}/MySolution.sln&quot;]
+    }
+  ]
+}</code></pre>
+        <p>The known gap: Cursor's C# extension doesn't yet honour the <code>console</code> setting. <code>internalConsole</code>, <code>integratedTerminal</code> and <code>externalTerminal</code> all end up in the Debug Console, which can't send stdin. If you debug an interactive console app that calls <code>Console.ReadLine()</code>, pass input as arguments or a file while debugging, or run it with <code>dotnet run</code> in the terminal. For web APIs and workers it doesn't matter.</p>
+        <p>For the inner loop, <code>dotnet watch</code> in the integrated terminal gives you hot reload without a debugger attached. When you need conditional breakpoints in async code or to step into decompiled NuGet sources, that is where Rider is still stronger, and you can keep Cursor's agent while you debug there: see <a href="05-cursor-vs-rider-dotnet.html">Cursor vs Rider (and Cursor inside Rider)</a>.</p>
+        <h2>Tests: make the terminal the contract</h2>
+        <p>ReSharper for Cursor and DotRush both ship a test runner, and that's pleasant for humans. For the agent, the reliable interface is the CLI: it can run <code>dotnet test</code>, read the output and iterate, whichever extension you installed. Two habits make that loop much tighter on a large solution:</p>
+        <pre><code># Build with warnings as errors so the agent can&#x27;t leave nullable warnings behind
+dotnet build MySolution.sln -warnaserror
+
+# Run only the tests the change touches, instead of the full suite every turn
+dotnet test tests/Orders.Tests --filter &quot;FullyQualifiedName~Orders.Application&quot;</code></pre>
+        <p>Then write that expectation down once, as a rule, rather than typing it into every prompt (more on rules below).</p>
+        <h2>Unity projects in Cursor</h2>
+        <p>Unity is where the licensing issue bites hardest. Unity's official VS Code integration relies on Microsoft's Unity extension, which carries the same Microsoft-products-only licence as the C# Dev Kit, so you can't install it in Cursor. The working setup uses community tools instead, and it's worth knowing that it sits outside Unity's official support:</p>
+        <ol>
+          <li>In Unity, open the Package Manager, choose <em>Add package from git URL</em>, and add <code>https://github.com/boxqkrtm/com.unity.ide.cursor.git</code>. From v2.0.24 the package is named <code>com.boxqkrtm.ide.cursor</code>; remove the old <code>com.unity.ide.cursor</code> name first if you're upgrading.</li>
+          <li>In <em>Edit &gt; Preferences &gt; External Tools</em> (macOS: <em>Unity &gt; Settings</em>), set <strong>External Script Editor</strong> to Cursor.</li>
+          <li>Run <em>Assets &gt; Open C# Project</em>. Cursor opens the generated solution. Check that typing <code>transform.</code> in a script offers Unity API completions.</li>
+          <li>For debugging, install <strong>DotRush</strong>, which includes a Unity (Mono) debugger. Create an attach configuration and list your script assemblies explicitly; without <code>userAssemblies</code>, stepping in some projects resumes instead of stepping.</li>
+        </ol>
+        <pre><code>{
+  &quot;version&quot;: &quot;0.2.0&quot;,
+  &quot;configurations&quot;: [
+    {
+      &quot;name&quot;: &quot;Unity Debugger&quot;,
+      &quot;type&quot;: &quot;unity&quot;,
+      &quot;request&quot;: &quot;attach&quot;,
+      &quot;userAssemblies&quot;: [
+        &quot;${workspaceFolder}/Library/ScriptAssemblies/Assembly-CSharp.dll&quot;,
+        &quot;${workspaceFolder}/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll&quot;
+      ]
+    }
+  ]
+}</code></pre>
+        <p>If you use Assembly Definitions, add each assembly's DLL from <code>Library/ScriptAssemblies</code> to that list, or breakpoints in those assemblies won't bind.</p>
+        <p>Unity also needs its own rules, because the AI's C# instincts come from server-side code. The classic example: Unity overrides <code>==</code> on <code>UnityEngine.Object</code> so that destroyed objects compare equal to null, but the <code>?.</code> and <code>??</code> operators bypass that override. Generic C# training data uses them everywhere. A scoped rule stops it:</p>
+        <pre><code>---
+description: Unity scripting conventions
+globs: Assets/**/*.cs
+alwaysApply: false
+---
+- Never use ?. or ?? on UnityEngine.Object types (GameObject, Component, ScriptableObject).
+  Use explicit `if (thing != null)` or `if (thing)` so Unity&#x27;s destroyed-object check runs.
+- Cache GetComponent&lt;T&gt;() results in Awake/Start; never call it every frame in Update.
+- No allocations in Update/FixedUpdate hot paths (LINQ, string concatenation, new lists).
+- Serialised fields: [SerializeField] private, not public fields.</code></pre>
+        <h2>Make Cursor write C# the way your team does</h2>
+        <p>Once the tooling works, the next complaint is style drift: exceptions for business failures, <code>DbContext</code> in a controller, a scoped service captured by a singleton. Cursor's project rules fix that. They live in <code>.cursor/rules/*.mdc</code>, are committed with the code, and can be scoped with <code>globs</code> so the EF Core guidance only loads for data-access files. For short instructions that should apply everywhere, a plain <code>AGENTS.md</code> at the repo root works too. (The old single <code>.cursorrules</code> file is legacy; migrate it.)</p>
+        <pre><code>---
+description: Build and test expectations for every C# change
+alwaysApply: true
+---
+- After editing C#, run `dotnet build MySolution.sln -warnaserror` and fix every warning you caused.
+- Run the narrowest relevant `dotnet test --filter` before declaring the task done.
+- Target the SDK in global.json; do not change TargetFramework or package versions unasked.</code></pre>
+        <p>The full map of rule types and how to scope them for a layered .NET solution is in <a href="../learn/cursor-rules-dotnet.html">Cursor rules for .NET engineers</a>. The two failure modes worth a dedicated rule first are <a href="02-scoped-singleton-di-bug.html">Scoped-into-Singleton DI captures</a> and <a href="04-cursor-result-not-throw.html">throwing instead of returning Result&lt;T&gt;</a>.</p>
+        <h2>Prefer to stay in Rider or Visual Studio?</h2>
+        <p>You don't have to move editors to use Cursor's agent. Rider 2025.3.2 and later can run Cursor through the Agent Client Protocol (setup in <a href="05-cursor-vs-rider-dotnet.html">the Rider comparison</a>). If your team lives in full Visual Studio, the realistic comparison is GitHub Copilot, covered in <a href="08-cursor-vs-copilot-dotnet.html">Cursor vs Copilot for C#/.NET</a>.</p>
+        <section class="post-faq" aria-label="Frequently asked questions">
+          <h2>FAQ</h2>
+          <h3>Can I use Microsoft's C# Dev Kit in Cursor?</h3>
+          <p>No. The C# Dev Kit, the vsdbg debugger and the Unity extension are licensed only for Microsoft products such as VS Code and Visual Studio. In Cursor, use the Anysphere C# extension, ReSharper for Cursor or DotRush instead.</p>
+          <h3>Which C# extension should I use in Cursor?</h3>
+          <p>Install one language extension. The Anysphere C# extension is the default for ASP.NET Core and library work. ReSharper for Cursor suits Blazor and Razor work or teams that want ReSharper's tooling. DotRush is the lightest option and includes a Unity debugger, but it doesn't support Razor, XAML or Blazor.</p>
+          <h3>Does Cursor support .NET debugging?</h3>
+          <p>Yes. Cursor's C# extension debugs with the open-source netcoredbg debugger, so breakpoints, stepping and watches work. One known limitation: it ignores the console setting in launch.json, so interactive console apps can't read stdin under the debugger.</p>
+          <h3>Can I use Cursor with Unity?</h3>
+          <p>Yes, with community tools. Install the com.boxqkrtm.ide.cursor package from its git URL, set Cursor as Unity's External Script Editor, and use DotRush's Unity debugger with userAssemblies pointing at your script assemblies. This setup is outside Unity's official support.</p>
+        </section>
+
+        <nav class="post-nav" aria-label="Previous and next essay">
+          <a class="post-nav-prev" href="10-claude-fable-5-2-for-coding.html"><span class="post-nav-label">Previous</span> Claude Fable 5.2 for coding</a>
+          <a class="post-nav-next" href="12-cursor-database-schema-efcore.html"><span class="post-nav-label">Next</span> Cursor + your database schema</a>
+        </nav>
+
+        <nav class="post-related" aria-label="Keep reading">
+          <h2>Keep reading</h2>
+          <ul>
+          <li><a href="05-cursor-vs-rider-dotnet.html">Cursor vs JetBrains Rider</a></li>
+          <li><a href="12-cursor-database-schema-efcore.html">Cursor + your database schema</a></li>
+          </ul>
+          <p class="post-related-hub">More essays: <a href="./">Blog index</a> &middot; Kit: <a href="../">Agentic Architect</a> &middot; Local models: <a href="../hardware/">Hardware hub</a></p>
+        </nav>
+
+        <hr class="post-divider" />
+
+        <div class="post-cta post-cta-sample">
+          <h2>Try one rule free — no email</h2>
+          <p>Copy <code>arch-core-lite.mdc</code> into <code>.cursor/rules/</code>. It stops Cursor (or Copilot in VS) from crossing layer boundaries and shipping EF Core in your Domain layer.</p>
+          <pre class="post-sample-mdc"><code>### 1. Respect layer boundaries
+- Domain never references Microsoft.EntityFrameworkCore, HttpClient, IConfiguration...
+- Application orchestrates via abstractions only. No direct DbContext use.
+- Infrastructure implements interfaces declared higher up.</code></pre>
+          <div class="post-cta-actions">
+            <a class="btn btn-accent btn-lg" href="https://agentic-architect.dev/arch-core-lite.mdc?utm_source=site&utm_medium=essay_post_cta&utm_campaign=free_sample" download="arch-core-lite.mdc">Download free .mdc &rarr;</a>
+            <a class="btn btn-primary btn-lg" href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=essay_post_cta&utm_campaign=paid_kit" target="_blank" rel="noopener">Full kit &mdash; &pound;9.00 (9 rules + LEARNING_LOG)</a>
+          </div>
+          <p class="post-cta-footnote">One-time purchase &middot; 30-day refund &middot; or grab the <a href="../#free-kit-signup">3-rule email starter</a> if you want more free files.</p>
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand">
+        <span class="brand-text">Agentic<span class="brand-accent">Architect</span></span>
+        <p>The persistence framework for serious Cursor users in C#/.NET environments.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Product</h4><a href="../#kit">What's Inside</a><a href="../#pricing">Pricing</a><a href="../#faq">FAQ</a></div>
+        <div><h4>Support</h4><a href="mailto:agenticstandardcontact@gmail.com">Email</a></div>
+        <div><h4>Legal</h4><a href="../privacy-policy.html">Privacy Policy</a><a href="../terms-of-service.html">Terms of Service</a><a href="../affiliate-disclosure.html">Affiliate Disclosure</a></div>
+        <div><h4>Buy</h4><a href="https://payhip.com/b/98aSq?utm_source=site&utm_medium=essay_footer&utm_campaign=paid_kit" target="_blank" rel="noopener">Get the kit &mdash; &pound;9.00</a></div>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>&copy; <span id="year">2026</span> Agentic Architect.</span>
+      <span>MIT-licensed rules &middot; One-time payment</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="../script.js" defer></script>
+</body>
+</html>
