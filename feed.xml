@@ -7,6 +7,15 @@
     <language>en-gb</language>
     <atom:link href="https://agentic-architect.dev/feed.xml" rel="self" type="application/rss+xml" />
 
+
+    <item>
+      <title>Rule 26: ProblemDetails for Every Error</title>
+      <link>https://agentic-architect.dev/blog/#2026-11-27</link>
+      <guid isPermaLink="false">daily-rule-2026-11-27</guid>
+      <pubDate>Fri, 27 Nov 2026 09:00:00 +0000</pubDate>
+      <description>Call AddProblemDetails() and UseExceptionHandler() so unhandled exceptions and bare status codes come back as RFC 9457 application/problem+json instead of HTML or empty bodies. Endpoints return TypedResults.Problem or TypedResults.ValidationProblem, never a hand-rolled error object. Cursor invents a new error shape per controller; one rule gives every client a single format to parse.</description>
+    </item>
+
     <item>
       <title>How to stop Cursor forgetting your database schema (and your project rules)</title>
       <link>https://agentic-architect.dev/blog/12-cursor-database-schema-efcore.html</link>
