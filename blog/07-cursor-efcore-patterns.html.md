@@ -135,22 +135,21 @@ You could manually review every AI-generated EF Core line. Or you could install 
 The ef-core-reads.mdc rule is directory-scoped. It activates only when Cursor's agent is working inside your data-access project — typically src/YourApp.Infrastructure/ or wherever your DbContext and repositories live. This means it doesn't burn tokens when you're editing controllers, domain models, or unit tests.
 
 
-When active, the rule inserts itself into Cursor's context window as a system-level constraint. The AI treats it like a non-negotiable instruction — the same way it treats 'don't generate Python in a .cs file.' After 2-3 prompts with the rule loaded, Cursor stops generating the bad patterns entirely. It becomes muscle memory for the AI.
+When active, the rule inserts itself into Cursor's context window as a system-level constraint. The AI treats it like a non-negotiable instruction — the same way it treats 'don't generate Python in a .cs file.' Because the rule is re-attached whenever a data-access file is in context, you're no longer relying on the model remembering yesterday's correction.
 
 
-## Real-world results: before and after the EF Core rule
+## What changes once the EF Core rule is loaded
 
 
-| Metric | Before Rule | After Rule | Improvement |
-| --- | --- | --- | --- |
-| AI-generated queries missing AsNoTracking | 78% | 4% | 95% reduction |
-| 3+ level Include chains | 42% of queries | 0% | Eliminated |
-| N+1 patterns in generated code | 1-2 per PR | 0 per PR | Eliminated |
-| Client-side eval incidents | ~2/month | 0 | Caught at dev time |
-| Average PR review time (data layer) | ~25 min | ~8 min | 68% faster |
+| Pattern | Ungoverned AI output | With the rule in context |
+| --- | --- | --- |
+| Read-only queries | Tracked entities returned to the API layer | AsNoTracking() or a Select projection to a DTO |
+| Deep Include chains | Whole object graphs loaded "just in case" | Bounded depth, or a projection of only the needed columns |
+| Loops over navigation properties | N+1 queries hidden behind lazy loading | Related data loaded up front in one query |
+| Untranslatable expressions | Filtering after materialisation in memory | Filters kept in the translated SQL, flagged when they can't be |
 
 
-These numbers come from a production .NET 9 solution with ~80 entity types across 6 bounded contexts. The team switched from ad-hoc Cursor usage to rule-governed AI pair programming. The data-layer PR review time savings alone paid for the kit in the first afternoon.
+None of these is exotic. They are the defaults the model falls back to when nothing in its context says otherwise, which is why a short, scoped rule changes the output so reliably. Your SQL logs and query plans are the place to confirm it on your own codebase.
 
 
 ## Install the EF Core guardrail in 60 seconds
@@ -188,13 +187,10 @@ The ef-core-reads.mdc rule is one of nine in the full kit. Together they form a 
 The natural instinct is to catch these in code review. But there are two problems with that approach.
 
 
-First, speed. If Cursor generates 200 lines of data-access code in a session and 78% of queries are missing AsNoTracking(), you're manually annotating ~20 query sites per session. That's review labour, not creative work.
+First, speed. If Cursor generates a few hundred lines of data-access code in a session and most of its read queries are missing AsNoTracking(), you end up annotating query sites by hand in every review. That's review labour, not creative work.
 
 
 Second, consistency. A human reviewer catches what they notice. The rule catches what it's programmed to catch — every time. No fatigue, no Friday-afternoon misses, no "I'll let this one slide because it's a small endpoint." The rule is uniform.
-
-
-> "The EF Core rule paid for itself in the first two hours. I stopped having to type AsNoTracking — Cursor just does it now." — Senior .NET developer, fintech team of 12
 
 
 ## AI pair programming needs guardrails, not guidelines
