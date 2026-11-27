@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
   <title>Cursor + .NET — Quick Fixes for Senior Engineers | Agentic Architect</title>
-  <meta name="description" content="Direct answers to the specific Cursor problems senior .NET engineers actually hit: scoped/singleton DI bugs, hallucinated methods, lost context between sessions, Result&lt;T&gt; drift." />
+  <meta name="description" content="Direct answers to the Cursor problems senior .NET engineers hit: Scoped/Singleton DI bugs, hallucinated methods, lost context and Result&lt;T&gt; drift." />
   <meta name="keywords" content="Cursor .NET fixes, Cursor C# rules, Cursor AI for senior engineers, scoped singleton bug, Cursor hallucination, Result pattern" />
   <link rel="canonical" href="https://agentic-architect.dev/learn/" />
   <link rel="alternate" type="application/rss+xml" title="Agentic Architect" href="https://agentic-architect.dev/feed.xml" />
@@ -80,10 +80,10 @@
             <a href="cursor-rules-dotnet.html" class="post-link">
               <div class="post-meta">
                 <span class="post-tag">Guide</span>
-                <span class="post-read-time">6 min</span>
+                <span class="post-read-time">12 min</span>
               </div>
-              <h2>Cursor rules for .NET engineers — scoped .mdc + LEARNING_LOG</h2>
-              <p>Directory-scoped AI coding rules and architectural persistence for Cursor on senior C#/.NET codebases.</p>
+              <h2>Cursor rules for .NET engineers: .mdc rule types, AGENTS.md and migrating .cursorrules</h2>
+              <p>How Cursor project rules load (Always, globs, description, manual), a rule layout for a layered C#/.NET solution, and LEARNING_LOG persistence.</p>
               <span class="post-read">Read the guide ?</span>
             </a>
           </li>
@@ -129,6 +129,28 @@
               <h2>Teach Cursor to use <code>Result&lt;T&gt;</code> instead of <code>throw</code> in C#</h2>
               <p>Why your in-chat corrections don't stick, and the one committed rule that teaches the AI your error model across every session.</p>
               <span class="post-read">Read the fix ?</span>
+            </a>
+          </li>
+          <li class="post-card">
+            <a href="../blog/12-cursor-database-schema-efcore.html" class="post-link">
+              <div class="post-meta">
+                <span class="post-tag">EF Core</span>
+                <span class="post-read-time">10 min</span>
+              </div>
+              <h2>Stop Cursor forgetting your database schema (and your project rules)</h2>
+              <p>A committed schema digest from <code>dotnet ef dbcontext script</code>, a rule that loads only for data-access code, and a drift test that keeps it honest.</p>
+              <span class="post-read">Read the guide &rarr;</span>
+            </a>
+          </li>
+          <li class="post-card">
+            <a href="../blog/11-cursor-csharp-dotnet-setup.html" class="post-link">
+              <div class="post-meta">
+                <span class="post-tag">Setup</span>
+                <span class="post-read-time">11 min</span>
+              </div>
+              <h2>Cursor for C# and .NET: extensions, debugging and Unity</h2>
+              <p>Why the C# Dev Kit won't run in Cursor, which C# extension to install instead, a working launch.json, and the Unity setup.</p>
+              <span class="post-read">Read the guide &rarr;</span>
             </a>
           </li>
         </ul>

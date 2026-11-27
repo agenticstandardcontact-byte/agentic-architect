@@ -22,7 +22,7 @@ That's the Context Tax.
 
 ## Why it happens
 
-Cursor, like every other AI coding tool right now, has no persistent memory between sessions. Each new chat starts fresh. Every architectural decision your team has ever made, every refactor your codebase has ever absorbed, every "we tried that, it doesn't work for us", gone the moment you close the window.
+Cursor, like every other AI coding tool right now, has no persistent memory between sessions. Each new chat starts fresh. Every architectural decision your team has ever made, every refactor your codebase has ever absorbed, every "we tried that, it doesn't work for us", gone the moment you close the window. That amnesia shows up whether Cursor is your only seat or you also keep a Copilot licence; the tooling trade-offs are a separate question (I wrote a Cursor vs Copilot for .NET comparison if you're stuck on that).
 
 The AI isn't stupid. It's amnesiac.
 

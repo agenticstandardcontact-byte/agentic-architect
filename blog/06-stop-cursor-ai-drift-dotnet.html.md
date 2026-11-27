@@ -1,4 +1,4 @@
-# How to stop Cursor AI forgetting your .NET architecture (the $9 fix)
+# How to stop Cursor AI forgetting your .NET architecture and project rules
 
 Published: May 30, 2026 · 8 min read
 
@@ -135,7 +135,7 @@ The full kit ships with all 9 production-tested .mdc rules — the 4 described a
 ## Built for senior .NET engineers, not beginners
 
 
-This framework assumes you already have a Clean Architecture/DDD codebase, you use Cursor daily, and you're tired of the AI forgetting your conventions. If you're learning C# for the first time, come back when you have architecture to protect.
+This framework assumes you already have a Clean Architecture/DDD codebase, you use Cursor daily, and you're tired of the AI forgetting your conventions. If you're learning C# for the first time, come back when you have architecture to protect. And if the open question is still whether Cursor earns a second seat next to Copilot, start with the Cursor vs Copilot for C#/.NET write-up, then come back to the rules once you've picked a primary agent. If the thing Cursor keeps forgetting is your database rather than your layers, see how to stop Cursor forgetting your database schema.
 
 
 If you're a Staff Engineer who's spent the last 6 months building a MediatR pipeline with Result and orchestrated handlers — and Cursor still suggests throw new Exception() in your controllers — this is for you.

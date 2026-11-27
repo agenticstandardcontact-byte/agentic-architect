@@ -206,6 +206,9 @@ Cursor AI is not a junior developer you mentor. It's a pattern-matching engine w
 EF Core is just the most expensive example. The same principle applies to DI scoping, error handling, API conventions, and every other area where the AI's training data contains simplified-for-blog-post patterns. Install the rules once. Let the AI conform to your standards — not the internet's.
 
 
+Query hygiene is half the problem. The other half is Cursor not knowing what your schema looks like in the first place: guessing column names, inventing navigation properties, writing migrations against a model it never read. That's covered in How to stop Cursor forgetting your database schema.
+
+
 ---
 
 Canonical HTML: https://agentic-architect.dev/blog/07-cursor-efcore-patterns.html

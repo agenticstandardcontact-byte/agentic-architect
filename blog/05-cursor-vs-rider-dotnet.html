@@ -4,18 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
-  <title>Cursor vs JetBrains Rider for C#/.NET in 2026: which to pay for</title>
-  <meta name="description" content="Cursor vs JetBrains Rider for C# in 2026: GBP pricing, agent mode vs the debugger, and when senior .NET teams pay for one tool, both, or neither." />
-  <meta name="keywords" content="Cursor vs Rider, JetBrains Rider, Cursor AI for C#, .NET IDE 2026, ReSharper, Cursor pricing, Rider pricing, AI pair programming C#, MediatR, Clean Architecture" />
+  <title>Cursor vs Rider for C#/.NET in 2026 (and Cursor Inside Rider)</title>
+  <meta name="description" content="Cursor vs JetBrains Rider for C# in 2026: current pricing, debugger vs agent, and how to run Cursor's agent inside Rider via ACP. A straight verdict." />
+  <meta name="keywords" content="Cursor vs Rider, Cursor in Rider, Rider Cursor ACP, JetBrains Rider, Cursor AI for C#, .NET IDE 2026, ReSharper, Cursor pricing, Rider pricing, AI pair programming C#" />
   <link rel="canonical" href="https://agentic-architect.dev/blog/05-cursor-vs-rider-dotnet.html" />
   <link rel="alternate" type="application/rss+xml" title="Agentic Architect" href="https://agentic-architect.dev/feed.xml" />
 
-  <meta property="og:title" content="Cursor vs JetBrains Rider for C#/.NET in 2026: which to pay for" />
-  <meta property="og:description" content="Cursor vs JetBrains Rider for C# in 2026: GBP pricing, agent mode vs the debugger, and when senior .NET teams pay for one tool, both, or neither." />
+  <meta property="og:title" content="Cursor vs Rider for C#/.NET in 2026 (and Cursor Inside Rider)" />
+  <meta property="og:description" content="Cursor vs JetBrains Rider for C# in 2026: current pricing, debugger vs agent, and how to run Cursor's agent inside Rider via ACP. A straight verdict." />
   <meta property="og:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
   <meta property="og:url" content="https://agentic-architect.dev/blog/05-cursor-vs-rider-dotnet.html" />
   <meta property="og:type" content="article" />
   <meta property="article:published_time" content="2026-05-26T08:00:00Z" />
+  <meta property="article:modified_time" content="2026-11-27T22:00:00Z" />
   <meta property="article:author" content="Agentic Architect" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
@@ -41,7 +42,7 @@
     "@type": "BlogPosting",
     "headline": "Cursor vs JetBrains Rider for C#/.NET in 2026: which to pay for",
     "datePublished": "2026-05-26T08:00:00Z",
-    "dateModified": "2026-05-26T08:00:00Z",
+    "dateModified": "2026-11-27T22:00:00Z",
     "author": {
         "@type": "Organization",
         "name": "Agentic Architect"
@@ -56,7 +57,47 @@
     },
     "image": "https://agentic-architect.dev/og-image.jpg?v=3",
     "mainEntityOfPage": "https://agentic-architect.dev/blog/05-cursor-vs-rider-dotnet.html",
-    "keywords": "Cursor vs Rider, JetBrains Rider, .NET IDE, AI coding, C# tooling"
+    "keywords": "Cursor vs Rider, Cursor in Rider, JetBrains Rider, ACP, .NET IDE, AI coding, C# tooling"
+}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Can I use Cursor inside JetBrains Rider?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Cursor is in JetBrains' ACP Registry, so in Rider 2025.3.2 or later (with the AI Assistant plugin enabled) you can install Cursor from AI Chat, sign in with a paid Cursor plan, and use its agent to edit files and run commands without leaving Rider. You don't need a JetBrains AI subscription for it."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is JetBrains Rider free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For individual non-commercial use, yes: Rider Non-Commercial costs nothing. Commercial work needs a paid licence, which for individuals starts at $169 for the first year (or $16.90 a month) as of November 2026."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can Cursor debug C# code?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, but not with Microsoft's tooling. The C# Dev Kit and vsdbg are licensed only for VS Code and Visual Studio, so Cursor's C# extension uses the open-source netcoredbg debugger. ReSharper for Cursor and the community DotRush extension are the other options. Breakpoints and stepping work; Rider's debugger is still stronger for async and decompiled-source debugging."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Should a .NET team pick Cursor or Rider?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most senior teams run both on the same repo: Rider for debugging, profiling and symbol-aware refactors, and Cursor for multi-file agentic edits. What matters is a shared source of truth, meaning committed Cursor rules and a LEARNING_LOG.md, so the two tools don't drift apart."
+            }
+        }
+    ]
 }
   </script>
 </head>
@@ -108,13 +149,13 @@
 
         <h2>The wrong question (and the right one)</h2>
         <p>Search the .NET subreddit on any given week and you'll find a thread titled something like "Should I drop Rider for Cursor?" The answers split into two camps: "Cursor is the future, Rider is dying" and "Cursor is a glorified VS Code, Rider's debugger alone is worth the licence." Both miss the point.</p>
-        <p>Cursor is an <strong>AI coder</strong>. Rider is an <strong>IDE</strong>. They overlap on the minimum-viable surface (open file, edit, save, git) and almost nowhere else. Asking which one to pick is like asking whether you should buy a car or a satnav. The right question is: <em>given the way each one breaks first, what configuration lets you keep both for $28 a month?</em></p>
+        <p>Cursor is an <strong>AI coder</strong>. Rider is an <strong>IDE</strong>. They overlap on the minimum-viable surface (open file, edit, save, git) and almost nowhere else. Asking which one to pick is like asking whether you should buy a car or a satnav. The right question is: <em>given the way each one breaks first, what configuration lets you keep both for less than an hour of billing a month?</em></p>
         <h2>What Rider still does that Cursor doesn't (yet)</h2>
         <p>These are the things that, as of mid-2026, still take a senior .NET dev twice as long in Cursor as they do in Rider:</p>
         <ul>
           <li><strong>Refactoring across solutions.</strong> Rider's <em>Rename</em>, <em>Move type</em>, <em>Extract interface</em>, and <em>Pull members up</em> are still surgically precise on a 200-project solution. Cursor's prompt-driven equivalents work, but they hallucinate references in obscure xUnit fixtures roughly one in twenty times.</li>
-          <li><strong>The debugger.</strong> Conditional breakpoints, expression evaluation in mixed managed/native frames, async call-stack reconstruction, decompiled-source stepping into NuGet packages. Cursor relies on VS Code's debugger; for serious .NET debugging you reach for Rider every time.</li>
-          <li><strong>Hot Reload + dotnet-watch loops.</strong> Better surfaced, better tested, and survives more solution layouts than the VS Code C# Dev Kit equivalent.</li>
+          <li><strong>The debugger.</strong> Conditional breakpoints, expression evaluation in mixed managed/native frames, async call-stack reconstruction, decompiled-source stepping into NuGet packages. Cursor can't run Microsoft's C# Dev Kit or <code>vsdbg</code> (both are licensed for VS Code and Visual Studio only), so its C# extension uses the open-source <code>netcoredbg</code>. Fine for breakpoints and stepping; for serious .NET debugging you still reach for Rider.</li>
+          <li><strong>Hot Reload + dotnet-watch loops.</strong> Better surfaced, better tested, and survives more solution layouts than a terminal <code>dotnet watch</code> loop in Cursor.</li>
           <li><strong>Inspections (R# heritage).</strong> Two thousand-plus inspections shipped, scoped per-project, with bulk-fix actions. Cursor will tell you about a code smell when you ask. Rider tells you before you save.</li>
           <li><strong>Profiling (dotTrace, dotMemory) and database tooling.</strong> The integrated tools matter more than they look on paper - they remove the context-switch tax of leaving the IDE.</li>
         </ul>
@@ -122,26 +163,38 @@
         <p>And the reverse list - things you reach for Cursor for, even if Rider is already open:</p>
         <ul>
           <li><strong>Multi-file agentic edits.</strong> "Add a CancellationToken parameter to every async method in the Application layer and propagate it." Cursor does this in one prompt across 60 files. Rider's R# bulk actions can do the rename; only Cursor can do the cascade <em>and</em> update the call sites.</li>
-          <li><strong>Composer and Background Agents.</strong> Long-running tasks ("port this controller to Minimal API endpoints, write the matching xUnit tests, then run them") are Cursor's home turf. Rider has AI Assistant; it doesn't iterate.</li>
+          <li><strong>Long-running agents.</strong> Tasks like "port this controller to Minimal API endpoints, write the matching xUnit tests, then run them" are Cursor's home turf, locally or as Cloud Agents. Rider 2026.1 can host agents too (Junie, Claude Agent, Codex, and Cursor itself via ACP, see below), but the deepest agent tooling still lives in Cursor's own editor.</li>
           <li><strong>Semantic codebase search.</strong> "Find me the place we authorise admin-only endpoints" returns the right file in Cursor. Rider's <em>Find Usages</em> needs the symbol first.</li>
-          <li><strong>MCP servers and <code>.mdc</code> rules.</strong> Cursor's directory-scoped rule system and MCP integrations (local databases, custom analysers, vendor APIs) have no Rider equivalent.</li>
+          <li><strong>Directory-scoped <code>.mdc</code> rules.</strong> Cursor loads a rule only when a matching file is in play (<code>globs: src/Infrastructure/**/*.cs</code>), so EF Core guidance never pollutes API-layer prompts. MCP used to be a Cursor-only advantage; JetBrains AI Assistant can now pass MCP servers to agents too, so scoped rules are the real differentiator.</li>
           <li><strong>Speed of light for boilerplate.</strong> New MediatR command + handler + validator + endpoint + xUnit + Postman example, all consistent with the existing patterns in your repo. Cursor with the right rules ships this in under a minute.</li>
         </ul>
+        <h2>Can you use Cursor inside Rider? Yes, via ACP</h2>
+        <p>Since March 2026 the answer to "Cursor <em>or</em> Rider" has a third option. Cursor is listed in JetBrains' <strong>ACP Registry</strong> (Agent Client Protocol, an open standard for plugging AI agents into IDEs), so Cursor's agent can run in Rider's AI Chat panel, read your solution, edit files and run terminal commands, while you keep Rider's debugger, inspections and refactorings.</p>
+        <ol>
+          <li>Use Rider <strong>2025.3.2 or later</strong> (2026.1 ships the ACP Registry built in) with the AI Assistant plugin enabled.</li>
+          <li>Open <em>AI Chat</em>, open the agent selector and choose <em>Install From ACP Registry&hellip;</em> (or go to <em>Settings | Tools | AI Assistant | Agents</em>).</li>
+          <li>Install <strong>Cursor</strong>, select it as the agent, and sign in with your Cursor account. A paid Cursor plan is required; a JetBrains AI subscription is not.</li>
+          <li>Send a prompt. Usage bills against your Cursor plan, exactly as it would in the Cursor editor.</li>
+        </ol>
+        <p>Two caveats from the docs: ACP agents aren't supported when Rider is running against WSL, and what you get is Cursor's <em>agent</em> (model choice, file edits, terminal commands), not the Cursor editor itself. Commit your rules to the repo either way, then ask the agent in Rider which project rules it is following. If the answer comes back empty, mirror the essentials into an <code>AGENTS.md</code> at the repo root, which most agents read.</p>
+        <p>Who should do this? Teams whose seniors won't leave Rider but want Cursor's agent for cascading edits. If you live in the Cursor editor instead, the setup in <a href="11-cursor-csharp-dotnet-setup.html">Cursor for C# and .NET: extensions, debugging and Unity</a> covers the C# extension situation (Microsoft's C# Dev Kit won't run there).</p>
         <h2>The pricing math</h2>
-        <p>Senior .NET developers in the UK and EU bill at &pound;60-&pound;120/hour. Both tools are an irrelevance against that baseline, but for completeness, in 2026 GBP:</p>
+        <p>Senior .NET developers in the UK and EU bill at &pound;60-&pound;120/hour. Both tools are an irrelevance against that baseline, but for completeness, here's what each costs as of November 2026 (USD list prices; check the vendor pages before you buy, both changed this year):</p>
         <div class="post-table-wrap">
         <table class="post-table">
           <thead><tr><th>Tool</th><th>Plan</th><th>Cost</th><th>What you actually get</th></tr></thead>
           <tbody>
-          <tr><td>Cursor</td><td>Pro</td><td>$20/mo (~&pound;16)</td><td>Sonnet/Opus access, Composer, MCP, 500 fast requests</td></tr>
-          <tr><td>JetBrains Rider</td><td>Personal annual</td><td>$159/yr (~&pound;125)</td><td>Rider only, all updates</td></tr>
-          <tr><td>JetBrains All Products</td><td>Personal annual</td><td>$289/yr (~&pound;230)</td><td>Rider + DataGrip + WebStorm + ReSharper + 9 more</td></tr>
-          <tr><td><strong>Both (typical senior)</strong></td><td>Cursor Pro + Rider</td><td><strong>~$33/mo (~&pound;26)</strong></td><td>Single seat, both tools, no compromise</td></tr>
+          <tr><td>Cursor</td><td>Premium (new customers)</td><td>$30/mo</td><td>Weekly pool for Cursor models (Grok, Composer), Cloud Agents, Bugbot. Third-party models such as Claude are billed at API list price from prepaid credit</td></tr>
+          <tr><td>Cursor</td><td>Pro (legacy subscribers)</td><td>$20/mo</td><td>Existing Pro subscribers keep it: monthly pools for Cursor models and for third-party models</td></tr>
+          <tr><td>JetBrains Rider</td><td>Non-Commercial</td><td>$0</td><td>Full IDE for individual non-commercial work (learning, open source, hobby projects)</td></tr>
+          <tr><td>JetBrains Rider</td><td>Commercial, individual</td><td>$169 first year (or $16.90/mo)</td><td>Rider only, all updates; organisation seats cost more</td></tr>
+          <tr><td>JetBrains All Products</td><td>Individual</td><td>$299 first year</td><td>Rider + ReSharper + DataGrip + WebStorm + the rest</td></tr>
+          <tr><td><strong>Both (typical senior)</strong></td><td>Cursor Premium + Rider</td><td><strong>~$44/mo plus model usage</strong></td><td>Single seat, both tools, no compromise</td></tr>
           </tbody>
         </table>
         </div>
-        <p>&pound;26/month is roughly 13 minutes of senior billing time. The tools save that much before lunch. If your employer doesn't expense both, push back; if you're freelance, both go on Schedule C / your self-assessment as ordinary business expenses. There's no realistic scenario where saving &pound;125/year on Rider makes financial sense.</p>
-        <p>Heavier tip: if you also use WebStorm or DataGrip, the All Products Pack (&pound;230/year) breaks even at <em>two</em> JetBrains tools and includes Rider. Most senior .NET devs already qualify.</p>
+        <p>Roughly &pound;35/month is well under an hour of senior billing time, and the tools save that much in a week. The line to watch is model usage: on Cursor's current plans, heavy use of frontier third-party models is metered on top of the subscription, so set a spending cap. If your employer doesn't expense both, push back; if you're freelance, both go on your self-assessment as ordinary business expenses.</p>
+        <p>Heavier tip: if you also use WebStorm or DataGrip, the All Products Pack breaks even at <em>two</em> JetBrains tools and includes Rider. And if the Rider work is genuinely non-commercial, the free licence covers it.</p>
         <h2>Why running both is dangerous (without configuration)</h2>
         <p>Here is the failure mode nobody warns you about: <strong>context drift</strong>.</p>
         <p>You refactor a domain entity in Rider. Six minutes later, you ask Cursor to add a new MediatR handler that uses it. Cursor's snapshot of the codebase is from before the refactor, because you haven't reopened the relevant files in the Cursor window. It writes the handler against the old shape. You don't notice until tests fail, or worse, until the analyser inspection fires three commits later in CI.</p>
@@ -158,7 +211,7 @@
         <h2>A 90-second setup</h2>
         <p>Assuming both tools are installed and licensed:</p>
         <pre><code># 1. Open the same solution root in both
-cd MyDotnetSolution.sln
+cd MyDotnetSolution   # the folder that contains MyDotnetSolution.sln
 
 # 2. Add scoped Cursor rules (or grab arch-core-lite.mdc free)
 mkdir -p .cursor/rules
@@ -186,18 +239,29 @@ git commit -m &quot;chore: align Cursor + Rider on house style&quot;</code></pre
           <tbody>
           <tr><td>Renaming a public type used in 80 files</td><td><strong>Rider</strong></td><td>Symbol-aware refactor, won't miss xUnit fixtures or attribute references</td></tr>
           <tr><td>Adding the same field + constructor + DI registration across 12 services</td><td><strong>Cursor</strong></td><td>Agentic loop with Composer; Rider can't iterate on intent</td></tr>
-          <tr><td>Async call-stack debugging into a NuGet package</td><td><strong>Rider</strong></td><td>Decompiled-source stepping; Cursor relies on the VS Code debugger</td></tr>
+          <tr><td>Async call-stack debugging into a NuGet package</td><td><strong>Rider</strong></td><td>Decompiled-source stepping; Cursor's netcoredbg-based debugger is thinner here</td></tr>
           <tr><td>Porting a controller to Minimal API + tests + Swagger doc</td><td><strong>Cursor</strong></td><td>Multi-file edit + iterate-until-tests-pass; pure prompt territory</td></tr>
           <tr><td>Inspecting why a Scoped service is captured by a Singleton</td><td><strong>Rider</strong></td><td><code>dotnet-di.mdc</code> in Cursor catches it post-hoc; Rider catches it on hover</td></tr>
-          <tr><td>Wiring a new MCP server that queries your local SQLite</td><td><strong>Cursor</strong></td><td>Rider doesn't speak MCP yet</td></tr>
+          <tr><td>Cascading agent edits without leaving the Rider debugger</td><td><strong>Cursor via ACP in Rider</strong></td><td>Cursor's agent in Rider's AI Chat; Rider keeps the debugger and inspections</td></tr>
           </tbody>
         </table>
         </div>
         <h2>The honest verdict</h2>
-        <p>If you bill at senior rates and you're staring at the &pound;125/year Rider question: pay for both. If your employer is asking which to expense for a team of 10: expense both. If you're a junior starting your first .NET role: get Rider via the JetBrains free <em>.NET Foundation</em> programme or your employer's seat, and run Cursor Pro on your own card while you're learning. The tools are complementary; the only configuration that fails is having neither.</p>
+        <p>If you bill at senior rates and you're staring at the Rider licence question: pay for both. If your employer is asking which to expense for a team of 10: expense both, and let the people who refuse to leave Rider run Cursor's agent inside it via ACP. If you're learning .NET or building side projects, Rider's free non-commercial licence plus a Cursor plan on your own card is the cheapest serious setup. The tools are complementary; the only configuration that fails is having neither.</p>
         <p>Where this article ends and the kit begins: the configuration above is necessary but not sufficient. Without scoped rules and a Learning Log, both tools regress to the public-internet average of a .NET codebase - exceptions for business failures, EF Core in your domain layer, DbContext captured by Singletons. The tools are the engine. The rules are the steering.</p>
         <h2>Pair with the rest of the series</h2>
         <p>If this is the first essay you've read here, the three foundational ones are: <a href="01-the-context-tax.html">The Context Tax</a> (why Cursor forgets your architecture every morning), <a href="02-scoped-singleton-di-bug.html">The Scoped&rarr;Singleton DI bug</a> (the .NET-specific failure mode that ships silently), and <a href="04-cursor-result-not-throw.html">Teach Cursor Result&lt;T&gt; instead of throwing</a> (stop the AI from regressing your error model on every prompt). All three apply equally whether you run Cursor solo or alongside Rider. For the other subscription question, see <a href="08-cursor-vs-copilot-dotnet.html">Cursor vs GitHub Copilot for C#/.NET</a>.</p>
+        <section class="post-faq" aria-label="Frequently asked questions">
+          <h2>FAQ</h2>
+          <h3>Can I use Cursor inside JetBrains Rider?</h3>
+          <p>Yes. Cursor is in JetBrains' ACP Registry, so in Rider 2025.3.2 or later (with the AI Assistant plugin enabled) you can install Cursor from AI Chat, sign in with a paid Cursor plan, and use its agent to edit files and run commands without leaving Rider. You don't need a JetBrains AI subscription for it.</p>
+          <h3>Is JetBrains Rider free?</h3>
+          <p>For individual non-commercial use, yes: Rider Non-Commercial costs nothing. Commercial work needs a paid licence, which for individuals starts at $169 for the first year (or $16.90 a month) as of November 2026.</p>
+          <h3>Can Cursor debug C# code?</h3>
+          <p>Yes, but not with Microsoft's tooling. The C# Dev Kit and vsdbg are licensed only for VS Code and Visual Studio, so Cursor's C# extension uses the open-source netcoredbg debugger. ReSharper for Cursor and the community DotRush extension are the other options. Breakpoints and stepping work; Rider's debugger is still stronger for async and decompiled-source debugging.</p>
+          <h3>Should a .NET team pick Cursor or Rider?</h3>
+          <p>Most senior teams run both on the same repo: Rider for debugging, profiling and symbol-aware refactors, and Cursor for multi-file agentic edits. What matters is a shared source of truth, meaning committed Cursor rules and a LEARNING_LOG.md, so the two tools don't drift apart.</p>
+        </section>
 
         <nav class="post-nav" aria-label="Previous and next essay">
           <a class="post-nav-prev" href="04-cursor-result-not-throw.html"><span class="post-nav-label">Previous</span> Result&lt;T&gt; instead of throw</a>
@@ -209,6 +273,7 @@ git commit -m &quot;chore: align Cursor + Rider on house style&quot;</code></pre
           <ul>
           <li><a href="08-cursor-vs-copilot-dotnet.html">Cursor vs Copilot</a></li>
           <li><a href="06-stop-cursor-ai-drift-dotnet.html">Stop Cursor drift</a></li>
+          <li><a href="11-cursor-csharp-dotnet-setup.html">Cursor for C# and .NET setup</a></li>
           </ul>
           <p class="post-related-hub">More essays: <a href="./">Blog index</a> &middot; Kit: <a href="../">Agentic Architect</a> &middot; Local models: <a href="../hardware/">Hardware hub</a></p>
         </nav>

@@ -10,22 +10,22 @@ If you write C#/.NET for a living, the AI tool question in 2026 is rarely Cursor
 Most teams don't pick between these two from a blank slate. Copilot is usually already there, bundled into the org's GitHub plan. So the real question is narrower and more useful: does Cursor do enough that Copilot can't, on a production .NET codebase, to justify a second subscription? The answer turns on agentic edits, not autocomplete.
 
 
-## The pricing, in 2026 GBP
+## The pricing, in 2026
 
 
-These figures are stamped to 2 June 2026. The vendors quote in USD, so the GBP numbers are converted at about $1 = &pound;0.79 (June 2026) and rounded. Check the live rate and the vendor page before you publish, because Copilot moved to usage-based billing on 1 June 2026 and Cursor now runs on a monthly credit pool.
+Updated 27 November 2026. The vendors quote in USD; GBP figures are rough conversions at about $1 = &pound;0.79. Both vendors changed their billing this year: Copilot moved to usage-based AI credits on 1 June 2026, and new Cursor customers now sign up through The X Subscription, where Cursor's own models come from a weekly pool and third-party models (Claude, GPT, Gemini) are billed at API list price on top. Existing Cursor Pro subscribers keep their legacy plan.
 
 
 | Tool / plan | Price | What you actually get |
 | --- | --- | --- |
-| Cursor Pro | approx &pound;16/mo ($20; &pound;12.60/mo billed annually) | $20 of included API usage, unlimited Tab completions, unlimited Auto mode. Monthly credit pool with overage. |
-| Cursor Ultra (top tier) | approx &pound;158/mo ($200; &pound;126/mo annually) | $400 of included API usage and roughly 20x the Pro agent limits. Same frontier model access as Pro. |
+| Cursor Premium (new customers) | approx &pound;24/mo ($30; $300/yr) | Weekly usage pool for Cursor models (Grok, Composer), Cloud Agents, Bugbot. Third-party models are paid from prepaid credit at API list price. |
+| Cursor Pro (legacy) | approx &pound;16/mo ($20) | Existing subscribers only: monthly pools for Cursor models and for third-party models, unlimited Tab completions. |
 | GitHub Copilot Pro | approx &pound;8/mo ($10) | Code completions and Next Edit Suggestions stay unlimited and free. 1,500 monthly AI credits (1,000 base + 500 flex) cover agent mode, chat, CLI and PR review. |
 | GitHub Copilot Pro+ | approx &pound;31/mo ($39) | 7,000 monthly AI credits (3,900 base + 3,100 flex) and wider model choice. Completions are still free and unlimited. |
 | GitHub Copilot Business | approx &pound;15/user/mo ($19) | Org policy controls, audit and seat management pooled across the org, plus IP indemnity on the business plan. |
 
 
-Set against a senior .NET rate of about &pound;60 to &pound;120 an hour, both tools are rounding errors. The cost that matters is the time each one saves or wastes, not the monthly fee.
+Set against a senior .NET rate of about &pound;60 to &pound;120 an hour, both subscriptions are rounding errors. What can surprise you is metered model usage: on both tools, heavy agent runs on frontier models draw down credit faster than chat does, so set a budget or spending cap on day one. The cost that matters is still the time each tool saves or wastes.
 
 
 ## Where Copilot wins
@@ -41,7 +41,7 @@ Set against a senior .NET rate of about &pound;60 to &pound;120 an hour, both to
 
 
 - Multi-file agentic edits. "Add a CancellationToken to every async method in the Application layer and propagate it" is one prompt across dozens of files. This is the gap that justifies the second seat.
-- Composer and background agents. Longer tasks ("port this controller to Minimal API, write the xUnit tests, run them") iterate without hand-holding. Copilot has its own agent mode now, billed against AI credits since 1 June 2026, and it is closing the gap, so re-check parity by the time you read this.
+- Long-running and Cloud Agents. Longer tasks ("port this controller to Minimal API, write the xUnit tests, run them") iterate without hand-holding. Copilot has its own agent mode now, billed against AI credits since 1 June 2026, and it is closing the gap, so re-check parity by the time you read this.
 - Directory-scoped .mdc rules + MCP. You can pin your house style (Result&lt;T&gt; over throw, AsNoTracking on reads) and wire local tools through MCP. Cursor's per-directory rule scoping is the edge here for layered architectures.
 - Semantic codebase search. "Find where we authorise admin-only endpoints" lands the right file without naming the symbol first.
 
@@ -81,7 +81,7 @@ Whichever tool you pay for, the expensive failure mode is the same: ungoverned a
 ## Related comparisons
 
 
-If you're weighing the IDE side of this too, see Cursor vs JetBrains Rider for C#/.NET. More tool, hardware, and model comparisons land here weekly.
+If you're weighing the IDE side of this too, see Cursor vs JetBrains Rider for C#/.NET. If you've picked Cursor and are setting it up for a C# solution, Cursor for C# and .NET in 2026 covers extensions, debugging and Unity.
 
 
 ---

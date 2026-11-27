@@ -4,17 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
-  <title>Mini PC comparisons for local LLMs &amp; .NET (2026) | Agentic Architect</title>
-  <meta name="description" content="Beelink SER9 vs Minisforum UM890 Pro, HX99G vs Mac Mini M4 Pro — specs, benchmarks, and honest verdicts for Ollama, Docker, and C# devs shopping AI hardware." />
-  <meta name="keywords" content="AI Mini PC comparison, best Mini PC for local LLMs, .NET developer hardware, Ollama hardware, LM Studio Mini PC, AMD vs Apple Silicon AI, Mini PC benchmarks" />
+  <title>Choosing a Mini PC for Local LLMs in 2026 (Ollama, AI Agents)</title>
+  <meta name="description" content="How to choose a mini PC for local LLMs: memory size and bandwidth, iGPU vs eGPU vs unified memory, model-size math, plus SER9, UM890 Pro, HX99G and Mac Mini." />
+  <meta name="keywords" content="best mini PC for local LLM, mini PC for Ollama, mini PC for AI agents, local LLM hardware, how much RAM for local LLM, Intel Arc or AMD Radeon for local AI, .NET developer hardware" />
   <link rel="canonical" href="https://agentic-architect.dev/hardware/" />
   <link rel="alternate" type="application/rss+xml" title="Agentic Architect" href="https://agentic-architect.dev/feed.xml" />
 
-  <meta property="og:title" content="Mini PC comparisons for local LLMs &amp; .NET (2026) | Agentic Architect" />
-  <meta property="og:description" content="Beelink SER9 vs Minisforum UM890 Pro, HX99G vs Mac Mini M4 Pro — specs, benchmarks, and honest verdicts for Ollama, Docker, and C# devs shopping AI hardware." />
+  <meta property="og:title" content="Choosing a Mini PC for Local LLMs in 2026 (Ollama, AI Agents)" />
+  <meta property="og:description" content="Memory size and bandwidth, iGPU vs eGPU vs unified memory, and model-size math, plus head-to-head comparisons for Ollama, Docker and .NET work." />
   <meta property="og:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
   <meta property="og:url" content="https://agentic-architect.dev/hardware/" />
   <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
   <link rel="icon" href="https://agentic-architect.dev/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="https://agentic-architect.dev/favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="https://agentic-architect.dev/favicon-32x32.png" />
@@ -35,7 +37,7 @@
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "AI Mini PC comparisons for .NET developers",
+    "name": "Mini PC comparisons for local LLMs and .NET development",
     "description": "Head-to-head hardware comparisons for local LLMs, Ollama, and .NET development.",
     "url": "https://agentic-architect.dev/hardware/",
     "itemListElement": [
@@ -43,13 +45,41 @@
         "@type": "ListItem",
         "position": 1,
         "url": "https://agentic-architect.dev/hardware/hx99g-vs-mac-mini-m4.html",
-        "name": "Beelink HX99G vs Mac Mini M4 Pro"
+        "name": "Minisforum HX99G vs Mac Mini M4 Pro"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "url": "https://agentic-architect.dev/hardware/ser9-vs-um890-pro.html",
         "name": "Beelink SER9 vs Minisforum UM890 Pro"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much RAM do I need to run a local LLM on a mini PC?",
+        "acceptedAnswer": { "@type": "Answer", "text": "At 4-bit quantisation a model needs roughly 0.6 GB per billion parameters, plus room for context and the operating system. In practice 16 GB runs 7B-8B models, 32 GB runs 14B comfortably and 32B tightly, and 64 GB is the floor for 70B-class models." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a mini PC good enough for Ollama?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes for 7B-14B models, which run at usable speeds on recent AMD mini PCs with Radeon integrated graphics; Ollama supports these GPUs through Vulkan, and Ryzen AI 300-series chips through ROCm on Linux. Larger models fit in 64 GB of RAM but generate slowly unless the machine has high memory bandwidth, such as Apple's unified memory or AMD Ryzen AI Max systems." }
+      },
+      {
+        "@type": "Question",
+        "name": "Intel Arc or AMD Radeon for local AI development?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Both work for local LLMs through llama.cpp-based runners using Vulkan, and each vendor also has its own optimised stack. On a mini PC, memory capacity and bandwidth matter more than the GPU brand, so compare those first." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the NPU in a mini PC speed up local LLMs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only with specific software. AMD's Ryzen AI software and Lemonade can run models on the NPU, or split work between NPU and iGPU, on Ryzen AI 300 and 400 series chips. Mainstream runners such as Ollama use the GPU or CPU, and older Ryzen 7000/8000 chips have no NPU path for LLMs, so don't buy on TOPS alone." }
       }
     ]
   }
@@ -89,11 +119,18 @@
   <main>
     <section class="hw-index-hero">
       <div class="container">
-        <span class="kicker">Hardware Comparisons</span>
-        <h1>AI Mini PCs for <span class="grad">.NET Developers</span></h1>
-        <p class="lede">Hands-on comparisons of the best Mini PCs for running local LLMs, .NET workloads, and Docker containers. Every machine tested with Ollama, LM Studio, and real C# solutions. Honest benchmarks and use-case verdicts.</p>
+        <span class="kicker">Hardware for local AI</span>
+        <h1>Choosing a mini PC for <span class="grad">local LLMs and .NET</span></h1>
+        <p class="lede">A buyer's guide to the two numbers that decide how a small machine runs local models, memory size and memory bandwidth, followed by head-to-head comparisons for Ollama, LM Studio, Docker and C# workloads. No live prices on this site; Amazon links are marked.</p>
       </div>
     </section>
+
+    <div class="container">
+      <aside class="hw-disclosure">
+        <h4>&#9432; Affiliate Disclosure</h4>
+        <p>Some links on this page are Amazon Associate links (tag <code>agenticstanda-21</code>). As an Amazon Associate I earn from qualifying purchases. We do not display live Amazon prices. See the <a href="../affiliate-disclosure.html">full affiliate disclosure</a>.</p>
+      </aside>
+    </div>
 
     <section class="section">
       <div class="container">
@@ -161,12 +198,93 @@
     </section>
 
     <section class="section">
+      <div class="container" style="max-width: 52rem;">
+        <h2 class="section-title">How to choose a mini PC for local LLMs</h2>
+        <p>Spec sheets lead with CPU cores and NPU TOPS. For running language models locally, neither is what limits you. Two numbers do: <strong>how much memory the model can use</strong>, which decides what you can load at all, and <strong>how fast that memory is</strong>, which decides how quickly it answers.</p>
+
+        <h3>1. Memory size decides which models you can run</h3>
+        <p>A model's weights take roughly <em>parameters &times; bits per weight &divide; 8</em> bytes. Most people run 4-bit quantised models (for example GGUF <code>Q4_K_M</code>), which works out at roughly 0.6 GB per billion parameters once you include the format's overhead. Then add room for the context window (the KV cache grows with context length), the operating system, your IDE and any Docker containers.</p>
+        <div class="hw-table-wrap">
+          <table class="hw-spec-table">
+            <thead><tr><th>Model size</th><th>Approx. 4-bit file</th><th>Comfortable system memory</th></tr></thead>
+            <tbody>
+              <tr><td>7B&ndash;8B</td><td>about 5 GB</td><td>16 GB</td></tr>
+              <tr><td>14B</td><td>about 9 GB</td><td>32 GB</td></tr>
+              <tr><td>30B&ndash;32B</td><td>about 18&ndash;20 GB</td><td>32 GB (tight) or 64 GB</td></tr>
+              <tr><td>70B</td><td>about 40&ndash;43 GB</td><td>64 GB minimum</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>On integrated graphics and Apple Silicon the GPU shares system memory, so the whole pool is available, minus whatever the OS reserves. With a discrete or external GPU, only the model layers that fit in VRAM run at GPU speed; the rest spill to system RAM and the CPU.</p>
+
+        <h3>2. Memory bandwidth decides how fast it answers</h3>
+        <p>Generating each token means reading (nearly) every weight of a dense model from memory. That makes bandwidth divided by model size a hard ceiling on tokens per second; real-world speed lands below it. The ceiling explains most of the differences between machines:</p>
+        <div class="hw-table-wrap">
+          <table class="hw-spec-table">
+            <thead><tr><th>Memory</th><th>Peak bandwidth</th><th>Ceiling for a 20 GB (32B, 4-bit) model</th></tr></thead>
+            <tbody>
+              <tr><td>Dual-channel DDR5-5600 SO-DIMM (typical Ryzen mini PC)</td><td>about 90 GB/s</td><td>about 4.5 tokens/s</td></tr>
+              <tr><td>LPDDR5X-7500, 128-bit (e.g. SER9)</td><td>about 120 GB/s</td><td>about 6 tokens/s</td></tr>
+              <tr><td>GDDR6 on an RX 6600M (8 GB VRAM)</td><td>224 GB/s</td><td>model doesn't fit in 8 GB</td></tr>
+              <tr><td>LPDDR5X-8000, 256-bit (Ryzen AI Max+ 395 systems)</td><td>256 GB/s</td><td>about 13 tokens/s</td></tr>
+              <tr><td>Apple M4 Pro unified memory</td><td>273 GB/s</td><td>about 14 tokens/s</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Mixture-of-experts models read only their active parameters per token, so they run much faster than their total size suggests, which is why MoE models are popular on mini PCs. Prompt processing (reading a long prompt before the first token) is compute-bound rather than bandwidth-bound, and that's where a real GPU pulls ahead.</p>
+
+        <h3>3. Integrated GPU, eGPU or unified memory?</h3>
+        <ul class="hw-coming-list">
+          <li><strong>Radeon integrated graphics</strong> (780M, 890M and newer) share system RAM, so a 64 GB machine can load large models. Ollama supports these GPUs through Vulkan on Windows and Linux, and Ryzen AI 300-series chips such as the HX 370 through ROCm on Linux. Bandwidth is the limit.</li>
+          <li><strong>OCuLink external GPU</strong> (for example on the UM890 Pro) gives you a desktop card's fast VRAM. Excellent for models that fit inside that VRAM, much less so for ones that don't.</li>
+          <li><strong>Unified memory</strong> (Apple Silicon, AMD Ryzen AI Max) combines a large pool with high bandwidth. It's the most practical way to run 30B&ndash;70B-class models on a small, quiet box.</li>
+        </ul>
+
+        <h3>4. NPUs: useful, but only with the right software</h3>
+        <p>The 50 TOPS NPU in Ryzen AI 300-series chips can run LLMs through AMD's Ryzen AI software and the Lemonade server, either NPU-only or in a hybrid mode where the NPU processes the prompt and the iGPU generates tokens. It's power-efficient and good for background tasks. Mainstream runners like Ollama use the GPU or CPU instead, and older Ryzen 7000/8000 chips (including the 8945HS in the UM890 Pro) have no NPU path for LLMs. Treat TOPS as a bonus, not the reason to buy.</p>
+
+        <h3>5. Intel Arc or AMD Radeon?</h3>
+        <p>Both run local models through llama.cpp-based tools using Vulkan, and each vendor maintains its own optimised stack on top. On a mini PC the GPU brand matters less than the memory behind it: compare capacity and bandwidth first, then check that your preferred runner lists your exact GPU.</p>
+
+        <h3>6. What a .NET developer actually needs</h3>
+        <p>If the machine also runs your IDE, a few Docker containers (SQL Server, Redis, a message broker) and a test suite, budget 8&ndash;12 GB for that before the model. That makes <strong>32 GB the practical minimum</strong> for pairing development with a 7B&ndash;14B model, and <strong>64 GB</strong> the sensible target if you want 30B-class models alongside your containers. Be realistic about the role, too: local models are excellent for private autocomplete, embeddings, summarising logs and offline work, but the strongest agentic coding models are still cloud-only. See <a href="../blog/10-claude-fable-5-2-for-coding.html">Claude Fable 5.2 for coding</a> and the <a href="../blog/glm-5-2-vs-claude-fable-5-comparison.html">GLM 5.2 vs Fable comparison</a> for that side of the trade-off.</p>
+
+        <h3>Quick picks by goal</h3>
+        <div class="hw-table-wrap">
+          <table class="hw-spec-table">
+            <thead><tr><th>Your goal</th><th>What to prioritise</th><th>Where to look</th></tr></thead>
+            <tbody>
+              <tr><td>7B&ndash;14B models next to your dev stack, efficiently</td><td>32&ndash;64 GB fast LPDDR5X, modern Radeon iGPU</td><td><a href="ser9-vs-um890-pro.html">SER9 vs UM890 Pro</a></td></tr>
+              <tr><td>Expandability and a GPU upgrade path</td><td>OCuLink, upgradeable SO-DIMM RAM, dual NVMe</td><td><a href="ser9-vs-um890-pro.html">UM890 Pro section</a></td></tr>
+              <tr><td>30B&ndash;70B-class models on a quiet desk</td><td>64 GB+ unified memory, 250 GB/s+ bandwidth</td><td><a href="hx99g-vs-mac-mini-m4.html">HX99G vs Mac Mini M4 Pro</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container" style="max-width: 52rem;">
+        <h2 class="section-title">FAQ</h2>
+        <h3>How much RAM do I need to run a local LLM on a mini PC?</h3>
+        <p>At 4-bit quantisation a model needs roughly 0.6 GB per billion parameters, plus room for context and the operating system. In practice 16 GB runs 7B&ndash;8B models, 32 GB runs 14B comfortably and 32B tightly, and 64 GB is the floor for 70B-class models.</p>
+        <h3>Is a mini PC good enough for Ollama?</h3>
+        <p>Yes for 7B&ndash;14B models, which run at usable speeds on recent AMD mini PCs with Radeon integrated graphics; Ollama supports these GPUs through Vulkan, and Ryzen AI 300-series chips through ROCm on Linux. Larger models fit in 64 GB of RAM but generate slowly unless the machine has high memory bandwidth, such as Apple's unified memory or AMD Ryzen AI Max systems.</p>
+        <h3>Intel Arc or AMD Radeon for local AI development?</h3>
+        <p>Both work for local LLMs through llama.cpp-based runners using Vulkan, and each vendor also has its own optimised stack. On a mini PC, memory capacity and bandwidth matter more than the GPU brand, so compare those first.</p>
+        <h3>Does the NPU in a mini PC speed up local LLMs?</h3>
+        <p>Only with specific software. AMD's Ryzen AI software and Lemonade can run models on the NPU, or split work between NPU and iGPU, on Ryzen AI 300 and 400 series chips. Mainstream runners such as Ollama use the GPU or CPU, and older Ryzen 7000/8000 chips have no NPU path for LLMs, so don't buy on TOPS alone.</p>
+      </div>
+    </section>
+
+    <section class="section">
       <div class="container">
         <h2 class="section-title">From the blog</h2>
         <p class="lede" style="max-width: 52rem; margin-bottom: 1.25rem;">Hardware picks sit next to IDE and workflow comparisons. If you are shopping the software side too:</p>
         <ul class="hw-coming-list">
           <li><a href="../blog/08-cursor-vs-copilot-dotnet.html"><strong>Cursor vs GitHub Copilot for C#/.NET</strong></a> — which second subscription pays off on agentic edits.</li>
-          <li><a href="../blog/05-cursor-vs-rider-dotnet.html"><strong>Cursor vs JetBrains Rider</strong></a> — debugger vs agent mode, same rules on both.</li>
+          <li><a href="../blog/05-cursor-vs-rider-dotnet.html"><strong>Cursor vs JetBrains Rider</strong></a> — debugger vs agent mode, and running Cursor inside Rider.</li>
+          <li><a href="../blog/11-cursor-csharp-dotnet-setup.html"><strong>Cursor for C# and .NET</strong></a> — extensions, debugging and Unity setup.</li>
           <li><a href="../blog/07-cursor-efcore-patterns.html"><strong>Cursor + EF Core without blowing up the database</strong></a> — patterns that survive a real schema.</li>
         </ul>
       </div>
@@ -176,19 +294,11 @@
       <div class="container">
         <h2 class="section-title">Coming Next</h2>
         <ul class="hw-coming-list">
-          <li><strong>Beelink SER8 vs Mac Mini M4 (base)</strong> — Entry-level AI Mini PC showdown: AMD NPU vs Apple Silicon on a budget.</li>
-          <li><strong>Best Mini PC for Ollama in 2026</strong> — Definitive ranking across all 5 machines tested.</li>
-          <li><strong>Mini PC + eGPU Setup Guide</strong> — How to bolt a desktop GPU onto a UM890 Pro for local 70B model inference.</li>
+          <li><strong>Beelink SER8 vs Mac Mini M4 (base)</strong> — Entry-level AI Mini PC showdown: AMD iGPU vs Apple Silicon on a budget.</li>
+          <li><strong>Mini PC + eGPU Setup Guide</strong> — How to bolt a desktop GPU onto a UM890 Pro over OCuLink.</li>
         </ul>
       </div>
     </section>
-
-    <div class="container">
-      <aside class="hw-disclosure">
-        <h4>&#9432; Affiliate Disclosure</h4>
-        <p>Some links on this page are Amazon Associate links (tag <code>agenticstanda-21</code>). As an Amazon Associate I earn from qualifying purchases. We do not display live Amazon prices. See the <a href="../affiliate-disclosure.html">full affiliate disclosure</a>.</p>
-      </aside>
-    </div>
   </main>
 
   <footer class="footer">

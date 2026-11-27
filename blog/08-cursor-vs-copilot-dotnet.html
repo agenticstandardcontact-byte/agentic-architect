@@ -16,6 +16,7 @@
   <meta property="og:url" content="https://agentic-architect.dev/blog/08-cursor-vs-copilot-dotnet.html" />
   <meta property="og:type" content="article" />
   <meta property="article:published_time" content="2026-06-02T08:00:00Z" />
+  <meta property="article:modified_time" content="2026-11-27T22:00:00Z" />
   <meta property="article:author" content="Agentic Architect" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
@@ -41,7 +42,7 @@
     "@type": "BlogPosting",
     "headline": "Cursor vs GitHub Copilot for C#/.NET in 2026: which to pay for",
     "datePublished": "2026-06-02T08:00:00Z",
-    "dateModified": "2026-06-02T08:00:00Z",
+    "dateModified": "2026-11-27T22:00:00Z",
     "author": {
         "@type": "Organization",
         "name": "Agentic Architect"
@@ -108,21 +109,21 @@
 
         <h2>The decision you're actually making</h2>
         <p>Most teams don't pick between these two from a blank slate. Copilot is usually already there, bundled into the org's GitHub plan. So the real question is narrower and more useful: does Cursor do enough that Copilot can't, on a production .NET codebase, to justify a second subscription? The answer turns on agentic edits, not autocomplete.</p>
-        <h2>The pricing, in 2026 GBP</h2>
-        <p>These figures are stamped to 2 June 2026. The vendors quote in USD, so the GBP numbers are converted at about $1 = &pound;0.79 (June 2026) and rounded. Check the live rate and the vendor page before you publish, because Copilot moved to usage-based billing on 1 June 2026 and Cursor now runs on a monthly credit pool.</p>
+        <h2>The pricing, in 2026</h2>
+        <p>Updated 27 November 2026. The vendors quote in USD; GBP figures are rough conversions at about $1 = &pound;0.79. Both vendors changed their billing this year: Copilot moved to usage-based AI credits on 1 June 2026, and new Cursor customers now sign up through The X Subscription, where Cursor's own models come from a weekly pool and third-party models (Claude, GPT, Gemini) are billed at API list price on top. Existing Cursor Pro subscribers keep their legacy plan.</p>
         <div class="post-table-wrap">
         <table class="post-table">
           <thead><tr><th>Tool / plan</th><th>Price</th><th>What you actually get</th></tr></thead>
           <tbody>
-          <tr><td>Cursor Pro</td><td>approx &pound;16/mo ($20; &pound;12.60/mo billed annually)</td><td>$20 of included API usage, unlimited Tab completions, unlimited Auto mode. Monthly credit pool with overage.</td></tr>
-          <tr><td>Cursor Ultra (top tier)</td><td>approx &pound;158/mo ($200; &pound;126/mo annually)</td><td>$400 of included API usage and roughly 20x the Pro agent limits. Same frontier model access as Pro.</td></tr>
+          <tr><td>Cursor Premium (new customers)</td><td>approx &pound;24/mo ($30; $300/yr)</td><td>Weekly usage pool for Cursor models (Grok, Composer), Cloud Agents, Bugbot. Third-party models are paid from prepaid credit at API list price.</td></tr>
+          <tr><td>Cursor Pro (legacy)</td><td>approx &pound;16/mo ($20)</td><td>Existing subscribers only: monthly pools for Cursor models and for third-party models, unlimited Tab completions.</td></tr>
           <tr><td>GitHub Copilot Pro</td><td>approx &pound;8/mo ($10)</td><td>Code completions and Next Edit Suggestions stay unlimited and free. 1,500 monthly AI credits (1,000 base + 500 flex) cover agent mode, chat, CLI and PR review.</td></tr>
           <tr><td>GitHub Copilot Pro+</td><td>approx &pound;31/mo ($39)</td><td>7,000 monthly AI credits (3,900 base + 3,100 flex) and wider model choice. Completions are still free and unlimited.</td></tr>
           <tr><td>GitHub Copilot Business</td><td>approx &pound;15/user/mo ($19)</td><td>Org policy controls, audit and seat management pooled across the org, plus IP indemnity on the business plan.</td></tr>
           </tbody>
         </table>
         </div>
-        <p>Set against a senior .NET rate of about &pound;60 to &pound;120 an hour, both tools are rounding errors. The cost that matters is the time each one saves or wastes, not the monthly fee.</p>
+        <p>Set against a senior .NET rate of about &pound;60 to &pound;120 an hour, both subscriptions are rounding errors. What can surprise you is metered model usage: on both tools, heavy agent runs on frontier models draw down credit faster than chat does, so set a budget or spending cap on day one. The cost that matters is still the time each tool saves or wastes.</p>
         <h2>Where Copilot wins</h2>
         <ul>
           <li><strong>It's already paid for.</strong> If your org has GitHub Enterprise, Copilot is often a checkbox, not a new purchase or a new approval.</li>
@@ -133,7 +134,7 @@
         <h2>Where Cursor wins</h2>
         <ul>
           <li><strong>Multi-file agentic edits.</strong> "Add a CancellationToken to every async method in the Application layer and propagate it" is one prompt across dozens of files. This is the gap that justifies the second seat.</li>
-          <li><strong>Composer and background agents.</strong> Longer tasks ("port this controller to Minimal API, write the xUnit tests, run them") iterate without hand-holding. Copilot has its own agent mode now, billed against AI credits since 1 June 2026, and it is closing the gap, so re-check parity by the time you read this.</li>
+          <li><strong>Long-running and Cloud Agents.</strong> Longer tasks ("port this controller to Minimal API, write the xUnit tests, run them") iterate without hand-holding. Copilot has its own agent mode now, billed against AI credits since 1 June 2026, and it is closing the gap, so re-check parity by the time you read this.</li>
           <li><strong>Directory-scoped <code>.mdc</code> rules + MCP.</strong> You can pin your house style (Result&lt;T&gt; over throw, AsNoTracking on reads) and wire local tools through MCP. Cursor's per-directory rule scoping is the edge here for layered architectures.</li>
           <li><strong>Semantic codebase search.</strong> "Find where we authorise admin-only endpoints" lands the right file without naming the symbol first.</li>
         </ul>
@@ -161,11 +162,11 @@
         <p>If you bill at senior rates and you do real refactors, pay for Cursor even when Copilot is already on the org card. The agentic edit gap is the whole argument, and one saved afternoon covers a year of the subscription. If you live in full Visual Studio, rarely leave inline completion, and your org won't approve a second tool, Copilot alone is a defensible call. The one setup that loses is running either of them ungoverned.</p>
         <p>Whichever tool you pay for, the expensive failure mode is the same: ungoverned agentic edits. The <a href="../">Agentic Architect</a> kit is the scoped rule set and Learning Log that keeps Cursor or Copilot aligned with your layers, DI lifetimes, and read patterns instead of the public-internet average.</p>
         <h2>Related comparisons</h2>
-        <p>If you're weighing the IDE side of this too, see <a href="05-cursor-vs-rider-dotnet.html">Cursor vs JetBrains Rider for C#/.NET</a>. More tool, hardware, and model comparisons land here weekly.</p>
+        <p>If you're weighing the IDE side of this too, see <a href="05-cursor-vs-rider-dotnet.html">Cursor vs JetBrains Rider for C#/.NET</a>. If you've picked Cursor and are setting it up for a C# solution, <a href="11-cursor-csharp-dotnet-setup.html">Cursor for C# and .NET in 2026</a> covers extensions, debugging and Unity.</p>
 
         <nav class="post-nav" aria-label="Previous and next essay">
           <a class="post-nav-prev" href="07-cursor-efcore-patterns.html"><span class="post-nav-label">Previous</span> EF Core patterns</a>
-          <a class="post-nav-next" href="glm-5-2-vs-claude-fable-5-comparison.html"><span class="post-nav-label">Next</span> GLM 5.2 vs Claude Fable 5</a>
+          <a class="post-nav-next" href="glm-5-2-vs-claude-fable-5-comparison.html"><span class="post-nav-label">Next</span> GLM 5.2 vs Fable 5 comparison</a>
         </nav>
 
         <nav class="post-related" aria-label="Keep reading">
@@ -173,6 +174,7 @@
           <ul>
           <li><a href="05-cursor-vs-rider-dotnet.html">Cursor vs Rider</a></li>
           <li><a href="07-cursor-efcore-patterns.html">EF Core patterns</a></li>
+          <li><a href="11-cursor-csharp-dotnet-setup.html">Cursor for C# and .NET setup</a></li>
           </ul>
           <p class="post-related-hub">More essays: <a href="./">Blog index</a> &middot; Kit: <a href="../">Agentic Architect</a> &middot; Local models: <a href="../hardware/">Hardware hub</a></p>
         </nav>

@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
-  <title>Cursor Rules for .NET Engineers — Scoped .mdc + LEARNING_LOG | Agentic Architect</title>
-  <meta name="description" content="How senior .NET teams use directory-scoped Cursor rules and a LEARNING_LOG so AI pair programming stops forgetting DI, EF Core, and Clean Architecture. Full kit £9.00 one-time." />
-  <meta name="keywords" content="Cursor rules for .NET, Cursor rules C#, AI coding rules, architectural persistence for Cursor, .mdc rules .NET" />
+  <title>Cursor Rules for .NET: .mdc Rule Types, AGENTS.md, .cursorrules</title>
+  <meta name="description" content="How Cursor project rules work on C#/.NET: .mdc frontmatter, the four rule types, glob scoping per layer, AGENTS.md, and migrating a legacy .cursorrules file." />
+  <meta name="keywords" content="Cursor rules for .NET, Cursor rules C#, .cursorrules, .cursor/rules, mdc rules, AGENTS.md, Cursor project rules, alwaysApply globs, architectural persistence for Cursor" />
   <link rel="canonical" href="https://agentic-architect.dev/learn/cursor-rules-dotnet.html" />
   <link rel="alternate" type="application/rss+xml" title="Agentic Architect" href="https://agentic-architect.dev/feed.xml" />
 
-  <meta property="og:title" content="Cursor Rules for .NET Engineers | Agentic Architect" />
-  <meta property="og:description" content="Scoped .mdc rules + LEARNING_LOG persistence for senior C#/.NET Cursor workflows. £9.00 one-time." />
+  <meta property="og:title" content="Cursor Rules for .NET: .mdc Rule Types, AGENTS.md, .cursorrules" />
+  <meta property="og:description" content="How Cursor project rules load, a rule layout for a layered C#/.NET solution, migrating .cursorrules, and LEARNING_LOG persistence." />
   <meta property="og:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
   <meta property="og:url" content="https://agentic-architect.dev/learn/cursor-rules-dotnet.html" />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg" />
+  <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
   <link rel="icon" href="https://agentic-architect.dev/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="https://agentic-architect.dev/favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="https://agentic-architect.dev/favicon-32x32.png" />
@@ -37,12 +37,46 @@
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "headline": "Cursor Rules for .NET Engineers",
-    "description": "Directory-scoped AI coding rules and architectural persistence for Cursor on C#/.NET codebases.",
+    "headline": "Cursor rules for .NET engineers: .mdc rule types, AGENTS.md and migrating .cursorrules",
+    "description": "How Cursor project rules work on C#/.NET: .mdc frontmatter, the four rule types, glob scoping per layer, AGENTS.md, and migrating a legacy .cursorrules file.",
     "datePublished": "2026-06-04T12:00:00Z",
-    "dateModified": "2026-06-04T12:00:00Z",
+    "dateModified": "2026-11-27T22:00:00Z",
     "author": { "@type": "Organization", "name": "Agentic Architect" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Agentic Architect",
+      "logo": { "@type": "ImageObject", "url": "https://agentic-architect.dev/favicon.svg" }
+    },
+    "image": "https://agentic-architect.dev/og-image.jpg?v=3",
     "mainEntityOfPage": "https://agentic-architect.dev/learn/cursor-rules-dotnet.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is .cursorrules deprecated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Cursor's documentation calls the root .cursorrules file legacy and says it will be deprecated. It still works for now, but the supported format is .mdc files in .cursor/rules/. To migrate, create a new rule, paste the old content, set it to Always Apply, and delete .cursorrules." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do Cursor project rules go?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In the .cursor/rules/ directory of your repository, as .mdc files with YAML frontmatter (description, globs, alwaysApply). Plain .md files in that directory are ignored by the rules system. Commit them so the whole team and every agent session gets the same rules." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between AGENTS.md and .cursor/rules?",
+        "acceptedAnswer": { "@type": "Answer", "text": "AGENTS.md is plain Markdown at the repo root (and optionally in subdirectories) for simple instructions that should always apply. Rules in .cursor/rules/ add control: they can be scoped to file patterns with globs, pulled in by description, or invoked manually. Use AGENTS.md for a short always-on brief and .mdc rules for layer-specific guidance." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is Cursor ignoring my rule?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The usual causes are a .md instead of .mdc extension, a rule with neither globs nor a description (which only applies when you @-mention it), a glob that doesn't match the file's path from the repo root, or an always-on rule so long that the important instruction is buried." }
+      }
+    ]
   }
   </script>
 </head>
@@ -81,33 +115,118 @@
     <article class="post">
       <div class="container post-narrow">
         <div class="post-meta">
-          <span class="post-tag">Guide · 6 min read</span>
+          <span class="post-tag">Guide · 12 min read</span>
+          <span class="post-read-time">Updated November 27, 2026</span>
         </div>
 
         <h1>Cursor rules for .NET engineers</h1>
 
-        <p class="post-lede">Generic Cursor prompts treat every C# repo like a tutorial sample. Senior teams need <strong>AI coding rules</strong> that load only where they apply, plus <strong>architectural persistence for Cursor</strong> so decisions survive new chats. This page is the map; the <a href="../">Agentic Architect kit</a> is the implementation.</p>
+        <p class="post-lede">Generic Cursor prompts treat every C# repo like a tutorial sample. Senior teams need <strong>AI coding rules</strong> that load only where they apply, plus <strong>architectural persistence for Cursor</strong> so decisions survive new chats. This guide covers how Cursor's rules actually load, a rule layout for a layered .NET solution, migrating an old <code>.cursorrules</code> file, and when <code>AGENTS.md</code> is enough. The <a href="../">Agentic Architect kit</a> is one implementation; everything below works with rules you write yourself.</p>
 
-        <h2>What "Cursor rules for .NET" actually means</h2>
-        <p>Cursor reads <code>.mdc</code> files from <code>.cursor/rules/</code>. When you scope a rule to <code>Infrastructure/**/*.cs</code>, EF Core guardrails fire on data access, not on your API layer. That is the difference between a 2,000-token preamble on every prompt and a sharp, file-aware assistant.</p>
-        <p>For .NET specifically you want separate rules for DI lifetimes, Result&lt;T&gt; discipline, EF reads, and layer boundaries. One monolithic "be a good architect" rule does not survive a real MediatR pipeline.</p>
+        <h2>How Cursor rules work, in one minute</h2>
+        <p>Language models don't retain memory between sessions. Rules are Cursor's answer: when a rule applies, its contents are included at the start of the model's context, so the agent gets the same guidance every time without you retyping it. Cursor supports four kinds:</p>
+        <ul>
+          <li><strong>Project rules</strong> in <code>.cursor/rules/</code>: version-controlled with your code and scoped to the repo. This is where .NET conventions belong.</li>
+          <li><strong>User rules</strong>: global to your Cursor install, used by Agent. Good for personal preferences (British spelling, terse answers), not for architecture.</li>
+          <li><strong>Team rules</strong>: managed from the Cursor dashboard on Team and Enterprise plans.</li>
+          <li><strong><code>AGENTS.md</code></strong>: plain Markdown instructions at the repo root (and optionally in subfolders), a simpler alternative to <code>.cursor/rules</code>.</li>
+        </ul>
 
-        <h2>Architectural persistence for Cursor</h2>
-        <p>Chat history is not memory. Persistence means a committed <code>LEARNING_LOG.md</code> plus a rule (<code>persistence.mdc</code>) that tells the agent to hydrate the log at session start and append ADR-style entries when you make non-obvious calls.</p>
+        <h2>The anatomy of an .mdc rule</h2>
+        <p>A project rule is an <code>.mdc</code> file (name it anything) with YAML frontmatter. The extension matters: a plain <code>.md</code> file in <code>.cursor/rules/</code> is ignored by the rules system because it has no frontmatter. Three fields decide when the rule is included:</p>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th>Rule type</th><th>Frontmatter</th><th>When it's included</th></tr></thead>
+          <tbody>
+          <tr><td>Always Apply</td><td><code>alwaysApply: true</code></td><td>Every chat session; globs and description are ignored</td></tr>
+          <tr><td>Apply to Specific Files</td><td><code>alwaysApply: false</code> + <code>globs</code></td><td>Auto-attached when a matching file is in context</td></tr>
+          <tr><td>Apply Intelligently</td><td><code>alwaysApply: false</code> + <code>description</code>, no globs</td><td>When the agent judges the description relevant to the task</td></tr>
+          <tr><td>Apply Manually</td><td>neither globs nor description</td><td>Only when you <code>@</code>-mention it in chat</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>A file-scoped rule for EF Core data access looks like this. Multiple glob patterns are comma-separated:</p>
+        <pre><code>---
+description: EF Core read and query conventions
+globs: src/Infrastructure/**/*.cs, **/Repositories/*.cs
+alwaysApply: false
+---
+- Read-only queries use AsNoTracking() or a projection with Select().
+- No Include() chains deeper than two levels on list endpoints.
+- Never return IQueryable from a repository; materialise inside Infrastructure.
+- Before writing a query, check docs/schema/schema.sql for real column names.</code></pre>
+        <p>One detail people miss: a file mention inside a rule (for example <code>@docs/schema/schema.sql</code>) tells the agent <em>where to look</em>; the agent reads the file with its tools when needed, and the contents are not inlined. Anything that must always be in context has to be in the rule body itself.</p>
+
+        <h2>A rule layout for a layered .NET solution</h2>
+        <p>For .NET you want separate rules for DI lifetimes, <code>Result&lt;T&gt;</code> discipline, EF reads and layer boundaries. One monolithic "be a good architect" rule does not survive a real MediatR pipeline, and an always-on 400-line rule costs tokens on every prompt while burying the instruction that matters. A layout that maps onto Clean Architecture:</p>
+        <div class="post-table-wrap">
+        <table class="post-table">
+          <thead><tr><th>Rule</th><th>Type</th><th>Scope</th><th>What it enforces</th></tr></thead>
+          <tbody>
+          <tr><td><code>arch-core.mdc</code></td><td>Always Apply</td><td>everything</td><td>Layer boundaries, build/test expectations, where the decision log lives. Keep it short.</td></tr>
+          <tr><td><code>domain.mdc</code></td><td>Specific files</td><td><code>src/Domain/**/*.cs</code></td><td>No EF Core, HttpClient or IConfiguration; value objects; <code>Result&lt;T&gt;</code> for expected failures</td></tr>
+          <tr><td><code>ef-core-reads.mdc</code></td><td>Specific files</td><td><code>src/Infrastructure/**/*.cs</code></td><td>AsNoTracking on reads, no N+1, bounded Include depth, schema digest</td></tr>
+          <tr><td><code>di-scoping.mdc</code></td><td>Specific files</td><td><code>**/Program.cs, **/*ServiceCollection*.cs</code></td><td>No Scoped service captured by a Singleton; DbContext stays Scoped</td></tr>
+          <tr><td><code>api-conventions.mdc</code></td><td>Specific files</td><td><code>src/Api/**/*.cs</code></td><td>Map <code>Result&lt;T&gt;</code> to ProblemDetails; no DbContext in endpoints</td></tr>
+          <tr><td><code>tests.mdc</code></td><td>Specific files</td><td><code>tests/**/*.cs</code></td><td>Arrange-Act-Assert, builders over magic values, real database for integration tests</td></tr>
+          <tr><td><code>migration-checklist.mdc</code></td><td>Manual</td><td><code>@migration-checklist</code></td><td>Step-by-step playbook for schema changes, invoked when needed</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>Globs are matched against paths from the repository root, so check them against your actual folder names (<code>src/</code> or not, <code>Infrastructure</code> or <code>Persistence</code>). A rule whose glob never matches simply never loads, and it fails silently.</p>
+
+        <h2>Migrating from .cursorrules</h2>
+        <p>The single <code>.cursorrules</code> file at the repo root is the original format. Cursor's docs now call it legacy and say it will be deprecated. It still works for the moment, with one gotcha: if you also have <code>.mdc</code> rules, they take precedence where the two overlap, which is why a <code>.cursorrules</code> file can look "ignored" in a repo that has started using <code>.cursor/rules</code>. Cursor's own migration path:</p>
+        <ol>
+          <li>Open the command palette and run <em>New Cursor Rule</em> (or type <code>/create-rule</code> in Agent).</li>
+          <li>Paste the contents of <code>.cursorrules</code> into the new rule.</li>
+          <li>Set the rule type to <strong>Always Apply</strong>, which matches the old behaviour.</li>
+          <li>Delete <code>.cursorrules</code> and commit both changes together.</li>
+        </ol>
+        <p>Then take the step that actually improves results: split the migrated rule. Anything that only matters for one layer moves into a glob-scoped rule from the table above, and the Always Apply rule shrinks to the handful of lines that genuinely apply everywhere.</p>
+
+        <h2>AGENTS.md or .cursor/rules?</h2>
+        <p><code>AGENTS.md</code> is plain Markdown, no frontmatter, picked up automatically from the project root. It's a good fit for a short always-on brief (how to build, how to run tests, which folders are generated) and it's a convention several agent tools read, which helps if your team mixes tools. When you need scoping, choose <code>.cursor/rules</code>: <code>AGENTS.md</code> can't say "only for files under <code>src/Infrastructure</code>". Many .NET repos end up with both: a 20-line <code>AGENTS.md</code> and a handful of scoped <code>.mdc</code> rules.</p>
+
+        <h2>Architectural persistence: the LEARNING_LOG</h2>
+        <p>Chat history is not memory. Persistence means a committed <code>LEARNING_LOG.md</code> plus a rule (<code>persistence.mdc</code>) that tells the agent to read the log at session start and append ADR-style entries when you make non-obvious calls.</p>
         <p>Example entry after you reject a suggestion:</p>
         <pre><code>## ADR-009 — Order queries
 - Read paths use AsNoTracking via IOrderReadRepository.
 - No Include deeper than 2 levels on list endpoints.</code></pre>
-        <p>Next morning, new chat, same repo: the model reads entry #9 before touching <code>OrderRepository.cs</code>.</p>
+        <p>Next morning, new chat, same repo: the model reads entry #9 before touching <code>OrderRepository.cs</code>. Rules say how code should look; the log says which decisions are settled and why, which is what stops an agent from "helpfully" undoing them.</p>
 
         <h2>Circuit breaker for hallucination loops</h2>
-        <p>When Cursor invents APIs that do not exist, most engineers become the circuit breaker manually. <code>bug-breaker.mdc</code> automates that: after repeated failed edits on one file, generation stops and the agent must re-read real sources.</p>
+        <p>When Cursor invents APIs that do not exist, most engineers become the circuit breaker manually. <code>bug-breaker.mdc</code> automates that: after repeated failed edits on one file, generation stops and the agent must re-read real sources. The full pattern is in <a href="cursor-hallucinating-dotnet-methods.html">Cursor keeps inventing .NET methods</a>.</p>
+
+        <h2>Why rules get ignored: five checks</h2>
+        <ol>
+          <li><strong>Wrong extension.</strong> <code>.md</code> files in <code>.cursor/rules/</code> are ignored; rename to <code>.mdc</code>.</li>
+          <li><strong>No trigger.</strong> A rule with neither <code>globs</code> nor <code>description</code> (and <code>alwaysApply: false</code>) only applies when you <code>@</code>-mention it.</li>
+          <li><strong>Glob mismatch.</strong> The pattern doesn't match the file's path from the repo root.</li>
+          <li><strong>Buried instruction.</strong> The rule is so long that the line you care about is lost. One concern per rule.</li>
+          <li><strong>Expecting file contents.</strong> An <code>@file</code> reference in a rule points the agent at a file; it doesn't paste it in.</li>
+        </ol>
+
+        <section class="post-faq" aria-label="Frequently asked questions">
+          <h2>FAQ</h2>
+          <h3>Is .cursorrules deprecated?</h3>
+          <p>Cursor's documentation calls the root <code>.cursorrules</code> file legacy and says it will be deprecated. It still works for now, but the supported format is <code>.mdc</code> files in <code>.cursor/rules/</code>. To migrate, create a new rule, paste the old content, set it to Always Apply, and delete <code>.cursorrules</code>.</p>
+          <h3>Where do Cursor project rules go?</h3>
+          <p>In the <code>.cursor/rules/</code> directory of your repository, as <code>.mdc</code> files with YAML frontmatter (<code>description</code>, <code>globs</code>, <code>alwaysApply</code>). Plain <code>.md</code> files in that directory are ignored by the rules system. Commit them so the whole team and every agent session gets the same rules.</p>
+          <h3>What is the difference between AGENTS.md and .cursor/rules?</h3>
+          <p><code>AGENTS.md</code> is plain Markdown at the repo root (and optionally in subdirectories) for simple instructions that should always apply. Rules in <code>.cursor/rules/</code> add control: they can be scoped to file patterns with globs, pulled in by description, or invoked manually. Use <code>AGENTS.md</code> for a short always-on brief and <code>.mdc</code> rules for layer-specific guidance.</p>
+          <h3>Why is Cursor ignoring my rule?</h3>
+          <p>The usual causes are a <code>.md</code> instead of <code>.mdc</code> extension, a rule with neither globs nor a description (which only applies when you <code>@</code>-mention it), a glob that doesn't match the file's path from the repo root, or an always-on rule so long that the important instruction is buried.</p>
+        </section>
 
         <h2>Related essays (free)</h2>
         <ul>
           <li><a href="../blog/01-the-context-tax.html">The Context Tax</a></li>
           <li><a href="../blog/06-stop-cursor-ai-drift-dotnet.html">Stop Cursor AI drift on .NET</a></li>
+          <li><a href="../blog/12-cursor-database-schema-efcore.html">Stop Cursor forgetting your database schema</a></li>
           <li><a href="../blog/07-cursor-efcore-patterns.html">EF Core patterns with Cursor</a></li>
+          <li><a href="../blog/11-cursor-csharp-dotnet-setup.html">Cursor for C# and .NET: extensions, debugging and Unity</a></li>
           <li><a href="../blog/05-cursor-vs-rider-dotnet.html">Cursor vs Rider for .NET</a></li>
         </ul>
 

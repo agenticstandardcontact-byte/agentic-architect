@@ -4,18 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f17" />
-  <title>How to use Cursor AI with Entity Framework Core (without blowing up your database)</title>
+  <title>How to Use Cursor AI with EF Core (Without Blowing Up Your DB)</title>
   <meta name="description" content="Cursor AI left ungoverned generates N+1 queries and skips AsNoTracking on read paths. Rule-based guardrails catch EF Core mistakes before production." />
   <meta name="keywords" content="Cursor AI Entity Framework Core, Cursor EF Core, AI .NET database, Cursor C# ORM, EF Core N+1 AI, AsNoTracking Cursor rules, Cursor dbcontext patterns, AI pair programming .NET" />
   <link rel="canonical" href="https://agentic-architect.dev/blog/07-cursor-efcore-patterns.html" />
   <link rel="alternate" type="application/rss+xml" title="Agentic Architect" href="https://agentic-architect.dev/feed.xml" />
 
-  <meta property="og:title" content="How to use Cursor AI with Entity Framework Core (without blowing up your database)" />
+  <meta property="og:title" content="How to Use Cursor AI with EF Core (Without Blowing Up Your DB)" />
   <meta property="og:description" content="Cursor AI left ungoverned generates N+1 queries and skips AsNoTracking on read paths. Rule-based guardrails catch EF Core mistakes before production." />
   <meta property="og:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
   <meta property="og:url" content="https://agentic-architect.dev/blog/07-cursor-efcore-patterns.html" />
   <meta property="og:type" content="article" />
   <meta property="article:published_time" content="2026-05-30T10:00:00Z" />
+  <meta property="article:modified_time" content="2026-11-27T22:00:00Z" />
   <meta property="article:author" content="Agentic Architect" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://agentic-architect.dev/og-image.jpg?v=3" />
@@ -41,7 +42,7 @@
     "@type": "BlogPosting",
     "headline": "How to use Cursor AI with Entity Framework Core (without blowing up your database)",
     "datePublished": "2026-05-30T10:00:00Z",
-    "dateModified": "2026-07-03T12:00:00Z",
+    "dateModified": "2026-11-27T22:00:00Z",
     "author": {
         "@type": "Organization",
         "name": "Agentic Architect"
@@ -229,6 +230,7 @@ var active = await _context.Users
         <h2>AI pair programming needs guardrails, not guidelines</h2>
         <p>Cursor AI is not a junior developer you mentor. It's a pattern-matching engine with access to every bad code example ever published. Mentoring it — correcting the same mistakes session after session — is the Context Tax we described in <a href="./06-stop-cursor-ai-drift-dotnet.html">Post 06</a>. The only sustainable approach is <strong>rule-based guardrails</strong> that prevent the bad patterns from ever reaching your screen.</p>
         <p>EF Core is just the most expensive example. The same principle applies to DI scoping, error handling, API conventions, and every other area where the AI's training data contains simplified-for-blog-post patterns. Install the rules once. Let the AI conform to your standards — not the internet's.</p>
+        <p>Query hygiene is half the problem. The other half is Cursor not knowing what your schema looks like in the first place: guessing column names, inventing navigation properties, writing migrations against a model it never read. That's covered in <a href="12-cursor-database-schema-efcore.html">How to stop Cursor forgetting your database schema</a>.</p>
 
         <nav class="post-nav" aria-label="Previous and next essay">
           <a class="post-nav-prev" href="06-stop-cursor-ai-drift-dotnet.html"><span class="post-nav-label">Previous</span> Stop Cursor drift on .NET</a>
@@ -240,6 +242,7 @@ var active = await _context.Users
           <ul>
           <li><a href="02-scoped-singleton-di-bug.html">DI scoping</a></li>
           <li><a href="08-cursor-vs-copilot-dotnet.html">Cursor vs Copilot</a></li>
+          <li><a href="12-cursor-database-schema-efcore.html">Cursor + your database schema</a></li>
           </ul>
           <p class="post-related-hub">More essays: <a href="./">Blog index</a> &middot; Kit: <a href="../">Agentic Architect</a> &middot; Local models: <a href="../hardware/">Hardware hub</a></p>
         </nav>
