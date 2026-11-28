@@ -7,6 +7,7 @@
   const PREFS_KEY = 'aa_cookie_prefs_v1';
 
   const marketingGranted = () => {
+    if (typeof window.__aaMarketingGranted === 'boolean') return window.__aaMarketingGranted;
     try {
       const raw = localStorage.getItem(PREFS_KEY);
       if (raw) return !!JSON.parse(raw).marketing;

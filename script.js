@@ -9,19 +9,32 @@
 (() => {
   'use strict';
 
-  /* ---------- Cookie consent (site-wide, injected once) ---------- */
+  /* ---------- Cookie consent (site-wide, injected once) ----------
+     EEA/UK/CH visitors get Google's certified CMP (TCF v2.2, loaded by adsbygoogle.js),
+     which owns Google consent mode there; our banner must stay hidden and silent for them.
+     Everyone else gets our banner. */
   const COOKIE_KEY = 'aa_cookie_consent_v1';
   const PREFS_KEY = 'aa_cookie_prefs_v1';
+  const REGIME_KEY = 'aa_consent_regime_v1';
+  const TCF_DECIDE_MS = 2500;
+  const TCF_VENDOR_GOOGLE = 755;
+  const TCF_VENDOR_MICROSOFT = 1126;
 
   const GOOGLE_ADS_ID = 'AW-18295180192';
+
+  /* 'tcf' = Google's CMP applies, 'site' = our banner; null until known */
+  let consentRegime = null;
+
+  const lsGet = (key) => {
+    try { return localStorage.getItem(key); } catch (_) { return null; }
+  };
+  const lsSet = (key, value) => {
+    try { localStorage.setItem(key, value); } catch (_) { /* storage blocked */ }
+  };
 
   const pushUetConsent = (granted) => {
     window.uetq = window.uetq || [];
     window.uetq.push('consent', 'update', { ad_storage: granted ? 'granted' : 'denied' });
-  };
-
-  const syncUetConsent = (prefs) => {
-    pushUetConsent(!!prefs.marketing);
   };
 
   const loadGoogleAdsTag = () => {
@@ -38,21 +51,30 @@
     document.head.appendChild(s);
   };
 
-  const pushGoogleAdsConsent = (granted) => {
+  const pushGoogleConsent = (prefs) => {
     window.gtag = window.gtag || function gtagStub() {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(arguments);
     };
+    const ads = prefs.marketing ? 'granted' : 'denied';
     gtag('consent', 'update', {
-      ad_storage: granted ? 'granted' : 'denied',
-      ad_user_data: granted ? 'granted' : 'denied',
-      ad_personalization: granted ? 'granted' : 'denied',
+      ad_storage: ads,
+      ad_user_data: ads,
+      ad_personalization: ads,
+      analytics_storage: prefs.analytics ? 'granted' : 'denied',
     });
-    if (granted) loadGoogleAdsTag();
+    if (prefs.marketing) loadGoogleAdsTag();
   };
 
-  const syncGoogleAdsConsent = (prefs) => {
-    pushGoogleAdsConsent(!!prefs.marketing);
+  const announceConsent = (choice, prefs) => {
+    window.__aaMarketingGranted = !!prefs.marketing;
+    document.dispatchEvent(new CustomEvent('aa:cookie-consent', { detail: { choice, prefs } }));
+  };
+
+  const syncSiteConsent = (prefs) => {
+    pushUetConsent(!!prefs.marketing);
+    pushGoogleConsent(prefs);
+    window.__aaMarketingGranted = !!prefs.marketing;
   };
 
   const sitePrefix = () => {
@@ -73,17 +95,16 @@
   };
 
   const writePrefs = (prefs) => {
-    localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+    lsSet(PREFS_KEY, JSON.stringify(prefs));
   };
 
   const applyConsent = (choice, prefs) => {
-    localStorage.setItem(COOKIE_KEY, choice);
+    lsSet(COOKIE_KEY, choice);
     const resolved = prefs || readPrefs();
     if (prefs) writePrefs(prefs);
     document.documentElement.classList.add('cookie-consent-set');
-    syncUetConsent(resolved);
-    syncGoogleAdsConsent(resolved);
-    document.dispatchEvent(new CustomEvent('aa:cookie-consent', { detail: { choice, prefs: resolved } }));
+    syncSiteConsent(resolved);
+    announceConsent(choice, resolved);
   };
 
   const hideBar = (bar) => {
@@ -98,7 +119,8 @@
   const infoIcon = '<svg class="cookie-consent-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>';
 
   const mountCookieConsent = () => {
-    if (document.getElementById('cookie-consent')) return;
+    const existing = document.getElementById('cookie-consent');
+    if (existing) return existing;
 
     const bar = document.createElement('div');
     bar.id = 'cookie-consent';
@@ -109,7 +131,7 @@
         ${infoIcon}
         <div class="cookie-consent-body">
           <p class="cookie-consent-text">
-            We use optional cookies for analytics (GoatCounter) and to improve the site, including newsletter forms (MailerLite).
+            We use optional cookies for newsletter forms (MailerLite), ad measurement, and personalised ads. Our analytics (GoatCounter) is cookie-free.
             You can accept, reject, or manage preferences.
             See our <a href="${privacyHref}">Privacy statement</a> and
             <a href="${thirdPartyHref}">Third-party cookies</a>.
@@ -133,7 +155,7 @@
             <div class="cookie-pref-row">
               <div class="cookie-pref-info">
                 <strong>Analytics</strong>
-                <span>GoatCounter, privacy-friendly page views. No ad tracking.</span>
+                <span>Lets Google tags use analytics storage. GoatCounter is cookie-free and not affected.</span>
               </div>
               <label class="cookie-pref-toggle" aria-label="Analytics cookies">
                 <input type="checkbox" id="cookie-pref-analytics" checked>
@@ -143,7 +165,7 @@
             <div class="cookie-pref-row">
               <div class="cookie-pref-info">
                 <strong>Marketing</strong>
-                <span>MailerLite signup forms, Microsoft Ads, and Google Ads conversion tracking.</span>
+                <span>MailerLite signup forms, Microsoft Ads, Google Ads conversion tracking, and personalised Google AdSense ads.</span>
               </div>
               <label class="cookie-pref-toggle" aria-label="Marketing cookies">
                 <input type="checkbox" id="cookie-pref-marketing" checked>
@@ -213,15 +235,102 @@
     return bar;
   };
 
-  const storedConsent = localStorage.getItem(COOKIE_KEY);
-  if (storedConsent) {
+  const enterSiteRegime = () => {
+    if (consentRegime) return;
+    consentRegime = 'site';
+    lsSet(REGIME_KEY, 'site');
+    if (lsGet(COOKIE_KEY)) {
+      document.documentElement.classList.add('cookie-consent-set');
+      syncSiteConsent(readPrefs());
+    } else {
+      mountCookieConsent();
+    }
+  };
+
+  const enterTcfRegime = () => {
+    if (consentRegime === 'tcf') return;
+    consentRegime = 'tcf';
+    lsSet(REGIME_KEY, 'tcf');
+    window.__aaMarketingGranted = false;
     document.documentElement.classList.add('cookie-consent-set');
-    const prefs = readPrefs();
-    syncUetConsent(prefs);
-    syncGoogleAdsConsent(prefs);
-  } else {
-    mountCookieConsent();
-  }
+    const bar = document.getElementById('cookie-consent');
+    if (bar) bar.remove();
+  };
+
+  const tcfAllows = (tcData, vendorId) => !!(
+    tcData.purpose && tcData.purpose.consents && tcData.purpose.consents[1]
+    && tcData.vendor && tcData.vendor.consents && tcData.vendor.consents[vendorId]
+  );
+
+  /* Google consent mode is updated by Google's CMP itself; we only map the non-Google tags. */
+  const onTcfData = (tcData, success) => {
+    if (!success || !tcData) return;
+    if (tcData.gdprApplies === false) {
+      enterSiteRegime();
+      return;
+    }
+    if (tcData.gdprApplies !== true) return;
+    enterTcfRegime();
+    if (tcData.eventStatus !== 'tcloaded' && tcData.eventStatus !== 'useractioncomplete') return;
+    const marketing = tcfAllows(tcData, TCF_VENDOR_GOOGLE);
+    pushUetConsent(tcfAllows(tcData, TCF_VENDOR_MICROSOFT));
+    if (marketing) loadGoogleAdsTag();
+    announceConsent('tcf', { analytics: true, marketing });
+  };
+
+  let tcfListening = false;
+  const listenToTcf = () => {
+    if (tcfListening || typeof window.__tcfapi !== 'function') return;
+    tcfListening = true;
+    window.__tcfapi('addEventListener', 2, onTcfData);
+  };
+
+  window.googlefc = window.googlefc || {};
+  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+  window.googlefc.callbackQueue.push({ CONSENT_API_READY: listenToTcf });
+  listenToTcf();
+
+  /* Returning non-CMP visitors keep their choice without waiting; others wait for the CMP verdict
+     so EEA/UK/CH visitors never see our banner flash before Google's message. */
+  if (lsGet(COOKIE_KEY) && lsGet(REGIME_KEY) === 'site') enterSiteRegime();
+  setTimeout(enterSiteRegime, TCF_DECIDE_MS);
+
+  const openCookieSettings = () => {
+    if (consentRegime === 'tcf') {
+      window.googlefc.callbackQueue.push({ CONSENT_DATA_READY: () => window.googlefc.showRevocationMessage() });
+      return;
+    }
+    if (!consentRegime) enterSiteRegime();
+    if (consentRegime !== 'site') return;
+    const bar = mountCookieConsent();
+    bar.classList.remove('is-hidden');
+    bar.removeAttribute('aria-hidden');
+    bar.querySelector('[data-cookie-action="manage"]').click();
+  };
+
+  const mountCookieSettingsLink = () => {
+    const footer = document.querySelector('footer.footer, footer.legal-footer');
+    if (!footer || footer.querySelector('[data-cookie-settings]')) return;
+    const link = document.createElement('a');
+    link.href = '#';
+    link.setAttribute('data-cookie-settings', '');
+    link.textContent = 'Cookie settings';
+    if (footer.classList.contains('legal-footer')) {
+      const row = footer.querySelector('p');
+      if (row) row.append(' \u00b7 ', link);
+      return;
+    }
+    const privacyLink = footer.querySelector('a[href$="privacy-policy.html"]');
+    if (privacyLink) privacyLink.after(link);
+  };
+
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest && e.target.closest('[data-cookie-settings]');
+    if (!trigger) return;
+    e.preventDefault();
+    openCookieSettings();
+  });
+  mountCookieSettingsLink();
 
   /* ---------- Year stamp ---------- */
   const yearEl = document.getElementById('year');
